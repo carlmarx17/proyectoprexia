@@ -4,166 +4,161 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PREXIA — III Encuentro Internacional de Semilleros 2022</title>
-  <meta name="description" content="Transformación Digital, Industria 4.0 y 5.0 — Semillero de Investigación PREXIA, Universidad Nacional de Colombia.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Transformación Digital, Industria 4.0 y 5.0 — Semillero PREXIA, Universidad Nacional de Colombia.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ── PREXIA Event Page Styles ── */
-    :root {
-      --ev-bg:     #0d0b1a;
-      --ev-card:   #151228;
-      --ev-card2:  #1a1635;
-      --ev-surf:   #1f1b3a;
-      --ev-mint:   #3de8c0;
-      --ev-cyan:   #18c8a0;
-      --ev-text:   #e8e6f0;
-      --ev-dim:    #9e9ab5;
-      --ev-muted:  #6b6788;
-      --ev-line:   rgba(255,255,255,0.07);
-      --ev-glow:   0 0 40px rgba(61,232,192,0.14);
-      --ev-glow-s: 0 0 18px rgba(61,232,192,0.10);
-      --ev-grad:   linear-gradient(135deg,#3de8c0,#18c8a0,#00b4d8);
-      --ev-r:      14px;
-      --ev-t:      0.28s cubic-bezier(.4,0,.2,1);
+    :root{
+      --bg:#0d0b1a;--card:#151228;--card2:#1a1635;--surf:#1f1b3a;
+      --mint:#3de8c0;--cyan:#18c8a0;
+      --text:#e8e6f0;--dim:#9e9ab5;--muted:#6b6788;
+      --line:rgba(255,255,255,0.07);
+      --glow:0 0 40px rgba(61,232,192,0.14);
+      --glows:0 0 18px rgba(61,232,192,0.10);
+      --grad:linear-gradient(135deg,#3de8c0,#18c8a0,#00b4d8);
+      --r:14px;--t:0.28s cubic-bezier(.4,0,.2,1);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{font-family:'Inter',-apple-system,sans-serif;background:var(--ev-bg);color:var(--ev-text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
     a{color:inherit;text-decoration:none}
     img{display:block;max-width:100%}
 
-    /* ── Navbar ── */
-    .ev-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,11,26,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--ev-line);}
-    .ev-nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;width:min(1200px,calc(100% - 48px));margin:0 auto;}
-    .ev-brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;letter-spacing:.06em;}
-    .ev-brand-dot{width:28px;height:28px;border-radius:7px;background:var(--ev-grad);box-shadow:var(--ev-glow-s);flex-shrink:0;}
-    .ev-brand span{color:#fff;}
-    .ev-brand em{font-style:normal;background:var(--ev-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .ev-nav-links{display:flex;align-items:center;gap:6px;}
-    .ev-nav-links a{padding:7px 13px;border-radius:6px;font-size:.84rem;font-weight:500;color:var(--ev-dim);transition:var(--ev-t);}
-    .ev-nav-links a:hover{color:#fff;background:rgba(255,255,255,.05);}
-    .ev-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 22px;border-radius:999px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:var(--ev-t);}
-    .ev-btn-primary{background:var(--ev-grad);color:#0d0b1a;box-shadow:var(--ev-glow-s);}
-    .ev-btn-primary:hover{transform:translateY(-2px);box-shadow:var(--ev-glow);}
-    .ev-btn-outline{background:transparent;color:var(--ev-mint);border:1px solid rgba(61,232,192,.35);}
-    .ev-btn-outline:hover{background:rgba(61,232,192,.08);border-color:var(--ev-mint);}
+    /* Navbar */
+    .ev-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,11,26,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);}
+    .ev-nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;width:min(1200px,calc(100% - 40px));margin:0 auto;}
+    .ev-brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:.06em;}
+    .ev-brand-dot{width:28px;height:28px;border-radius:7px;background:var(--grad);box-shadow:var(--glows);flex-shrink:0;}
+    .ev-brand-txt{color:#fff;}
+    .ev-brand-txt em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .ev-nav-menu{display:flex;align-items:center;gap:4px;}
+    .ev-nav-menu a{padding:7px 13px;border-radius:6px;font-size:.83rem;font-weight:500;color:var(--dim);transition:var(--t);}
+    .ev-nav-menu a:hover{color:#fff;background:rgba(255,255,255,.05);}
+    .ev-nav-cta{background:var(--grad);color:#0d0b1a!important;border-radius:999px!important;font-weight:600!important;box-shadow:var(--glows);}
+    .ev-nav-cta:hover{transform:translateY(-1px);box-shadow:var(--glow)!important;}
 
-    /* ── Shell ── */
-    .ev-shell{width:min(1160px,calc(100% - 48px));margin:0 auto;}
-
-    /* ── Hero ── */
-    .ev-hero{
-      position:relative;
-      min-height:92vh;
-      display:flex;
-      align-items:flex-end;
-      padding-bottom:72px;
-      padding-top:100px;
-      background-image: linear-gradient(180deg, rgba(13,11,26,0.55) 0%, rgba(13,11,26,0.96) 100%), url("../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__01__c77c62c3a9cc.jpg"); background-size: cover; background-position: center;
-    }
-    .ev-hero-content{position:relative;z-index:2;max-width:800px;}
-    .ev-hero-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(61,232,192,.1);border:1px solid rgba(61,232,192,.25);color:var(--ev-mint);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;}
-    .ev-hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ev-mint);box-shadow:0 0 8px var(--ev-mint);}
-    .ev-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:800;line-height:1.1;color:#fff;margin-bottom:16px;}
-    .ev-hero-theme{font-size:1.15rem;color:var(--ev-dim);margin-bottom:28px;font-style:italic;line-height:1.5;}
-    .ev-hero-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:36px;}
-    .ev-meta-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--ev-line);font-size:.85rem;color:var(--ev-text);}
-    .ev-meta-pill svg{color:var(--ev-mint);flex-shrink:0;}
-    .ev-hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-
-    /* ── Event Navbar (sub-nav) ── */
-    .ev-enav{background:var(--ev-card);border-bottom:1px solid var(--ev-line);padding:0;position:sticky;top:68px;z-index:90;}
-    .ev-enav-inner{display:flex;align-items:center;gap:4px;height:52px;width:min(1160px,calc(100% - 48px));margin:0 auto;overflow-x:auto;scrollbar-width:none;}
+    /* Events sub-nav */
+    .ev-enav{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:66px;z-index:90;}
+    .ev-enav-inner{display:flex;height:50px;align-items:center;gap:2px;width:min(1200px,calc(100% - 40px));margin:0 auto;overflow-x:auto;scrollbar-width:none;}
     .ev-enav-inner::-webkit-scrollbar{display:none;}
-    .ev-nav-link{padding:6px 14px;border-radius:6px;font-size:.83rem;font-weight:500;color:var(--ev-dim);white-space:nowrap;transition:var(--ev-t);}
+    .ev-nav-link{padding:5px 14px;border-radius:6px;font-size:.82rem;font-weight:500;color:var(--dim);white-space:nowrap;transition:var(--t);}
     .ev-nav-link:hover{color:#fff;background:rgba(255,255,255,.05);}
-    .ev-nav-active{color:var(--ev-mint)!important;background:rgba(61,232,192,.08)!important;}
+    .ev-nav-active{color:var(--mint)!important;background:rgba(61,232,192,.08)!important;}
 
-    /* ── Section helpers ── */
+    /* Shell */
+    .ev-shell{width:min(1140px,calc(100% - 40px));margin:0 auto;}
+
+    /* Hero */
+    .ev-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding-top:120px;padding-bottom:80px;background-image: linear-gradient(175deg, rgba(13,11,26,0.45) 0%, rgba(13,11,26,0.97) 75%), url("../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__11__a86117b50985.jpg"); background-size: cover; background-position: center top;}
+    .ev-hero-content{position:relative;z-index:2;max-width:760px;}
+    .ev-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:rgba(61,232,192,.1);border:1px solid rgba(61,232,192,.25);color:var(--mint);font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:22px;}
+    .ev-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);}
+    .ev-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3.6rem);font-weight:800;line-height:1.08;color:#fff;margin-bottom:14px;}
+    .ev-hero-theme{font-size:1.1rem;color:var(--dim);font-style:italic;line-height:1.55;margin-bottom:28px;}
+    .ev-hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;}
+    .ev-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:.84rem;color:var(--text);}
+    .ev-pill svg{color:var(--mint);flex-shrink:0;}
+    .ev-hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+    .ev-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:999px;font-size:.88rem;font-weight:600;cursor:pointer;border:none;transition:var(--t);}
+    .ev-btn-p{background:var(--grad);color:#0d0b1a;box-shadow:var(--glows);}
+    .ev-btn-p:hover{transform:translateY(-2px);box-shadow:var(--glow);}
+    .ev-btn-o{background:transparent;color:var(--mint);border:1px solid rgba(61,232,192,.35);}
+    .ev-btn-o:hover{background:rgba(61,232,192,.08);border-color:var(--mint);}
+
+    /* Sections */
     .ev-section{padding:80px 0;}
-    .ev-section-tag{display:inline-block;padding:3px 12px;border-radius:999px;background:rgba(61,232,192,.08);color:var(--ev-mint);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
-    .ev-section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;margin-bottom:12px;}
-    .ev-section-lead{color:var(--ev-dim);font-size:1.05rem;line-height:1.65;max-width:640px;}
+    .ev-section-tag{display:inline-block;padding:3px 12px;border-radius:999px;background:rgba(61,232,192,.08);color:var(--mint);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
+    .ev-section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:700;color:#fff;margin-bottom:12px;}
+    .ev-section-lead{color:var(--dim);font-size:1rem;line-height:1.65;max-width:620px;}
 
-    /* ── Info cards ── */
-    .ev-info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:40px;}
-    .ev-info-card{padding:28px;border-radius:var(--ev-r);background:var(--ev-card);border:1px solid var(--ev-line);transition:var(--ev-t);}
-    .ev-info-card:hover{border-color:rgba(61,232,192,.2);transform:translateY(-3px);box-shadow:var(--ev-glow-s);}
-    .ev-info-icon{width:44px;height:44px;border-radius:11px;background:rgba(61,232,192,.08);display:flex;align-items:center;justify-content:center;color:var(--ev-mint);margin-bottom:16px;}
-    .ev-info-card h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:8px;}
-    .ev-info-card p{color:var(--ev-dim);font-size:.9rem;line-height:1.55;}
+    /* Info 2-col */
+    .ev-info-2col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:40px;}
+    .ev-info-cards{display:grid;gap:16px;}
+    .ev-info-card{padding:22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);transition:var(--t);display:flex;gap:16px;}
+    .ev-info-card:hover{border-color:rgba(61,232,192,.2);transform:translateY(-2px);}
+    .ev-info-icon{width:40px;height:40px;border-radius:10px;background:rgba(61,232,192,.08);display:flex;align-items:center;justify-content:center;color:var(--mint);flex-shrink:0;}
+    .ev-info-card h4{font-size:.88rem;font-weight:600;color:var(--mint);margin-bottom:4px;}
+    .ev-info-card p{color:var(--dim);font-size:.88rem;line-height:1.5;}
 
-    /* ── Mesas grid ── */
-    .ev-mesas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:40px;}
-    .ev-mesa-card{padding:28px 24px;border-radius:var(--ev-r);background:var(--ev-card);border:1px solid var(--ev-line);position:relative;overflow:hidden;transition:var(--ev-t);}
-    .ev-mesa-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ev-grad);opacity:0;transition:var(--ev-t);}
-    .ev-mesa-card:hover{border-color:rgba(61,232,192,.25);transform:translateY(-4px);box-shadow:var(--ev-glow-s);}
+    /* Participa roles */
+    .ev-roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;}
+    .ev-role-card{padding:28px 22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);text-align:center;transition:var(--t);}
+    .ev-role-card:hover{border-color:rgba(61,232,192,.25);transform:translateY(-3px);box-shadow:var(--glows);}
+    .ev-role-icon{width:52px;height:52px;border-radius:13px;background:rgba(61,232,192,.08);display:flex;align-items:center;justify-content:center;color:var(--mint);margin:0 auto 16px;font-size:1.4rem;}
+    .ev-role-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:8px;}
+    .ev-role-card p{color:var(--dim);font-size:.86rem;line-height:1.5;}
+
+    /* Mesas */
+    .ev-mesas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:36px;}
+    .ev-mesa-card{padding:26px 22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);position:relative;overflow:hidden;transition:var(--t);}
+    .ev-mesa-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:0;transition:var(--t);}
+    .ev-mesa-card:hover{border-color:rgba(61,232,192,.25);transform:translateY(-4px);box-shadow:var(--glows);}
     .ev-mesa-card:hover::before{opacity:1;}
-    .ev-mesa-num{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;color:var(--ev-mint);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
-    .ev-mesa-card h3{font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:10px;}
-    .ev-mesa-card p{color:var(--ev-dim);font-size:.88rem;line-height:1.55;}
+    .ev-mesa-num{font-size:.73rem;font-weight:700;color:var(--mint);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
+    .ev-mesa-card h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:8px;line-height:1.35;}
+    .ev-mesa-card p{color:var(--dim);font-size:.86rem;line-height:1.5;}
 
-    /* ── Benefits list ── */
-    .ev-benefits{display:grid;gap:14px;margin-top:36px;}
-    .ev-benefit-item{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;border-radius:var(--ev-r);background:rgba(255,255,255,.03);border:1px solid var(--ev-line);}
-    .ev-benefit-dot{width:8px;height:8px;border-radius:50%;background:var(--ev-mint);box-shadow:0 0 8px rgba(61,232,192,.4);flex-shrink:0;margin-top:6px;}
-    .ev-benefit-item span{color:var(--ev-text);font-size:.92rem;line-height:1.5;}
+    /* Benefits */
+    .ev-benefits{display:grid;gap:12px;margin-top:32px;}
+    .ev-benefit{display:flex;align-items:flex-start;gap:14px;padding:15px 20px;border-radius:var(--r);background:rgba(255,255,255,.025);border:1px solid var(--line);}
+    .ev-benefit-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px rgba(61,232,192,.4);flex-shrink:0;margin-top:6px;}
+    .ev-benefit span{color:var(--text);font-size:.9rem;line-height:1.5;}
 
-    /* ── CTA Band ── */
-    .ev-cta-band{background:var(--ev-card2);border-top:1px solid var(--ev-line);border-bottom:1px solid var(--ev-line);padding:72px 0;text-align:center;}
-    .ev-cta-band h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);color:#fff;margin-bottom:16px;}
-    .ev-cta-band p{color:var(--ev-dim);max-width:540px;margin:0 auto 32px;line-height:1.65;}
-    .ev-cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+    /* CTA band */
+    .ev-cta{background:var(--card2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:72px 0;text-align:center;position:relative;overflow:hidden;}
+    .ev-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(61,232,192,.05) 0%,transparent 60%);}
+    .ev-cta h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);color:#fff;margin-bottom:14px;position:relative;}
+    .ev-cta p{color:var(--dim);max-width:520px;margin:0 auto 30px;line-height:1.65;position:relative;}
+    .ev-cta-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;}
 
-    /* ── Subpages ── */
-    .ev-sub-section{padding:56px 0;background:var(--ev-card);border-top:1px solid var(--ev-line);}
-    .ev-sub-title{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:24px;}
+    /* Allies */
+    .ev-allies-grid{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+    .ev-ally-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 20px;border-radius:var(--r);background:rgba(255,255,255,.96);border:1px solid var(--line);min-width:140px;max-width:180px;transition:var(--t);}
+    .ev-ally-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+    .ev-ally-card img{height:52px;width:auto;max-width:120px;object-fit:contain;}
+    .ev-ally-card span{font-size:.72rem;color:#333;text-align:center;line-height:1.3;font-weight:500;}
+
+    /* Sub-sections */
+    .ev-sub-section{padding:56px 0;background:var(--card);border-top:1px solid var(--line);}
     .ev-sub-grid{display:flex;flex-wrap:wrap;gap:12px;}
-    .ev-sub-link{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:var(--ev-r);background:var(--ev-surf);border:1px solid var(--ev-line);color:var(--ev-text);font-size:.9rem;font-weight:500;transition:var(--ev-t);}
-    .ev-sub-link:hover{border-color:rgba(61,232,192,.3);color:var(--ev-mint);transform:translateX(4px);}
+    .ev-sub-link{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:var(--r);background:var(--surf);border:1px solid var(--line);color:var(--text);font-size:.9rem;font-weight:500;transition:var(--t);}
+    .ev-sub-link:hover{border-color:rgba(61,232,192,.3);color:var(--mint);transform:translateX(4px);}
 
-    /* ── Gallery ── */
-    .ev-gallery-section{padding:80px 0;}
-    .ev-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:36px;}
-    .ev-gal-item{border-radius:var(--ev-r);overflow:hidden;aspect-ratio:4/3;background:var(--ev-card);border:1px solid var(--ev-line);transition:var(--ev-t);}
-    .ev-gal-item img{width:100%;height:100%;object-fit:cover;transition:var(--ev-t);}
-    .ev-gal-item:hover{border-color:rgba(61,232,192,.25);box-shadow:var(--ev-glow-s);}
-    .ev-gal-item:hover img{transform:scale(1.05);}
-
-    /* ── Footer ── */
-    .ev-footer{padding:40px 0;border-top:1px solid var(--ev-line);text-align:center;}
+    /* Footer */
+    .ev-footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;}
     .ev-footer-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:10px;}
-    .ev-footer-brand em{font-style:normal;background:var(--ev-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-    .ev-footer p{color:var(--ev-muted);font-size:.82rem;}
+    .ev-footer-brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .ev-footer p{color:var(--muted);font-size:.82rem;margin-top:4px;}
 
-    /* ── Responsive ── */
-    @media(max-width:768px){
-      .ev-nav-links a:not(.ev-btn){display:none;}
-      .ev-hero{min-height:auto;padding-bottom:48px;}
+    @media(max-width:900px){
+      .ev-info-2col{grid-template-columns:1fr;}
+      .ev-roles-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .ev-nav-menu a:not(.ev-nav-cta){display:none;}
+      .ev-hero{min-height:auto;}
+      .ev-roles-grid{grid-template-columns:1fr;}
       .ev-section{padding:56px 0;}
-      .ev-hero h1{font-size:2rem;}
     }
   </style>
 </head>
 <body>
 
-<!-- ══ NAVBAR ══ -->
 <nav class="ev-nav">
   <div class="ev-nav-inner">
     <a class="ev-brand" href="../index.html">
       <div class="ev-brand-dot"></div>
-      <span>PRE<em>XIA</em></span>
+      <span class="ev-brand-txt">PRE<em>XIA</em></span>
     </a>
-    <div class="ev-nav-links">
+    <div class="ev-nav-menu">
       <a href="../index.html#sobre">Sobre Prexia</a>
       <a href="../index.html#lineas">Líneas</a>
       <a href="../index.html#consultoria">Consultoría</a>
       <a href="../index.html#encuentros">Encuentros</a>
-      <a href="../index.html#contacto" class="ev-btn ev-btn-primary">Contactar</a>
+      <a href="../index.html#contacto" class="ev-nav-cta">Contactar</a>
     </div>
   </div>
 </nav>
 
-<!-- ══ EVENTS SUB-NAV ══ -->
 <div class="ev-enav">
   <div class="ev-enav-inner">
     <a class="ev-nav-link" href="unal-edu-co__prexiaforum__home__vi-eisi-2025.html">VI EISI 2025</a>
@@ -176,99 +171,122 @@
   </div>
 </div>
 
-<!-- ══ HERO ══ -->
+<!-- HERO -->
 <section class="ev-hero">
   <div class="ev-shell">
     <div class="ev-hero-content">
-      <div class="ev-hero-tag">Edición III · PREXIA UNAL</div>
-      <h1>III Encuentro Internacional de Semilleros 2022</h1>
+      <div class="ev-badge">Edición III · PREXIA UNAL · 2022</div>
+      <h1>III Encuentro Internacional de Semilleros<br>2022</h1>
       <p class="ev-hero-theme">"Transformación Digital, Industria 4.0 y 5.0"</p>
-      <div class="ev-hero-meta">
-        <div class="ev-meta-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <div class="ev-hero-pills">
+        <span class="ev-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Octubre de 2022
-        </div>
-        <div class="ev-meta-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Híbrida (Presencial + Virtual)
-        </div>
-        <div class="ev-meta-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          UNAL, Sede Medellín
-        </div>
+        </span>
+        <span class="ev-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Híbrida — Presencial y Virtual
+        </span>
+        <span class="ev-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Facultad de Minas, UNAL
+        </span>
       </div>
       <div class="ev-hero-btns">
-        <a href="../index.html#contacto" class="ev-btn ev-btn-primary">Inscribirse / Participar</a>
-        <a href="../index.html#encuentros" class="ev-btn ev-btn-outline">← Todos los Encuentros</a>
+        <a href="../index.html#contacto" class="ev-btn ev-btn-p">Inscribirse / Participar</a>
+        <a href="../index.html#encuentros" class="ev-btn ev-btn-o">← Todos los Encuentros</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ INFO SECTION ══ -->
+<!-- INFO GENERAL -->
 <section class="ev-section">
   <div class="ev-shell">
-    <div class="ev-section-tag">Detalles del Evento</div>
-    <h2 class="ev-section-title">Información General</h2>
-    <p class="ev-section-lead">El III Encuentro Internacional de Semilleros PREXIA es un espacio académico de alto nivel que conecta investigadores, estudiantes y profesionales en torno a los grandes retos organizacionales contemporáneos.</p>
-    <div class="ev-info-grid">
-      <div class="ev-info-card">
-        <div class="ev-info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <div class="ev-section-tag">Detalles</div>
+    <h2 class="ev-section-title">Información del Evento</h2>
+    <p class="ev-section-lead">El III Encuentro Internacional de Semilleros PREXIA 2022 exploró los desafíos y oportunidades de la transformación digital y la industria 4.0 y 5.0. Este evento marcó la consolidación del encuentro como referente académico internacional en ingeniería industrial y administrativa.</p>
+    <div class="ev-info-2col">
+      <div class="ev-info-cards">
+        <div class="ev-info-card">
+          <div class="ev-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><h4>Fechas</h4><p>Octubre de 2022</p></div>
         </div>
-        <h3>Fechas</h3>
-        <p>Octubre de 2022</p>
+        <div class="ev-info-card">
+          <div class="ev-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Sede Presencial</h4><p>Facultad de Minas, Universidad Nacional de Colombia, Medellín</p></div>
+        </div>
+        <div class="ev-info-card">
+          <div class="ev-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></div>
+          <div><h4>Transmisión Virtual</h4><p>Retransmisión por el Canal oficial UNAL</p></div>
+        </div>
+        <div class="ev-info-card">
+          <div class="ev-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><h4>Contacto</h4><p>prexiaforum_med@unal.edu.co<br>Facultad de Minas, UNAL</p></div>
+        </div>
       </div>
-      <div class="ev-info-card">
-        <div class="ev-info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__02__4e7711b8227b.jpg" alt="Afiche del evento" style="width:100%;border-radius:14px;border:1px solid rgba(255,255,255,0.08);"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPA -->
+<section class="ev-section" style="background:rgba(21,18,40,0.7);padding-top:72px;padding-bottom:72px;">
+  <div class="ev-shell">
+    <div class="ev-section-tag">Participación</div>
+    <h2 class="ev-section-title">Modalidades de Participación</h2>
+    <p class="ev-section-lead">El evento fomenta la visibilidad de la producción científica de los estudiantes de pregrado y proporciona espacios dinámicos de relacionamiento.</p>
+    <div class="ev-roles-grid">
+      <div class="ev-role-card">
+        <div class="ev-role-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </div>
-        <h3>Sede Presencial</h3>
-        <p>Facultad de Minas, Universidad Nacional de Colombia, Medellín</p>
+        <h3>Evaluador (Par académico)</h3>
+        <p>Revisa y evalúa los trabajos de investigación presentados siguiendo los criterios académicos del comité científico.</p>
       </div>
-      <div class="ev-info-card">
-        <div class="ev-info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+      <div class="ev-role-card">
+        <div class="ev-role-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
-        <h3>Modalidad Virtual</h3>
-        <p>Retransmisión por el Canal oficial UNAL</p>
+        <h3>Asistente</h3>
+        <p>Participa en las conferencias, mesas de trabajo y actividades del encuentro. Certificado de participación incluido.</p>
       </div>
-      <div class="ev-info-card">
-        <div class="ev-info-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <div class="ev-role-card">
+        <div class="ev-role-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <h3>Contacto Organizador</h3>
-        <p>prexiaforum_med@unal.edu.co<br>Facultad de Minas, UNAL</p>
+        <h3>Ponente</h3>
+        <p>Presenta tu trabajo de investigación ante la comunidad académica internacional. Consulta los lineamientos para autores.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ MESAS TEMÁTICAS ══ -->
-<section class="ev-section" style="background:rgba(21,18,40,0.6);padding-top:72px;padding-bottom:72px;">
+<!-- MESAS TEMATICAS -->
+<section class="ev-section">
   <div class="ev-shell">
     <div class="ev-section-tag">Temáticas</div>
     <h2 class="ev-section-title">Mesas Temáticas</h2>
-    <p class="ev-section-lead">Ejes centrales para la presentación, evaluación y discusión de trabajos de investigación aplicada.</p>
+    <p class="ev-section-lead">Ejes centrales para la presentación, evaluación y discusión de trabajos de investigación aplicada e innovación.</p>
     <div class="ev-mesas-grid">
       
       <div class="ev-mesa-card">
-        <div class="ev-mesa-num">I</div>
+        <div class="ev-mesa-num">Mesa I</div>
         <h3>Industria 4.0 y Manufactura Avanzada</h3>
         <p>Automatización industrial, robótica, IoT, gemelos digitales y su impacto en la manufactura moderna.</p>
       </div>
       <div class="ev-mesa-card">
-        <div class="ev-mesa-num">II</div>
+        <div class="ev-mesa-num">Mesa II</div>
         <h3>Gestión Financiera y Fintech</h3>
         <p>Finanzas digitales, criptoactivos, modelos de financiación innovadores y gestión de riesgos financieros.</p>
       </div>
       <div class="ev-mesa-card">
-        <div class="ev-mesa-num">III</div>
+        <div class="ev-mesa-num">Mesa III</div>
         <h3>Logística Inteligente y Cadenas de Valor</h3>
         <p>Optimización de cadenas de suministro con tecnologías emergentes, trazabilidad y logística 4.0.</p>
       </div>
       <div class="ev-mesa-card">
-        <div class="ev-mesa-num">IV</div>
+        <div class="ev-mesa-num">Mesa IV</div>
         <h3>Emprendimiento Digital y Nuevos Modelos de Negocio</h3>
         <p>Startups tecnológicas, economía de plataformas, transformación de modelos de negocio y ecosistemas de innovación.</p>
       </div>
@@ -276,125 +294,71 @@
   </div>
 </section>
 
-<!-- ══ POR QUÉ ASISTIR ══ -->
-<section class="ev-section">
+<!-- POR QUE ASISTIR -->
+<section class="ev-section" style="background:rgba(21,18,40,0.7);padding-top:72px;padding-bottom:72px;">
   <div class="ev-shell">
     <div class="ev-section-tag">Beneficios</div>
     <h2 class="ev-section-title">¿Por qué participar?</h2>
-    <p class="ev-section-lead">El encuentro ofrece una experiencia académica integral que impacta positivamente el desarrollo investigativo y profesional de sus participantes.</p>
+    <p class="ev-section-lead">El encuentro ofrece una experiencia académica integral que transforma el desarrollo investigativo y profesional de sus participantes.</p>
     <div class="ev-benefits">
-      <div class="ev-benefit-item"><div class="ev-benefit-dot"></div><span><strong>Networking Internacional:</strong> Relacionamiento estratégico con investigadores y profesionales del área a nivel global.</span></div>
-      <div class="ev-benefit-item"><div class="ev-benefit-dot"></div><span><strong>Intercambio Académico:</strong> Acceso a ponencias técnicas y conceptuales de alto rigor investigativo y aplicabilidad práctica.</span></div>
-      <div class="ev-benefit-item"><div class="ev-benefit-dot"></div><span><strong>Experiencia Aplicada:</strong> Participación en actividades analíticas y retos orientados al panorama empresarial actual.</span></div>
-      <div class="ev-benefit-item"><div class="ev-benefit-dot"></div><span><strong>Certificación Institucional:</strong> Otorgamiento de certificados formales de participación y socialización de proyectos de investigación.</span></div>
+      <div class="ev-benefit"><div class="ev-benefit-dot"></div><span><strong>Conexión Internacional:</strong> Conecta con personas de diferentes lugares del mundo, construyendo redes de colaboración académica y profesional.</span></div>
+      <div class="ev-benefit"><div class="ev-benefit-dot"></div><span><strong>Evento Académico Superior:</strong> Aprende sobre diferentes temas en ponencias técnicas y conceptuales de alto rigor investigativo.</span></div>
+      <div class="ev-benefit"><div class="ev-benefit-dot"></div><span><strong>Actividades Prácticas:</strong> Participa en retos prácticos orientados al panorama empresarial actual, con premios y sorpresas.</span></div>
+      <div class="ev-benefit"><div class="ev-benefit-dot"></div><span><strong>Certificado de Participación:</strong> Recibe certificación institucional formal que valida tu experiencia académica en el evento.</span></div>
     </div>
   </div>
 </section>
 
-<!-- ══ CTA ══ -->
-<div class="ev-cta-band">
+<!-- CTA -->
+<div class="ev-cta">
   <div class="ev-shell">
-    <h2>¿Listo para participar en el encuentro?</h2>
-    <p>Invitamos a académicos, estudiantes e instituciones a consultar los lineamientos y registrarse según su rol de participación.</p>
+    <h2>¿Listo para ser parte del encuentro?</h2>
+    <p>Invitamos a académicos, estudiantes e instituciones a registrarse según su rol de participación.</p>
     <div class="ev-cta-btns">
-      <a href="../index.html#contacto" class="ev-btn ev-btn-primary">Inscribirse como Ponente</a>
-      <a href="../index.html#contacto" class="ev-btn ev-btn-outline">Inscribirse como Asistente</a>
+      <a href="../index.html#contacto" class="ev-btn ev-btn-p">Inscribirse como Ponente</a>
+      <a href="../index.html#contacto" class="ev-btn ev-btn-o">Inscribirse como Asistente</a>
     </div>
   </div>
 </div>
 
 
-  <!-- Subpáginas -->
+  <section class="ev-section" style="padding-top:56px;padding-bottom:56px;">
+    <div class="ev-shell">
+      <div class="ev-section-tag">Organizadores y Aliados</div>
+      <h2 class="ev-section-title">Instituciones Participantes</h2>
+      <p class="ev-section-lead" style="margin-bottom:36px;">Este encuentro contó con el respaldo de instituciones de investigación nacionales e internacionales.</p>
+      <div class="ev-allies-grid">
+        
+        <div class="ev-ally-card">
+          <img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__09__6bf6ffd21445.jpg" alt="Universidad Nacional de Colombia">
+          <span>Universidad Nacional de Colombia</span>
+        </div>
+        <div class="ev-ally-card">
+          <img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__10__8be6f665e515.jpg" alt="Grupo Economía y Medio Ambiente — UNAL Medellín">
+          <span>Grupo Economía y Medio Ambiente — UNAL Medellín</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="ev-sub-section">
     <div class="ev-shell">
-      <h2 class="ev-sub-title">Secciones del evento</h2>
+      <div class="ev-section-tag">Secciones</div>
+      <h2 class="ev-section-title" style="margin-bottom:24px;">Secciones del Evento</h2>
       <div class="ev-sub-grid">
-      <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022.html"><span>Agenda 2022</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022.html"><span>Conferencistas 2022</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022.html"><span>Mesas Temáticas 2022</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022.html"><span>Participa 2022</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span>Agenda 2022</span></a>
+        <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span>Conferencistas 2022</span></a>
+        <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span>Mesas Temáticas 2022</span></a>
+        <a class="ev-sub-link" href="unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg><span>Participa 2022</span></a>
       </div>
     </div>
   </section>
 
-  <!-- Galería -->
-  <section class="ev-gallery-section">
-    <div class="ev-shell">
-      <div class="ev-section-tag">Galería</div>
-      <h2 class="ev-section-title">Imágenes del Evento</h2>
-      <div class="ev-gallery-grid">
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__01__c77c62c3a9cc.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__01__c77c62c3a9cc.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__02__4e7711b8227b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__02__4e7711b8227b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__03__e262f9e578ca.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__03__e262f9e578ca.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__04__6fd4b1449e80.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__04__6fd4b1449e80.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__05__811992e09b04.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__05__811992e09b04.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__06__b81767d8e353.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__06__b81767d8e353.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__07__04757e10e921.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__07__04757e10e921.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__08__81ddbc880e49.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__08__81ddbc880e49.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__09__6bf6ffd21445.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__09__6bf6ffd21445.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__10__8be6f665e515.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__10__8be6f665e515.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__11__a86117b50985.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__11__a86117b50985.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__12__504aadfcb78b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__12__504aadfcb78b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__13__31257c8ed477.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__13__31257c8ed477.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__14__3b1a8aa5524b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__14__3b1a8aa5524b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__15__efb96efba9bf.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__15__efb96efba9bf.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__01__c77c62c3a9cc.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__01__c77c62c3a9cc.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__02__811992e09b04.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__02__811992e09b04.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__03__b81767d8e353.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__03__b81767d8e353.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__04__04757e10e921.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__04__04757e10e921.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__05__81ddbc880e49.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__05__81ddbc880e49.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__06__6bf6ffd21445.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__06__6bf6ffd21445.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__07__8be6f665e515.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__07__8be6f665e515.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__08__a86117b50985.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__08__a86117b50985.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__09__504aadfcb78b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__09__504aadfcb78b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__10__31257c8ed477.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__10__31257c8ed477.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__11__3b1a8aa5524b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__11__3b1a8aa5524b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__12__7aeb619d9278.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__agenda-2022__12__7aeb619d9278.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__01__c77c62c3a9cc.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__01__c77c62c3a9cc.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__02__811992e09b04.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__02__811992e09b04.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__03__b81767d8e353.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__03__b81767d8e353.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__04__04757e10e921.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__04__04757e10e921.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__05__81ddbc880e49.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__05__81ddbc880e49.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__06__6bf6ffd21445.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__06__6bf6ffd21445.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__07__8be6f665e515.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__07__8be6f665e515.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__08__a86117b50985.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__08__a86117b50985.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__09__504aadfcb78b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__09__504aadfcb78b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__10__c1a90b8c2ef0.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__10__c1a90b8c2ef0.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__11__3b1a8aa5524b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__11__3b1a8aa5524b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__12__7aeb619d9278.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__conferencistas-2022__12__7aeb619d9278.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__01__c77c62c3a9cc.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__01__c77c62c3a9cc.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__02__811992e09b04.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__02__811992e09b04.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__03__b81767d8e353.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__03__b81767d8e353.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__04__04757e10e921.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__04__04757e10e921.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__05__81ddbc880e49.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__05__81ddbc880e49.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__06__6bf6ffd21445.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__06__6bf6ffd21445.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__07__8be6f665e515.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__07__8be6f665e515.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__08__a86117b50985.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__08__a86117b50985.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__09__504aadfcb78b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__09__504aadfcb78b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__10__c1a90b8c2ef0.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__10__c1a90b8c2ef0.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__11__3b1a8aa5524b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__11__3b1a8aa5524b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__12__7aeb619d9278.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__mesas-tem-c3-a1ticas-2022__12__7aeb619d9278.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__01__c77c62c3a9cc.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__01__c77c62c3a9cc.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__02__811992e09b04.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__02__811992e09b04.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__03__b81767d8e353.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__03__b81767d8e353.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__04__04757e10e921.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__04__04757e10e921.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__05__81ddbc880e49.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__05__81ddbc880e49.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__06__6bf6ffd21445.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__06__6bf6ffd21445.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__07__8be6f665e515.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__07__8be6f665e515.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__08__a86117b50985.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__08__a86117b50985.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__09__504aadfcb78b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__09__504aadfcb78b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__10__c1a90b8c2ef0.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__10__c1a90b8c2ef0.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__11__3b1a8aa5524b.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__11__3b1a8aa5524b.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-    <a class="ev-gal-item" href="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__12__7aeb619d9278.jpg" target="_blank" rel="noreferrer"><img src="../images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__participa-2022__12__7aeb619d9278.jpg" alt="III Encuentro Internacional de Semilleros" loading="lazy"></a>
-      </div>
-    </div>
-  </section>
-
-<!-- ══ FOOTER ══ -->
 <footer class="ev-footer">
   <div class="ev-shell">
     <div class="ev-footer-brand">PRE<em>XIA</em></div>
-    <p>&copy; 2022 Semillero de Investigación PREXIA — Universidad Nacional de Colombia, Sede Medellín</p>
+    <p>Semillero de Investigación — Universidad Nacional de Colombia, Sede Medellín</p>
+    <p style="margin-top:6px;">&copy; 2022 Facultad de Minas — Área Curricular de Ingeniería Industrial e Ingeniería Administrativa</p>
   </div>
 </footer>
 
