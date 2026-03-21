@@ -2,10 +2,613 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=site/index.html">
-  <title>PREXIA — Redirigiendo...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PREXIA — Semillero de Investigación | Universidad Nacional de Colombia</title>
+  <meta name="description" content="PREXIA es el semillero de investigación de la Facultad de Minas, UNAL Medellín. Consultoría estratégica, investigación aplicada, emprendimiento y comunicación universitaria.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ════════════════════════════════
+       PREXIA Design System
+    ════════════════════════════════ */
+    :root {
+      --bg:      #0d0b1a;
+      --card:    #151228;
+      --card2:   #1a1635;
+      --surf:    #1e1a38;
+      --mint:    #3de8c0;
+      --cyan:    #18c8a0;
+      --text:    #e8e6f0;
+      --dim:     #9e9ab5;
+      --muted:   #6b6788;
+      --red:     #ff6b6b;
+      --line:    rgba(255,255,255,0.07);
+      --glow:    0 0 40px rgba(61,232,192,0.16);
+      --glows:   0 0 18px rgba(61,232,192,0.10);
+      --grad:    linear-gradient(135deg, #3de8c0, #18c8a0, #00b4d8);
+      --r: 14px; --t: 0.28s cubic-bezier(.4,0,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* Shell */
+    .shell { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,11,26,0.9); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--line);
+    }
+    .navbar-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem; }
+    .brand-dot { width: 30px; height: 30px; border-radius: 8px; background: var(--grad); box-shadow: var(--glows); flex-shrink: 0; }
+    .brand span { color: #fff; }
+    .brand em { font-style: normal; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a { padding: 7px 14px; border-radius: 6px; font-size: .84rem; font-weight: 500; color: var(--dim); transition: var(--t); }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.05); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 999px; font-size: .88rem; font-weight: 600; cursor: pointer; border: none; transition: var(--t); }
+    .btn-primary { background: var(--grad); color: #0d0b1a; box-shadow: var(--glows); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--glow); }
+    .btn-outline { background: transparent; color: var(--mint); border: 1px solid rgba(61,232,192,.35); }
+    .btn-outline:hover { background: rgba(61,232,192,.08); border-color: var(--mint); }
+    .btn-sm { padding: 8px 18px; font-size: .82rem; }
+
+    /* ── Section helpers ── */
+    .section { padding: 96px 0; }
+    .section-dark { background: var(--card); }
+    .section-tag {
+      display: inline-block; padding: 4px 14px; border-radius: 999px;
+      background: rgba(61,232,192,.08); color: var(--mint);
+      font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 700; color: #fff;
+      margin-bottom: 14px; line-height: 1.15;
+    }
+    .section-lead { color: var(--dim); font-size: 1.05rem; line-height: 1.68; max-width: 600px; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header .section-lead { margin: 0 auto; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      padding: 130px 0 80px; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -30%; right: -15%; width: 750px; height: 750px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(61,232,192,.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -20%; left: -10%; width: 550px; height: 550px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(61,232,192,.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 780px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px;
+      border-radius: 999px; background: rgba(61,232,192,.09); border: 1px solid rgba(61,232,192,.22);
+      color: var(--mint); font-size: .8rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px var(--mint); }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.6rem); font-weight: 800; line-height: 1.06; color: #fff;
+      margin-bottom: 24px;
+    }
+    .hero h1 .accent { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { font-size: 1.15rem; color: var(--dim); line-height: 1.7; margin-bottom: 20px; max-width: 560px; }
+    .hero-detail { font-size: .9rem; color: var(--muted); margin-bottom: 40px; max-width: 560px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ── SOBRE ── */
+    .about-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .about-stat {
+      padding: 26px; border-radius: var(--r); background: var(--card2); border: 1px solid var(--line);
+      text-align: center; transition: var(--t);
+    }
+    .about-stat:hover { border-color: rgba(61,232,192,.2); transform: translateY(-3px); }
+    .about-stat strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 2.8rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .about-stat span { color: var(--dim); font-size: .86rem; }
+
+    /* ── LINEAS ── */
+    .lineas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 16px; }
+
+    /* Normal lines */
+    .linea-card {
+      padding: 32px 28px; border-radius: var(--r); background: var(--card);
+      border: 1px solid var(--line); transition: var(--t); position: relative; overflow: hidden;
+    }
+    .linea-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad); opacity: 0; transition: var(--t);
+    }
+    .linea-card:hover { border-color: rgba(61,232,192,.25); transform: translateY(-4px); box-shadow: var(--glows); }
+    .linea-card:hover::after { opacity: 1; }
+    .linea-icon {
+      width: 50px; height: 50px; border-radius: 12px; background: rgba(61,232,192,.08);
+      display: flex; align-items: center; justify-content: center; color: var(--mint);
+      margin-bottom: 20px;
+    }
+    .linea-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 14px; }
+    .linea-list { list-style: none; display: grid; gap: 8px; }
+    .linea-list li { color: var(--dim); font-size: .9rem; display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; }
+    .linea-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); flex-shrink: 0; margin-top: 6px; box-shadow: 0 0 6px rgba(61,232,192,.4); }
+
+    /* CONSULTORIA — full width hero card */
+    .consult-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #1a1635 0%, #0f0d22 100%);
+      border: 1px solid rgba(61,232,192,.2);
+      border-radius: var(--r); overflow: hidden; position: relative;
+      transition: var(--t);
+    }
+    .consult-card:hover { border-color: rgba(61,232,192,.4); box-shadow: var(--glow); }
+    .consult-card::before {
+      content: ''; position: absolute; top: -60%; right: -10%; width: 500px; height: 500px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(61,232,192,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .consult-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 48px; align-items: center; position: relative; z-index: 2; }
+    .consult-badge {
+      display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px; border-radius: 999px;
+      background: rgba(61,232,192,.12); border: 1px solid rgba(61,232,192,.3);
+      color: var(--mint); font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .consult-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 6px var(--mint); }
+    .consult-inner h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .consult-inner > div:first-child > p { color: var(--dim); line-height: 1.65; margin-bottom: 28px; }
+    .consult-inner .consult-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .consult-services { display: grid; gap: 12px; }
+    .consult-service {
+      display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px;
+      border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid var(--line);
+    }
+    .cs-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px rgba(61,232,192,.4); flex-shrink: 0; margin-top: 6px; }
+    .consult-service span { color: var(--text); font-size: .9rem; line-height: 1.45; }
+
+    /* ── CREDIBILIDAD — Empresas aliadas ── */
+    .allies-strip {
+      padding: 60px 0; background: var(--card);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .allies-inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .ally-logo {
+      height: 52px; width: auto; max-width: 140px; object-fit: contain;
+      filter: brightness(0) invert(1); opacity: 0.45; transition: var(--t);
+    }
+    .ally-logo:hover { opacity: 0.85; filter: brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(120deg); }
+
+    /* ── ENCUENTROS ── */
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .ev-card { border-radius: var(--r); background: var(--card); border: 1px solid var(--line); overflow: hidden; transition: var(--t); display: block; }
+    .ev-card:hover { border-color: rgba(61,232,192,.22); transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,.4); }
+    .ev-cover { aspect-ratio: 16/9; overflow: hidden; background: var(--surf); }
+    .ev-cover img { width: 100%; height: 100%; object-fit: cover; transition: var(--t); }
+    .ev-card:hover .ev-cover img { transform: scale(1.05); }
+    .ev-body { padding: 20px 22px 24px; }
+    .ev-year { display: inline-block; padding: 3px 10px; border-radius: 999px; background: rgba(61,232,192,.09); color: var(--mint); font-size: .73rem; font-weight: 700; margin-bottom: 10px; }
+    .ev-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 8px; line-height: 1.35; }
+    .ev-body p { color: var(--dim); font-size: .86rem; line-height: 1.5; margin-bottom: 14px; }
+
+    /* ── ÚNETE ── */
+    .join-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .join-card { padding: 36px 28px; border-radius: var(--r); background: var(--card2); border: 1px solid var(--line); text-align: center; transition: var(--t); }
+    .join-card:hover { border-color: rgba(61,232,192,.2); transform: translateY(-3px); }
+    .join-icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(61,232,192,.08); display: flex; align-items: center; justify-content: center; color: var(--mint); margin: 0 auto 20px; }
+    .join-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.08rem; color: #fff; margin-bottom: 10px; }
+    .join-card p { color: var(--dim); font-size: .9rem; line-height: 1.55; }
+
+    /* ── CONTACTO ── */
+    .contact-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .contact-form { display: grid; gap: 14px; }
+    .contact-form input, .contact-form textarea, .contact-form select {
+      width: 100%; padding: 13px 18px; border-radius: 10px;
+      border: 1px solid var(--line); background: var(--card);
+      color: var(--text); font-family: 'Inter', sans-serif; font-size: .92rem; transition: var(--t);
+    }
+    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+      outline: none; border-color: var(--mint); box-shadow: 0 0 0 3px rgba(61,232,192,.1);
+    }
+    .contact-form select option { background: var(--card); }
+    .contact-form textarea { min-height: 130px; resize: vertical; }
+    .contact-info h3 { font-family: 'Space Grotesk', sans-serif; color: #fff; font-size: 1.3rem; margin-bottom: 24px; }
+    .ci-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+    .ci-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(61,232,192,.08); display: flex; align-items: center; justify-content: center; color: var(--mint); flex-shrink: 0; }
+    .ci-item strong { display: block; color: #fff; font-size: .9rem; margin-bottom: 3px; }
+    .ci-item span { color: var(--dim); font-size: .86rem; line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    .footer { padding: 48px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+    .footer-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; color: #fff; }
+    .footer-brand em { font-style: normal; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--muted); font-size: .84rem; transition: var(--t); }
+    .footer-links a:hover { color: var(--mint); }
+    .social-row { display: flex; gap: 10px; }
+    .social-btn { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--card); border: 1px solid var(--line); color: var(--dim); transition: var(--t); }
+    .social-btn:hover { color: var(--mint); border-color: rgba(61,232,192,.3); box-shadow: var(--glows); }
+    .social-btn svg { width: 17px; height: 17px; fill: currentColor; }
+    .footer-copy { color: var(--muted); font-size: .8rem; }
+
+    /* ── Divider ── */
+    .divider { height: 1px; background: var(--line); }
+
+    /* ── Responsive ── */
+    @media(max-width: 1024px) {
+      .about-2col, .contact-2col { grid-template-columns: 1fr; }
+      .consult-inner { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width: 768px) {
+      .shell { width: min(100% - 32px, 1160px); }
+      .navbar-inner { height: 60px; }
+      .nav-links a:not(.btn) { display: none; }
+      .section { padding: 64px 0; }
+      .lineas-grid { grid-template-columns: 1fr; }
+      .events-grid, .join-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 2.4rem; }
+      .hero-btns { flex-direction: column; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links, .social-row { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-  <p>Redirigiendo... <a href="site/index.html">Haz clic aquí si no te redirige.</a></p>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar">
+  <div class="shell navbar-inner">
+    <a class="brand" href="site/index.html">
+      <div class="brand-dot"></div>
+      <span>PRE<em>XIA</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre">Sobre Prexia</a>
+      <a href="#lineas">Líneas</a>
+      <a href="#consultoria">Consultoría</a>
+      <a href="#encuentros">Encuentros</a>
+      <a href="#unete">Únete</a>
+      <a href="#contacto" class="btn btn-primary btn-sm">Contactar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="shell">
+    <div class="hero-content">
+      <div class="hero-badge">Semillero de Investigación · Universidad Nacional de Colombia</div>
+      <h1>Transformamos conocimiento en <span class="accent">soluciones reales</span></h1>
+      <p class="hero-sub">Investigación aplicada, consultoría estratégica y emprendimiento desde la Facultad de Minas, UNAL Medellín.</p>
+      <p class="hero-detail">Conectamos el rigor académico universitario con los desafíos reales de las organizaciones colombianas.</p>
+      <div class="hero-btns">
+        <a href="#unete" class="btn btn-primary">Unirme al semillero</a>
+        <a href="#consultoria" class="btn btn-outline">Solicitar consultoría</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOBRE PREXIA ══ -->
+<section class="section" id="sobre">
+  <div class="shell">
+    <div class="about-2col">
+      <div>
+        <div class="section-tag">Quiénes somos</div>
+        <h2 class="section-title">Un semillero que genera impacto real</h2>
+        <p class="section-lead" style="margin-bottom:18px;">PREXIA es el semillero de investigación del Área Curricular de Ingeniería Industrial e Ingeniería Administrativa de la Facultad de Minas, Universidad Nacional de Colombia, Sede Medellín.</p>
+        <p style="color:var(--dim);line-height:1.68;font-size:.97rem;">Integramos estudiantes comprometidos con una experiencia universitaria que fortalezca la comprensión y resolución de problemas reales en la industria y las organizaciones. Nuestras cuatro líneas de trabajo abarcan la investigación, el emprendimiento, la comunicación y la consultoría empresarial.</p>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat"><strong>6+</strong><span>Encuentros internacionales realizados</span></div>
+        <div class="about-stat"><strong>4</strong><span>Líneas activas de trabajo</span></div>
+        <div class="about-stat"><strong>50+</strong><span>Proyectos de consultoría</span></div>
+        <div class="about-stat"><strong>5</strong><span>Años de trayectoria</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider shell"></div>
+
+<!-- ══ LÍNEAS DE TRABAJO ══ -->
+<section class="section section-dark" id="lineas">
+  <div class="shell">
+    <div class="section-header">
+      <div class="section-tag">Nuestras Líneas</div>
+      <h2 class="section-title">Las 4 líneas oficiales de PREXIA</h2>
+      <p class="section-lead">Cada línea tiene un enfoque diferenciado, pero todas comparten el mismo propósito: conectar el conocimiento académico con la acción transformadora.</p>
+    </div>
+
+    <div class="lineas-grid">
+
+      <!-- PREXIA INVESTIGA -->
+      <div class="linea-card">
+        <div class="linea-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <h3>PREXIA Investiga</h3>
+        <ul class="linea-list">
+          <li>Formación en metodologías de investigación aplicada</li>
+          <li>Desarrollo de proyectos académicos con impacto real</li>
+          <li>Participación en eventos científicos (EISI y otros)</li>
+          <li>Generación y difusión de conocimiento organizacional</li>
+        </ul>
+      </div>
+
+      <!-- PREXIA EMPRENDE -->
+      <div class="linea-card">
+        <div class="linea-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>PREXIA Emprende</h3>
+        <ul class="linea-list">
+          <li>Apoyo y acompañamiento a emprendimientos universitarios</li>
+          <li>Desarrollo y validación de modelos de negocio</li>
+          <li>Innovación, pre-incubación e ideación de nuevas empresas</li>
+          <li>Formación en cultura emprendedora universitaria</li>
+        </ul>
+      </div>
+
+      <!-- PREXIA CONECTA -->
+      <div class="linea-card">
+        <div class="linea-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>PREXIA Conecta</h3>
+        <ul class="linea-list">
+          <li>Comunicación interna y externa del semillero</li>
+          <li>Difusión de eventos, logros y actividades académicas</li>
+          <li>Relación con la comunidad, academia y actores externos</li>
+          <li>Gestión de presencia digital e institucional</li>
+        </ul>
+      </div>
+
+      <!-- PREXIA CONSULTORÍA — destacada full-width -->
+      <div class="consult-card" id="consultoria">
+        <div class="consult-inner">
+          <div>
+            <div class="consult-badge">Línea estratégica</div>
+            <h3>PREXIA Consultoría</h3>
+            <p>Ofrecemos consultoría real a empresas, especialmente MiPymes, con el respaldo metodológico de la Universidad Nacional. Nuestro equipo de estudiantes capacitados ejecuta proyectos de diagnóstico y mejora con resultados medibles.</p>
+            <div class="consult-btns">
+              <a href="#contacto" class="btn btn-primary">Solicitar diagnóstico gratuito</a>
+              <a href="#contacto" class="btn btn-outline">Trabaja con PREXIA</a>
+            </div>
+          </div>
+          <div class="consult-services">
+            <div class="consult-service"><div class="cs-dot"></div><span><strong>Diagnóstico organizacional</strong> — Identificamos brechas y oportunidades de mejora.</span></div>
+            <div class="consult-service"><div class="cs-dot"></div><span><strong>Mejora de productividad</strong> — Optimización de procesos y eliminación de desperdicios.</span></div>
+            <div class="consult-service"><div class="cs-dot"></div><span><strong>Finanzas y control de gestión</strong> — Análisis y reestructuración financiera para pymes.</span></div>
+            <div class="consult-service"><div class="cs-dot"></div><span><strong>Estrategia y mercadeo</strong> — Posicionamiento, propuesta de valor y crecimiento comercial.</span></div>
+            <div class="consult-service"><div class="cs-dot"></div><span><strong>Operaciones y logística</strong> — Cadena de suministro, inventarios y flujo de materiales.</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONFIANZA — Aliados e instituciones ══ -->
+<section class="allies-strip" id="aliados">
+  <div class="shell">
+    <div class="section-header" style="margin-bottom:36px;">
+      <div class="section-tag">Confianza</div>
+      <h2 class="section-title">Empresas e instituciones que confían en PREXIA</h2>
+      <p class="section-lead">Trabajamos con organizaciones nacionales e internacionales que respaldan nuestra labor académica y consultora.</p>
+    </div>
+    <div class="allies-inner">
+      <img class="ally-logo" src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__09__6bf6ffd21445.jpg" alt="Universidad Nacional de Colombia">
+      <img class="ally-logo" src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__10__8be6f665e515.jpg" alt="Grupo Geyma UNAL">
+      <img class="ally-logo" src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__12__cf582afe5603.jpg" alt="Facultad de Ciencias Agrarias UNAL">
+      <img class="ally-logo" src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__13__31257c8ed477.jpg" alt="UNESP Brasil">
+      <img class="ally-logo" src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__15__efb96efba9bf.jpg" alt="Instituto A Nau Ciranda">
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRAYECTORIA — Encuentros académicos ══ -->
+<section class="section" id="encuentros">
+  <div class="shell">
+    <div class="section-header">
+      <div class="section-tag">Impacto Académico</div>
+      <h2 class="section-title">Encuentros Internacionales de Semilleros</h2>
+      <p class="section-lead">Histórico de nuestros eventos de investigación, divulgación y conexión global. 6 ediciones, cientos de participantes de múltiples países.</p>
+    </div>
+    <div class="events-grid">
+
+      <a class="ev-card" href="site/pages/unal-edu-co__prexiaforum__home__vi-eisi-2025.html">
+        <div class="ev-cover"><img src="site/images/unal-edu-co__prexiaforum__home__vi-eisi-2025__01__feb3bfe9e5fb.jpg" alt="VI EISI 2025"></div>
+        <div class="ev-body">
+          <span class="ev-year">2025</span>
+          <h3>VI EISI PREXIA UNAL</h3>
+          <p>Ingeniería que Transforma Territorios: Gestión e Innovación para el Desarrollo Sostenible.</p>
+          <span class="btn btn-outline btn-sm">Ver evento →</span>
+        </div>
+      </a>
+
+      <a class="ev-card" href="site/pages/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024.html">
+        <div class="ev-cover"><img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__11__a86117b50985.jpg" alt="V PREXIA 2024"></div>
+        <div class="ev-body">
+          <span class="ev-year">2024</span>
+          <h3>V Encuentro Internacional</h3>
+          <p>Dualidad humana tecnológica: El nuevo reto organizacional.</p>
+          <span class="btn btn-outline btn-sm">Ver evento →</span>
+        </div>
+      </a>
+
+      <a class="ev-card" href="site/pages/unal-edu-co__prexiaforum__home__iv-encuentro-internacional-de-semilleros-2023.html">
+        <div class="ev-cover"><img src="site/images/unal-edu-co__prexiaforum__home__iv-encuentro-internacional-de-semilleros-2023__01__c77c62c3a9cc.jpg" alt="IV PREXIA 2023"></div>
+        <div class="ev-body">
+          <span class="ev-year">2023</span>
+          <h3>IV Encuentro Internacional</h3>
+          <p>Innovación, Ingeniería y Territorios.</p>
+          <span class="btn btn-outline btn-sm">Ver evento →</span>
+        </div>
+      </a>
+
+      <a class="ev-card" href="site/pages/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022.html">
+        <div class="ev-cover"><img src="site/images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__01__c77c62c3a9cc.jpg" alt="III PREXIA 2022"></div>
+        <div class="ev-body">
+          <span class="ev-year">2022</span>
+          <h3>III Encuentro Internacional</h3>
+          <p>Transformación Digital, Industria 4.0 y 5.0.</p>
+          <span class="btn btn-outline btn-sm">Ver evento →</span>
+        </div>
+      </a>
+
+      <a class="ev-card" href="site/pages/unal-edu-co__prexiaforum__home__ii-encuentro-internacional-de-semilleros-2021.html">
+        <div class="ev-cover"><img src="site/images/unal-edu-co__prexiaforum__home__ii-encuentro-internacional-de-semilleros-2021__01__c77c62c3a9cc.jpg" alt="II PREXIA 2021"></div>
+        <div class="ev-body">
+          <span class="ev-year">2021</span>
+          <h3>II Encuentro Internacional</h3>
+          <p>Desarrollo Tecnológico e Innovación Productiva Post-Pandemia.</p>
+          <span class="btn btn-outline btn-sm">Ver evento →</span>
+        </div>
+      </a>
+
+      <a class="ev-card" href="site/pages/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020.html">
+        <div class="ev-cover"><img src="site/images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__01__b649eab2c978.jpg" alt="I PREXIA 2020"></div>
+        <div class="ev-body">
+          <span class="ev-year">2020</span>
+          <h3>I Encuentro Internacional</h3>
+          <p>Perspectivas de Innovación en la Gestión de Organizaciones.</p>
+          <span class="btn btn-outline btn-sm">Ver evento →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ ÚNETE ══ -->
+<section class="section section-dark" id="unete">
+  <div class="shell">
+    <div class="section-header">
+      <div class="section-tag">Para Estudiantes</div>
+      <h2 class="section-title">¿Por qué unirte a PREXIA?</h2>
+      <p class="section-lead">Formación investigativa real, desarrollo profesional temprano y experiencias que marcan la diferencia en tu carrera.</p>
+    </div>
+    <div class="join-grid">
+      <div class="join-card">
+        <div class="join-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Aprendizaje aplicado</h3>
+        <p>Trabaja en proyectos reales con empresas y aplica metodologías de investigación desde el pregrado.</p>
+      </div>
+      <div class="join-card">
+        <div class="join-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Red profesional global</h3>
+        <p>Conéctate con académicos, empresas y emprendedores a nivel nacional e internacional en nuestros encuentros.</p>
+      </div>
+      <div class="join-card">
+        <div class="join-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3>Experiencia diferenciadora</h3>
+        <p>Consultoría real, publicaciones académicas y organización de eventos internacionales en tu hoja de vida.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;">
+      <a href="#contacto" class="btn btn-primary">Quiero unirme a PREXIA</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══ -->
+<section class="section" id="contacto">
+  <div class="shell">
+    <div class="section-header">
+      <div class="section-tag">Contacto</div>
+      <h2 class="section-title">Hablemos</h2>
+      <p class="section-lead">¿Quieres unirte al semillero, solicitar una consultoría o simplemente saber más sobre PREXIA?</p>
+    </div>
+    <div class="contact-2col">
+      <form class="contact-form" onsubmit="return false;">
+        <input type="text" placeholder="Nombre completo" required>
+        <input type="email" placeholder="Correo electrónico" required>
+        <select>
+          <option value="" disabled selected>¿Qué te interesa?</option>
+          <option value="consultoria">Solicitar consultoría empresarial</option>
+          <option value="semillero">Unirme al semillero</option>
+          <option value="evento">Información sobre eventos EISI</option>
+          <option value="otro">Otro</option>
+        </select>
+        <textarea placeholder="Cuéntanos más sobre tu consulta..."></textarea>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;">Enviar mensaje</button>
+      </form>
+      <div class="contact-info">
+        <h3>Información de contacto</h3>
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div><strong>Correo institucional</strong><span>prexiaforum_med@unal.edu.co</span></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><strong>Ubicación</strong><span>Facultad de Minas, Universidad Nacional de Colombia — Sede Medellín</span></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div><strong>Departamento</strong><span>Área Curricular de Ingeniería Industrial e Ingeniería Administrativa</span></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div><strong>Director y Fundador</strong><span>José Ignacio Maya</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-inner">
+      <div class="footer-brand">PRE<em>XIA</em></div>
+      <div class="footer-links">
+        <a href="#sobre">Sobre Prexia</a>
+        <a href="#lineas">Líneas</a>
+        <a href="#encuentros">Encuentros</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="social-row">
+        <a class="social-btn" href="#" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a class="social-btn" href="#" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="social-btn" href="#" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);margin-top:32px;padding-top:24px;text-align:center;">
+      <p class="footer-copy">&copy; 2025 Semillero de Investigación PREXIA — Universidad Nacional de Colombia, Sede Medellín · Facultad de Minas</p>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

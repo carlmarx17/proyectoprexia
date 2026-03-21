@@ -721,4 +721,19 @@ ul, ol { list-style: none; }
   .join-grid { grid-template-columns: 1fr; }
   .about-stats { grid-template-columns: 1fr 1fr; }
   .hero-btns { flex-direction: column; }
+  .consultoria-card { grid-template-columns: 1fr !important; }
 }
+
+/* ══ Líneas oficiales PREXIA (4 reales) ══ */
+.linea-list { list-style: none; display: grid; gap: 9px; }
+.linea-list li { color: var(--text-dim); font-size: 0.9rem; display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; }
+.linea-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); flex-shrink: 0; margin-top: 6px; box-shadow: 0 0 6px rgba(61,232,192,0.45); }
+.linea-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 14px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); }
+.linea-item span:last-child { color: var(--text-dim); font-size: 0.88rem; line-height: 1.45; }
+.dot-mint { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px rgba(61,232,192,0.45); flex-shrink: 0; margin-top: 6px; }
+
+/* ══ Aliados / Confianza ══ */
+.allies-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 28px; }
+.ally-logo { height: 54px; width: auto; max-width: 150px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.4; transition: var(--transition); }
+.ally-logo:hover { opacity: 0.85; filter: brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(120deg); }
+
