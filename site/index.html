@@ -13,7 +13,23 @@
 <nav class="navbar" id="navbar">
   <div class="shell navbar-inner">
     <a class="navbar-brand" href="#">
-      <div class="logo-dot"></div>
+      <!-- Isotipo Prexia según Manual de Marca -->
+      <svg class="logo-prexia" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="url(#gradA)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="url(#gradB)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M16 16 C20 28 28 36 44 44" stroke="url(#gradA)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M44 16 C40 28 32 36 16 44" stroke="url(#gradB)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <defs>
+          <linearGradient id="gradA" x1="8" y1="8" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#84FBAA"/>
+            <stop offset="100%" stop-color="#60EAF0"/>
+          </linearGradient>
+          <linearGradient id="gradB" x1="52" y1="8" x2="8" y2="52" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#60EAF0"/>
+            <stop offset="100%" stop-color="#84FBAA"/>
+          </linearGradient>
+        </defs>
+      </svg>
       <span>PRE<em>XIA</em></span>
     </a>
     <div class="nav-menu">
@@ -336,7 +352,27 @@
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer">
   <div class="shell">
-    <div class="footer-brand">PRE<em>XIA</em></div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px;">
+      <!-- Isotipo en footer -->
+      <svg width="36" height="36" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="url(#gradF1)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="url(#gradF2)" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M16 16 C20 28 28 36 44 44" stroke="url(#gradF1)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <path d="M44 16 C40 28 32 36 16 44" stroke="url(#gradF2)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <defs>
+          <linearGradient id="gradF1" x1="8" y1="8" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#84FBAA"/>
+            <stop offset="100%" stop-color="#60EAF0"/>
+          </linearGradient>
+          <linearGradient id="gradF2" x1="52" y1="8" x2="8" y2="52" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#60EAF0"/>
+            <stop offset="100%" stop-color="#84FBAA"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="footer-brand">PRE<em>XIA</em></div>
+    </div>
+    <div style="font-size:0.68rem;letter-spacing:0.22em;color:var(--text-muted);text-transform:uppercase;margin-bottom:20px;">Emprendimiento</div>
     <div class="social-row">
       <a class="social-btn" href="#" title="LinkedIn">
         <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
