@@ -3,28 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PREXIA · Semillero de Investigación y Consultoría · UNAL Minas</title>
-  <meta name="description" content="Semillero de Investigación PREXIA, Facultad de Minas, Universidad Nacional de Colombia Sede Medellín. Consultoría empresarial, investigación aplicada, eventos EISI y sistema de puntos PP.">
+  <title>PREXIA · Semillero de Investigación y Consultoría · UNAL Facultad de Minas</title>
+  <meta name="description" content="Semillero de Investigación y Consultoría PREXIA, Facultad de Minas, Universidad Nacional de Colombia Sede Medellín. Consultoría empresarial, investigación aplicada, emprendimiento, eventos internacionales EISI y sistema de evaluación por Puntos Prexia (PP).">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root {
       --bg: #f7f7f5;
       --surface: #ecebe6;
+      --surface-strong: #e2e0d8;
+      --card-light: #fdfdfc;
       --ink: #1f1a3a;
-      --muted: #4e4a68;
+      --muted: #4a4662;
       --accent: #1f1a3a;
       --accent-ink: #f7f7f5;
       --field-navy: #1f1a3a;
       --field-navy-surface: #2b244d;
+      --field-navy-card: #342c5c;
       --field-navy-ink: #f7f7f5;
-      --field-navy-muted: #b8b3d1;
+      --field-navy-muted: #c2bddb;
       --mint-dark: #15803d;
       --mint-light: #84fbaa;
-      --margin: clamp(1.25rem, 3.2vw, 3rem);
-      --gutter: clamp(1rem, 2vw, 2rem);
+      --cyan-light: #60eaf0;
+      --margin: clamp(1.25rem, 3.2vw, 3.2rem);
+      --gutter: clamp(1.25rem, 2.2vw, 2.25rem);
       --font-display: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-text: 'Source Serif 4', Georgia, serif;
       --radius: 2px;
@@ -45,8 +49,8 @@
 
     body {
       font-family: var(--font-text);
-      font-size: 17px;
-      line-height: 1.58;
+      font-size: 18px;
+      line-height: 1.62;
       background: var(--bg);
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
@@ -66,41 +70,61 @@
 
     .wrap {
       padding-inline: var(--margin);
+      max-width: 1440px;
+      margin-inline: auto;
     }
 
-    /* ── TOP BAR (EDITORIAL IMPRINT) ── */
+    /* ── TOP BAR (EDITORIAL IMPRINT + ISOTIPO MANUAL DE MARCA) ── */
     .top-bar {
-      padding-top: 32px;
-      padding-bottom: 24px;
-      display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr auto;
-      align-items: baseline;
-      gap: var(--gutter);
+      padding-top: 24px;
+      padding-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 90;
     }
 
     .brand-mark {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--ink);
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
-    .brand-mark span {
+    .brand-isotipo {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark em {
+      font-style: normal;
+      color: var(--mint-dark);
+    }
+
+    .brand-mark span.brand-sub {
       font-family: var(--font-text);
       font-size: 14px;
       font-weight: 400;
       color: var(--muted);
       letter-spacing: 0;
+      padding-left: 6px;
     }
 
     .nav-links {
       display: flex;
-      align-items: baseline;
-      gap: 28px;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: nowrap;
     }
 
     .nav-links a {
@@ -108,7 +132,8 @@
       font-size: 14px;
       font-weight: 700;
       color: var(--muted);
-      transition: color 0.2s ease-out;
+      white-space: nowrap;
+      transition: color 0.18s ease-out;
     }
 
     .nav-links a:hover,
@@ -120,132 +145,123 @@
       font-family: var(--font-display);
       font-size: 14px;
       font-weight: 700;
-      color: var(--ink);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      transition: transform 140ms var(--ease-out);
+      color: var(--accent-ink);
+      background: var(--ink);
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      white-space: nowrap;
+      transition: transform 140ms var(--ease-out), opacity 140ms var(--ease-out);
     }
 
     .top-cta:hover {
       transform: translateY(-1px);
+      opacity: 0.92;
     }
 
-    /* ── HERO BLUEPRINT: VOID THEN STATEMENT ON AXIS ── */
+    /* ── HERO EDITORIAL EQUILIBRADO ── */
     .hero {
-      min-height: calc(100svh - 90px);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      padding-top: 28px;
       padding-bottom: 64px;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 48%) 1fr;
-      column-gap: var(--gutter);
-      align-items: flex-end;
-      padding-top: clamp(60px, 12vh, 160px);
+      column-gap: calc(var(--gutter) * 1.5);
+      align-items: center;
     }
 
     .hero-title-col {
-      order: 1;
-    }
-
-    .hero-side {
-      order: 2;
-      padding-left: var(--gutter);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.2vw, 5.2rem);
+      font-size: clamp(2.5rem, 4.8vw, 4.35rem);
       font-weight: 800;
-      line-height: 0.96;
-      letter-spacing: -0.04em;
+      line-height: 0.98;
+      letter-spacing: -0.038em;
       color: var(--ink);
     }
 
-    /* ── MASKED HEADLINE REVEAL (SIGNATURE MOTION) ── */
-    .lines .line {
-      display: block;
-      overflow: hidden;
-      padding-bottom: 0.08em;
-      margin-bottom: -0.08em;
-    }
-
-    .lines [data-line] {
-      display: block;
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .js .lines [data-line] {
-        transform: translateY(105%);
-        animation: line-up 900ms var(--ease-out) forwards;
-        animation-delay: calc(var(--i) * 110ms + 150ms);
-      }
-    }
-
-    @keyframes line-up {
-      to {
-        transform: none;
-      }
+    .hero-sub-badge {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--mint-dark);
     }
 
     .hero-lead {
       font-size: 1.15rem;
-      line-height: 1.55;
+      line-height: 1.58;
       color: var(--ink);
-      max-width: 38ch;
-      margin-bottom: 24px;
+      max-width: 50ch;
+    }
+
+    .hero-detail {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 52ch;
     }
 
     .hero-actions {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      flex-wrap: wrap;
+      align-items: center;
       gap: 14px;
+      padding-top: 4px;
     }
 
     .btn-solid {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 28px;
+      min-height: 48px;
+      padding: 12px 24px;
       background: var(--ink);
-      color: var(--bg);
+      color: var(--accent-ink);
       font-family: var(--font-display);
       font-size: 14px;
       font-weight: 700;
       border-radius: var(--radius);
-      transition: transform 140ms var(--ease-out), opacity 180ms ease;
+      border: none;
+      cursor: pointer;
+      transition: transform 140ms var(--ease-out), opacity 140ms var(--ease-out);
     }
 
     .btn-solid:hover {
       transform: translateY(-2px);
-      opacity: 0.94;
+      opacity: 0.92;
     }
 
-    .btn-solid:active {
-      transform: scale(0.98);
-    }
-
-    .btn-solid-light {
+    .btn-tonal {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 28px;
-      background: var(--field-navy-ink);
-      color: var(--field-navy);
+      min-height: 48px;
+      padding: 12px 22px;
+      background: var(--surface);
+      color: var(--ink);
       font-family: var(--font-display);
       font-size: 14px;
       font-weight: 700;
       border-radius: var(--radius);
-      transition: transform 140ms var(--ease-out), opacity 180ms ease;
+      transition: transform 140ms var(--ease-out), background-color 140ms var(--ease-out);
     }
 
-    .btn-solid-light:hover {
+    .btn-tonal:hover {
       transform: translateY(-2px);
-      opacity: 0.94;
+      background: var(--surface-strong);
+    }
+
+    .hero-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 6px;
     }
 
     .link-action {
@@ -255,257 +271,451 @@
       color: var(--ink);
       text-decoration: underline;
       text-underline-offset: 4px;
-      transition: transform 140ms var(--ease-out);
+      transition: color 0.18s ease-out;
     }
 
     .link-action:hover {
-      transform: translateY(-1px);
+      color: var(--mint-dark);
     }
 
-    /* ── SCROLL MOTION LAYER ── */
-    @media (prefers-reduced-motion: no-preference) {
-      .js [data-reveal] {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 700ms var(--ease-out), transform 800ms var(--ease-out);
-      }
-      .js [data-reveal].is-in {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    /* ── MASTHEAD MOSAIC BAND ── */
-    .masthead-band {
-      margin-top: 56px;
-      margin-bottom: 80px;
-    }
-
-    .mosaic-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      background: var(--surface);
-    }
-
-    .mosaic-cell {
-      position: relative;
-      aspect-ratio: 16/10;
-      overflow: hidden;
-    }
-
-    .mosaic-cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(1) contrast(1.05);
-      transition: filter 0.4s ease-out;
-    }
-
-    .mosaic-cell:hover img {
-      filter: none;
-    }
-
-    .mosaic-tile-info {
-      background: var(--surface);
-      padding: clamp(20px, 3vw, 40px);
+    .hero-visual-col {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 16px;
     }
 
-    .mosaic-tile-info p {
+    .hero-main-photo {
+      background: var(--surface);
+      padding: 12px;
+      border-radius: var(--radius);
+    }
+
+    .hero-main-photo img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    .hero-photo-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding-top: 10px;
       font-size: 14px;
       color: var(--muted);
-      line-height: 1.5;
     }
 
-    .mosaic-tile-info strong {
+    .hero-photo-caption strong {
       font-family: var(--font-display);
-      font-size: 17px;
       font-weight: 700;
       color: var(--ink);
+      white-space: nowrap;
     }
 
-    /* ── SECTION: MEMORIA Y FUNDAMENTOS ── */
+    .hero-metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .hero-metric-box {
+      background: var(--surface);
+      padding: 16px 14px;
+      border-radius: var(--radius);
+    }
+
+    .hero-metric-box strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hero-metric-box span {
+      font-size: 14px;
+      line-height: 1.3;
+      color: var(--muted);
+      display: block;
+    }
+
+    /* ── SECTION: QUIÉNES SOMOS Y MEMORIA DOCUMENTAL ── */
     .section-report {
-      padding-top: 80px;
-      padding-bottom: 110px;
+      padding: 88px 0;
+      background: var(--surface);
     }
 
     .report-grid {
       display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
+      grid-template-columns: minmax(0, 40%) 1fr;
       column-gap: var(--gutter);
       align-items: start;
+      margin-bottom: 56px;
     }
 
     .report-aside {
       padding-right: var(--gutter);
     }
 
-    .report-aside h2 {
+    .section-h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
+      font-size: clamp(2rem, 3.2vw, 3rem);
       font-weight: 800;
-      line-height: 1.05;
+      line-height: 1.02;
       letter-spacing: -0.03em;
       color: var(--ink);
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .report-meta {
       font-size: 14px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
+      background: var(--bg);
+      padding: 20px;
+      border-radius: var(--radius);
+    }
+
+    .report-meta strong {
+      color: var(--ink);
+      font-family: var(--font-display);
+      display: block;
+      margin-bottom: 4px;
     }
 
     .report-body {
-      max-width: 62ch;
+      max-width: 66ch;
     }
 
-    .report-body p {
-      font-size: 1.15rem;
-      line-height: 1.68;
+    .report-body p + p {
+      margin-top: 18px;
+    }
+
+    .photo-strip-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .photo-card {
+      background: var(--bg);
+      padding: 10px;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: var(--radius);
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.02);
+    }
+
+    .photo-card figcaption {
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    .photo-card figcaption strong {
       color: var(--ink);
-      margin-bottom: 24px;
+      font-family: var(--font-display);
+      display: block;
     }
 
-    /* ── SECTION: LAS 4 LÍNEAS ── */
+    /* ── SECTION: LAS 4 LÍNEAS OFICIALES + CONSULTORÍA DESTACADA ── */
     .section-lines {
-      background: var(--surface);
-      padding-top: 96px;
-      padding-bottom: 110px;
+      padding: 96px 0;
+      background: var(--bg);
     }
 
     .lines-header {
       display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
+      grid-template-columns: minmax(0, 40%) 1fr;
       column-gap: var(--gutter);
-      margin-bottom: 64px;
-    }
-
-    .lines-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
-      font-weight: 800;
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-      color: var(--ink);
+      margin-bottom: 56px;
+      align-items: end;
     }
 
     .lines-intro {
       font-size: 1.15rem;
       color: var(--ink);
-      max-width: 54ch;
+      max-width: 58ch;
       line-height: 1.6;
-      align-self: flex-end;
     }
 
-    .lines-list {
+    .lines-cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .linea-box {
+      background: var(--surface);
+      padding: 32px 28px;
+      border-radius: var(--radius);
       display: flex;
       flex-direction: column;
-      gap: 48px;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-    .line-row {
-      display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
-      column-gap: var(--gutter);
-      align-items: start;
-    }
-
-    .line-title-block {
-      padding-right: var(--gutter);
-    }
-
-    .line-title-block h3 {
+    .linea-box h3 {
       font-family: var(--font-display);
       font-size: 1.4rem;
       font-weight: 800;
       color: var(--ink);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .line-scope {
+    .linea-role-sub {
       font-size: 14px;
-      color: var(--muted);
       font-style: italic;
+      color: var(--mint-dark);
+      margin-bottom: 14px;
+      display: block;
     }
 
-    .line-detail-block {
-      max-width: 62ch;
-    }
-
-    .line-detail-block p {
-      font-size: 17px;
-      line-height: 1.62;
+    .linea-box p {
+      font-size: 18px;
+      line-height: 1.58;
       color: var(--ink);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .deliverables-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 14px;
+    .linea-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .deliverables-table td {
-      padding: 10px 0;
+    .linea-bullets li {
       font-size: 14px;
-      color: var(--ink);
-      border-top: 1px solid rgba(31, 26, 58, 0.12);
+      line-height: 1.45;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
     }
 
-    .deliverables-table td:first-child {
+    .linea-bullets li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--mint-dark);
+      font-weight: 700;
+    }
+
+    /* ── CONSULTORÍA FULL-WIDTH FEATURE ── */
+    .consult-feature {
+      background: var(--field-navy);
+      color: var(--field-navy-ink);
+      padding: 48px 40px;
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: minmax(0, 44%) 1fr;
+      gap: calc(var(--gutter) * 1.5);
+      align-items: center;
+    }
+
+    .consult-feature h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 2.6vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--field-navy-ink);
+      margin-bottom: 12px;
+    }
+
+    .consult-sub {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--mint-light);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .consult-feature p {
+      font-size: 18px;
+      line-height: 1.62;
+      color: var(--field-navy-muted);
+      margin-bottom: 24px;
+    }
+
+    .consult-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-mint {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px 22px;
+      background: var(--mint-light);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: var(--radius);
+      transition: transform 140ms var(--ease-out);
+    }
+
+    .btn-mint:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-navy-sec {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 10px 20px;
+      background: var(--field-navy-surface);
+      color: var(--field-navy-ink);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius);
+      transition: background-color 140ms var(--ease-out);
+    }
+
+    .btn-navy-sec:hover {
+      background: var(--field-navy-card);
+    }
+
+    .consult-services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .consult-service-item {
+      background: var(--field-navy-surface);
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .cs-marker {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint-light);
+      flex-shrink: 0;
+      transform: translateY(-1px);
+    }
+
+    .consult-service-item div {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--field-navy-muted);
+    }
+
+    .consult-service-item strong {
+      color: var(--field-navy-ink);
       font-family: var(--font-display);
       font-weight: 700;
-      width: 32%;
-      color: var(--muted);
     }
 
-    /* ── THE LIVE THING: SIMULADOR DE PUNTOS PREXIA (PP) ── */
+    /* ── SECTION: SISTEMA DE EVALUACIÓN PREXIA (PP) + SIMULADOR ── */
     .section-simulator {
       background: var(--field-navy);
       color: var(--field-navy-ink);
-      padding-top: 96px;
-      padding-bottom: 110px;
+      padding: 96px 0;
     }
 
     .sim-header {
       display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
+      grid-template-columns: minmax(0, 40%) 1fr;
       column-gap: var(--gutter);
-      margin-bottom: 56px;
+      margin-bottom: 48px;
+      align-items: end;
     }
 
     .sim-header h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
+      font-size: clamp(2rem, 3.2vw, 3rem);
       font-weight: 800;
       line-height: 1.02;
       letter-spacing: -0.03em;
       color: var(--field-navy-ink);
     }
 
-    .sim-intro {
+    .sim-lead {
       font-size: 1.15rem;
       color: var(--field-navy-muted);
-      max-width: 56ch;
+      max-width: 58ch;
       line-height: 1.6;
+    }
+
+    .levels-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .level-card {
+      background: var(--field-navy-surface);
+      padding: 22px 20px;
+      border-radius: var(--radius);
+    }
+
+    .level-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--mint-light);
+      margin-bottom: 4px;
+    }
+
+    .level-meta {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--field-navy-ink);
+      margin-bottom: 10px;
+    }
+
+    .level-card p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--field-navy-muted);
     }
 
     .sim-engine {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: calc(var(--gutter) * 2);
-      row-gap: 40px;
+      grid-template-columns: minmax(0, 52%) 1fr;
+      gap: var(--gutter);
       align-items: start;
     }
 
     .sim-controls {
+      background: var(--field-navy-surface);
+      padding: 32px;
+      border-radius: var(--radius);
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 24px;
     }
 
     .control-group label {
@@ -514,226 +724,242 @@
       font-size: 14px;
       font-weight: 700;
       color: var(--field-navy-ink);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .control-group select,
-    .control-group input[type="range"] {
+    .sim-select {
       width: 100%;
-      background: var(--field-navy-surface);
-      color: var(--field-navy-ink);
+      padding: 12px 14px;
       font-family: var(--font-display);
-      font-size: 17px;
-      padding: 14px 16px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(247, 247, 245, 0.2);
-    }
-
-    .control-group select option {
+      font-size: 14px;
+      font-weight: 600;
       background: var(--field-navy);
       color: var(--field-navy-ink);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: var(--radius);
     }
 
-    .hours-counter {
+    .range-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .range-slider {
+      width: 100%;
+      accent-color: var(--mint-light);
+      cursor: pointer;
+    }
+
+    .range-meta {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-top: 8px;
-      font-family: var(--font-display);
       font-size: 14px;
       color: var(--field-navy-muted);
     }
 
-    .hours-counter strong {
-      font-size: 1.15rem;
+    .range-meta strong {
+      font-family: var(--font-display);
       color: var(--mint-light);
+      font-variant-numeric: tabular-nums;
     }
 
-    .multipliers-list {
+    .mult-grid {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 8px;
+      gap: 8px;
+      max-height: 310px;
+      overflow-y: auto;
+      padding-right: 4px;
     }
 
-    .mult-label {
+    .mult-option {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      background: var(--field-navy-surface);
+      gap: 10px;
+      padding: 10px 12px;
+      background: var(--field-navy);
       border-radius: var(--radius);
       cursor: pointer;
       font-size: 14px;
       color: var(--field-navy-ink);
-      transition: background 160ms var(--ease-out);
     }
 
-    .mult-label:hover {
-      background: #342c5c;
-    }
-
-    .mult-label input {
+    .mult-option input {
       accent-color: var(--mint-light);
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
     }
 
-    .mult-rate {
-      margin-left: auto;
+    .mult-option em {
+      font-style: normal;
       font-family: var(--font-display);
       font-weight: 700;
       color: var(--mint-light);
+      margin-left: auto;
+      padding-left: 8px;
     }
 
-    .sim-scoreboard {
+    .sim-output {
       background: var(--field-navy-surface);
-      padding: clamp(28px, 4vw, 48px);
+      padding: 36px 32px;
       border-radius: var(--radius);
-    }
-
-    .board-title {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--field-navy-muted);
-      margin-bottom: 24px;
-    }
-
-    .ledger-rows {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      margin-bottom: 36px;
     }
 
-    .ledger-item {
+    .sim-output-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--field-navy-muted);
+    }
+
+    .sim-ledger {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .sim-ledger td {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 14px;
+    }
+
+    .sim-ledger td:first-child {
+      color: var(--field-navy-muted);
+    }
+
+    .sim-ledger td:last-child {
+      text-align: right;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--field-navy-ink);
+      font-size: 18px;
+    }
+
+    .sim-total-block {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      padding-top: 8px;
     }
 
-    .ledger-item span {
+    .sim-total-label {
       font-size: 14px;
       color: var(--field-navy-muted);
     }
 
-    .ledger-item strong {
+    .sim-total-number {
       font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--field-navy-ink);
-    }
-
-    .ledger-highlight {
-      padding-top: 20px;
-      border-top: 1px solid rgba(247, 247, 245, 0.15); /* taste-skill-ignore */
-    }
-
-    .ledger-highlight strong {
-      font-size: clamp(2rem, 3.2vw, 3rem);
+      font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+      font-weight: 800;
       color: var(--mint-light);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
     }
 
-    .verdict-box {
-      padding: 18px 20px;
-      background: rgba(132, 251, 170, 0.12);
+    .sim-status-box {
+      padding: 16px 18px;
+      background: var(--field-navy);
       border-radius: var(--radius);
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--field-navy-ink);
     }
 
-    .verdict-box strong {
+    .sim-status-box strong {
       display: block;
       font-family: var(--font-display);
-      font-size: 17px;
+      font-size: 14px;
       color: var(--mint-light);
       margin-bottom: 4px;
     }
 
-    /* ── SECTION: EISI TRAYECTORIA ── */
+    .sim-status-box p {
+      font-size: 14px;
+      color: var(--field-navy-muted);
+      line-height: 1.45;
+    }
+
+    /* ── SECTION: ENCUENTROS INTERNACIONALES EISI (6 EDICIONES) ── */
     .section-eisi {
-      padding-top: 96px;
-      padding-bottom: 96px;
+      padding: 96px 0;
+      background: var(--bg);
     }
 
     .eisi-head {
       display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
+      grid-template-columns: minmax(0, 40%) 1fr;
       column-gap: var(--gutter);
       margin-bottom: 56px;
-    }
-
-    .eisi-head h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
-      font-weight: 800;
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-      color: var(--ink);
+      align-items: end;
     }
 
     .eisi-head p {
       font-size: 1.15rem;
-      color: var(--ink);
-      max-width: 52ch;
-      line-height: 1.6;
-      align-self: flex-end;
+      color: var(--muted);
+      max-width: 56ch;
     }
 
-    .eisi-strip {
+    .eisi-grid-6 {
       display: grid;
-      grid-template-columns: 2fr 1.3fr 1.3fr 1.3fr;
-      background: var(--surface);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
     .eisi-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: var(--radius);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(24px, 2.5vw, 36px);
-      background: var(--surface);
-      color: var(--ink);
+      gap: 18px;
+      transition: transform 0.22s var(--ease-out);
     }
 
-    .eisi-card:nth-child(even) {
-      background: #e3e2dc;
+    .eisi-card:hover {
+      transform: translateY(-3px);
     }
 
-    .eisi-card-photo {
-      aspect-ratio: 16/10;
+    .eisi-card-poster {
+      aspect-ratio: 16 / 10;
       overflow: hidden;
-      margin-bottom: 24px;
+      background: var(--field-navy);
+      border-radius: var(--radius);
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .eisi-card-photo img {
+    .eisi-card-poster img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      filter: grayscale(1) contrast(1.05);
-      transition: filter 0.3s ease-out;
-    }
-
-    .eisi-card:hover .eisi-card-photo img {
-      filter: none;
+      object-fit: contain;
     }
 
     .eisi-edition {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--ink);
-      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .eisi-date-meta {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--mint-dark);
       margin-bottom: 8px;
     }
 
     .eisi-theme {
-      font-size: 14px;
+      font-size: 18px;
+      line-height: 1.5;
       color: var(--muted);
-      line-height: 1.45;
-      margin-bottom: 16px;
     }
 
     .eisi-link {
@@ -743,852 +969,1317 @@
       color: var(--ink);
       text-decoration: underline;
       text-underline-offset: 4px;
-      margin-top: auto;
-      transition: transform 140ms var(--ease-out);
     }
 
-    .eisi-link:hover {
-      transform: translateY(-1px);
-    }
-
-    /* ── SECTION: STATS (DECIMAL ALIGNED LEDGER & PHOTO) ── */
-    .section-stats {
+    /* ── SECTION: ALIADOS INSTITUCIONALES ── */
+    .section-allies {
+      padding: 80px 0;
       background: var(--surface);
-      padding-top: 96px;
-      padding-bottom: 110px;
     }
 
-    .stats-split {
+    .allies-header {
       display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
+      grid-template-columns: minmax(0, 40%) 1fr;
       column-gap: var(--gutter);
-      align-items: center;
+      margin-bottom: 44px;
+      align-items: end;
     }
 
-    .stats-photo {
-      aspect-ratio: 4/3;
-      overflow: hidden;
+    .allies-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
     }
 
-    .stats-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(1) contrast(1.05);
-    }
-
-    .stats-ledger {
+    .ally-card {
+      background: var(--card-light);
+      padding: 20px 16px;
+      border-radius: var(--radius);
       display: flex;
       flex-direction: column;
-      gap: 36px;
-      padding-left: var(--gutter);
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-align: center;
     }
 
-    .stats-heading {
+    .ally-logo-wrap {
+      height: 64px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ally-logo-wrap img {
+      max-height: 58px;
+      max-width: 130px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .ally-card span {
       font-family: var(--font-display);
-      font-size: clamp(1.9rem, 2.8vw, 3rem);
-      font-weight: 800;
-      line-height: 1.1;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
       color: var(--ink);
-      margin-bottom: 12px;
     }
 
-    .stat-row {
+    /* ── SECTION: ¿POR QUÉ UNIRTE A PREXIA? ── */
+    .section-join {
+      padding: 88px 0;
+      background: var(--bg);
+    }
+
+    .join-header {
       display: grid;
-      grid-template-columns: 120px 1fr;
-      align-items: baseline;
-      gap: 20px;
+      grid-template-columns: minmax(0, 40%) 1fr;
+      column-gap: var(--gutter);
+      margin-bottom: 48px;
+      align-items: end;
     }
 
-    .stat-num {
+    .join-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .join-card {
+      background: var(--surface);
+      padding: 32px 28px;
+      border-radius: var(--radius);
+    }
+
+    .join-card h3 {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 4.2vw, 4.6rem);
+      font-size: 1.3rem;
       font-weight: 800;
-      line-height: 0.9;
       color: var(--ink);
-      letter-spacing: -0.04em;
+      margin-bottom: 10px;
     }
 
-    .stat-desc {
-      font-size: 17px;
-      line-height: 1.45;
+    .join-card p {
+      font-size: 18px;
+      line-height: 1.58;
       color: var(--muted);
     }
 
-    .stat-desc strong {
-      display: block;
-      color: var(--ink);
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 17px;
-    }
-
-    /* ── SECTION: CONTACT (SENTENCE, PORTRAIT, TWO LINKS) ── */
+    /* ── SECTION: CONTACTO DIRECTO + FORMULARIO + MAPA CAMPUS ── */
     .section-contact {
-      padding-top: 110px;
-      padding-bottom: 120px;
+      padding: 96px 0;
+      background: var(--surface);
     }
 
-    .contact-row {
+    .contact-header {
       display: grid;
-      grid-template-columns: 5fr 2fr 4fr;
+      grid-template-columns: minmax(0, 40%) 1fr;
       column-gap: var(--gutter);
+      margin-bottom: 48px;
+      align-items: end;
+    }
+
+    .contact-2col {
+      display: grid;
+      grid-template-columns: minmax(0, 48%) 1fr;
+      gap: calc(var(--gutter) * 1.5);
       align-items: start;
     }
 
-    .contact-statement {
-      font-family: var(--font-text);
-      font-size: 1.25rem;
-      font-weight: 400;
-      line-height: 1.4;
+    .contact-form-card {
+      background: var(--bg);
+      padding: 36px 32px;
+      border-radius: var(--radius);
+    }
+
+    .contact-form-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
       color: var(--ink);
-      max-width: 46ch;
+      margin-bottom: 18px;
     }
 
-    .contact-portrait {
-      aspect-ratio: 1/1;
-      overflow: hidden;
-      max-width: 190px;
-    }
-
-    .contact-portrait img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(1) contrast(1.05);
-    }
-
-    .contact-links-block {
+    .form-stack {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    .contact-links-block h3 {
+    .form-field label {
+      display: block;
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 14px;
       font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      font-family: var(--font-text);
+      font-size: 18px;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1px solid rgba(31, 26, 58, 0.2);
+      border-radius: var(--radius);
+    }
+
+    textarea.form-input {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-feedback {
+      display: none;
+      padding: 14px 16px;
+      background: var(--surface);
+      color: var(--mint-dark);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: var(--radius);
+    }
+
+    .contact-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .contact-item-box {
+      background: var(--bg);
+      padding: 20px;
+      border-radius: var(--radius);
+    }
+
+    .contact-item-box strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
       color: var(--ink);
       margin-bottom: 4px;
     }
 
-    .contact-direct-link {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 700;
+    .contact-item-box span,
+    .contact-item-box a {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .contact-item-box a {
       color: var(--ink);
       text-decoration: underline;
-      text-underline-offset: 4px;
-      transition: transform 140ms var(--ease-out);
+      text-underline-offset: 3px;
     }
 
-    .contact-direct-link:hover {
-      transform: translateY(-1px);
+    .campus-map-box {
+      background: var(--bg);
+      padding: 14px;
+      border-radius: var(--radius);
     }
 
-    .contact-footnote {
+    .campus-map-box img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      background: #ecebe6;
+      border-radius: var(--radius);
+    }
+
+    .campus-map-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
       font-size: 14px;
       color: var(--muted);
-      line-height: 1.5;
-      margin-top: 10px;
     }
 
-    /* ── FOOTER: SOLID NAVY IMPRINT ── */
+    /* ── FOOTER (UNAL MINAS IMPRINT) ── */
     .site-footer {
       background: var(--field-navy);
       color: var(--field-navy-ink);
-      padding-top: 80px;
-      padding-bottom: 72px;
+      padding: 72px 0 48px;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: minmax(0, 42%) 1fr;
+      grid-template-columns: minmax(0, 38%) 1fr;
       column-gap: var(--gutter);
-      row-gap: 40px;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
     }
 
-    .footer-brand h4 {
+    .footer-brand {
       font-family: var(--font-display);
       font-size: 1.4rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
       margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .footer-brand p {
+    .footer-brand em {
+      font-style: normal;
+      color: var(--mint-light);
+    }
+
+    .footer-desc {
       font-size: 14px;
       color: var(--field-navy-muted);
-      max-width: 38ch;
-      line-height: 1.55;
+      max-width: 44ch;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius);
+      background: var(--field-navy-surface);
+      color: var(--field-navy-ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.18s ease-out, color 0.18s ease-out;
+    }
+
+    .social-btn:hover {
+      background: var(--mint-light);
+      color: var(--ink);
+    }
+
+    .social-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
     .footer-col-links {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: var(--gutter);
     }
 
-    .footer-col h5 {
+    .footer-col h4 {
       font-family: var(--font-display);
       font-size: 14px;
       font-weight: 700;
-      color: var(--mint-light);
-      margin-bottom: 16px;
+      color: var(--field-navy-ink);
+      margin-bottom: 14px;
     }
 
     .footer-col ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .footer-col a {
       font-size: 14px;
       color: var(--field-navy-muted);
-      transition: color 0.2s ease-out;
+      transition: color 0.18s ease-out;
     }
 
     .footer-col a:hover {
-      color: var(--field-navy-ink);
+      color: var(--mint-light);
     }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding-top: 40px;
-      margin-top: 40px;
-      background: rgba(0, 0, 0, 0.12);
-      padding: 24px;
-      border-radius: var(--radius);
       font-size: 14px;
       color: var(--field-navy-muted);
+      padding-top: 24px;
     }
 
-    .footer-bottom a {
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    /* ── SIGNATURE MOTION LAYER ── */
+    .lines .line {
+      overflow: hidden;
+      display: block;
+      padding-bottom: 0.06em;
     }
 
-    /* ── RESPONSIVE COMPOSITION ── */
-    @media (max-width: 1024px) {
-      .top-bar {
-        grid-template-columns: 1fr auto;
+    .js .lines [data-line] {
+      display: block;
+      transform: translateY(105%);
+      transition: transform 680ms var(--ease-out);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+
+    .js.in .lines [data-line] {
+      transform: translateY(0);
+    }
+
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 540ms var(--ease-out), transform 540ms var(--ease-out);
+    }
+
+    .js [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
+      .js .lines [data-line],
+      .js [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    /* ── RESPONSIVE BREAKPOINTS ── */
+    @media (max-width: 1080px) {
       .nav-links {
         display: none;
       }
-      .hero-grid {
+      .hero-grid,
+      .report-grid,
+      .lines-header,
+      .consult-feature,
+      .sim-header,
+      .sim-engine,
+      .eisi-head,
+      .allies-header,
+      .join-header,
+      .contact-header,
+      .contact-2col,
+      .footer-grid {
         grid-template-columns: 1fr;
         row-gap: 32px;
       }
-      .hero-title-col {
-        order: 1;
-      }
-      .hero-side {
-        order: 2;
-        padding-left: 0;
-      }
-      .report-grid,
-      .lines-header,
-      .line-row,
-      .sim-header,
-      .eisi-head,
-      .stats-split,
-      .footer-grid {
-        grid-template-columns: 1fr;
-        row-gap: 36px;
-      }
-      .report-aside,
-      .line-title-block,
-      .stats-ledger {
-        padding-right: 0;
-        padding-left: 0;
-      }
-      .sim-engine {
-        grid-template-columns: 1fr;
-      }
-      .mosaic-grid {
+      .lines-cards-3,
+      .eisi-grid-6,
+      .join-grid {
         grid-template-columns: 1fr 1fr;
       }
-      .eisi-strip {
+      .photo-strip-4,
+      .levels-strip {
         grid-template-columns: 1fr 1fr;
       }
-      .contact-row {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 36px;
+      .allies-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    @media (max-width: 600px) {
-      .hero {
-        padding-bottom: 40px;
+    @media (max-width: 640px) {
+      .brand-mark span.brand-sub {
+        display: none;
       }
       .hero-title {
-        font-size: clamp(2.4rem, 11vw, 3.6rem);
+        font-size: clamp(2.1rem, 9.5vw, 3rem);
       }
-      .mosaic-grid,
-      .eisi-strip,
-      .contact-row {
-        grid-template-columns: 1fr;
-      }
-      .stat-row {
-        grid-template-columns: 90px 1fr;
-      }
+      .hero-metrics-bar,
+      .photo-strip-4,
+      .lines-cards-3,
+      .levels-strip,
+      .eisi-grid-6,
+      .allies-grid,
+      .join-grid,
+      .contact-details-grid,
       .footer-col-links {
         grid-template-columns: 1fr;
       }
+      .consult-feature {
+        padding: 32px 24px;
+      }
       .footer-bottom {
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══ TOP BAR ══ -->
+  <!-- ══ TOP BAR (ISOTIPO MANUAL DE MARCA + NAVEGACIÓN GLOBAL) ══ -->
   <header class="wrap top-bar">
-    <div class="brand-mark">
-      PREXIA
-      <span>Facultad de Minas · UNAL</span>
-    </div>
-    <nav class="nav-links">
-      <a href="#memoria" class="active">Memoria</a>
-      <a href="#lineas">Líneas</a>
-      <a href="#simulador">Simulador PP</a>
-      <a href="#eisi">Encuentros EISI</a>
-      <a href="#trayectoria">Cifras</a>
+    <a href="#inicio" class="brand-mark">
+      <svg class="brand-isotipo" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#15803d" stroke-width="4" stroke-linecap="round"/>
+        <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#1f1a3a" stroke-width="4" stroke-linecap="round"/>
+        <path d="M16 16 C20 28 28 36 44 44" stroke="#15803d" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M44 16 C40 28 32 36 16 44" stroke="#1f1a3a" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>
+      <span>PRE<em>XIA</em></span>
+      <span class="brand-sub">Facultad de Minas · UNAL</span>
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#sobre">Quiénes somos</a>
+      <a href="#lineas">Las 4 Líneas</a>
+      <a href="#consultoria">Consultoría</a>
+      <a href="#simulador">Sistema PP</a>
+      <a href="#encuentros">Encuentros EISI</a>
+      <a href="#aliados">Aliados</a>
+      <a href="#unete">Únete</a>
+      <a href="site/index.html">Archivo (40)</a>
     </nav>
-    <a href="#contacto" class="top-cta">Solicitar consultoría</a>
+    <a href="#contacto" class="top-cta">Contactar</a>
   </header>
 
-  <!-- ══ HERO: STATEMENT ON AXIS ══ -->
+  <!-- ══ HERO: CIENCIA APLICADA A LA INDUSTRIA ══ -->
   <section class="wrap hero" id="inicio">
     <div class="hero-grid">
       <div class="hero-title-col">
         <h1 class="hero-title lines">
-          <span class="line"><span data-line style="--i:0">Investigación</span></span>
-          <span class="line"><span data-line style="--i:1">y consultoría.</span></span>
+          <span class="line"><span data-line style="--i:0">Ciencia aplicada</span></span>
+          <span class="line"><span data-line style="--i:1">a la industria.</span></span>
         </h1>
-      </div>
-      <div class="hero-side">
+        <p class="hero-sub-badge">
+          Semillero de Investigación, Consultoría y Emprendimiento · Universidad Nacional de Colombia
+        </p>
         <p class="hero-lead">
-          Semillero de investigación y consultoría estratégica en la Facultad de Minas de la Universidad Nacional de Colombia, Sede Medellín.
+          Transformamos el conocimiento de la Facultad de Minas en soluciones reales para las organizaciones colombianas.
+        </p>
+        <p class="hero-detail">
+          Adscrito al Área Curricular de Ingeniería Industrial e Ingeniería Administrativa (Sede Medellín), PREXIA articula cuatro líneas activas de trabajo, seis ediciones del Encuentro Internacional EISI y un modelo propio de gestión por Puntos Prexia (PP).
         </p>
         <div class="hero-actions">
-          <a href="#simulador" class="btn-solid">Simular Puntos Prexia</a>
-          <a href="#lineas" class="link-action">Conocer las cuatro líneas</a>
+          <a href="#consultoria" class="btn-solid">Solicitar consultoría</a>
+          <a href="#simulador" class="btn-tonal">Simular Puntos Prexia</a>
+        </div>
+        <div class="hero-quick-links">
+          <a href="site/pages/sistema-evaluacion-prexia.html" class="link-action">Manual Oficial PP (PDF) →</a>
+          <a href="#unete" class="link-action">Unirme al semillero →</a>
+          <a href="site/index.html" class="link-action">Catálogo de 40 páginas migradas →</a>
+        </div>
+      </div>
+
+      <div class="hero-visual-col" data-reveal>
+        <figure class="hero-main-photo">
+          <img src="assets/photos/grupo-prexia-2024.png" alt="Sesión plenaria de trabajo del Semillero PREXIA con el profesor José Ignacio Maya en la Facultad de Minas UNAL" loading="eager">
+          <figcaption class="hero-photo-caption">
+            <span>Sesión de trabajo e innovación organizacional en la Facultad de Minas, Campus Robledo.</span>
+            <strong>PREXIA · UNAL Medellín</strong>
+          </figcaption>
+        </figure>
+        <div class="hero-metrics-bar">
+          <div class="hero-metric-box">
+            <strong>6</strong>
+            <span>Ediciones internacionales EISI</span>
+          </div>
+          <div class="hero-metric-box">
+            <strong>4</strong>
+            <span>Líneas oficiales de acción</span>
+          </div>
+          <div class="hero-metric-box">
+            <strong>50+</strong>
+            <span>Diagnósticos y proyectos</span>
+          </div>
+          <div class="hero-metric-box">
+            <strong>110%</strong>
+            <span>Meta progresiva semanal POA</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ MASTHEAD BAND (REAL ARCHIVAL PHOTOGRAPHY) ══ -->
-  <section class="wrap masthead-band" data-reveal>
-    <div class="mosaic-grid">
-      <div class="mosaic-cell">
-        <img src="assets/photos/grupo-prexia-2024.png" alt="Integrantes del Semillero PREXIA en el V Encuentro Internacional 2024" loading="eager">
-      </div>
-      <div class="mosaic-cell">
-        <img src="assets/photos/encuentro-2023-auditorio.png" alt="Auditorio de la Facultad de Minas durante el IV Encuentro Internacional PREXIA" loading="lazy">
-      </div>
-      <div class="mosaic-tile-info">
-        <p>Facultad de Minas, Núcleo Robledo. Estudiantes de ingeniería vinculados a proyectos de consultoría, analítica aplicada y conferencias internacionales.</p>
-        <strong>Registro UNAL 2025</strong>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SECTION: MEMORIA Y FUNDAMENTOS ══ -->
-  <section class="wrap section-report" id="memoria" data-reveal>
-    <div class="report-grid">
-      <div class="report-aside">
-        <h2>Rigor académico y acción empresarial.</h2>
-        <div class="report-meta">
-          Área Curricular de Ingeniería Industrial e Ingeniería Administrativa.<br>
-          Universidad Nacional de Colombia, Sede Medellín.<br>
-          Fundador y Director: José Ignacio Maya.
+  <!-- ══ SECTION: QUIÉNES SOMOS Y MEMORIA DOCUMENTAL ══ -->
+  <section class="section-report" id="sobre" data-reveal>
+    <div class="wrap">
+      <div class="report-grid">
+        <div class="report-aside">
+          <h2 class="section-h2">Quiénes somos.</h2>
+          <div class="report-meta">
+            <strong>Identidad Institucional</strong>
+            Departamento de Ingeniería de la Organización · Bloque M8B<br>
+            Área Curricular de Ingeniería Industrial e Ingeniería Administrativa<br>
+            Facultad de Minas · Universidad Nacional de Colombia, Sede Medellín<br>
+            Director y Fundador: Prof. José Ignacio Maya
+          </div>
+        </div>
+        <div class="report-body">
+          <p>
+            <strong>PREXIA</strong> nació para resolver una brecha histórica en la educación superior: la distancia entre el análisis teórico universitario y las decisiones reales de la industria y las organizaciones. Integramos estudiantes de pregrado y posgrado comprometidos con fortalecer sus competencias en comprensión y resolución de problemas complejos empleando metodologías de las ciencias y la ingeniería.
+          </p>
+          <p>
+            Nuestro modelo combina el rigor investigativo con la acción transformadora en terreno: prestamos consultoría diagnóstica a pequeñas y medianas empresas (MiPymes), acompañamos la validación de emprendimientos universitarios y lideramos desde 2020 los <strong>Encuentros Internacionales de Semilleros de Investigación (EISI)</strong> en alianza con universidades de Brasil, México y España.
+          </p>
         </div>
       </div>
-      <div class="report-body">
-        <p>
-          PREXIA nació para resolver una brecha histórica: la distancia entre el análisis teórico universitario y las decisiones operacionales de las organizaciones colombianas. No somos un grupo de lectura pasivo; estructuramos proyectos con entregables rigurosos para pequeñas y medianas empresas.
-        </p>
-        <p>
-          El trabajo se organiza en cuatro frentes que se retroalimentan: la investigación metodológica, el acompañamiento a nuevos modelos de negocio, la difusión científica abierta y el servicio de consultoría diagnóstica.
-        </p>
+
+      <div class="photo-strip-4">
+        <figure class="photo-card" data-reveal>
+          <img src="assets/photos/jose-ignacio-maya.jpg" alt="Auditorio Alejandro López durante sesión plenaria del Encuentro Internacional PREXIA" loading="lazy">
+          <figcaption>
+            <strong>Auditorio Alejandro López</strong>
+            Comunidad de semilleristas, docentes e investigadores en plenaria académica.
+          </figcaption>
+        </figure>
+        <figure class="photo-card" data-reveal>
+          <img src="assets/photos/encuentro-2023-auditorio.png" alt="Conferencia magistral en el V Encuentro Internacional de Semilleros PREXIA UNAL" loading="lazy">
+          <figcaption>
+            <strong>Conferencias Magistrales</strong>
+            Ponencias sobre liderazgo, estrategia organizacional y transformación productiva.
+          </figcaption>
+        </figure>
+        <figure class="photo-card" data-reveal>
+          <img src="assets/photos/semillero-equipo-completo.png" alt="Delegación internacional de Colombia y Brasil en las escalinatas de la Facultad de Minas" loading="lazy">
+          <figcaption>
+            <strong>Cooperación Colombia–Brasil</strong>
+            Integración académica entre la UNAL, UNESP Jaboticabal e Instituto Nau Ciranda.
+          </figcaption>
+        </figure>
+        <figure class="photo-card" data-reveal>
+          <img src="assets/photos/podcast-prexia.jpg" alt="Grabación de contenidos y divulgación científica de PREXIA Conecta" loading="lazy">
+          <figcaption>
+            <strong>Divulgación y Medios</strong>
+            Producción de cápsulas de conocimiento, entrevistas y transferencia al sector real.
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- ══ SECTION: LAS 4 LÍNEAS ══ -->
+  <!-- ══ SECTION: LAS 4 LÍNEAS OFICIALES DE PREXIA ══ -->
   <section class="wrap section-lines" id="lineas" data-reveal>
     <div class="lines-header">
-      <h2>Cuatro líneas de trabajo.</h2>
+      <h2 class="section-h2">Cuatro líneas.</h2>
       <p class="lines-intro">
-        Cada línea cuenta con un coordinador, un equipo de estudiantes por ciclo formativo y un sistema de evaluación auditado por entregables.
+        Cada línea tiene un enfoque especializado y un coordinador operativo, conectando la investigación científica, la creación de empresas, la comunicación estratégica y la consultoría empresarial.
       </p>
     </div>
 
-    <div class="lines-list">
-      <!-- LÍNEA 1 -->
-      <article class="line-row" data-reveal>
-        <div class="line-title-block">
-          <h3>PREXIA Consultoría</h3>
-          <span class="line-scope">Diagnóstico y productividad empresarial</span>
-        </div>
-        <div class="line-detail-block">
-          <p>
-            Prestación de servicios de diagnóstico y optimización para MiPymes y organizaciones aliadas. Aplicamos ingeniería de métodos, control de gestión financiero y diseño de cadenas de suministro con acompañamiento docente.
-          </p>
-          <table class="deliverables-table" data-ui>
-            <tbody>
-              <tr>
-                <td>Metodología</td>
-                <td>Diagnóstico integral de 5 fases con matriz de brechas de productividad.</td>
-              </tr>
-              <tr>
-                <td>Entregable</td>
-                <td>Informe analítico final con plan de acción cuantificado y retorno estimado.</td>
-              </tr>
-              <tr>
-                <td>Público</td>
-                <td>Empresas manufactureras, comerciales y de servicios del Valle de Aburrá.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </article>
-
-      <!-- LÍNEA 2 -->
-      <article class="line-row" data-reveal>
-        <div class="line-title-block">
+    <div class="lines-cards-3">
+      <!-- PREXIA INVESTIGA -->
+      <article class="linea-box" data-reveal>
+        <div>
           <h3>PREXIA Investiga</h3>
-          <span class="line-scope">Metodología y producción científica</span>
-        </div>
-        <div class="line-detail-block">
+          <span class="linea-role-sub">Investigación aplicada y rigor metodológico</span>
           <p>
-            Formación en métodos formales de investigación aplicada, redacción de artículos y estructuración de ponencias para los Encuentros Internacionales de Semilleros (EISI) y congresos indexados.
+            Fortalecemos las capacidades de generación de conocimiento en los estudiantes del Departamento de Ingeniería de la Organización mediante proyectos aplicados y eventos científicos internacionales.
           </p>
-          <table class="deliverables-table" data-ui>
-            <tbody>
-              <tr>
-                <td>Metodología</td>
-                <td>Seminarios quincenales de epistemología, diseño experimental y muestreo.</td>
-              </tr>
-              <tr>
-                <td>Entregable</td>
-                <td>Artículos de investigación, ponencias orales y memorias académicas anuales.</td>
-              </tr>
-              <tr>
-                <td>Público</td>
-                <td>Estudiantes de pregrado y posgrado en ingeniería de la Universidad Nacional.</td>
-              </tr>
-            </tbody>
-          </table>
+          <ul class="linea-bullets">
+            <li>Formación en metodologías de investigación cuantitativa y cualitativa</li>
+            <li>Desarrollo de artículos, ponencias y estudios de caso sectoriales</li>
+            <li>Dirección académica de las seis ediciones del Encuentro Internacional EISI</li>
+            <li>Articulación con grupos de investigación de la Facultad de Minas y RedCOLSI</li>
+          </ul>
         </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga.html" class="link-action">Explorar PREXIA Investiga →</a>
       </article>
 
-      <!-- LÍNEA 3 -->
-      <article class="line-row" data-reveal>
-        <div class="line-title-block">
+      <!-- PREXIA EMPRENDE -->
+      <article class="linea-box" data-reveal>
+        <div>
           <h3>PREXIA Emprende</h3>
-          <span class="line-scope">Validación y modelos de negocio</span>
-        </div>
-        <div class="line-detail-block">
+          <span class="linea-role-sub">Modelos de negocio e innovación universitaria</span>
           <p>
-            Acompañamiento a iniciativas productivas nacidas en las aulas universitarias. Estructuramos propuestas de valor, experimentos de tracción comercial y modelos financieros sostenibles.
+            Acompañamos iniciativas productivas nacidas en las aulas universitarias para estructurar propuestas de valor sostenibles, validación comercial y pre-incubación empresarial.
           </p>
-          <table class="deliverables-table" data-ui>
-            <tbody>
-              <tr>
-                <td>Metodología</td>
-                <td>Pruebas de concepto rápidas y validación en terreno con clientes tempranos.</td>
-              </tr>
-              <tr>
-                <td>Entregable</td>
-                <td>Modelo económico validado, plan de costos y pitch para fondos de fomento.</td>
-              </tr>
-              <tr>
-                <td>Público</td>
-                <td>Emprendedores universitarios con soluciones de base tecnológica o industrial.</td>
-              </tr>
-            </tbody>
-          </table>
+          <ul class="linea-bullets">
+            <li>Diseño y validación de modelos de negocio de base tecnológica e industrial</li>
+            <li>Pruebas de concepto, análisis de costos y tracción con clientes tempranos</li>
+            <li>Preparación para ferias de emprendimiento e inmersión internacional</li>
+            <li>Formación práctica en cultura emprendedora y liderazgo de proyectos</li>
+          </ul>
         </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-emprende.html" class="link-action">Explorar PREXIA Emprende →</a>
       </article>
 
-      <!-- LÍNEA 4 -->
-      <article class="line-row" data-reveal>
-        <div class="line-title-block">
+      <!-- PREXIA CONECTA -->
+      <article class="linea-box" data-reveal>
+        <div>
           <h3>PREXIA Conecta</h3>
-          <span class="line-scope">Comunidad y divulgación del conocimiento</span>
-        </div>
-        <div class="line-detail-block">
+          <span class="linea-role-sub">Comunidad, divulgación y alianzas globales</span>
           <p>
-            Gestión de las redes académicas, difusión de convocatorias y articulación logística de los eventos internacionales. Traduce hallazgos técnicos a formatos accesibles para la comunidad universitaria.
+            Gestionamos la comunicación interna y externa del semillero, traduciendo los hallazgos técnicos en cápsulas de conocimiento y conectando a nuestros miembros con redes internacionales.
           </p>
-          <table class="deliverables-table" data-ui>
+          <ul class="linea-bullets">
+            <li>Producción editorial de cápsulas de conocimiento y divulgación científica</li>
+            <li>Difusión de convocatorias, congresos EISI y logros institucionales</li>
+            <li>Relacionamiento con universidades aliadas, egresados y gremios</li>
+            <li>Gestión de bienestar, cultura consultor y posicionamiento digital</li>
+          </ul>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-comunica.html" class="link-action">Explorar PREXIA Conecta →</a>
+      </article>
+    </div>
+
+    <!-- PREXIA CONSULTORÍA — DESTACADA FULL WIDTH -->
+    <div class="consult-feature" id="consultoria" data-reveal>
+      <div>
+        <h3>PREXIA Consultoría</h3>
+        <span class="consult-sub">Línea Estratégica de Intervención Empresarial · UNAL</span>
+        <p>
+          Ofrecemos consultoría diagnóstica y aplicada a empresas —especialmente MiPymes— con el respaldo metodológico de la Universidad Nacional de Colombia. Nuestros equipos de estudiantes, organizados por niveles de avance curricular y supervisados por docentes, ejecutan proyectos con entregables verificables y retorno medible.
+        </p>
+        <div class="consult-actions">
+          <a href="#contacto" class="btn-mint">Solicitar diagnóstico gratuito</a>
+          <a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada.html" class="btn-navy-sec">Ver línea de Consultoría →</a>
+        </div>
+      </div>
+      <div class="consult-services-grid">
+        <div class="consult-service-item">
+          <span class="cs-marker"></span>
+          <div><strong>Diagnóstico organizacional</strong> — Identificación integral de brechas operativas y oportunidades de mejora.</div>
+        </div>
+        <div class="consult-service-item">
+          <span class="cs-marker"></span>
+          <div><strong>Mejora de productividad</strong> — Ingeniería de métodos, estandarización de procesos y reducción de desperdicios.</div>
+        </div>
+        <div class="consult-service-item">
+          <span class="cs-marker"></span>
+          <div><strong>Finanzas y control de gestión</strong> — Análisis de costos, indicadores clave (KPIs) y estructuración financiera para pymes.</div>
+        </div>
+        <div class="consult-service-item">
+          <span class="cs-marker"></span>
+          <div><strong>Estrategia y mercadeo</strong> — Posicionamiento competitivo, diseño de propuesta de valor y tracción comercial.</div>
+        </div>
+        <div class="consult-service-item">
+          <span class="cs-marker"></span>
+          <div><strong>Operaciones y logística</strong> — Optimización de cadena de suministro, control de inventarios y distribución en planta.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION: SISTEMA DE EVALUACIÓN PREXIA (PP) Y MULTIPLICADORES (PDF) ══ -->
+  <section class="section-simulator" id="simulador" data-reveal>
+    <div class="wrap">
+      <div class="sim-header">
+        <div>
+          <h2>Puntos Prexia.</h2>
+        </div>
+        <p class="sim-lead">
+          Fundamentado en Hackman &amp; Oldham y en la teoría de motivación intrínseca de Daniel Pink (Autonomía, Maestría y Propósito), el Sistema de Evaluación de PREXIA mide resultados en <strong>Puntos Prexia (PP)</strong> y no en horas silla. Cada hora semanal pactada en el POA equivale a <strong>100 PP base</strong>, con una exigencia que crece 1% semanal hasta llegar al <strong>110% en la semana diez</strong>.
+        </p>
+      </div>
+
+      <!-- LOS 4 NIVELES DE AVANCE DE CARRERA DEL PDF -->
+      <div class="levels-strip">
+        <article class="level-card" data-reveal>
+          <h3>Nivel 1 · Operativo</h3>
+          <div class="level-meta">Fundamentación (0% a 25% · Sem. 1–2)</div>
+          <p>Ejecución de tareas operativas acotadas, apoyo logístico a eventos, cápsulas de conocimiento y difusión de cultura consultor.</p>
+        </article>
+        <article class="level-card" data-reveal>
+          <h3>Nivel 2 · Gestor</h3>
+          <div class="level-meta">Transición (26% a 50% · Sem. 3–5)</div>
+          <p>Liderazgo en mesas temáticas, tracción en redes (+10%), poder de convocatoria (&ge;80%), bienestar y simulaciones de ventas.</p>
+        </article>
+        <article class="level-card" data-reveal>
+          <h3>Nivel 3 · Consultor Jr.</h3>
+          <div class="level-meta">Profesionalización (51% a 75% · Sem. 6–8)</div>
+          <p>Diagnóstico empresarial a MiPymes, diseño curricular de casos de estudio reales y meta del 80% de productividad de línea.</p>
+        </article>
+        <article class="level-card" data-reveal>
+          <h3>Nivel 4 · Líder</h3>
+          <div class="level-meta">Proyección (&gt;75% · Sem. 9–10)</div>
+          <p>Gerencia de proyectos, acuerdos de retribución sobre utilidades generadas (+10%), vinculación de expertos y mentoría a pares.</p>
+        </article>
+      </div>
+
+      <!-- MOTOR INTERACTIVO DEL SIMULADOR -->
+      <div class="sim-engine" data-ui>
+        <div class="sim-controls">
+          <div class="control-group">
+            <label for="level-select">Ciclo académico y rol formativo</label>
+            <select id="level-select" class="sim-select">
+              <option value="1">Nivel 1: Fundamentación (0%–25% · Semestres 1 a 2) · Rol Operativo</option>
+              <option value="2">Nivel 2: Transición (26%–50% · Semestres 3 a 5) · Rol Gestor</option>
+              <option value="3" selected>Nivel 3: Profesionalización (51%–75% · Semestres 6 a 8) · Consultor Junior</option>
+              <option value="4">Nivel 4: Cierre y Proyección (&gt;75% · Semestres 9 a 10) · Rol Líder</option>
+            </select>
+          </div>
+
+          <div class="control-group range-row">
+            <label for="hours-slider">Pacto de dedicación semanal (1 h = 100 PP base)</label>
+            <input type="range" id="hours-slider" class="range-slider" min="1" max="12" value="4">
+            <div class="range-meta">
+              <span>Dedicación acordada en POA:</span>
+              <strong id="hours-display">4 horas/semana (400 PP)</strong>
+            </div>
+          </div>
+
+          <div class="control-group range-row">
+            <label for="week-slider">Semana lectiva del semestre (Curva progresiva 100% a 110%)</label>
+            <input type="range" id="week-slider" class="range-slider" min="1" max="10" value="10">
+            <div class="range-meta">
+              <span>Semana evaluada:</span>
+              <strong id="week-display">Semana 10 (Exigencia 110%)</strong>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>Factores multiplicadores de calidad acreditados (POA)</label>
+            <div class="mult-grid" id="multipliers-container">
+              <!-- Nivel 1 -->
+              <label class="mult-option" data-level="1">
+                <input type="checkbox" value="3" class="mult-check">
+                <span>Excelencia en contenido (calendario al 100%)</span>
+                <em>+3%</em>
+              </label>
+              <label class="mult-option" data-level="1">
+                <input type="checkbox" value="3" class="mult-check">
+                <span>Generación de valor (cápsula adicional publicada)</span>
+                <em>+3%</em>
+              </label>
+              <label class="mult-option" data-level="1">
+                <input type="checkbox" value="2" class="mult-check">
+                <span>Cultura consultor (diseño de material formativo)</span>
+                <em>+2%</em>
+              </label>
+              <!-- Nivel 2 -->
+              <label class="mult-option" data-level="2">
+                <input type="checkbox" value="3" class="mult-check">
+                <span>Tracción web y redes (&gt;10% crecimiento medido)</span>
+                <em>+3%</em>
+              </label>
+              <label class="mult-option" data-level="2">
+                <input type="checkbox" value="3" class="mult-check">
+                <span>Poder de convocatoria (&ge;80% asistencia efectiva)</span>
+                <em>+3%</em>
+              </label>
+              <label class="mult-option" data-level="2">
+                <input type="checkbox" value="2" class="mult-check">
+                <span>Celebración, bienestar y reconocimientos al 100%</span>
+                <em>+2%</em>
+              </label>
+              <!-- Nivel 3 -->
+              <label class="mult-option" data-level="3">
+                <input type="checkbox" value="5" class="mult-check" checked>
+                <span>Efectividad analítica en informe final de consultoría</span>
+                <em>+5%</em>
+              </label>
+              <label class="mult-option" data-level="3">
+                <input type="checkbox" value="3" class="mult-check" checked>
+                <span>Diseño curricular de casos de simulación con datos reales</span>
+                <em>+3%</em>
+              </label>
+              <label class="mult-option" data-level="3">
+                <input type="checkbox" value="2" class="mult-check" checked>
+                <span>Productividad extra o entrega anticipada en línea</span>
+                <em>+2%</em>
+              </label>
+              <!-- Nivel 4 -->
+              <label class="mult-option" data-level="4">
+                <input type="checkbox" value="10" class="mult-check">
+                <span>Impacto económico (acuerdo de retribución sobre utilidades)</span>
+                <em>+10%</em>
+              </label>
+              <label class="mult-option" data-level="4">
+                <input type="checkbox" value="3" class="mult-check">
+                <span>Relaciones públicas (vinculación de expertos internacionales)</span>
+                <em>+3%</em>
+              </label>
+              <label class="mult-option" data-level="4">
+                <input type="checkbox" value="2" class="mult-check">
+                <span>Finalización satisfactoria del curso de consultores (&gt;80%)</span>
+                <em>+2%</em>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="sim-output">
+          <div class="sim-output-title">LIQUIDACIÓN QUINCENAL ESTIMADA (PUNTOS PREXIA)</div>
+          <table class="sim-ledger">
             <tbody>
               <tr>
-                <td>Metodología</td>
-                <td>Calendario editorial quincenal y coordinación interinstitucional.</td>
+                <td>Meta base semanal (100 PP/hora)</td>
+                <td id="out-base">400 PP</td>
               </tr>
               <tr>
-                <td>Entregable</td>
-                <td>Boletines periódicos, gestión de canales públicos y foros temáticos.</td>
+                <td id="out-target-label">Meta exigida en Semana 10 (110%)</td>
+                <td id="out-target">440 PP</td>
               </tr>
               <tr>
-                <td>Público</td>
-                <td>Comunidad universitaria, egresados y redes globales de semilleros.</td>
+                <td>Bonificación por multiplicadores activos</td>
+                <td id="out-mult">+10% (+40 PP)</td>
               </tr>
             </tbody>
           </table>
+
+          <div class="sim-total-block">
+            <span class="sim-total-label">Rendimiento neto acreditado</span>
+            <span class="sim-total-number" id="out-final">440 PP</span>
+          </div>
+
+          <div class="sim-status-box">
+            <strong id="out-badge">Meta Progresiva Superada con Insignia de Excelencia</strong>
+            <p id="out-message">
+              Cubres el 110% de exigencia de cierre de semestre sin incrementar horas reloj gracias a tus multiplicadores de calidad.
+            </p>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:8px;">
+            <a href="site/pages/sistema-evaluacion-prexia.html" class="btn-mint">Ver manual completo y tablas del PDF →</a>
+            <span style="font-size:14px;color:var(--field-navy-muted);">Evaluación quincenal en Google Sheets POA</span>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION: ENCUENTROS INTERNACIONALES DE SEMILLEROS (LAS 6 EDICIONES) ══ -->
+  <section class="wrap section-eisi" id="encuentros" data-reveal>
+    <div class="eisi-head">
+      <h2 class="section-h2">Encuentros EISI.</h2>
+      <p>
+        Seis ediciones ininterrumpidas (2020–2025) articulando semilleros de investigación, docentes e industria de Colombia, Brasil, México y España desde la Facultad de Minas.
+      </p>
+    </div>
+
+    <div class="eisi-grid-6">
+      <!-- VI EISI 2025 -->
+      <article class="eisi-card" data-reveal>
+        <div>
+          <div class="eisi-card-poster">
+            <img src="assets/photos/vi-eisi-2025.jpg" alt="VI Encuentro Internacional de Semilleros PREXIA UNAL 2025" loading="lazy">
+          </div>
+          <div style="padding-top:16px;">
+            <div class="eisi-date-meta">13 y 14 de noviembre de 2025 · Medellín &amp; Brasil</div>
+            <h3 class="eisi-edition">VI EISI PREXIA UNAL 2025</h3>
+            <p class="eisi-theme">Ingeniería que transforma territorios: gestión e innovación para el desarrollo sostenible.</p>
+          </div>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__vi-eisi-2025.html" class="eisi-link">Explorar edición 2025, agenda y mesas →</a>
+      </article>
+
+      <!-- V EISI 2024 -->
+      <article class="eisi-card" data-reveal>
+        <div>
+          <div class="eisi-card-poster">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__02__48daefe43e0f.jpg" alt="V Encuentro Internacional de Semilleros 2024" loading="lazy">
+          </div>
+          <div style="padding-top:16px;">
+            <div class="eisi-date-meta">24 y 25 de octubre de 2024 · Híbrido</div>
+            <h3 class="eisi-edition">V Encuentro Internacional 2024</h3>
+            <p class="eisi-theme">Dualidad humana tecnológica: el nuevo reto organizacional en la era digital.</p>
+          </div>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024.html" class="eisi-link">Explorar edición 2024 y mesas →</a>
+      </article>
+
+      <!-- IV EISI 2023 -->
+      <article class="eisi-card" data-reveal>
+        <div>
+          <div class="eisi-card-poster">
+            <img src="site/images/unal-edu-co__prexiaforum__home__iv-encuentro-internacional-de-semilleros-2023__02__ee8a4ddf12b6.jpg" alt="IV Encuentro Internacional de Semilleros 2023" loading="lazy">
+          </div>
+          <div style="padding-top:16px;">
+            <div class="eisi-date-meta">Octubre de 2023 · Facultad de Minas</div>
+            <h3 class="eisi-edition">IV Encuentro Internacional 2023</h3>
+            <p class="eisi-theme">Ingeniando territorios: innovación, ingeniería, desarrollo endógeno y la organización.</p>
+          </div>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__iv-encuentro-internacional-de-semilleros-2023.html" class="eisi-link">Explorar edición 2023 y ponentes →</a>
+      </article>
+
+      <!-- III EISI 2022 -->
+      <article class="eisi-card" data-reveal>
+        <div>
+          <div class="eisi-card-poster">
+            <img src="site/images/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022__02__4e7711b8227b.jpg" alt="III Encuentro Internacional de Semilleros 2022" loading="lazy">
+          </div>
+          <div style="padding-top:16px;">
+            <div class="eisi-date-meta">Octubre de 2022 · Presencial y Virtual</div>
+            <h3 class="eisi-edition">III Encuentro Internacional 2022</h3>
+            <p class="eisi-theme">Transformación digital, Industria 4.0 y 5.0 y resiliencia en cadenas de valor.</p>
+          </div>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022.html" class="eisi-link">Explorar edición 2022 y conferencistas →</a>
+      </article>
+
+      <!-- II EISI 2021 -->
+      <article class="eisi-card" data-reveal>
+        <div>
+          <div class="eisi-card-poster">
+            <img src="site/images/unal-edu-co__prexiaforum__home__ii-encuentro-internacional-de-semilleros-2021__02__75e310c7f3b6.jpg" alt="II Encuentro Internacional de Semilleros 2021" loading="lazy">
+          </div>
+          <div style="padding-top:16px;">
+            <div class="eisi-date-meta">Octubre de 2021 · Internacional Virtual</div>
+            <h3 class="eisi-edition">II Encuentro Internacional 2021</h3>
+            <p class="eisi-theme">Desarrollo tecnológico e innovación productiva en el panorama post-pandemia.</p>
+          </div>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__ii-encuentro-internacional-de-semilleros-2021.html" class="eisi-link">Explorar edición 2021 y agenda →</a>
+      </article>
+
+      <!-- I EISI 2020 -->
+      <article class="eisi-card" data-reveal>
+        <div>
+          <div class="eisi-card-poster">
+            <img src="site/images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__02__75e310c7f3b6.jpg" alt="I Encuentro Internacional de Semilleros 2020" loading="lazy">
+          </div>
+          <div style="padding-top:16px;">
+            <div class="eisi-date-meta">Octubre de 2020 · Edición Fundacional</div>
+            <h3 class="eisi-edition">I Encuentro Internacional 2020</h3>
+            <p class="eisi-theme">Perspectivas de innovación en la gestión de organizaciones y competitividad.</p>
+          </div>
+        </div>
+        <a href="site/pages/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020.html" class="eisi-link">Explorar edición 2020 y memorias →</a>
       </article>
     </div>
   </section>
 
-  <!-- ══ THE LIVE THING: SIMULADOR DE PUNTOS PREXIA (PP) ══ -->
-  <section class="wrap section-simulator" id="simulador" data-reveal>
-    <div class="sim-header">
-      <h2>Simulador de Puntos Prexia.</h2>
-      <p class="sim-intro">
-        El Sistema de Evaluación de PREXIA no mide presencia en horas: mide impacto objetivo en Puntos Prexia (PP). Cada integrante pacta horas semanales según su ciclo de carrera y alcanza la meta mediante multiplicadores de calidad y eficiencia.
+  <!-- ══ SECTION: EMPRESAS E INSTITUCIONES ALIADAS ══ -->
+  <section class="section-allies" id="aliados" data-reveal>
+    <div class="wrap">
+      <div class="allies-header">
+        <h2 class="section-h2">Red de aliados.</h2>
+        <p style="font-size:1.15rem;color:var(--muted);max-width:56ch;">
+          Instituciones académicas, facultades y centros internacionales de Brasil y Colombia que coorganizan nuestros encuentros y respaldan la labor investigativa y consultora de PREXIA.
+        </p>
+      </div>
+
+      <div class="allies-grid">
+        <div class="ally-card" data-reveal>
+          <div class="ally-logo-wrap">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__09__6bf6ffd21445.jpg" alt="Universidad Nacional de Colombia" loading="lazy">
+          </div>
+          <span>Universidad Nacional de Colombia</span>
+        </div>
+        <div class="ally-card" data-reveal>
+          <div class="ally-logo-wrap">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__10__8be6f665e515.jpg" alt="Grupo Geyma UNAL" loading="lazy">
+          </div>
+          <span>Grupo Geyma · UNAL Medellín</span>
+        </div>
+        <div class="ally-card" data-reveal>
+          <div class="ally-logo-wrap">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__12__cf582afe5603.jpg" alt="Facultad de Ciencias Agrarias UNAL Bogotá" loading="lazy">
+          </div>
+          <span>Facultad de Ciencias Agrarias · UNAL</span>
+        </div>
+        <div class="ally-card" data-reveal>
+          <div class="ally-logo-wrap">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__13__31257c8ed477.jpg" alt="UNESP Universidade Estadual Paulista" loading="lazy">
+          </div>
+          <span>UNESP · São Paulo, Brasil</span>
+        </div>
+        <div class="ally-card" data-reveal>
+          <div class="ally-logo-wrap">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__14__7393e1c00186.jpg" alt="UNESP Campus Jaboticabal" loading="lazy">
+          </div>
+          <span>UNESP · Campus Jaboticabal</span>
+        </div>
+        <div class="ally-card" data-reveal>
+          <div class="ally-logo-wrap">
+            <img src="site/images/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024__15__efb96efba9bf.jpg" alt="Instituto A Nau Ciranda Sinparedes" loading="lazy">
+          </div>
+          <span>Instituto A Nau Ciranda · Brasil</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION: ¿POR QUÉ UNIRTE A PREXIA? ══ -->
+  <section class="wrap section-join" id="unete" data-reveal>
+    <div class="join-header">
+      <h2 class="section-h2">Únete a PREXIA.</h2>
+      <p style="font-size:1.15rem;color:var(--muted);max-width:56ch;">
+        Formación investigativa en terreno, desarrollo profesional desde los primeros semestres y una ruta clara de crecimiento desde Rol Operativo hasta Líder de Consultoría.
       </p>
     </div>
 
-    <div class="sim-engine" data-ui>
-      <div class="sim-controls">
-        <div class="control-group">
-          <label for="selNivel">Ciclo académico y rol formativo</label>
-          <select id="selNivel" onchange="actualizarCalculo()">
-            <option value="1">Nivel 1: Fundamentación (Semestres 1 a 2) · Rol Operativo</option>
-            <option value="2">Nivel 2: Transición (Semestres 3 a 5) · Rol Gestor</option>
-            <option value="3" selected>Nivel 3: Profesionalización (Semestres 6 a 8) · Consultor Junior</option>
-            <option value="4">Nivel 4: Cierre y Liderazgo (Semestres 9 a 10) · Rol Líder</option>
-          </select>
-        </div>
+    <div class="join-grid">
+      <article class="join-card" data-reveal>
+        <h3>Aprendizaje aplicado</h3>
+        <p>
+          Intervén en diagnósticos empresariales reales con MiPymes del Valle de Aburrá y aplica ingeniería de métodos, finanzas y analítica mucho antes de graduarte.
+        </p>
+      </article>
+      <article class="join-card" data-reveal>
+        <h3>Red académica global</h3>
+        <p>
+          Participa como autor, ponente o coorganizador en los Encuentros Internacionales EISI y en las inmersiones conjuntas con universidades de Brasil y América Latina.
+        </p>
+      </article>
+      <article class="join-card" data-reveal>
+        <h3>Reconocimiento por Puntos PP</h3>
+        <p>
+          Tu aporte se mide por impacto y calidad mediante Puntos Prexia e insignias verificables en el POA, respetando tus semanas de alta carga académica en la facultad.
+        </p>
+      </article>
+    </div>
+  </section>
 
-        <div class="control-group">
-          <label for="rangeHoras">Pacto de dedicación semanal</label>
-          <input type="range" id="rangeHoras" min="1" max="10" value="4" oninput="actualizarCalculo()">
-          <div class="hours-counter">
-            <span>Dedicación acordada:</span>
-            <strong id="valHoras">4 horas/semana</strong>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label>Multiplicadores de calidad acreditados</label>
-          <div class="multipliers-list" id="multContainer">
-            <!-- Inyectados dinámicamente según nivel -->
-          </div>
-        </div>
+  <!-- ══ SECTION: CONTACTO DIRECTO + FORMULARIO INTERACTIVO + MAPA CAMPUS ══ -->
+  <section class="section-contact" id="contacto" data-reveal>
+    <div class="wrap">
+      <div class="contact-header">
+        <h2 class="section-h2">Contacto directo.</h2>
+        <p style="font-size:1.15rem;color:var(--muted);max-width:56ch;">
+          Recibimos solicitudes de diagnóstico empresarial para MiPymes, postulaciones de nuevos integrantes al semillero e inscripciones para el VI EISI 2025.
+        </p>
       </div>
 
-      <div class="sim-scoreboard">
-        <div class="board-title">BALANCE SEMANAL ESTIMADO (PP)</div>
-        <div class="ledger-rows">
-          <div class="ledger-item">
-            <span>Meta base semana 1 (100 PP/h)</span>
-            <strong id="lblBase">400 PP</strong>
-          </div>
-          <div class="ledger-item">
-            <span>Meta progresiva semana 10 (+10%)</span>
-            <strong id="lblMeta10">440 PP</strong>
-          </div>
-          <div class="ledger-item">
-            <span>Bonificación por multiplicadores</span>
-            <strong id="lblBonus">+0%</strong>
-          </div>
-          <div class="ledger-item ledger-highlight">
-            <span>Rendimiento neto semanal</span>
-            <strong id="lblTotal">400 PP</strong>
-          </div>
+      <div class="contact-2col">
+        <div class="contact-form-card" data-ui>
+          <h3>Enviar solicitud o mensaje</h3>
+          <form class="form-stack" id="prexia-contact-form">
+            <div class="form-field">
+              <label for="cf-name">Nombre completo o empresa</label>
+              <input type="text" id="cf-name" class="form-input" placeholder="Ej. Ana María Gómez / Industrias Antioquia S.A.S." required>
+            </div>
+            <div class="form-field">
+              <label for="cf-email">Correo electrónico de contacto</label>
+              <input type="email" id="cf-email" class="form-input" placeholder="nombre@unal.edu.co o correo corporativo" required>
+            </div>
+            <div class="form-field">
+              <label for="cf-topic">Motivo de contacto</label>
+              <select id="cf-topic" class="form-input" required>
+                <option value="Solicitar consultoría empresarial (PREXIA Consultoría)">Solicitar consultoría empresarial (PREXIA Consultoría)</option>
+                <option value="Unirme al Semillero PREXIA (Estudiante UNAL)">Unirme al Semillero PREXIA (Estudiante UNAL)</option>
+                <option value="Inscripción o ponencia en el VI EISI 2025">Inscripción o ponencia en el VI EISI 2025</option>
+                <option value="Alianza académica o patrocinio institucional">Alianza académica o patrocinio institucional</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="cf-msg">Detalles de tu consulta o proyecto</label>
+              <textarea id="cf-msg" class="form-input" placeholder="Cuéntanos sobre tu empresa, tu semestre actual o tu propuesta de investigación..." required></textarea>
+            </div>
+            <button type="submit" class="btn-solid" style="width:100%;">Enviar solicitud a PREXIA</button>
+            <div class="form-feedback" id="cf-feedback">
+              Solicitud preparada. Se ha abierto tu cliente de correo hacia prexiaforum_med@unal.edu.co con los datos diligenciados.
+            </div>
+          </form>
         </div>
-        <div class="verdict-box">
-          <strong id="lblVerdictTitle">Cumplimiento Estándar</strong>
-          <span id="lblVerdictDesc">Cumples la meta base pactada. Agrega multiplicadores de calidad para superar la exigencia de la semana 10 sin extender tus horas de dedicación.</span>
+
+        <div class="contact-info-col">
+          <div class="contact-details-grid">
+            <div class="contact-item-box">
+              <strong>Correo Institucional</strong>
+              <a href="mailto:prexiaforum_med@unal.edu.co">prexiaforum_med@unal.edu.co</a>
+            </div>
+            <div class="contact-item-box">
+              <strong>Sede y Ubicación</strong>
+              <span>Bloque M8B · Campus Robledo, Facultad de Minas, UNAL Medellín</span>
+            </div>
+            <div class="contact-item-box">
+              <strong>Área Curricular</strong>
+              <span>Ingeniería Industrial e Ingeniería Administrativa · Dpto. Ingeniería de la Organización</span>
+            </div>
+            <div class="contact-item-box">
+              <strong>Dirección Académica</strong>
+              <span>Prof. José Ignacio Maya · Fundador y Coordinador General</span>
+            </div>
+          </div>
+
+          <figure class="campus-map-box">
+            <a href="assets/photos/mapa-campus-robledo.jpg" target="_blank" rel="noreferrer">
+              <img src="assets/photos/mapa-campus-robledo.jpg" alt="Mapa oficial del Campus Robledo de la Facultad de Minas UNAL Medellín con ubicación del Bloque M8B y Auditorio Alejandro López M3" loading="lazy">
+            </a>
+            <figcaption class="campus-map-caption">
+              <span>Mapa del Campus Robledo: Bloque M8B (Sede PREXIA) y Bloque M3 (Auditorio Alejandro López).</span>
+              <a href="assets/photos/mapa-campus-robledo.jpg" target="_blank" rel="noreferrer" class="link-action">Ampliar mapa →</a>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ SECTION: EISI TRAYECTORIA ══ -->
-  <section class="wrap section-eisi" id="eisi" data-reveal>
-    <div class="eisi-head">
-      <h2>Encuentros Internacionales.</h2>
-      <p>
-        Seis ediciones consecutivas reuniendo a investigadores, docentes y semilleros de Colombia, Brasil, México y España en el campus de la Facultad de Minas.
-      </p>
-    </div>
-
-    <div class="eisi-strip">
-      <div class="eisi-card" data-reveal>
-        <div class="eisi-card-photo">
-          <img src="assets/photos/vi-eisi-2025.jpg" alt="VI Encuentro Internacional de Semilleros EISI 2025" loading="lazy">
-        </div>
-        <div>
-          <div class="eisi-edition">VI EISI · 2025</div>
-          <p class="eisi-theme">Ingeniería que transforma territorios: gestión e innovación para el desarrollo sostenible.</p>
-        </div>
-        <a href="site/pages/unal-edu-co__prexiaforum__home__vi-eisi-2025.html" class="eisi-link">Ver memorias completas</a>
-      </div>
-
-      <div class="eisi-card" data-reveal>
-        <div class="eisi-card-photo">
-          <img src="assets/photos/v-eisi-conferencia.jpg" alt="V Encuentro Internacional 2024" loading="lazy">
-        </div>
-        <div>
-          <div class="eisi-edition">V EISI · 2024</div>
-          <p class="eisi-theme">Dualidad humana y tecnológica: el nuevo reto organizacional en la era de la inteligencia artificial.</p>
-        </div>
-        <a href="site/pages/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024.html" class="eisi-link">Ver relatoría</a>
-      </div>
-
-      <div class="eisi-card" data-reveal>
-        <div class="eisi-card-photo">
-          <img src="assets/photos/iv-eisi-presentacion.jpg" alt="IV Encuentro Internacional 2023" loading="lazy">
-        </div>
-        <div>
-          <div class="eisi-edition">IV EISI · 2023</div>
-          <p class="eisi-theme">Innovación, ingeniería y territorios: articulación de cadenas de valor regionales.</p>
-        </div>
-        <a href="site/pages/unal-edu-co__prexiaforum__home__iv-encuentro-internacional-de-semilleros-2023.html" class="eisi-link">Ver ponencias</a>
-      </div>
-
-      <div class="eisi-card" data-reveal>
-        <div class="eisi-card-photo">
-          <img src="assets/photos/iii-eisi-academico.jpg" alt="III Encuentro Internacional 2022" loading="lazy">
-        </div>
-        <div>
-          <div class="eisi-edition">III EISI · 2022</div>
-          <p class="eisi-theme">Transformación digital, industria 4.0 y resiliencia en sistemas productivos.</p>
-        </div>
-        <a href="site/pages/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022.html" class="eisi-link">Ver actas</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SECTION: STATS (DECIMAL ALIGNED LEDGER & PHOTO) ══ -->
-  <section class="wrap section-stats" id="trayectoria" data-reveal>
-    <div class="stats-split">
-      <div class="stats-photo">
-        <img src="assets/photos/semillero-equipo-completo.png" alt="Integrantes del Semillero PREXIA en jornada de planeación estratégica" loading="lazy">
-      </div>
-      <div class="stats-ledger">
-        <h3 class="stats-heading">Balance consolidado de actividades.</h3>
-
-        <div class="stat-row" data-reveal>
-          <div class="stat-num">6</div>
-          <div class="stat-desc">
-            <strong>Ediciones consecutivas EISI</strong>
-            Congresos internacionales realizados con ponentes de cuatro países.
-          </div>
-        </div>
-
-        <div class="stat-row" data-reveal>
-          <div class="stat-num">50</div>
-          <div class="stat-desc">
-            <strong>Diagnósticos empresariales</strong>
-            Intervenciones realizadas a pequeñas y medianas empresas de la región.
-          </div>
-        </div>
-
-        <div class="stat-row" data-reveal>
-          <div class="stat-num">4</div>
-          <div class="stat-desc">
-            <strong>Líneas activas de trabajo</strong>
-            Consultoría, investigación, emprendimiento y comunicación universitaria.
-          </div>
-        </div>
-
-        <div class="stat-row" data-reveal>
-          <div class="stat-num">110</div>
-          <div class="stat-desc">
-            <strong>Por ciento de meta progresiva</strong>
-            Exigencia máxima evaluada en la semana diez de cada semestre académico.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SECTION: CONTACT (SENTENCE, PORTRAIT, TWO LINKS) ══ -->
-  <section class="wrap section-contact" id="contacto" data-reveal>
-    <div class="contact-row">
-      <p class="contact-statement">
-        Recibimos solicitudes de diagnóstico empresarial y postulaciones estudiantiles cada inicio de semestre.
-      </p>
-
-      <div class="contact-portrait">
-        <img src="assets/photos/jose-ignacio-maya.jpg" alt="Profesor José Ignacio Maya, director y fundador de PREXIA" loading="lazy">
-      </div>
-
-      <div class="contact-links-block">
-        <h3>Contacto institucional</h3>
-        <a href="mailto:prexiaforum_med@unal.edu.co" class="contact-direct-link">prexiaforum_med@unal.edu.co</a>
-        <a href="https://minas.medellin.unal.edu.co" target="_blank" rel="noopener" class="contact-direct-link">minas.medellin.unal.edu.co</a>
-        <div class="contact-footnote">
-          Facultad de Minas, Bloque M3, Campus Robledo.<br>
-          Medellín, Antioquia, Colombia.<br>
-          Tiempo habitual de respuesta: dos días hábiles.
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FOOTER (NAVY IMPRINT) ══ -->
+  <!-- ══ FOOTER INSTITUCIONAL ══ -->
   <footer class="site-footer">
     <div class="wrap">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <h4>PREXIA · UNAL MINAS</h4>
-          <p>
-            Semillero de Investigación adscrito al Área Curricular de Ingeniería Industrial e Ingeniería Administrativa de la Facultad de Minas, Universidad Nacional de Colombia Sede Medellín.
+        <div>
+          <div class="footer-brand">
+            <svg width="28" height="28" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#84fbaa" stroke-width="4" stroke-linecap="round"/>
+              <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#60eaf0" stroke-width="4" stroke-linecap="round"/>
+              <path d="M16 16 C20 28 28 36 44 44" stroke="#84fbaa" stroke-width="2.8" stroke-linecap="round"/>
+              <path d="M44 16 C40 28 32 36 16 44" stroke="#60eaf0" stroke-width="2.8" stroke-linecap="round"/>
+            </svg>
+            <span>PRE<em>XIA</em> · UNAL MINAS</span>
+          </div>
+          <p class="footer-desc">
+            Semillero de Investigación, Consultoría y Emprendimiento adscrito al Área Curricular de Ingeniería Industrial e Ingeniería Administrativa de la Facultad de Minas, Universidad Nacional de Colombia — Sede Medellín.
           </p>
+          <div class="social-row">
+            <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn PREXIA">
+              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a class="social-btn" href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram PREXIA">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a class="social-btn" href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook PREXIA">
+              <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+            </a>
+          </div>
         </div>
 
         <div class="footer-col-links">
           <div class="footer-col">
-            <h5>Estructura</h5>
+            <h4>Líneas Oficiales</h4>
             <ul>
-              <li><a href="#lineas">PREXIA Consultoría</a></li>
-              <li><a href="#lineas">PREXIA Investiga</a></li>
-              <li><a href="#lineas">PREXIA Emprende</a></li>
-              <li><a href="#lineas">PREXIA Conecta</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada.html">PREXIA Consultoría</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga.html">PREXIA Investiga</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-emprende.html">PREXIA Emprende</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-comunica.html">PREXIA Conecta</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia.html">Estructura general</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h5>Encuentros</h5>
+            <h4>Encuentros EISI</h4>
             <ul>
-              <li><a href="#eisi">VI EISI 2025</a></li>
-              <li><a href="#eisi">V EISI 2024</a></li>
-              <li><a href="#eisi">IV EISI 2023</a></li>
-              <li><a href="#eisi">Histórico de ponencias</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__vi-eisi-2025.html">VI EISI 2025</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__v-encuentro-internacional-de-semilleros-2024.html">V Encuentro 2024</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__iv-encuentro-internacional-de-semilleros-2023.html">IV Encuentro 2023</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022.html">III Encuentro 2022</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__ii-encuentro-internacional-de-semilleros-2021.html">II Encuentro 2021</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020.html">I Encuentro 2020</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h5>Herramientas</h5>
+            <h4>Gestión y Archivo</h4>
             <ul>
-              <li><a href="#simulador">Simulador PP</a></li>
-              <li><a href="site/index.html">Archivo histórico</a></li>
-              <li><a href="#contacto">Vías de contacto</a></li>
+              <li><a href="site/pages/sistema-evaluacion-prexia.html">Manual Puntos Prexia (PDF)</a></li>
+              <li><a href="#simulador">Simulador Interactivo PP</a></li>
+              <li><a href="site/index.html">Catálogo de 40 páginas</a></li>
+              <li><a href="site/pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019.html">Evento Fundacional 2019</a></li>
+              <li><a href="#contacto">Solicitar consultoría</a></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
-          Fotografías de archivo institucional del Semillero PREXIA y memorias de los Encuentros Internacionales EISI (2020 a 2025).
-        </div>
-        <div>
-          Facultad de Minas · Universidad Nacional de Colombia · Sede Medellín
-        </div>
+        <span>&copy; 2025 Semillero de Investigación PREXIA · Archivo oficial migrado íntegro desde Google Sites</span>
+        <span>Facultad de Minas · Universidad Nacional de Colombia · Sede Medellín</span>
       </div>
     </div>
   </footer>
 
-  <!-- ══ SIMULATOR SCRIPT (LIGHTWEIGHT, DETERMINISTIC) ══ -->
+  <!-- ══ SCRIPTS: MOTION + SIMULADOR PP + FORMULARIO CONTACTO ══ -->
   <script>
-    const MULTIPLICADORES = {
-      1: [
-        { id: 'm1_1', nombre: 'Excelencia en contenido de publicaciones', bonus: 3 },
-        { id: 'm1_2', nombre: 'Generación de valor extra en cápsulas', bonus: 3 },
-        { id: 'm1_3', nombre: 'Cultura de consultoría aplicada', bonus: 2 }
-      ],
-      2: [
-        { id: 'm2_1', nombre: 'Tracción e interacción en canales web', bonus: 3 },
-        { id: 'm2_2', nombre: 'Convocatoria y participación de integrantes', bonus: 3 },
-        { id: 'm2_3', nombre: 'Celebración y bienestar de la comunidad', bonus: 2 }
-      ],
-      3: [
-        { id: 'm3_1', nombre: 'Efectividad analítica en informe final', bonus: 5 },
-        { id: 'm3_2', nombre: 'Diseño curricular de casos de estudio', bonus: 3 },
-        { id: 'm3_3', nombre: 'Productividad extra en intervenciones', bonus: 2 }
-      ],
-      4: [
-        { id: 'm4_1', nombre: 'Impacto económico y cierre de acuerdos', bonus: 10 },
-        { id: 'm4_2', nombre: 'Relaciones públicas y ponentes externos', bonus: 3 },
-        { id: 'm4_3', nombre: 'Finalización de curso con certificación', bonus: 2 }
-      ]
-    };
-
-    function renderMultiplicadores() {
-      const nivel = document.getElementById('selNivel').value;
-      const container = document.getElementById('multContainer');
-      const mults = MULTIPLICADORES[nivel] || [];
-      container.innerHTML = mults.map(m => `
-        <label class="mult-label">
-          <input type="checkbox" id="${m.id}" value="${m.bonus}" onchange="actualizarCalculo()">
-          <span>${m.nombre}</span>
-          <span class="mult-rate">+${m.bonus}%</span>
-        </label>
-      `).join('');
-    }
-
-    function actualizarCalculo() {
-      const horas = parseInt(document.getElementById('rangeHoras').value, 10);
-      document.getElementById('valHoras').textContent = horas + (horas === 1 ? ' hora/semana' : ' horas/semana');
-
-      const checkboxes = document.querySelectorAll('#multContainer input[type="checkbox"]:checked');
-      let bonusPct = 0;
-      checkboxes.forEach(cb => {
-        bonusPct += parseFloat(cb.value);
-      });
-
-      const basePP = horas * 100;
-      const meta10 = Math.round(basePP * 1.10);
-      const totalPP = Math.round(basePP * (1 + (bonusPct / 100)));
-
-      document.getElementById('lblBase').textContent = basePP + ' PP';
-      document.getElementById('lblMeta10').textContent = meta10 + ' PP';
-      document.getElementById('lblBonus').textContent = '+' + bonusPct + '%';
-      document.getElementById('lblTotal').textContent = totalPP + ' PP';
-
-      const verdictTitle = document.getElementById('lblVerdictTitle');
-      const verdictDesc = document.getElementById('lblVerdictDesc');
-
-      if (totalPP >= meta10) {
-        verdictTitle.textContent = 'Desempeño Sobresaliente (Acreditado Semana 10)';
-        verdictTitle.style.color = 'var(--mint-light)';
-        verdictDesc.textContent = 'Superas con holgura la meta exigida para la semana diez (' + meta10 + ' PP) gracias a la calidad de tus entregables sin necesidad de incurrir en horas extras.';
-      } else if (totalPP >= basePP) {
-        verdictTitle.textContent = 'Cumplimiento Estándar de Base';
-        verdictTitle.style.color = 'var(--mint-light)';
-        verdictDesc.textContent = 'Alcanzas la meta base de la semana uno (' + basePP + ' PP). Te faltan ' + (meta10 - totalPP) + ' PP para cubrir la exigencia progresiva del 110% de cierre de semestre.';
-      } else {
-        verdictTitle.textContent = 'Dedicación Insuficiente';
-        verdictTitle.style.color = '#fca5a5';
-        verdictDesc.textContent = 'El puntaje se encuentra por debajo del estándar base pactado al inicio del periodo formativo.';
-      }
-    }
-
-    // Scroll reveal observer
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-in');
-          io.unobserve(e.target);
-        }
-      }
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
-
-    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
-
-    document.getElementById('selNivel').addEventListener('change', () => {
-      renderMultiplicadores();
-      actualizarCalculo();
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add('in');
     });
 
-    renderMultiplicadores();
-    actualizarCalculo();
+    const revealElements = document.querySelectorAll('[data-reveal]');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+    /* ── SIMULADOR DE PUNTOS PREXIA (PP) ── */
+    const levelSelect = document.getElementById('level-select');
+    const hoursSlider = document.getElementById('hours-slider');
+    const weekSlider = document.getElementById('week-slider');
+    const hoursDisplay = document.getElementById('hours-display');
+    const weekDisplay = document.getElementById('week-display');
+    const multOptions = document.querySelectorAll('.mult-option');
+    const multChecks = document.querySelectorAll('.mult-check');
+
+    const outBase = document.getElementById('out-base');
+    const outTargetLabel = document.getElementById('out-target-label');
+    const outTarget = document.getElementById('out-target');
+    const outMult = document.getElementById('out-mult');
+    const outFinal = document.getElementById('out-final');
+    const outBadge = document.getElementById('out-badge');
+    const outMessage = document.getElementById('out-message');
+
+    function filterMultipliersByLevel() {
+      const selectedLevel = levelSelect.value;
+      multOptions.forEach((opt) => {
+        const optLevel = opt.getAttribute('data-level');
+        const checkbox = opt.querySelector('input');
+        if (optLevel === selectedLevel) {
+          opt.style.display = 'flex';
+        } else {
+          opt.style.display = 'none';
+          checkbox.checked = false;
+        }
+      });
+      calculatePoints();
+    }
+
+    function calculatePoints() {
+      const hours = parseInt(hoursSlider.value, 10);
+      const week = parseInt(weekSlider.value, 10);
+      const basePP = hours * 100;
+      const progressivePct = 100 + week;
+      const targetPP = Math.round(basePP * (progressivePct / 100));
+
+      hoursDisplay.textContent = hours + (hours === 1 ? ' hora/semana (' : ' horas/semana (') + basePP + ' PP)';
+      weekDisplay.textContent = 'Semana ' + week + ' (Exigencia ' + progressivePct + '%)';
+
+      let bonusPct = 0;
+      multChecks.forEach((chk) => {
+        if (chk.checked && chk.closest('.mult-option').style.display !== 'none') {
+          bonusPct += parseInt(chk.value, 10);
+        }
+      });
+
+      const bonusPP = Math.round(basePP * (bonusPct / 100));
+      const finalPP = basePP + bonusPP;
+
+      outBase.textContent = basePP + ' PP';
+      outTargetLabel.textContent = 'Meta exigida en Semana ' + week + ' (' + progressivePct + '%)';
+      outTarget.textContent = targetPP + ' PP';
+      outMult.textContent = '+' + bonusPct + '% (+' + bonusPP + ' PP)';
+      outFinal.textContent = finalPP + ' PP';
+
+      if (finalPP >= targetPP) {
+        outBadge.textContent = 'Meta Progresiva Superada · Insignia de Excelencia POA';
+        outMessage.textContent = 'Alcanzas ' + finalPP + ' PP y superas la meta de la Semana ' + week + ' (' + targetPP + ' PP) mediante multiplicadores de calidad sin aumentar horas reloj.';
+      } else {
+        const diff = targetPP - finalPP;
+        outBadge.textContent = 'Cumplimiento Base (' + finalPP + ' de ' + targetPP + ' PP)';
+        outMessage.textContent = 'Cubres la base de ' + basePP + ' PP. Activa multiplicadores de calidad adicionales para cubrir los ' + diff + ' PP restantes de la curva progresiva.';
+      }
+    }
+
+    levelSelect.addEventListener('change', filterMultipliersByLevel);
+    hoursSlider.addEventListener('input', calculatePoints);
+    weekSlider.addEventListener('input', calculatePoints);
+    multChecks.forEach((chk) => chk.addEventListener('change', calculatePoints));
+
+    filterMultipliersByLevel();
+
+    /* ── FORMULARIO DE CONTACTO ── */
+    const contactForm = document.getElementById('prexia-contact-form');
+    const contactFeedback = document.getElementById('cf-feedback');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('cf-name').value.trim();
+        const email = document.getElementById('cf-email').value.trim();
+        const topic = document.getElementById('cf-topic').value;
+        const msg = document.getElementById('cf-msg').value.trim();
+        const subject = encodeURIComponent('[Portal Web PREXIA] ' + topic + ' - ' + name);
+        const body = encodeURIComponent('Nombre / Entidad: ' + name + '\nCorreo: ' + email + '\nMotivo: ' + topic + '\n\nMensaje:\n' + msg);
+        contactFeedback.style.display = 'block';
+        window.location.href = 'mailto:prexiaforum_med@unal.edu.co?subject=' + subject + '&body=' + body;
+      });
+    }
   </script>
 </body>
 </html>
