@@ -1,29 +1,24 @@
 {
- "url": "index.html",
- "at": "2026-10-16T21:49:50.375Z",
+ "url": "site/pages/unal-edu-co__prexiaforum__home__vi-eisi-2025.html",
+ "at": "2026-10-16T22:07:15.477Z",
  "allow": [],
  "viewports": [
   {
    "width": 1440,
    "height": 900,
    "load": "load",
-   "screens": 10,
+   "screens": 5,
    "filled": [
-    0.62,
-    0.81,
-    0.84,
-    0.86,
-    0.83,
-    0.9,
-    0.72,
-    0.69,
-    0.81,
-    0.8
+    0.57,
+    0.65,
+    0.91,
+    0.8,
+    0.64
    ],
    "motion": {
-    "elements": 35,
+    "elements": 30,
     "css": 0,
-    "transitions": 35,
+    "transitions": 30,
     "scripted": 0,
     "videos": 0,
     "playingVideos": 0
@@ -34,30 +29,30 @@
      "h": 900
     },
     "page": {
-     "height": 8176,
-     "screens": 9.1,
-     "words": 1668,
-     "img": 18,
+     "height": 5185,
+     "screens": 5.8,
+     "words": 812,
+     "img": 22,
      "video": 0,
      "canvas": 0,
-     "svg": 5,
-     "sections": 8,
+     "svg": 2,
+     "sections": 6,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
-     "uiFragments": 2,
+     "uiFragments": 0,
      "uiAbuse": false,
-     "realPictures": 12,
+     "realPictures": 15,
      "videoCount": 0,
-     "uiPictures": 2,
+     "uiPictures": 0,
      "pictureSamples": [
-      "grupo-prexia-2024.png",
-      "jose-ignacio-maya.jpg",
-      "encuentro-2023-auditorio.png",
-      "semillero-equipo-completo.png",
-      "podcast-prexia.jpg",
       "vi-eisi-2025.jpg",
-      "unal-edu-co__prexiaforum__home__v-encuentro-inte",
-      "unal-edu-co__prexiaforum__home__iv-encuentro-int"
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__02",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__03",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__04",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__05",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__06",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__07",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__08"
      ],
      "blendText": 0,
      "sideScrollers": 0,
@@ -65,162 +60,78 @@
      "emoji": []
     },
     "hero": {
-     "text": "Ciencia aplicada a la industria.",
-     "words": 5,
-     "chars": 32,
-     "lines": 2,
+     "text": "VI EISI 2025.",
+     "words": 3,
+     "chars": 13,
+     "lines": 1,
      "size": 69.1,
      "vw": 4.8,
      "font": "Libre Franklin",
      "weight": 800,
-     "tracking": -0.038,
+     "tracking": -0.035,
      "leading": 0.98,
-     "upper": false,
+     "upper": true,
      "italic": false,
      "mono": false,
      "align": "left",
      "position": "left",
-     "widthRatio": 0.45,
-     "top": 123,
+     "widthRatio": 0.51,
+     "top": 291,
      "tag": "h1",
      "kind": "heading"
     },
     "h1": {
-     "text": "Ciencia aplicada a la industria.",
-     "words": 5,
-     "lines": 2,
+     "text": "VI EISI 2025.",
+     "words": 3,
+     "lines": 1,
      "size": 69.1,
      "font": "Libre Franklin"
     },
     "headings": [
      {
-      "text": "Ciencia aplicada a la industria.",
-      "words": 5,
-      "chars": 32,
-      "lines": 2,
+      "text": "VI EISI 2025.",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
       "size": 69.1,
       "vw": 4.8,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.038,
+      "tracking": -0.035,
       "leading": 0.98,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.45,
-      "top": 123,
-      "tag": "h1",
-      "kind": "heading"
-     },
-     {
-      "text": "Quiénes somos.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 46.1,
-      "vw": 3.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.35,
-      "top": 872,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "Cuatro líneas.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 46.1,
-      "vw": 3.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.4,
-      "top": 1812,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "PREXIA Consultoría",
-      "words": 2,
-      "chars": 18,
-      "lines": 1,
-      "size": 37.4,
-      "vw": 2.6,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1.05,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.42,
-      "top": 2586,
-      "tag": "h3",
-      "kind": "heading"
-     },
-     {
-      "text": "Puntos Prexia.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 46.1,
-      "vw": 3.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.37,
-      "top": 3334,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "440 PP",
-      "words": 2,
-      "chars": 6,
-      "lines": 1,
-      "size": 51.2,
-      "vw": 3.6,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
       "upper": true,
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "right",
-      "widthRatio": 0.13,
-      "top": 3921,
-      "tag": "span",
+      "position": "left",
+      "widthRatio": 0.51,
+      "top": 291,
+      "tag": "h1",
       "kind": "heading"
      },
      {
-      "text": "Encuentros EISI.",
+      "text": "Modalidades.",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 46.1,
+      "vw": 3.2,
+      "font": "Libre Franklin",
+      "weight": 800,
+      "tracking": -0.025,
+      "leading": 1.04,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 1108,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mesas temáticas.",
       "words": 2,
       "chars": 16,
       "lines": 1,
@@ -228,85 +139,64 @@
       "vw": 3.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "left",
-      "widthRatio": 0.4,
-      "top": 4475,
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 1582,
       "tag": "h2",
       "kind": "heading"
      },
      {
-      "text": "Red de aliados.",
+      "text": "Secciones del encuentro.",
       "words": 3,
-      "chars": 15,
+      "chars": 24,
       "lines": 1,
       "size": 46.1,
       "vw": 3.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "left",
-      "widthRatio": 0.37,
-      "top": 5826,
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 2213,
       "tag": "h2",
       "kind": "heading"
      },
      {
-      "text": "Únete a PREXIA.",
-      "words": 3,
-      "chars": 15,
-      "lines": 1,
-      "size": 46.1,
-      "vw": 3.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.4,
-      "top": 6280,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "Contacto directo.",
+      "text": "Memoria gráfica.",
       "words": 2,
-      "chars": 17,
+      "chars": 16,
       "lines": 1,
       "size": 46.1,
       "vw": 3.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "left",
-      "widthRatio": 0.37,
-      "top": 6823,
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 3097,
       "tag": "h2",
       "kind": "heading"
      }
     ],
     "headingSummary": {
-     "count": 10,
-     "maxLines": 2,
+     "count": 5,
+     "maxLines": 1,
      "over2Lines": 0,
      "statements": 0,
      "centered": 0,
@@ -317,12 +207,12 @@
      "families": [
       {
        "family": "Source Serif 4",
-       "share": 0.73,
+       "share": 0.68,
        "mono": false
       },
       {
        "family": "Libre Franklin",
-       "share": 0.27,
+       "share": 0.32,
        "mono": false
       }
      ],
@@ -330,31 +220,26 @@
      "sizes": [
       14,
       18,
-      19,
-      20,
-      21,
       22,
-      26,
-      37,
       46,
       69
      ],
-     "sizeCount": 10,
+     "sizeCount": 5,
      "notLoaded": [],
      "body": {
       "font": "Source Serif 4",
-      "size": 18.4,
-      "leading": 1.58,
+      "size": 18,
+      "leading": 1.62,
       "weight": 400,
       "tracking": 0,
-      "contrast": 15.5
+      "contrast": 8.4
      },
-     "measureChars": 70,
+     "measureChars": 81,
      "max": {
       "size": 69.1,
       "vw": 4.8,
       "font": "Libre Franklin",
-      "text": "Ciencia aplicada"
+      "text": "VI EISI 2025."
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -363,8 +248,8 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0.01,
-     "centerShare": 0.02,
+     "upperShare": 0.02,
+     "centerShare": 0.04,
      "smallText": 0
     },
     "eyebrows": [],
@@ -380,136 +265,62 @@
      "sectionBgs": [
       {
        "color": "#ecebe6",
-       "top": 784,
+       "top": 1052,
        "hsl": {
         "h": 50,
         "s": 0.14,
         "l": 0.91
        }
-      },
-      {
-       "color": "#f7f7f5",
-       "top": 1664,
-       "hsl": {
-        "h": 60,
-        "s": 0.11,
-        "l": 0.96
-       }
-      },
-      {
-       "color": "#1f1a3a",
-       "top": 2494,
-       "hsl": {
-        "h": 249,
-        "s": 0.38,
-        "l": 0.16
-       }
-      },
-      {
-       "color": "#2b244d",
-       "top": 3664,
-       "hsl": {
-        "h": 250,
-        "s": 0.36,
-        "l": 0.22
-       }
       }
      ],
      "textColors": [
+      {
+       "color": "#1f1a3a",
+       "share": 0.52
+      },
       {
        "color": "#4a4662",
        "share": 0.35
       },
       {
-       "color": "#1f1a3a",
-       "share": 0.28
+       "color": "#c2bddb",
+       "share": 0.06
       },
       {
-       "color": "#c2bddb",
-       "share": 0.24
+       "color": "#0f652e",
+       "share": 0.05
       },
       {
        "color": "#f7f7f5",
-       "share": 0.07
-      },
-      {
-       "color": "#15803d",
-       "share": 0.04
+       "share": 0.01
       }
      ],
      "button": {
-      "bg": "#1f1a3a",
+      "bg": "#f7f7f5",
       "hsl": {
-       "h": 249,
-       "s": 0.38,
-       "l": 0.16
+       "h": 60,
+       "s": 0.11,
+       "l": 0.96
       },
-      "fg": "#f7f7f5"
+      "fg": "#4a4662"
      },
-     "lowContrast": [
-      {
-       "text": "Investigación aplicada y rigor metodológ",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "Modelos de negocio e innovación universi",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "Comunidad, divulgación y alianzas global",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "13 y 14 de noviembre de 2025 · Medellín ",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "24 y 25 de octubre de 2024 · Híbrido",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "Octubre de 2023 · Facultad de Minas",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      }
-     ]
+     "lowContrast": []
     },
     "buttons": {
-     "count": 7,
-     "inHero": 3,
+     "count": 13,
+     "inHero": 13,
      "radius": 2,
-     "height": 48,
+     "height": 35,
      "withShadow": 0,
      "withGradient": 0,
      "mono": 0,
      "upper": 0,
      "heroLabels": [
       "Contactar",
-      "Solicitar consultoría",
-      "Simular Puntos Prexia"
+      "VI EISI 2025",
+      "V EISI 2024",
+      "IV EISI 2023",
+      "III EISI 2022"
      ]
     },
     "surfaces": {
@@ -528,7 +339,7 @@
      "roundedBoxes": 0,
      "boxRadius": 0,
      "squareMedia": 0,
-     "roundedMedia": 12,
+     "roundedMedia": 15,
      "mediaRadius": 2,
      "textShadow": 0,
      "cardRows": [
@@ -536,61 +347,43 @@
        "count": 4,
        "iconTopped": false,
        "rounded": false,
-       "top": 603
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 1296
+       "top": 766
       },
       {
        "count": 3,
        "iconTopped": false,
        "rounded": false,
-       "top": 1933
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 3429
-      },
-      {
-       "count": 6,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 4596
-      },
-      {
-       "count": 6,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 5935
+       "top": 1257
       },
       {
        "count": 3,
        "iconTopped": false,
        "rounded": false,
-       "top": 6393
+       "top": 1730
       },
       {
-       "count": 4,
+       "count": 6,
        "iconTopped": false,
        "rounded": false,
-       "top": 6936
+       "top": 2362
+      },
+      {
+       "count": 7,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 4654
       }
      ]
     },
     "heroMedia": [
      {
       "type": "img",
-      "ratio": 0.19
+      "ratio": 0.12
      }
     ],
     "nav": {
-     "links": 10,
-     "fixed": true,
+     "links": 7,
+     "fixed": false,
      "height": 87,
      "floatingPill": false,
      "blur": false
@@ -606,25 +399,20 @@
    "width": 768,
    "height": 1024,
    "load": "load",
-   "screens": 12,
+   "screens": 7,
    "filled": [
-    0.58,
-    0.76,
-    0.68,
-    0.8,
-    0.83,
-    0.9,
-    0.97,
     0.7,
-    0.9,
-    0.8,
-    0.56,
-    0.62
+    0.72,
+    0.69,
+    0.79,
+    0.93,
+    0.78,
+    0.86
    ],
    "motion": {
-    "elements": 37,
+    "elements": 31,
     "css": 0,
-    "transitions": 37,
+    "transitions": 31,
     "scripted": 0,
     "videos": 0,
     "playingVideos": 0
@@ -635,30 +423,30 @@
      "h": 1024
     },
     "page": {
-     "height": 13317,
-     "screens": 13,
-     "words": 1654,
-     "img": 18,
+     "height": 8135,
+     "screens": 7.9,
+     "words": 812,
+     "img": 22,
      "video": 0,
      "canvas": 0,
-     "svg": 5,
-     "sections": 8,
+     "svg": 2,
+     "sections": 6,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
-     "uiFragments": 2,
+     "uiFragments": 0,
      "uiAbuse": false,
-     "realPictures": 12,
+     "realPictures": 15,
      "videoCount": 0,
-     "uiPictures": 2,
+     "uiPictures": 0,
      "pictureSamples": [
-      "grupo-prexia-2024.png",
-      "jose-ignacio-maya.jpg",
-      "encuentro-2023-auditorio.png",
-      "semillero-equipo-completo.png",
-      "podcast-prexia.jpg",
       "vi-eisi-2025.jpg",
-      "unal-edu-co__prexiaforum__home__v-encuentro-inte",
-      "unal-edu-co__prexiaforum__home__iv-encuentro-int"
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__02",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__03",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__04",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__05",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__06",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__07",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__08"
      ],
      "blendText": 0,
      "sideScrollers": 0,
@@ -666,246 +454,78 @@
      "emoji": []
     },
     "hero": {
-     "text": "Ciencia aplicada a la industria.",
-     "words": 5,
-     "chars": 32,
-     "lines": 2,
+     "text": "VI EISI 2025.",
+     "words": 3,
+     "chars": 13,
+     "lines": 1,
      "size": 40,
      "vw": 5.2,
      "font": "Libre Franklin",
      "weight": 800,
-     "tracking": -0.038,
+     "tracking": -0.035,
      "leading": 0.98,
-     "upper": false,
+     "upper": true,
      "italic": false,
      "mono": false,
      "align": "left",
      "position": "center",
      "widthRatio": 0.94,
-     "top": 115,
+     "top": 389,
      "tag": "h1",
      "kind": "heading"
     },
     "h1": {
-     "text": "Ciencia aplicada a la industria.",
-     "words": 5,
-     "lines": 2,
+     "text": "VI EISI 2025.",
+     "words": 3,
+     "lines": 1,
      "size": 40,
      "font": "Libre Franklin"
     },
     "headings": [
      {
-      "text": "Ciencia aplicada a la industria.",
-      "words": 5,
-      "chars": 32,
-      "lines": 2,
+      "text": "VI EISI 2025.",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
       "size": 40,
       "vw": 5.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.038,
+      "tracking": -0.035,
       "leading": 0.98,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.94,
-      "top": 115,
-      "tag": "h1",
-      "kind": "heading"
-     },
-     {
-      "text": "6",
-      "words": 1,
-      "chars": 1,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 3.4,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.19,
-      "top": 1220,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "4",
-      "words": 1,
-      "chars": 1,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 3.4,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "left",
-      "widthRatio": 0.19,
-      "top": 1220,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "50+",
-      "words": 1,
-      "chars": 3,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 3.4,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "right",
-      "widthRatio": 0.19,
-      "top": 1220,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "110%",
-      "words": 1,
-      "chars": 4,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 3.4,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "right",
-      "widthRatio": 0.19,
-      "top": 1220,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "Quiénes somos.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 32,
-      "vw": 4.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.91,
-      "top": 1455,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "Cuatro líneas.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 32,
-      "vw": 4.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 1,
-      "top": 2913,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "PREXIA Consultoría",
-      "words": 2,
-      "chars": 18,
-      "lines": 1,
-      "size": 28,
-      "vw": 3.6,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1.05,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.9,
-      "top": 4386,
-      "tag": "h3",
-      "kind": "heading"
-     },
-     {
-      "text": "Puntos Prexia.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 32,
-      "vw": 4.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.94,
-      "top": 5377,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "440 PP",
-      "words": 2,
-      "chars": 6,
-      "lines": 1,
-      "size": 35.2,
-      "vw": 4.6,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
       "upper": true,
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "right",
-      "widthRatio": 0.17,
-      "top": 6954,
-      "tag": "span",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 389,
+      "tag": "h1",
       "kind": "heading"
      },
      {
-      "text": "Encuentros EISI.",
+      "text": "Modalidades.",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 32,
+      "vw": 4.2,
+      "font": "Libre Franklin",
+      "weight": 800,
+      "tracking": -0.025,
+      "leading": 1.04,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 1665,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mesas temáticas.",
       "words": 2,
       "chars": 16,
       "lines": 1,
@@ -913,85 +533,64 @@
       "vw": 4.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 1,
-      "top": 7411,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "Red de aliados.",
-      "words": 3,
-      "chars": 15,
-      "lines": 1,
-      "size": 32,
-      "vw": 4.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
       "position": "center",
       "widthRatio": 0.94,
-      "top": 9235,
+      "top": 2437,
       "tag": "h2",
       "kind": "heading"
      },
      {
-      "text": "Únete a PREXIA.",
+      "text": "Secciones del encuentro.",
       "words": 3,
-      "chars": 15,
+      "chars": 24,
       "lines": 1,
       "size": 32,
       "vw": 4.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
       "position": "center",
-      "widthRatio": 1,
-      "top": 9970,
+      "widthRatio": 0.94,
+      "top": 3461,
       "tag": "h2",
       "kind": "heading"
      },
      {
-      "text": "Contacto directo.",
+      "text": "Memoria gráfica.",
       "words": 2,
-      "chars": 17,
+      "chars": 16,
       "lines": 1,
       "size": 32,
       "vw": 4.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
       "position": "center",
       "widthRatio": 0.94,
-      "top": 10926,
+      "top": 5098,
       "tag": "h2",
       "kind": "heading"
      }
     ],
     "headingSummary": {
-     "count": 14,
-     "maxLines": 2,
+     "count": 5,
+     "maxLines": 1,
      "over2Lines": 0,
      "statements": 0,
      "centered": 0,
@@ -1002,12 +601,12 @@
      "families": [
       {
        "family": "Source Serif 4",
-       "share": 0.74,
+       "share": 0.68,
        "mono": false
       },
       {
        "family": "Libre Franklin",
-       "share": 0.26,
+       "share": 0.32,
        "mono": false
       }
      ],
@@ -1015,31 +614,26 @@
      "sizes": [
       14,
       18,
-      19,
-      20,
-      21,
       22,
-      26,
-      28,
       32,
       40
      ],
-     "sizeCount": 10,
+     "sizeCount": 5,
      "notLoaded": [],
      "body": {
       "font": "Source Serif 4",
-      "size": 18.4,
-      "leading": 1.58,
+      "size": 18,
+      "leading": 1.62,
       "weight": 400,
       "tracking": 0,
-      "contrast": 15.5
+      "contrast": 8.4
      },
-     "measureChars": 70,
+     "measureChars": 80,
      "max": {
       "size": 40,
       "vw": 5.2,
       "font": "Libre Franklin",
-      "text": "Ciencia aplicada"
+      "text": "VI EISI 2025."
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -1048,8 +642,8 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0.01,
-     "centerShare": 0.02,
+     "upperShare": 0.02,
+     "centerShare": 0.04,
      "smallText": 0
     },
     "eyebrows": [],
@@ -1064,26 +658,8 @@
      "dark": false,
      "sectionBgs": [
       {
-       "color": "#ecebe6",
-       "top": 674,
-       "hsl": {
-        "h": 50,
-        "s": 0.14,
-        "l": 0.91
-       }
-      },
-      {
-       "color": "#f7f7f5",
-       "top": 2817,
-       "hsl": {
-        "h": 60,
-        "s": 0.11,
-        "l": 0.96
-       }
-      },
-      {
        "color": "#1f1a3a",
-       "top": 4338,
+       "top": 1096,
        "hsl": {
         "h": 249,
         "s": 0.38,
@@ -1091,86 +667,63 @@
        }
       },
       {
-       "color": "#2b244d",
-       "top": 6069,
+       "color": "#ecebe6",
+       "top": 1609,
        "hsl": {
-        "h": 250,
-        "s": 0.36,
-        "l": 0.22
+        "h": 50,
+        "s": 0.14,
+        "l": 0.91
        }
       }
      ],
      "textColors": [
       {
-       "color": "#4a4662",
-       "share": 0.34
+       "color": "#1f1a3a",
+       "share": 0.52
       },
       {
-       "color": "#1f1a3a",
-       "share": 0.28
+       "color": "#4a4662",
+       "share": 0.35
       },
       {
        "color": "#c2bddb",
-       "share": 0.24
+       "share": 0.06
+      },
+      {
+       "color": "#0f652e",
+       "share": 0.05
       },
       {
        "color": "#f7f7f5",
-       "share": 0.07
-      },
-      {
-       "color": "#15803d",
-       "share": 0.04
+       "share": 0.01
       }
      ],
      "button": {
-      "bg": "#1f1a3a",
+      "bg": "#f7f7f5",
       "hsl": {
-       "h": 249,
-       "s": 0.38,
-       "l": 0.16
+       "h": 60,
+       "s": 0.11,
+       "l": 0.96
       },
-      "fg": "#f7f7f5"
+      "fg": "#4a4662"
      },
-     "lowContrast": [
-      {
-       "text": "Investigación aplicada y rigor metodológ",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "Modelos de negocio e innovación universi",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      },
-      {
-       "text": "Comunidad, divulgación y alianzas global",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      }
-     ]
+     "lowContrast": []
     },
     "buttons": {
-     "count": 7,
-     "inHero": 3,
+     "count": 13,
+     "inHero": 13,
      "radius": 2,
-     "height": 48,
+     "height": 35,
      "withShadow": 0,
      "withGradient": 0,
      "mono": 0,
      "upper": 0,
      "heroLabels": [
       "Contactar",
-      "Solicitar consultoría",
-      "Simular Puntos Prexia"
+      "VI EISI 2025",
+      "V EISI 2024",
+      "IV EISI 2023",
+      "III EISI 2022"
      ]
     },
     "surfaces": {
@@ -1189,7 +742,7 @@
      "roundedBoxes": 0,
      "boxRadius": 0,
      "squareMedia": 0,
-     "roundedMedia": 12,
+     "roundedMedia": 15,
      "mediaRadius": 2,
      "textShadow": 0,
      "cardRows": [
@@ -1197,62 +750,27 @@
        "count": 4,
        "iconTopped": false,
        "rounded": false,
-       "top": 1204
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 2121
+       "top": 835
       },
       {
        "count": 3,
        "iconTopped": false,
        "rounded": false,
-       "top": 3169
+       "top": 2570
       },
       {
-       "count": 4,
+       "count": 7,
        "iconTopped": false,
        "rounded": false,
-       "top": 5666
-      },
-      {
-       "count": 6,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 7640
-      },
-      {
-       "count": 6,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 9481
-      },
-      {
-       "count": 3,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 10190
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 11803
+       "top": 7355
       }
      ]
     },
-    "heroMedia": [
-     {
-      "type": "img",
-      "ratio": 0.3
-     }
-    ],
+    "heroMedia": [],
     "nav": {
-     "links": 2,
-     "fixed": true,
-     "height": 87,
+     "links": 7,
+     "fixed": false,
+     "height": 142,
      "floatingPill": false,
      "blur": false
     },
@@ -1267,25 +785,24 @@
    "width": 390,
    "height": 844,
    "load": "load",
-   "screens": 12,
+   "screens": 11,
    "filled": [
-    0.64,
-    0.64,
+    0.71,
+    0.81,
+    0.75,
+    0.57,
+    0.86,
+    0.83,
+    1,
+    1,
     0.8,
-    0.84,
-    0.65,
-    0.91,
-    0.93,
-    0.95,
-    0.79,
-    0.99,
-    0.93,
-    0.92
+    0.73,
+    0.79
    ],
    "motion": {
-    "elements": 18,
+    "elements": 26,
     "css": 0,
-    "transitions": 18,
+    "transitions": 26,
     "scripted": 0,
     "videos": 0,
     "playingVideos": 0
@@ -1296,29 +813,30 @@
      "h": 844
     },
     "page": {
-     "height": 19433,
-     "screens": 23,
-     "words": 1649,
-     "img": 18,
+     "height": 12083,
+     "screens": 14.3,
+     "words": 812,
+     "img": 22,
      "video": 0,
      "canvas": 0,
-     "svg": 5,
-     "sections": 8,
+     "svg": 2,
+     "sections": 6,
      "horizontalOverflow": 0,
      "overflowCulprits": [],
-     "uiFragments": 2,
-     "uiAbuse": true,
-     "realPictures": 7,
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 15,
      "videoCount": 0,
-     "uiPictures": 2,
+     "uiPictures": 0,
      "pictureSamples": [
-      "grupo-prexia-2024.png",
-      "jose-ignacio-maya.jpg",
-      "encuentro-2023-auditorio.png",
-      "semillero-equipo-completo.png",
-      "podcast-prexia.jpg",
       "vi-eisi-2025.jpg",
-      "unal-edu-co__prexiaforum__home__v-encuentro-inte"
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__02",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__03",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__04",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__05",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__06",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__07",
+      "unal-edu-co__prexiaforum__home__vi-eisi-2025__08"
      ],
      "blendText": 0,
      "sideScrollers": 0,
@@ -1326,309 +844,99 @@
      "emoji": []
     },
     "hero": {
-     "text": "Ciencia aplicada a la industria.",
-     "words": 5,
-     "chars": 32,
-     "lines": 2,
-     "size": 37.1,
-     "vw": 9.5,
+     "text": "VI EISI 2025.",
+     "words": 3,
+     "chars": 13,
+     "lines": 1,
+     "size": 40,
+     "vw": 10.3,
      "font": "Libre Franklin",
      "weight": 800,
-     "tracking": -0.038,
+     "tracking": -0.035,
      "leading": 0.98,
-     "upper": false,
+     "upper": true,
      "italic": false,
      "mono": false,
      "align": "left",
      "position": "center",
      "widthRatio": 0.9,
-     "top": 115,
+     "top": 690,
      "tag": "h1",
      "kind": "heading"
     },
     "h1": {
-     "text": "Ciencia aplicada a la industria.",
-     "words": 5,
-     "lines": 2,
-     "size": 37.1,
+     "text": "VI EISI 2025.",
+     "words": 3,
+     "lines": 1,
+     "size": 40,
      "font": "Libre Franklin"
     },
     "headings": [
      {
-      "text": "Ciencia aplicada a la industria.",
-      "words": 5,
-      "chars": 32,
-      "lines": 2,
-      "size": 37.1,
-      "vw": 9.5,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.038,
-      "leading": 0.98,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.9,
-      "top": 115,
-      "tag": "h1",
-      "kind": "heading"
-     },
-     {
-      "text": "6",
+      "text": "PREXIA",
       "words": 1,
-      "chars": 1,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 6.8,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.83,
-      "top": 1236,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "4",
-      "words": 1,
-      "chars": 1,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 6.8,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.83,
-      "top": 1329,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "50+",
-      "words": 1,
-      "chars": 3,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 6.8,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.83,
-      "top": 1422,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "110%",
-      "words": 1,
-      "chars": 4,
-      "lines": 1,
-      "size": 26.4,
-      "vw": 6.8,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.83,
-      "top": 1514,
-      "tag": "strong",
-      "kind": "heading"
-     },
-     {
-      "text": "Quiénes somos.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 32,
-      "vw": 8.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.85,
-      "top": 1731,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "Cuatro líneas.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 32,
-      "vw": 8.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 1,
-      "top": 4222,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "PREXIA Investiga",
-      "words": 2,
-      "chars": 16,
-      "lines": 1,
-      "size": 22.4,
-      "vw": 5.7,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1.62,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.86,
-      "top": 4540,
-      "tag": "h3",
-      "kind": "heading"
-     },
-     {
-      "text": "PREXIA Emprende",
-      "words": 2,
-      "chars": 15,
-      "lines": 1,
-      "size": 22.4,
-      "vw": 5.7,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1.62,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.86,
-      "top": 5120,
-      "tag": "h3",
-      "kind": "heading"
-     },
-     {
-      "text": "PREXIA Conecta",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 22.4,
-      "vw": 5.7,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1.62,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.86,
-      "top": 5673,
-      "tag": "h3",
-      "kind": "heading"
-     },
-     {
-      "text": "PREXIA Consultoría",
-      "words": 2,
-      "chars": 18,
-      "lines": 1,
-      "size": 28,
-      "vw": 7.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": 0,
-      "leading": 1.05,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.88,
-      "top": 6233,
-      "tag": "h3",
-      "kind": "heading"
-     },
-     {
-      "text": "Puntos Prexia.",
-      "words": 2,
-      "chars": 14,
-      "lines": 1,
-      "size": 32,
-      "vw": 8.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 0.9,
-      "top": 7541,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "440 PP",
-      "words": 2,
       "chars": 6,
-      "lines": 2,
-      "size": 35.2,
-      "vw": 9,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": 0,
-      "leading": 1,
+      "tracking": -0.02,
+      "leading": 1.62,
       "upper": true,
       "italic": false,
       "mono": false,
       "align": "left",
-      "position": "right",
-      "widthRatio": 0.3,
-      "top": 9902,
+      "position": "left",
+      "widthRatio": 0.22,
+      "top": 24,
       "tag": "span",
       "kind": "heading"
      },
      {
-      "text": "Encuentros EISI.",
+      "text": "VI EISI 2025.",
+      "words": 3,
+      "chars": 13,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Libre Franklin",
+      "weight": 800,
+      "tracking": -0.035,
+      "leading": 0.98,
+      "upper": true,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 690,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Modalidades.",
+      "words": 1,
+      "chars": 12,
+      "lines": 1,
+      "size": 32,
+      "vw": 8.2,
+      "font": "Libre Franklin",
+      "weight": 800,
+      "tracking": -0.025,
+      "leading": 1.04,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 2232,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Mesas temáticas.",
       "words": 2,
       "chars": 16,
       "lines": 1,
@@ -1636,78 +944,57 @@
       "vw": 8.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
-      "upper": false,
-      "italic": false,
-      "mono": false,
-      "align": "left",
-      "position": "center",
-      "widthRatio": 1,
-      "top": 10552,
-      "tag": "h2",
-      "kind": "heading"
-     },
-     {
-      "text": "Red de aliados.",
-      "words": 3,
-      "chars": 15,
-      "lines": 1,
-      "size": 32,
-      "vw": 8.2,
-      "font": "Libre Franklin",
-      "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
       "position": "center",
       "widthRatio": 0.9,
-      "top": 13863,
+      "top": 3318,
       "tag": "h2",
       "kind": "heading"
      },
      {
-      "text": "Únete a PREXIA.",
+      "text": "Secciones del encuentro.",
       "words": 3,
-      "chars": 15,
-      "lines": 1,
+      "chars": 24,
+      "lines": 2,
       "size": 32,
       "vw": 8.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
       "position": "center",
-      "widthRatio": 1,
-      "top": 15192,
+      "widthRatio": 0.9,
+      "top": 4803,
       "tag": "h2",
       "kind": "heading"
      },
      {
-      "text": "Contacto directo.",
+      "text": "Memoria gráfica.",
       "words": 2,
-      "chars": 17,
+      "chars": 16,
       "lines": 1,
       "size": 32,
       "vw": 8.2,
       "font": "Libre Franklin",
       "weight": 800,
-      "tracking": -0.03,
-      "leading": 1.02,
+      "tracking": -0.025,
+      "leading": 1.04,
       "upper": false,
       "italic": false,
       "mono": false,
       "align": "left",
       "position": "center",
       "widthRatio": 0.9,
-      "top": 16481,
+      "top": 7061,
       "tag": "h2",
       "kind": "heading"
      },
@@ -1716,8 +1003,8 @@
       "words": 4,
       "chars": 19,
       "lines": 1,
-      "size": 22.4,
-      "vw": 5.7,
+      "size": 22,
+      "vw": 5.6,
       "font": "Libre Franklin",
       "weight": 800,
       "tracking": 0,
@@ -1728,13 +1015,13 @@
       "align": "left",
       "position": "center",
       "widthRatio": 0.9,
-      "top": 18242,
+      "top": 11737,
       "tag": "div",
       "kind": "heading"
      }
     ],
     "headingSummary": {
-     "count": 18,
+     "count": 7,
      "maxLines": 2,
      "over2Lines": 0,
      "statements": 0,
@@ -1746,12 +1033,12 @@
      "families": [
       {
        "family": "Source Serif 4",
-       "share": 0.74,
+       "share": 0.68,
        "mono": false
       },
       {
        "family": "Libre Franklin",
-       "share": 0.26,
+       "share": 0.32,
        "mono": false
       }
      ],
@@ -1759,31 +1046,26 @@
      "sizes": [
       14,
       18,
-      19,
-      20,
-      21,
       22,
-      26,
-      28,
       32,
-      37
+      40
      ],
-     "sizeCount": 10,
+     "sizeCount": 5,
      "notLoaded": [],
      "body": {
       "font": "Source Serif 4",
-      "size": 18.4,
-      "leading": 1.58,
+      "size": 18,
+      "leading": 1.62,
       "weight": 400,
       "tracking": 0,
-      "contrast": 15.5
+      "contrast": 8.4
      },
      "measureChars": 39,
      "max": {
-      "size": 37.1,
-      "vw": 9.5,
+      "size": 40,
+      "vw": 10.3,
       "font": "Libre Franklin",
-      "text": "Ciencia aplicada"
+      "text": "VI EISI 2025."
      },
      "monoShare": 0,
      "monoProseShare": 0,
@@ -1792,8 +1074,8 @@
      "microLabels": 0,
      "microLabelShare": 0,
      "microSamples": [],
-     "upperShare": 0.01,
-     "centerShare": 0.02,
+     "upperShare": 0.02,
+     "centerShare": 0.04,
      "smallText": 0
     },
     "eyebrows": [],
@@ -1809,7 +1091,7 @@
      "sectionBgs": [
       {
        "color": "#ecebe6",
-       "top": 853,
+       "top": 230,
        "hsl": {
         "h": 50,
         "s": 0.14,
@@ -1817,88 +1099,63 @@
        }
       },
       {
-       "color": "#f7f7f5",
-       "top": 2810,
-       "hsl": {
-        "h": 60,
-        "s": 0.11,
-        "l": 0.96
-       }
-      },
-      {
        "color": "#1f1a3a",
-       "top": 6201,
+       "top": 11673,
        "hsl": {
         "h": 249,
         "s": 0.38,
         "l": 0.16
        }
-      },
-      {
-       "color": "#2b244d",
-       "top": 8730,
-       "hsl": {
-        "h": 250,
-        "s": 0.36,
-        "l": 0.22
-       }
       }
      ],
      "textColors": [
       {
-       "color": "#4a4662",
-       "share": 0.34
+       "color": "#1f1a3a",
+       "share": 0.52
       },
       {
-       "color": "#1f1a3a",
-       "share": 0.28
+       "color": "#4a4662",
+       "share": 0.35
       },
       {
        "color": "#c2bddb",
-       "share": 0.24
+       "share": 0.06
+      },
+      {
+       "color": "#0f652e",
+       "share": 0.05
       },
       {
        "color": "#f7f7f5",
-       "share": 0.07
-      },
-      {
-       "color": "#15803d",
-       "share": 0.04
+       "share": 0.01
       }
      ],
      "button": {
-      "bg": "#1f1a3a",
+      "bg": "#f7f7f5",
       "hsl": {
-       "h": 249,
-       "s": 0.38,
-       "l": 0.16
+       "h": 60,
+       "s": 0.11,
+       "l": 0.96
       },
-      "fg": "#f7f7f5"
+      "fg": "#4a4662"
      },
-     "lowContrast": [
-      {
-       "text": "Investigación aplicada y rigor metodológ",
-       "ratio": 4.2,
-       "need": 4.5,
-       "size": 14,
-       "fg": "#15803d",
-       "bg": "#ecebe6"
-      }
-     ]
+     "lowContrast": []
     },
     "buttons": {
-     "count": 7,
-     "inHero": 3,
+     "count": 13,
+     "inHero": 13,
      "radius": 2,
-     "height": 48,
+     "height": 35,
      "withShadow": 0,
      "withGradient": 0,
      "mono": 0,
      "upper": 0,
      "heroLabels": [
       "Contactar",
-      "Solicitar consultoría",
-      "Simular Puntos Prexia"
+      "VI EISI 2025",
+      "V EISI 2024",
+      "IV EISI 2023",
+      "III EISI 2022"
      ]
     },
     "surfaces": {
@@ -1917,7 +1174,7 @@
      "roundedBoxes": 0,
      "boxRadius": 0,
      "squareMedia": 0,
-     "roundedMedia": 11,
+     "roundedMedia": 15,
      "mediaRadius": 2,
      "textShadow": 0,
      "cardRows": [
@@ -1925,39 +1182,33 @@
        "count": 4,
        "iconTopped": false,
        "rounded": false,
-       "top": 2810
+       "top": 1463
       },
       {
-       "count": 5,
+       "count": 3,
        "iconTopped": false,
        "rounded": false,
-       "top": 6789
+       "top": 2424
       },
       {
-       "count": 4,
+       "count": 3,
        "iconTopped": false,
        "rounded": false,
-       "top": 7948
+       "top": 3510
       },
       {
        "count": 6,
        "iconTopped": false,
        "rounded": false,
-       "top": 14157
-      },
-      {
-       "count": 4,
-       "iconTopped": false,
-       "rounded": false,
-       "top": 17418
+       "top": 4999
       }
      ]
     },
     "heroMedia": [],
     "nav": {
-     "links": 2,
-     "fixed": true,
-     "height": 87,
+     "links": 6,
+     "fixed": false,
+     "height": 230,
      "floatingPill": false,
      "blur": false
     },
@@ -1974,30 +1225,8 @@
    "level": "WARN",
    "id": "card-rows",
    "width": 1440,
-   "message": "8 rows of identical boxed cards.",
+   "message": "5 rows of identical boxed cards.",
    "fix": "Vary the composition; not every section is a card grid.",
-   "alsoAt": [
-    768,
-    390
-   ]
-  },
-  {
-   "level": "WARN",
-   "id": "contrast",
-   "width": 1440,
-   "message": "Low-contrast text: \"Investigación aplicada y rigor metodológ\" 4.2:1 needs 4.5:1; \"Modelos de negocio e innovación universi\" 4.2:1 needs 4.5:1; \"Comunidad, divulgación y alianzas global\" 4.2:1 needs 4.5:1; \"13 y 14 de noviembre de 2025 · Medellín \" 4.2:1 needs 4.5:1",
-   "fix": "Darken or lighten the text colour.",
-   "alsoAt": [
-    768,
-    390
-   ]
-  },
-  {
-   "level": "WARN",
-   "id": "size-count",
-   "width": 1440,
-   "message": "10 different font sizes (14, 18, 19, 20, 21, 22, 26, 37, 46, 69).",
-   "fix": "A page needs about five: display, heading, lead, body, small.",
    "alsoAt": [
     768,
     390
@@ -2009,13 +1238,6 @@
    "width": 1440,
    "message": "No video anywhere on the page.",
    "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
-  },
-  {
-   "level": "FAIL",
-   "id": "ui-wrapper",
-   "width": 390,
-   "message": "A data-ui element wraps a heading or more than a screen and a half of the page.",
-   "fix": "data-ui marks a cropped interface fragment only. Remove it from page-level wrappers."
   }
  ],
  "images": [
@@ -2025,8 +1247,7 @@
    "fold": "/Users/carlosalbertomartinez/Documents/proyectoprexia/.taste-skill/inspect/desktop-fold.jpg",
    "pages": [
     "/Users/carlosalbertomartinez/Documents/proyectoprexia/.taste-skill/inspect/desktop-page-01.jpg",
-    "/Users/carlosalbertomartinez/Documents/proyectoprexia/.taste-skill/inspect/desktop-page-02.jpg",
-    "/Users/carlosalbertomartinez/Documents/proyectoprexia/.taste-skill/inspect/desktop-page-03.jpg"
+    "/Users/carlosalbertomartinez/Documents/proyectoprexia/.taste-skill/inspect/desktop-page-02.jpg"
    ]
   },
   {
