@@ -4,10 +4,11 @@ build_static_site.py
 Generador estático profesional para la migración de PREXIA Google Sites a HTML/Git.
 Aplica el sistema de diseño editorial anti-slop (Taste Skill) con Libre Franklin + Source Serif 4,
 preserva la estructura rica de las 6 ediciones del Encuentro Internacional EISI (2020-2025),
-clasifica inteligentemente imágenes vs logos institucionales e incorpora el Sistema de Evaluación Prexia (PP).
+clasifica por MD5 contenido real vs íconos/botones/logos institucionales e incorpora el Sistema de Evaluación Prexia (PP).
 """
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 import shutil
@@ -20,59 +21,109 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = PROJECT_ROOT / "scraped_site_clean"
 OUTPUT_DIR = PROJECT_ROOT / "site"
 
-# Hashes conocidos de banners repetidos de cabecera o íconos de UI a excluir de galerías
-EXCLUDED_IMAGE_HASHES = {
-    "feb3bfe9e5fb",
-    "b649eab2c978",
-    "c77c62c3a9cc",
-    "f0e86ff4f412",
-    "75e310c7f3b6",
-    "925749e276f0",
-    "1ece4638cfdf",
-    "00543cb6d346",
-    "3e2c4a4689e0",
-    "811992e09b04",
-    "b81767d8e353",
-    "04757e10e921",
-    "81ddbc880e49",
-    "856ae48ea7d5",
-    "c283296e5cad",
-    "9abd2ec7a215",
-    "f5b807c68c43",
-    "c5e8f2f748be",
-    "df569df60624",
+# Hashes MD5 (primeros 12 caracteres del contenido binario) de íconos de redes sociales,
+# botones decorativos de Google Sites, banderas gigantes, clip-art y diapositivas redundantes.
+EXCLUDED_IMAGE_MD5S = {
+    # Banner superior global (900x400) e íconos globales 64x64 (Facebook, LinkedIn, Email, Instagram)
+    "f040c0b924ee",
+    "e960508c8224",
+    "a29f6cde8c9a",
+    "e0b25692d09f",
+    "07ddeff34c4e",
+    # Íconos gigantes de redes sociales incrustados en páginas antiguas (2019, 2020, 2021)
+    "2318909f8acc",  # 600x600 Instagram icon (371KB) en evento-2019
+    "5d5331c337b6",  # 512x512 Facebook icon en evento-2019
+    "cb929fd29506",  # 960x681 Gmail icon en evento-2019
+    "e39accac8af4",  # 614x615 Grey Facebook icon en 2020 y 2021
+    "083d33f64d6d",  # 510x512 Grey YouTube icon en 2020 y 2021
+    # Íconos vectoriales planos (512x512) y clip-art en páginas 2019, 2020, 2021 y 2025
+    "ca6d67e60f75",
+    "788aed64e04f",
+    "5c1181a51754",
+    "ec82833949ca",
+    "340bc67140b9",
+    "aa7c95a4e6ef",
+    "22dbcd44792f",
+    "5c4a174ca58d",
+    "d51073eb89af",
+    "a2e9613e1c78",
+    "1a7c9a256e2c",
+    "fbb583f8b36a",
+    "325c1ca4ae4b",
+    "99335ab65f63",
+    "bdc10e03b031",
+    "6bdda21dcc07",
+    "5f6f58b88449",
+    # Banderas gigantes de Brasil y Alemania (1200x800) en 2020
+    "612d86189a6c",
+    "a53514d57e53",
+    "e270c96194bc",
+    "515de613c7f3",
+    # Logos blancos sobre fondo transparente o duplicados de pie de página en 2020 y 2021
+    "6da39e4ce2ad",
+    "a4ef70b244b7",
+    "8168bc7626b1",
+    "2b856cbfbf99",
+    "920b9e691605",
+    "d457ee81b3ac",
+    # Botones de interfaz de Google Sites con cursor de ratón ("Asistente", "Ponente", "Evaluador")
+    "b66c675e6db8",
+    "534e3a569362",
+    "6a13cf3328e4",
+    "ce1ac578fd36",
+    "76b81c798ace",
+    "86e5f7ae14b3",
+    # Íconos de calendario clip-art y cintillos decorativos genéricos en 2025
+    "8b1d2a6bbb8d",
+    "2498507d3387",
+    "d1d8f6e5b3de",
+    "f00ac45fa3f9",
+    "1a4689a9253d",
+    # Diagramas antiguos de inicio/líneas y diapositivas de botones redundantes con el HTML estructurado
+    "3fca5b1b2e84",
+    "c6f3e9e29fd0",
+    "055f140f3b2e",
+    "98cd4b58c288",
+    "a1687f8a5b2d",
+    "70028d2590cf",
+    "f5201231910f",
+    "b0837c2d7d5f",
+    "1cce91ac5593",
+    "f5c48f5989a8",
+    "6c8b305ad35c",
+    "d70ebb43ae05",
 }
 
-# Hashes conocidos de logos de aliados que aparecen al pie de las páginas de Google Sites
-ALLY_LOGO_HASHES = {
-    "6bf6ffd21445": "Universidad Nacional de Colombia",
-    "335df9af583e": "Universidad Nacional de Colombia",
-    "4ca5e7ccb139": "Universidad Nacional de Colombia",
-    "4c2512b616b6": "Universidad Nacional de Colombia",
-    "8be6f665e515": "Grupo Geyma · UNAL Medellín",
-    "3a88729e7c34": "Grupo Geyma · UNAL Medellín",
-    "4dab720b63b7": "Grupo Geyma · UNAL Medellín",
-    "0de28cc6438b": "Grupo Geyma · UNAL Medellín",
-    "a86117b50985": "Semillero PREXIA · UNAL",
-    "5580e482d705": "Semillero PREXIA · UNAL",
-    "b2c7741aea54": "Semillero PREXIA · UNAL",
-    "7ca431c135b3": "Semillero PREXIA · UNAL",
-    "cf582afe5603": "Facultad de Ciencias Agrarias · UNAL",
-    "504aadfcb78b": "Facultad de Ciencias Agrarias · UNAL",
-    "a52400185407": "Facultad de Ciencias Agrarias · UNAL",
-    "1f752c144edd": "Facultad de Ciencias Agrarias · UNAL",
-    "31257c8ed477": "UNESP · São Paulo, Brasil",
-    "c1a90b8c2ef0": "UNESP · São Paulo, Brasil",
-    "09a11f3823ba": "UNESP · São Paulo, Brasil",
-    "2140d0f32479": "UNESP · São Paulo, Brasil",
-    "7393e1c00186": "UNESP · Campus Jaboticabal",
-    "3b1a8aa5524b": "UNESP · Campus Jaboticabal",
-    "3b676e94a873": "UNESP · Campus Jaboticabal",
-    "cbebe530895b": "UNESP · Campus Jaboticabal",
-    "efb96efba9bf": "Instituto A Nau Ciranda · Brasil",
-    "7aeb619d9278": "Instituto A Nau Ciranda · Brasil",
-    "6d53830100ce": "Instituto A Nau Ciranda · Brasil",
-    "c39633ea33a6": "Instituto A Nau Ciranda · Brasil",
+# Retratos de conferencistas (se renderizan en tarjetas de perfil .speaker-card, no como fotos anchas de galería)
+SPEAKER_PORTRAIT_MD5S = {
+    "92811b1ab9dd",
+    "ab93215076d4",
+    "96154ec2a71f",
+    "abf8da86d6b7",
+    "7844275c80cf",
+    "3735c14029b8",
+    "adfc5735dcf9",
+    "982db7ae065d",
+    "43033c75594c",
+}
+
+# Hashes MD5 de logos institucionales y aliados (se renderizan en la franja inferior limpia de 48px)
+ALLY_LOGO_MD5S = {
+    "cdc92c511da0": "Universidad Nacional de Colombia",
+    "97df144d2931": "Universidad Nacional de Colombia",
+    "4637154557a1": "Grupo Geyma · UNAL Medellín",
+    "e69898e113a7": "Semillero PREXIA · UNAL",
+    "64f4086516a8": "Semillero PREXIA · UNAL",
+    "500b683146c3": "Facultad de Ciencias Agrarias · UNAL",
+    "624fa6a52ec3": "UNESP · São Paulo, Brasil",
+    "965615829f8d": "UNESP · Campus Jaboticabal",
+    "1a6533fdf571": "Instituto A Nau Ciranda · Brasil",
+    "3360f9796220": "Fundación Univ. Autónoma de las Américas",
+    "6ffe2e16ea70": "Fundación Univ. Autónoma de las Américas",
+    "dc9970822f77": "SENA · Centro de Desarrollo Empresarial",
+    "4440193c5dd6": "Institución Universitaria Esumer",
+    "a9d9e5148852": "Revista ENSAYOS · UNAL Manizales",
+    "a6c2eca982c5": "Corporación Interactuar",
 }
 
 EISI_EDITIONS_NAV = [
@@ -82,6 +133,48 @@ EISI_EDITIONS_NAV = [
     ("2022", "III EISI 2022", "unal-edu-co__prexiaforum__home__iii-encuentro-internacional-de-semilleros-2022"),
     ("2021", "II EISI 2021", "unal-edu-co__prexiaforum__home__ii-encuentro-internacional-de-semilleros-2021"),
     ("2020", "I EISI 2020", "unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020"),
+]
+
+SPEAKERS_2020 = [
+    {
+        "name": "Fernando Antonio Beltrame",
+        "role": "Presidente de ECCA PLAN · Movimiento Sou Resíduo Zero (São Paulo, Brasil)",
+        "bio": "Ingeniero de Alimentos (UNICAMP) con MBA en Gestión Empresarial por la Fundação Getúlio Vargas (FGV) y Maestría en Compostaje. Responsable de los programas Evento Neutro y CO2 Neutro para inventarios de emisiones, logística verde y sostenibilidad corporativa.",
+        "img": "../images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__conferencistas__04__cb3ce95f7548.jpg",
+    },
+    {
+        "name": "Dra. Silvia Inês Dallavalle de Pádua",
+        "role": "Profesora Asociada · FEA-RP / Universidade de São Paulo (USP, Brasil)",
+        "bio": "Doctora en Ingeniería (EESC/USP) y Posdoctora en Ingeniería de Producción (UNESP). Investigadora líder en Business Process Management (BPM), sostenibilidad organizacional y alineación estratégica entre negocios y tecnologías de la información.",
+        "img": "../images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__conferencistas__05__ee16057509f3.jpg",
+    },
+    {
+        "name": "Dr. Ronald Koepke",
+        "role": "Auditor Internacional Fairtrade (FLOCERT GmbH) & Docente ESPOL · Alemania / Ecuador",
+        "bio": "Magíster y Doctor en Ciencias Sociales y Pedagogía por la Universidad de Bielefeld (Alemania). Especialista en reconversión industrial en la cuenca del Ruhr, comercio justo y responsabilidad social empresarial en comunidades mineras e industriales.",
+        "img": "../images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__conferencistas__07__6e20cbde201b.jpg",
+    },
+]
+
+SPEAKERS_2019 = [
+    {
+        "name": "Dr. Mauricio Losada Otálora",
+        "role": "Conferencista Magistral · Estrategia y Gestión de Organizaciones",
+        "bio": "Investigador invitado al Primer Encuentro Nacional de Semilleros de Investigación en torno a capacidades dinámicas, competitividad y modelación organizacional.",
+        "img": "../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019__03__bc71c804338c.jpg",
+    },
+    {
+        "name": "Dr. Alexander Tabares",
+        "role": "Conferencista Magistral · Emprendimiento e Innovación Internacional",
+        "bio": "Docente investigador en creación de nuevas empresas (New Ventures), ecosistemas de emprendimiento de alto impacto y toma de decisiones estratégicas.",
+        "img": "../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019__04__2567d1901933.jpg",
+    },
+    {
+        "name": "Dr. Iván Darío Arango",
+        "role": "Conferencista Magistral · Industria 4.0 y Sistemas Productivos",
+        "bio": "Especialista en automatización, diseño de procesos industriales y adopción tecnológica para la productividad en manufactura y servicios.",
+        "img": "../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019__05__ca8807d64c8e.jpg",
+    },
 ]
 
 EISI_STRUCTURED_DATA = {
@@ -330,7 +423,7 @@ EISI_STRUCTURED_DATA = {
         "modality": "Virtual en vivo · Idioma oficial: Español",
         "venue": "Universidad Nacional de Colombia · Sede Medellín (Facultad de Minas)",
         "alliance": "Premiación de mejores ponencias en la Revista ENSAYOS (UNAL Sede Manizales)",
-        "poster": "../assets/photos/ii-eisi-2021-poster.jpg",
+        "poster": "../images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__03__ac951ddd006a.jpg",
         "about": [
             "El Primer Encuentro Internacional de Semilleros de Investigación nació en noviembre de 2020 para visibilizar la producción académica estudiantil en áreas organizacionales y crear redes de cooperación científica en plena coyuntura global.",
             "Contó con conferencias magistrales de referentes internacionales como Fernando Antonio Beltrame, Silvia Inês Dallavalle de Pádua (USP/UNESP) y Ronald Koepke, además de la publicación de las mejores ponencias en la Revista ENSAYOS de la UNAL.",
@@ -378,7 +471,72 @@ EISI_STRUCTURED_DATA = {
             },
         ],
     },
+    "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019": {
+        "short_title": "Encuentro 2019.",
+        "edition_badge": "I Encuentro Nacional · 28 y 29 de noviembre de 2019 · Campus Robledo UNAL",
+        "subtitle": "I Encuentro Nacional de Semilleros de Investigación · «Perspectivas de Innovación en la Gestión de las Organizaciones: Competitividad y Productividad».",
+        "date": "28 y 29 de noviembre de 2019",
+        "modality": "Presencial · Trabajo teórico (ponencias) y práctico (retos empresariales)",
+        "venue": "Campus Robledo · Facultad de Minas, UNAL Medellín & Autónoma de las Américas",
+        "alliance": "Coorganización con Fundación Universitaria Autónoma de las Américas, SENA SBDC y CIE Esumer",
+        "poster": "../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__07__899ec7e54f18.jpg",
+        "about": [
+            "El Primer Encuentro Nacional de Semilleros de Investigación reunió en noviembre de 2019 a estudiantes de pregrado de la Universidad Nacional de Colombia, la Fundación Universitaria Autónoma de las Américas y universidades invitadas del país en torno a los métodos de investigación aplicados a la competitividad y gestión de organizaciones.",
+            "Se estructuró en dos fases complementarias: una jornada teórica de ponencias magistrales y socialización de avances (propuestas, proyectos en curso e investigaciones terminadas), y una jornada práctica de solución de retos empresariales con premios y candidatura a publicación en el Fondo Editorial.",
+        ],
+        "mesas": [
+            {
+                "num": "Mesa 01",
+                "title": "Modelamiento, Simulación y Optimización de Procesos",
+                "topics": [
+                    "Simulación de procesos productivos y de operaciones.",
+                    "Modelamiento matemático, optimización y diseño de instalaciones de manufactura.",
+                ],
+            },
+            {
+                "num": "Mesa 02",
+                "title": "Industria 4.0 · Smart Manufacturing",
+                "topics": [
+                    "Analítica, Internet de las Cosas (IoT), Cloud Computing y Ciberseguridad.",
+                    "Casos de implementación de herramientas de la Industria 4.0 en organizaciones reales.",
+                ],
+            },
+            {
+                "num": "Mesa 03",
+                "title": "Gestión de la Sostenibilidad en Organizaciones",
+                "topics": [
+                    "Estrategia corporativa, procesos de transformación estratégica y Ética y RSE.",
+                    "Objetivos de Desarrollo Sostenible, resiliencia y economía circular.",
+                ],
+            },
+            {
+                "num": "Mesa 04",
+                "title": "Diseño y Gestión de Organizaciones",
+                "topics": [
+                    "Inteligencia de negocios, análisis de decisiones bajo incertidumbre y gestión del riesgo.",
+                    "Pensamiento creativo, tendencias en diseño organizacional y gestión de la innovación.",
+                ],
+            },
+            {
+                "num": "Mesa 05",
+                "title": "Emprendimiento · Lean Startup",
+                "topics": [
+                    "Spin-offs, modelos de emprendimiento y ecosistemas de innovación.",
+                    "Formación en emprendimiento, New Ventures y casos de éxito empresarial.",
+                ],
+            },
+        ],
+    },
 }
+
+DEFAULT_DOCUMENTARY_PHOTOS = [
+    "images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__03__ac951ddd006a.jpg",
+    "images/unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__04__3d53a84daed8.jpg",
+    "images/unal-edu-co__prexiaforum__home__vi-eisi-2025__04__6fd6c9c52f62.jpg",
+    "images/unal-edu-co__prexiaforum__home__vi-eisi-2025__participa-2025__03__88ebbf9e5d3a.jpg",
+    "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada__04__cff182fe819d.jpg",
+    "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__03__0bb63af26d05.jpg",
+]
 
 CSS = """
 :root {
@@ -414,6 +572,7 @@ html {
   scroll-behavior: smooth;
   background: var(--bg);
   color: var(--ink);
+  overflow-x: clip;
 }
 
 body {
@@ -767,6 +926,107 @@ img {
   margin-top: auto;
 }
 
+/* ── TARJETAS DE CONFERENCISTAS Y EQUIPO (RETRATOS LIMPIOS) ── */
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 28px 0 36px;
+}
+
+.speaker-card {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.speaker-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.speaker-avatar {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--field-navy);
+}
+
+.speaker-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.speaker-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.18;
+  color: var(--ink);
+  display: block;
+}
+
+.speaker-role {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint-dark);
+  display: block;
+  margin-top: 4px;
+}
+
+.speaker-bio {
+  font-size: 18px;
+  line-height: 1.58;
+  color: var(--muted);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 20px 0 36px;
+}
+
+.team-card {
+  background: var(--surface);
+  padding: 22px;
+  border-radius: var(--radius);
+}
+
+.team-card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.team-card .team-role {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint-dark);
+  margin-top: 4px;
+}
+
+.team-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
 /* ── PÁGINA ESTRUCTURADA DE EVENTO EISI ── */
 .eisi-hero {
   padding: 48px 0 56px;
@@ -1003,6 +1263,8 @@ img {
   color: var(--muted);
   margin-top: 14px;
   margin-bottom: 20px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .breadcrumb-trail span + span::before {
@@ -1023,18 +1285,20 @@ img {
 
 .page-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-size: clamp(2.5rem, 4.8vw, 4.35rem);
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
   color: var(--ink);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .meta-original {
   font-size: 14px;
   color: var(--muted);
   margin-bottom: 28px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .meta-original a {
@@ -1043,6 +1307,8 @@ img {
 
 .page-copy {
   max-width: 68ch;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .page-copy p {
@@ -1290,7 +1556,10 @@ img {
   .mesa-title,
   .mesa-card h3,
   .editorial-subhead,
-  .role-box h3 {
+  .role-box h3,
+  .speaker-name,
+  .team-card strong,
+  .eisi-hero-lead {
     font-size: 18px;
   }
 }
@@ -1310,7 +1579,7 @@ def parse_markdown(path: Path) -> tuple[list[str], list[str]]:
         if line == "## Texto extraido":
             mode = "text"
             continue
-        if line == "## Imagenes":
+        if line.startswith("## Imagenes"):
             mode = "images"
             continue
         if not line.strip():
@@ -1318,73 +1587,119 @@ def parse_markdown(path: Path) -> tuple[list[str], list[str]]:
         if mode == "text":
             lines.append(line.strip())
         elif mode == "images" and line.startswith("- "):
-            image_path = line[2:].split(" (", 1)[0].strip()
+            parts = line[2:].split(" (", 1)
+            image_path = parts[0].strip()
+            alt_label = parts[1][:-1].strip().lower() if len(parts) > 1 else ""
+            if alt_label in {"facebook", "instagram", "linkedin", "email", "youtube"}:
+                continue
             if image_path:
                 images.append(image_path)
     return lines, images
 
 
 def classify_page_images(images: list[str]) -> tuple[list[str], list[tuple[str, str]]]:
-    """Separa imágenes de contenido real vs logos de aliados, excluyendo iconos pequeños (<10KB) y banners repetidos."""
+    """Separa fotografías y afiches reales vs logos de aliados usando el hash MD5 real del archivo."""
     content_images: list[str] = []
     ally_logos: list[tuple[str, str]] = []
     seen_ally_names: set[str] = set()
-    seen_hashes: set[str] = set()
+    seen_md5s: set[str] = set()
 
     for img_rel in images:
         img_file = SOURCE_DIR / img_rel
-        stem_parts = Path(img_rel).stem.split("__")
-        img_hash = stem_parts[-1] if stem_parts else ""
-
-        if img_hash in EXCLUDED_IMAGE_HASHES:
+        if not img_file.exists():
             continue
 
-        if img_file.exists():
-            size = img_file.stat().st_size
-            if size < 10000 or size == 42819:
-                continue
+        file_bytes = img_file.read_bytes()
+        size = len(file_bytes)
+        md5 = hashlib.md5(file_bytes).hexdigest()[:12]
 
-        if img_hash in ALLY_LOGO_HASHES:
-            ally_name = ALLY_LOGO_HASHES[img_hash]
+        # Excluir íconos de redes sociales, botones decorativos, banderas y retratos (que van en .speakers-grid)
+        if md5 in EXCLUDED_IMAGE_MD5S or md5 in SPEAKER_PORTRAIT_MD5S:
+            continue
+
+        if size < 10000 or size == 42819:
+            continue
+
+        if md5 in ALLY_LOGO_MD5S:
+            ally_name = ALLY_LOGO_MD5S[md5]
             if ally_name not in seen_ally_names:
                 seen_ally_names.add(ally_name)
                 ally_logos.append((img_rel, ally_name))
             continue
 
-        if img_hash and img_hash in seen_hashes:
+        if md5 in seen_md5s:
             continue
-        if img_hash:
-            seen_hashes.add(img_hash)
+        seen_md5s.add(md5)
         content_images.append(img_rel)
 
     return content_images, ally_logos
 
 
+UI_NOISE_LINES = {
+    "organizan:",
+    "-o-",
+    "click aquí para ver el evento ¡en vivo!",
+    "click aquí para ver el evento ¡en vivo",
+    "pulsa en los siguientes titulares y despliega su contenido para más información",
+    "es",
+}
+
+
 def normalize_text_lines(lines: list[str]) -> list[str]:
     merged: list[str] = []
-    for line in lines:
-        line = " ".join(line.split())
-        if not line:
+    for raw_line in lines:
+        line = " ".join(raw_line.split())
+        if not line or line.lower() in UI_NOISE_LINES:
             continue
         if not merged:
             merged.append(line)
             continue
 
         previous = merged[-1]
+        # Si la línea es un signo de puntuación suelto o fragmento de 1-2 letras (como 'o', 'l', 'v', '.', ',')
+        if line in {".", ",", ":", ";", "!", "?"}:
+            merged[-1] = f"{previous}{line}"
+            continue
+        if len(line) <= 2 and line.islower() and not previous.endswith((".", ":", "!", "?")):
+            merged[-1] = f"{previous}{line}"
+            continue
+        if len(previous) == 1 and previous.isupper() and line[:1].islower():
+            merged[-1] = f"{previous}{line}"
+            continue
+        if len(previous) <= 2 and previous.isdigit():
+            merged[-1] = f"{previous} {line}"
+            continue
+        if len(line) <= 2 and line.isdigit():
+            merged[-1] = f"{previous} {line}"
+            continue
+
         should_merge = False
         if (
             previous
             and not previous.endswith((".", ":", "?", "!"))
             and not previous.isupper()
-            and (line[:1].islower() or len(previous) < 26)
+            and (line[:1].islower() or line.startswith((",", ".", ";", ")")))
         ):
             should_merge = True
 
         if should_merge:
-            merged[-1] = f"{previous} {line}"
+            sep = "" if line.startswith((",", ".", ";", ")")) else " "
+            merged[-1] = f"{previous}{sep}{line}"
         else:
             merged.append(line)
     return merged
+
+
+def clean_display_title(raw_title: str) -> str:
+    """Elimina el prefijo redundante 'Semillero Prexia - ' para titulares concisos."""
+    cleaned = raw_title.strip()
+    if cleaned.lower().startswith("semillero prexia - "):
+        cleaned = cleaned[len("semillero prexia - "):].strip()
+    if cleaned.lower() == "es":
+        return "Líneas Prexia (ES)"
+    if cleaned.lower() == "galeria":
+        return "Galería 2019"
+    return cleaned
 
 
 def title_case_from_segment(segment: str) -> str:
@@ -1398,6 +1713,32 @@ def page_output_name(slug: str) -> str:
 
 def page_href(slug: str) -> str:
     return f"pages/{page_output_name(slug)}"
+
+
+def render_speakers_section(speakers: list[dict], heading: str = "Conferencistas Magistrales Invitados") -> str:
+    cards = "".join(
+        f"""
+        <article class="speaker-card">
+          <div class="speaker-header">
+            <div class="speaker-avatar">
+              <img src="{html.escape(sp['img'])}" alt="{html.escape(sp['name'])}" loading="lazy">
+            </div>
+            <div>
+              <strong class="speaker-name">{html.escape(sp['name'])}</strong>
+              <span class="speaker-role">{html.escape(sp['role'])}</span>
+            </div>
+          </div>
+          <p class="speaker-bio">{html.escape(sp['bio'])}</p>
+        </article>
+        """
+        for sp in speakers
+    )
+    return f"""
+    <section class="section" style="padding:28px 0;">
+      <h2 class="editorial-subhead" style="margin-top:0;">{html.escape(heading)}</h2>
+      <div class="speakers-grid">{cards}</div>
+    </section>
+    """
 
 
 def render_allies_strip(ally_logos: list[tuple[str, str]], prefix: str = "../") -> str:
@@ -1427,6 +1768,20 @@ def render_allies_strip(ally_logos: list[tuple[str, str]], prefix: str = "../") 
     """
 
 
+def ensure_min_photos(photos: list[str], min_count: int = 4, exclude_name: str = "") -> list[str]:
+    result = list(photos)
+    existing_names = {Path(p).name for p in result}
+    if exclude_name:
+        existing_names.add(exclude_name)
+    for fallback in DEFAULT_DOCUMENTARY_PHOTOS:
+        if len(result) >= min_count:
+            break
+        if Path(fallback).name not in existing_names:
+            result.append(fallback)
+            existing_names.add(Path(fallback).name)
+    return result
+
+
 def build_eisi_event_page(page: dict, children: list[dict], content_images: list[str], ally_logos: list[tuple[str, str]]) -> str:
     slug = page["slug"]
     info = EISI_STRUCTURED_DATA[slug]
@@ -1440,8 +1795,9 @@ def build_eisi_event_page(page: dict, children: list[dict], content_images: list
 
     child_pills = []
     for child in children:
+        short_child = clean_display_title(child["title"])
         child_pills.append(
-            f'<a class="eisi-pill" href="{html.escape(page_output_name(child["slug"]))}">{html.escape(child["title"])} →</a>'
+            f'<a class="eisi-pill" href="{html.escape(page_output_name(child["slug"]))}">{html.escape(short_child)} →</a>'
         )
 
     about_paragraphs = "".join(f"<p>{html.escape(p)}</p>" for p in info["about"])
@@ -1459,22 +1815,37 @@ def build_eisi_event_page(page: dict, children: list[dict], content_images: list
             """
         )
 
+    speakers_block = ""
+    if slug == "unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020":
+        speakers_block = f'<div class="shell">{render_speakers_section(SPEAKERS_2020)}</div>'
+    elif slug == "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019":
+        speakers_block = f'<div class="shell">{render_speakers_section(SPEAKERS_2019, "Conferencistas Invitados · Encuentro Nacional 2019")}</div>'
+
     extra_photos = [img for img in content_images if Path(img).name not in Path(info["poster"]).name]
-    gallery_html = ""
-    if extra_photos:
-        items = "".join(
-            f'<a class="gallery-thumb" href="../{html.escape(img)}" target="_blank" rel="noreferrer"><img src="../{html.escape(img)}" alt="{html.escape(page["title"])}" loading="lazy"></a>'
-            for img in extra_photos
-        )
-        gallery_html = f"""
-        <section class="section">
-          <div class="section-header">
-            <h2 class="section-title">Memoria gráfica.</h2>
-            <p class="section-desc">Afiches, conferencistas y registro visual oficial de la edición ({len(extra_photos)} recursos).</p>
-          </div>
-          <div class="gallery-grid">{items}</div>
-        </section>
-        """
+    if slug == "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019":
+        extra_photos = [
+            "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__02__87b31aedafe3.jpg",
+            "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__03__0bb63af26d05.jpg",
+            "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__04__89e65143a6a4.jpg",
+            "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__05__65a65f68e794.jpg",
+            "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__06__08ae494069e0.jpg",
+            "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__08__312ee1b5bd7a.jpg",
+        ]
+    extra_photos = ensure_min_photos(extra_photos, min_count=4, exclude_name=Path(info["poster"]).name)
+
+    items = "".join(
+        f'<a class="gallery-thumb" href="../{html.escape(img)}" target="_blank" rel="noreferrer"><img src="../{html.escape(img)}" alt="{html.escape(page["title"])}" loading="lazy"></a>'
+        for img in extra_photos
+    )
+    gallery_html = f"""
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Memoria gráfica.</h2>
+        <p class="section-desc">Afiches, sesiones académicas y registro visual oficial de la edición ({len(extra_photos)} recursos).</p>
+      </div>
+      <div class="gallery-grid">{items}</div>
+    </section>
+    """
 
     subpages_cards = ""
     if children:
@@ -1482,11 +1853,11 @@ def build_eisi_event_page(page: dict, children: list[dict], content_images: list
             f"""
             <article class="card span-4">
               <div>
-                <strong class="card-title" style="display:block;"><a href="{html.escape(page_output_name(child['slug']))}">{html.escape(child['title'])}</a></strong>
+                <strong class="card-title" style="display:block;"><a href="{html.escape(page_output_name(child['slug']))}">{html.escape(clean_display_title(child['title']))}</a></strong>
                 <div class="card-meta-tag">Subpágina oficial de la edición</div>
-                <p class="card-excerpt">Consulta el detalle completo de {html.escape(child['title'].lower())} correspondiente a esta edición del Encuentro Internacional EISI.</p>
+                <p class="card-excerpt">Consulta el detalle completo de {html.escape(clean_display_title(child['title']).lower())} correspondiente a esta edición del Encuentro.</p>
               </div>
-              <a class="btn-card" href="{html.escape(page_output_name(child['slug']))}">Abrir {html.escape(child['title'])} →</a>
+              <a class="btn-card" href="{html.escape(page_output_name(child['slug']))}">Abrir {html.escape(clean_display_title(child['title']))} →</a>
             </article>
             """
             for child in children
@@ -1548,7 +1919,7 @@ def build_eisi_event_page(page: dict, children: list[dict], content_images: list
       <div class="eisi-poster-showcase">
         <img src="{html.escape(info['poster'])}" alt="{html.escape(page['title'])}">
         <div class="eisi-poster-caption">
-          <span>Afiche / Imagen oficial · {html.escape(page['title'])}</span>
+          <span>Afiche / Imagen oficial · {html.escape(clean_display_title(page['title']))}</span>
           <a href="{html.escape(info['poster'])}" target="_blank" rel="noreferrer" style="color:var(--mint-light);text-decoration:underline;">Ver tamaño completo →</a>
         </div>
       </div>
@@ -1588,6 +1959,8 @@ def build_eisi_event_page(page: dict, children: list[dict], content_images: list
     </div>
   </section>
 
+  {speakers_block}
+
   {subpages_cards}
 
   <div class="shell" style="padding-bottom:64px;">
@@ -1596,6 +1969,143 @@ def build_eisi_event_page(page: dict, children: list[dict], content_images: list
   </div>
 </main>
 """
+
+
+def build_lineas_hub_content() -> str:
+    """Contenido editorial estructurado para el hub de las 4 Líneas PREXIA."""
+    return """
+    <p>
+      PREXIA articula la teoría de la ingeniería con la práctica organizacional a través de <strong>cuatro líneas de acción</strong> integradas por estudiantes de Ingeniería Industrial, Ingeniería Administrativa y carreras afines de la Facultad de Minas (UNAL Sede Medellín).
+    </p>
+    <div class="grid-cards" style="margin: 28px 0 36px;">
+      <article class="card span-6">
+        <div>
+          <div class="card-cover"><img src="../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada__04__cff182fe819d.jpg" alt="Prexia Consultoría" loading="lazy"></div>
+          <strong class="card-title" style="display:block;"><a href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada.html">Prexia Consultoría</a></strong>
+          <div class="card-meta-tag">Apoyo a la Productividad de MiPymes</div>
+          <p class="card-excerpt">Diagnóstico e intervención empresarial en Finanzas, Mercadeo, Operaciones y Talento Humano bajo convenios con CFA, Fábricas de Productividad y Laboratorios UNAL. Evaluada mediante el Sistema de Puntos Prexia (PP).</p>
+        </div>
+        <a class="btn-card" href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada.html">Explorar línea de Consultoría →</a>
+      </article>
+      <article class="card span-6">
+        <div>
+          <div class="card-cover"><img src="../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__03__0bb63af26d05.jpg" alt="Prexia Investiga" loading="lazy"></div>
+          <strong class="card-title" style="display:block;"><a href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga.html">Prexia Investiga</a></strong>
+          <div class="card-meta-tag">Formación Investigativa y Divulgación Científica</div>
+          <p class="card-excerpt">Desarrollo de proyectos propios, vínculo docente-estudiante con grupos de investigación de la Facultad de Minas y organización anual del Encuentro Internacional de Semilleros EISI.</p>
+        </div>
+        <a class="btn-card" href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga.html">Explorar línea de Investigación →</a>
+      </article>
+      <article class="card span-6">
+        <div>
+          <div class="card-cover"><img src="../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-emprende__02__c3ff7b88ef35.jpg" alt="Prexia Emprende" loading="lazy"></div>
+          <strong class="card-title" style="display:block;"><a href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-emprende.html">Prexia Emprende</a></strong>
+          <div class="card-meta-tag">Gestión del Emprendimiento e Incubación</div>
+          <p class="card-excerpt">Estructuración de planes de negocio mediante células de trabajo acompañadas por docentes y gestión del Observatorio de Emprendimiento del ecosistema local.</p>
+        </div>
+        <a class="btn-card" href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-emprende.html">Explorar línea de Emprendimiento →</a>
+      </article>
+      <article class="card span-6">
+        <div>
+          <div class="card-cover"><img src="../images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-comunica__02__ef47c35ea038.jpg" alt="Prexia Comunica" loading="lazy"></div>
+          <strong class="card-title" style="display:block;"><a href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-comunica.html">Prexia Comunica</a></strong>
+          <div class="card-meta-tag">Divulgación, Visitas Técnicas y Eventos</div>
+          <p class="card-excerpt">Gestión de canales de comunicación estratégica, visitas empresariales a plantas industriales (como Eurocerámica), foros académicos, capacitaciones e integraciones.</p>
+        </div>
+        <a class="btn-card" href="unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-comunica.html">Explorar línea de Comunicaciones →</a>
+      </article>
+    </div>
+    """
+
+
+def build_creditos_2025_content() -> str:
+    """Renderiza el directorio estructurado del Equipo PREXIA y Comité Académico Internacional 2025."""
+    return """
+    <p>
+      El VI Encuentro Internacional de Semilleros de Investigación (VI EISI 2025) es posible gracias al trabajo articulado de la dirección docente, la coordinación estudiantil del Semillero PREXIA, el Comité Académico Internacional (Colombia–Brasil) y las redes de semilleros aliadas.
+    </p>
+    <h2 class="editorial-subhead">Dirección y Equipo Coordinador PREXIA</h2>
+    <div class="team-grid">
+      <article class="team-card">
+        <strong>Docente José Ignacio Maya Guerra</strong>
+        <span class="team-role">Director y Fundador del Semillero PREXIA</span>
+        <p>Departamento de Ingeniería de la Organización · Facultad de Minas, UNAL Sede Medellín.</p>
+      </article>
+      <article class="team-card">
+        <strong>Héctor Daniel Figueroa</strong>
+        <span class="team-role">Coordinador General PREXIA</span>
+        <p>Estudiante de Ingeniería Administrativa · Facultad de Minas, UNAL Sede Medellín.</p>
+      </article>
+      <article class="team-card">
+        <strong>Alejandra Jiménez Antequera</strong>
+        <span class="team-role">Integrante · Línea Prexia Investiga</span>
+        <p>Coordinación logística y académica del Encuentro Internacional de Semilleros.</p>
+      </article>
+      <article class="team-card">
+        <strong>Cristhian Castaño García</strong>
+        <span class="team-role">Integrante · Comité Organizador</span>
+        <p>Estudiante de Ingeniería Industrial · Facultad de Minas, UNAL Sede Medellín.</p>
+      </article>
+      <article class="team-card">
+        <strong>Andrea Henao Arroyave</strong>
+        <span class="team-role">Integrante · Comité Organizador</span>
+        <p>Semillero PREXIA · Facultad de Minas, UNAL Sede Medellín.</p>
+      </article>
+      <article class="team-card">
+        <strong>María Alejandra Zuleta &amp; Jenny Alejandra Upegui</strong>
+        <span class="team-role">Integrantes · Comité Organizador</span>
+        <p>Gestión de comunicaciones, relacionamiento y soporte a ponentes.</p>
+      </article>
+    </div>
+
+    <h2 class="editorial-subhead">Dirección Internacional &amp; Comité Científico</h2>
+    <div class="team-grid">
+      <article class="team-card">
+        <strong>Docente Katia Alexandre Maya</strong>
+        <span class="team-role">Directora y Fundadora · Instituto A Nau Ciranda Sinparedes</span>
+        <p>Articulación binacional ANCSP Brasil–Colômbia y coorganización EICCIE 2025.</p>
+      </article>
+      <article class="team-card">
+        <strong>Dr. Ernesto Augusto Garbe</strong>
+        <span class="team-role">Jefe del Departamento de Tecnología Industrial</span>
+        <p>Universidade do Estado de Santa Catarina (UDESC, Brasil).</p>
+      </article>
+      <article class="team-card">
+        <strong>Dr. Adriano dos Reis Lucente</strong>
+        <span class="team-role">Docente · Depto. de Economía, Administración y Educación</span>
+        <p>Universidade Estadual Paulista (UNESP Jaboticabal, São Paulo, Brasil).</p>
+      </article>
+      <article class="team-card">
+        <strong>Dra. Natalia Andrea Cano Londoño</strong>
+        <span class="team-role">PhD en Recursos Hidráulicos · MSc Medio Ambiente</span>
+        <p>Líneas: Desarrollo sostenible y Análisis de Ciclo de Vida · UNAL Medellín.</p>
+      </article>
+      <article class="team-card">
+        <strong>Dr. Daimer Higuita López</strong>
+        <span class="team-role">Director Área Curricular Ing. Administrativa e Industrial</span>
+        <p>Facultad de Minas · Universidad Nacional de Colombia, Sede Medellín.</p>
+      </article>
+      <article class="team-card">
+        <strong>Docente Paola Andrea Ortiz &amp; Dra. Natalia Marulanda Grisales</strong>
+        <span class="team-role">Comité Evaluador · UNAL &amp; Uniminuto</span>
+        <p>Responsabilidad Social Empresarial, Gestión del Conocimiento, Logística e Innovación.</p>
+      </article>
+    </div>
+
+    <h2 class="editorial-subhead">Grupos Estudiantiles y Semilleros Invitados</h2>
+    <div class="team-grid">
+      <article class="team-card">
+        <strong>Grupo Estudiantil TEMS</strong>
+        <span class="team-role">Universidad Nacional de Colombia · Sede Bogotá</span>
+        <p>Habilidades blandas, promoción, entrenamiento de equipos y trabajo colaborativo.</p>
+      </article>
+      <article class="team-card">
+        <strong>Semillero SIGEHAS</strong>
+        <span class="team-role">Institución Universitaria Pascual Bravo · Medellín</span>
+        <p>Semillero de Investigación en Gestión Empresarial y Habilidades Sociales.</p>
+      </article>
+    </div>
+    """
 
 
 def build_evaluation_page(root_prefix: str = "../") -> str:
@@ -1975,7 +2485,7 @@ def build_site() -> None:
         isotipo_footer = """<svg width="26" height="26" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#84fbaa" stroke-width="4" stroke-linecap="round"/><path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#60eaf0" stroke-width="4" stroke-linecap="round"/><path d="M16 16 C20 28 28 36 44 44" stroke="#84fbaa" stroke-width="2.8" stroke-linecap="round"/><path d="M44 16 C40 28 32 36 16 44" stroke="#60eaf0" stroke-width="2.8" stroke-linecap="round"/></svg>"""
         nav = f"""
 <header class="topbar">
-  <div class="shell topbar-inner">
+  <div class="shell topbar-inner" role="navigation" aria-label="Navegación principal">
     <a class="brand" href="{root_prefix}../index.html">
       {isotipo_header}
       <span>PRE<em>XIA</em></span>
@@ -2042,7 +2552,7 @@ def build_site() -> None:
         }}
       }});
     }}, {{ threshold: 0.08 }});
-    document.querySelectorAll('.section, .mesa-card, .role-box, .card, .gallery-thumb, .allies-strip-section, .sidebar-box').forEach(el => {{
+    document.querySelectorAll('.section, .mesa-card, .role-box, .card, .gallery-thumb, .allies-strip-section, .sidebar-box, .speaker-card, .team-card').forEach(el => {{
       el.classList.add('reveal-item');
       observer.observe(el);
     }});
@@ -2056,6 +2566,12 @@ def build_site() -> None:
     eval_page_html = layout("Sistema de Evaluación Prexia (Puntos y Multiplicadores)", build_evaluation_page("../"), root_prefix="../")
     (OUTPUT_DIR / "pages" / "sistema-evaluacion-prexia.html").write_text(eval_page_html, encoding="utf-8")
 
+    # Curated fallback covers for collection cards so no collection uses an icon
+    COLLECTION_COVER_FALLBACKS = {
+        "unal-edu-co__prexiaforum__home": "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada__05__250ebb187d42.jpg",
+        "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia": "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada__04__cff182fe819d.jpg",
+    }
+
     # Build catalog home page (site/index.html)
     home_page = page_by_slug["unal-edu-co__prexiaforum__home"]
     home_lines, _ = parsed_content[home_page["slug"]]
@@ -2065,18 +2581,23 @@ def build_site() -> None:
         label = "Inicio" if group == "home" else title_case_from_segment(group)
         anchor_page = sorted(items, key=lambda item: item["url"].count("/"))[0]
         c_imgs, _ = classified_images[anchor_page["slug"]]
-        cover_src = c_imgs[0] if c_imgs else "assets/photos/vi-eisi-2025.jpg"
+        cover_src = COLLECTION_COVER_FALLBACKS.get(anchor_page["slug"], c_imgs[0] if c_imgs else "assets/photos/vi-eisi-2025.jpg")
         if anchor_page["slug"] in EISI_STRUCTURED_DATA:
             cover_src = EISI_STRUCTURED_DATA[anchor_page["slug"]]["poster"].lstrip("./")
+        excerpt_text = (
+            "Explora las 4 líneas de acción del semillero: Consultoría a MiPymes, Investigación, Emprendimiento y Comunicaciones."
+            if anchor_page["slug"] == "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia"
+            else (parsed_content[anchor_page["slug"]][0][0][:170] if parsed_content[anchor_page["slug"]][0] else "Contenido oficial migrado desde Google Sites.")
+        )
         cover = f'<div class="card-cover"><img src="{html.escape(cover_src)}" alt="{html.escape(anchor_page["title"])}" loading="lazy"></div>'
         collection_cards.append(
             f"""
 <article class="card span-4">
   <div>
     {cover}
-    <h3 class="card-title"><a href="{html.escape(page_href(anchor_page["slug"]))}">{html.escape(anchor_page["title"])}</a></h3>
+    <h3 class="card-title"><a href="{html.escape(page_href(anchor_page["slug"]))}">{html.escape(clean_display_title(anchor_page["title"]))}</a></h3>
     <div class="card-meta-tag">{len(items)} páginas · {html.escape(label)}</div>
-    <p class="card-excerpt">{html.escape(parsed_content[anchor_page["slug"]][0][0][:170] if parsed_content[anchor_page["slug"]][0] else "Contenido migrado desde Google Sites.")}</p>
+    <p class="card-excerpt">{html.escape(excerpt_text)}</p>
   </div>
   <a class="btn-card" href="{html.escape(page_href(anchor_page["slug"]))}">Consultar colección →</a>
 </article>
@@ -2087,10 +2608,14 @@ def build_site() -> None:
     for page in sorted(pages, key=lambda item: (item["url"].count("/"), item["title"])):
         lines, _ = parsed_content[page["slug"]]
         c_imgs, _ = classified_images[page["slug"]]
-        excerpt = " ".join(lines[:3]) or "Contenido oficial migrado desde Google Sites PREXIA."
+        excerpt = " ".join(lines[:3]) or "Sección oficial migrada del archivo histórico de PREXIA UNAL."
+        if page["slug"] in {"unal-edu-co__prexiaforum__home__l-c3-adneas-prexia", "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__es"}:
+            excerpt = "Estructura organizacional de PREXIA en cuatro líneas estratégicas: Consultoría, Investigación, Emprendimiento y Comunicaciones."
         cover_src = c_imgs[0] if c_imgs else ""
         if page["slug"] in EISI_STRUCTURED_DATA:
             cover_src = EISI_STRUCTURED_DATA[page["slug"]]["poster"].lstrip("./")
+        elif page["slug"] in COLLECTION_COVER_FALLBACKS:
+            cover_src = COLLECTION_COVER_FALLBACKS[page["slug"]]
         cover = f'<div class="card-cover"><img src="{html.escape(cover_src)}" alt="{html.escape(page["title"])}" loading="lazy"></div>' if cover_src else ""
         path_parts = [part for part in urlparse(page["url"]).path.split("/") if part]
         top_group = path_parts[3] if len(path_parts) > 3 else "home"
@@ -2100,7 +2625,7 @@ def build_site() -> None:
 <article class="card span-6 dir-card" data-group="{html.escape(top_group)}" data-search="{html.escape((page['title'] + ' ' + label + ' ' + excerpt).lower())}">
   <div>
     {cover}
-    <h3 class="card-title"><a href="{html.escape(page_href(page["slug"]))}">{html.escape(page["title"])}</a></h3>
+    <h3 class="card-title"><a href="{html.escape(page_href(page["slug"]))}">{html.escape(clean_display_title(page["title"]))}</a></h3>
     <div class="card-meta-tag">{html.escape(label)}</div>
     <p class="card-excerpt">{html.escape(excerpt[:220])}</p>
   </div>
@@ -2218,7 +2743,7 @@ def build_site() -> None:
             if nearest_parent_url(child["url"]) == page["url"]
         ]
 
-        # Rich structured layout for the 6 main EISI event pages (2020-2025)
+        # Rich structured layout for the EISI event pages (2019-2025)
         if slug in EISI_STRUCTURED_DATA:
             eisi_body = build_eisi_event_page(page, direct_children, content_images, ally_logos)
             (OUTPUT_DIR / "pages" / page_output_name(slug)).write_text(
@@ -2246,33 +2771,80 @@ def build_site() -> None:
                 candidate_parent = nearest_parent_url(current["url"])
                 current = page_by_url[candidate_parent] if candidate_parent else None
             for item in reversed(lineage):
-                breadcrumbs.append(f'<span><a href="{html.escape(page_output_name(item["slug"]))}">{html.escape(item["title"])}</a></span>')
-        breadcrumbs.append(f"<span>{html.escape(page['title'])}</span>")
+                breadcrumbs.append(f'<span><a href="{html.escape(page_output_name(item["slug"]))}">{html.escape(clean_display_title(item["title"]))}</a></span>')
+        breadcrumbs.append(f"<span>{html.escape(clean_display_title(page['title']))}</span>")
 
-        content_blocks = []
-        for line in lines:
-            if line.upper().startswith("ORGANIZAN"):
-                continue
-            if len(line) < 52 and not line.endswith(".") and not line.endswith(":"):
-                content_blocks.append(f'<h3 class="editorial-subhead">{html.escape(line)}</h3>')
-            else:
-                content_blocks.append(f"<p>{html.escape(line)}</p>")
-
-        gallery = ""
-        if content_images:
-            gallery_items = "".join(
-                f'<a class="gallery-thumb" href="../{html.escape(image)}" target="_blank" rel="noreferrer"><img src="../{html.escape(image)}" alt="{html.escape(page["title"])}" loading="lazy"></a>'
-                for image in content_images
+        # Specialized structured content for specific subpages
+        custom_body_html = ""
+        if slug in {"unal-edu-co__prexiaforum__home__l-c3-adneas-prexia", "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__es"}:
+            custom_body_html = build_lineas_hub_content()
+        elif slug == "unal-edu-co__prexiaforum__home__vi-eisi-2025__cr-c3-a9ditos-2025":
+            custom_body_html = build_creditos_2025_content()
+        elif slug == "unal-edu-co__prexiaforum__home__i-encuentro-internacional-de-semilleros-2020__conferencistas":
+            custom_body_html = (
+                "<p>Conferencistas magistrales internacionales invitados a la edición fundacional del Encuentro Internacional de Semilleros de Investigación (I EISI 2020).</p>"
+                + render_speakers_section(SPEAKERS_2020)
             )
-            gallery = f"""
+        elif slug == "unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__evento-2019__galeria":
+            custom_body_html = (
+                "<p>Registro fotográfico oficial del Primer Encuentro Nacional de Semilleros de Investigación (28 y 29 de noviembre de 2019 · Campus Robledo, Facultad de Minas UNAL Sede Medellín).</p>"
+            )
+            content_images = [
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__07__899ec7e54f18.jpg",
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__02__87b31aedafe3.jpg",
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__03__0bb63af26d05.jpg",
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__04__89e65143a6a4.jpg",
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__05__65a65f68e794.jpg",
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__06__08ae494069e0.jpg",
+                "images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-investiga__08__312ee1b5bd7a.jpg",
+            ]
+        else:
+            content_blocks = []
+            # Si es una subpágina de Mesas Temáticas de alguna edición EISI, mostrar también las tarjetas estructuradas de las mesas
+            if "mesas-tem-c3-a1ticas" in slug and parent and parent["slug"] in EISI_STRUCTURED_DATA:
+                parent_info = EISI_STRUCTURED_DATA[parent["slug"]]
+                mcards = []
+                for mesa in parent_info["mesas"]:
+                    topics_html = "".join(f"<li>{html.escape(t)}</li>" for t in mesa["topics"])
+                    mcards.append(
+                        f"""
+                        <article class="mesa-card">
+                          <strong class="mesa-title">{html.escape(mesa['title'])}</strong>
+                          <div class="mesa-num">{html.escape(mesa['num'])}</div>
+                          <ul class="mesa-topics">{topics_html}</ul>
+                        </article>
+                        """
+                    )
+                content_blocks.append(f'<div class="mesas-grid" style="margin-bottom:36px;">{"".join(mcards)}</div>')
+
+            for line in lines:
+                if line.upper().startswith("ORGANIZAN"):
+                    continue
+                if len(line) < 52 and not line.endswith(".") and not line.endswith(":"):
+                    content_blocks.append(f'<h3 class="editorial-subhead">{html.escape(line)}</h3>')
+                else:
+                    content_blocks.append(f"<p>{html.escape(line)}</p>")
+
+            if not content_blocks and parent:
+                content_blocks.append(
+                    f'<p>Consulta los recursos gráficos oficiales y la programación completa en la página principal de <a href="{html.escape(page_output_name(parent["slug"]))}" style="text-decoration:underline;font-weight:700;">{html.escape(clean_display_title(parent["title"]))}</a>.</p>'
+                )
+            custom_body_html = "".join(content_blocks)
+
+        display_photos = ensure_min_photos(content_images, min_count=4)
+        gallery_items = "".join(
+            f'<a class="gallery-thumb" href="../{html.escape(image)}" target="_blank" rel="noreferrer"><img src="../{html.escape(image)}" alt="{html.escape(clean_display_title(page["title"]))}" loading="lazy"></a>'
+            for image in display_photos
+        )
+        gallery = f"""
 <section class="gallery-section">
-  <h3 class="editorial-subhead">Afiches, fotografías y recursos gráficos ({len(content_images)})</h3>
+  <h3 class="editorial-subhead">Afiches, fotografías y registro visual ({len(display_photos)})</h3>
   <div class="gallery-grid">{gallery_items}</div>
 </section>
 """
 
         child_links = [
-            f'<a class="sidebar-nav-item" href="{html.escape(page_output_name(child["slug"]))}">{html.escape(child["title"])}</a>'
+            f'<a class="sidebar-nav-item" href="{html.escape(page_output_name(child["slug"]))}">{html.escape(clean_display_title(child["title"]))}</a>'
             for child in direct_children
         ]
 
@@ -2280,7 +2852,7 @@ def build_site() -> None:
         for sibling in siblings:
             active_class = " active" if sibling["slug"] == slug else ""
             sibling_links.append(
-                f'<a class="sidebar-nav-item{active_class}" href="{html.escape(page_output_name(sibling["slug"]))}">{html.escape(sibling["title"])}</a>'
+                f'<a class="sidebar-nav-item{active_class}" href="{html.escape(page_output_name(sibling["slug"]))}">{html.escape(clean_display_title(sibling["title"]))}</a>'
             )
 
         eisi_bar = ""
@@ -2297,15 +2869,19 @@ def build_site() -> None:
 </nav>
 """
 
+        short_h1 = clean_display_title(page["title"])
+        if not short_h1.endswith("."):
+            short_h1 = f"{short_h1}."
+
         page_body = f"""
 {eisi_bar}
 <main class="shell page-layout">
   <article class="page-article">
-    <h1 class="page-title">{html.escape(page['title'])}</h1>
+    <h1 class="page-title">{html.escape(short_h1)}</h1>
     <nav class="breadcrumb-trail" aria-label="Ruta de navegación">{''.join(breadcrumbs)}</nav>
     <p class="meta-original">Fuente oficial migrada: <a href="{html.escape(page['url'])}" target="_blank" rel="noreferrer">{html.escape(page['url'])}</a></p>
     <div class="page-copy">
-      {''.join(content_blocks)}
+      {custom_body_html}
     </div>
     {gallery}
     {render_allies_strip(ally_logos, "../")}

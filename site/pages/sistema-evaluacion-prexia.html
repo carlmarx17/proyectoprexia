@@ -13,7 +13,7 @@
 <body>
 
 <header class="topbar">
-  <div class="shell topbar-inner">
+  <div class="shell topbar-inner" role="navigation" aria-label="Navegación principal">
     <a class="brand" href="../../index.html">
       <svg width="28" height="28" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#0f652e" stroke-width="4" stroke-linecap="round"/><path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#1f1a3a" stroke-width="4" stroke-linecap="round"/><path d="M16 16 C20 28 28 36 44 44" stroke="#0f652e" stroke-width="2.8" stroke-linecap="round"/><path d="M44 16 C40 28 32 36 16 44" stroke="#1f1a3a" stroke-width="2.8" stroke-linecap="round"/></svg>
       <span>PRE<em>XIA</em></span>
@@ -381,7 +381,7 @@
         }
       });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.section, .mesa-card, .role-box, .card, .gallery-thumb, .allies-strip-section, .sidebar-box').forEach(el => {
+    document.querySelectorAll('.section, .mesa-card, .role-box, .card, .gallery-thumb, .allies-strip-section, .sidebar-box, .speaker-card, .team-card').forEach(el => {
       el.classList.add('reveal-item');
       observer.observe(el);
     });
