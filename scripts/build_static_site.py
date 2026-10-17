@@ -1459,26 +1459,530 @@ img {
   color: var(--ink);
 }
 
-/* ── TABLAS FORMALES (PDF PREXIA) ── */
+/* ── SISTEMA DE EVALUACIÓN PREXIA (INTERFAZ EJECUTIVA / CEO) ── */
+.pp-exec-hero {
+  background: var(--field-navy);
+  color: var(--field-navy-ink);
+  padding: 64px 0 72px;
+}
+
+.pp-exec-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.pp-exec-tag {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint-light);
+}
+
+.pp-exec-pdf-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s ease-out;
+}
+
+.pp-exec-pdf-link:hover {
+  color: var(--field-navy-ink);
+}
+
+.pp-exec-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 56%) 1fr;
+  gap: calc(var(--gutter) * 1.5);
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.pp-exec-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.8vw, 4.35rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.038em;
+  color: var(--field-navy-ink);
+}
+
+.pp-exec-lead {
+  font-size: 22px;
+  line-height: 1.52;
+  color: var(--field-navy-ink);
+  margin-bottom: 14px;
+}
+
+.pp-exec-sublead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--field-navy-muted);
+}
+
+.pp-kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.pp-kpi-card {
+  background: var(--field-navy-surface);
+  padding: 24px 22px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pp-kpi-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--mint-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-kpi-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--field-navy-ink);
+}
+
+.pp-kpi-desc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--field-navy-muted);
+}
+
+/* ── SIMULADOR EJECUTIVO PP (EN EL HERO / PRIMER IMPACTO) ── */
+.pp-sim-engine {
+  display: grid;
+  grid-template-columns: minmax(0, 52%) 1fr;
+  gap: var(--gutter);
+  align-items: stretch;
+  margin-top: 36px;
+}
+
+.pp-sim-controls,
+.pp-sim-output {
+  background: var(--field-navy-surface);
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pp-sim-output {
+  justify-content: space-between;
+}
+
+.pp-control-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--field-navy-ink);
+  margin-bottom: 10px;
+}
+
+.pp-level-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.pp-lvl-btn {
+  padding: 12px 10px;
+  background: var(--field-navy);
+  color: var(--field-navy-muted);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out, transform 0.15s var(--ease-out);
+}
+
+.pp-lvl-btn strong {
+  display: block;
+  font-size: 14px;
+  color: inherit;
+}
+
+.pp-lvl-btn span {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.pp-lvl-btn:hover {
+  color: var(--field-navy-ink);
+}
+
+.pp-lvl-btn.active {
+  background: var(--mint-light);
+  color: var(--ink);
+}
+
+.pp-sliders-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pp-slider-box {
+  background: var(--field-navy);
+  padding: 16px 18px;
+  border-radius: var(--radius);
+}
+
+.pp-range-slider {
+  width: 100%;
+  accent-color: var(--mint-light);
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+.pp-range-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+  color: var(--field-navy-muted);
+}
+
+.pp-range-meta strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--mint-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-mult-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pp-mult-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--field-navy);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--field-navy-ink);
+  transition: opacity 0.15s ease-out;
+}
+
+.pp-mult-item input {
+  accent-color: var(--mint-light);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.pp-mult-item em {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-light);
+  margin-left: auto;
+  padding-left: 8px;
+}
+
+.pp-ledger {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pp-ledger td {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14); /* taste-skill-ignore */
+  font-size: 18px;
+}
+
+.pp-ledger td:first-child {
+  color: var(--field-navy-muted);
+}
+
+.pp-ledger td:last-child {
+  text-align: right;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--field-navy-ink);
+}
+
+.pp-progress-wrap {
+  background: var(--field-navy);
+  padding: 16px 18px;
+  border-radius: var(--radius);
+}
+
+.pp-progress-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--field-navy-muted);
+  margin-bottom: 8px;
+}
+
+.pp-progress-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.pp-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--mint-light);
+  transform-origin: left center;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.pp-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 4px;
+}
+
+.pp-total-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.6rem);
+  font-weight: 800;
+  color: var(--mint-light);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.pp-status-box {
+  background: var(--field-navy);
+  padding: 18px 20px;
+  border-radius: var(--radius);
+}
+
+.pp-status-box strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-light);
+  margin-bottom: 6px;
+}
+
+.pp-status-box p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--field-navy-muted);
+}
+
+/* ── ARQUITECTURA DE CARRERA Y MULTIPLICADORES (4 COLUMNAS EJECUTIVAS) ── */
+.pp-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.pp-tier-col {
+  background: var(--surface);
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pp-tier-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pp-tier-badge {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-dark);
+}
+
+.pp-tier-col h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.pp-tier-role {
+  font-size: 18px;
+  line-height: 1.52;
+  color: var(--muted);
+}
+
+.pp-tier-bonuses {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.pp-bonus-row {
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+}
+
+.pp-bonus-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pp-bonus-top strong {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.pp-bonus-top em {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-bonus-row p {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ── TABLA EJECUTIVA DE AUDITORÍA QUINCENAL ── */
+.table-wrap {
+  width: 100%;
+  margin: 24px 0 36px;
+}
+
 .prexia-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 24px 0;
-  font-size: 14px;
+  font-size: 18px;
+  background: var(--bg);
+  border-radius: var(--radius);
 }
 
 .prexia-table th,
 .prexia-table td {
-  padding: 12px 14px;
+  padding: 16px 18px;
   text-align: left;
+  vertical-align: middle;
   border-bottom: 1px solid var(--line); /* taste-skill-ignore */
 }
 
 .prexia-table th {
   font-family: var(--font-display);
+  font-size: 14px;
   font-weight: 800;
   color: var(--ink);
+  background: var(--surface-alt);
+}
+
+.pp-editorial-2col {
+  display: grid;
+  grid-template-columns: minmax(0, 42%) 1fr;
+  gap: calc(var(--gutter) * 1.8);
+  align-items: start;
+}
+
+.pp-arg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pp-arg-item {
+  background: var(--bg);
+  padding: 24px 26px;
+  border-radius: var(--radius);
+}
+
+.pp-arg-item h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.pp-arg-item p {
+  font-size: 18px;
+  line-height: 1.58;
+  color: var(--muted);
+}
+
+.pp-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.pp-evidence-card {
   background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-evidence-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.pp-evidence-card figcaption {
+  padding: 14px 16px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
 }
 
 /* ── FOOTER SITIO CON ISOTIPO Y REDES ── */
@@ -1542,8 +2046,36 @@ img {
   .eisi-hero-grid,
   .roles-grid-3,
   .page-layout,
-  .archive-stats-box {
+  .archive-stats-box,
+  .pp-exec-hero-grid,
+  .pp-kpi-bar,
+  .pp-sim-engine,
+  .pp-level-pills,
+  .pp-sliders-2col,
+  .pp-matrix-grid,
+  .pp-editorial-2col,
+  .pp-evidence-grid {
     grid-template-columns: 1fr;
+  }
+  .prexia-table thead {
+    display: none;
+  }
+  .prexia-table,
+  .prexia-table tbody,
+  .prexia-table tr,
+  .prexia-table td {
+    display: block;
+    width: 100%;
+  }
+  .prexia-table tr {
+    background: var(--bg);
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: var(--radius);
+  }
+  .prexia-table td {
+    padding: 6px 0;
+    border-bottom: none;
   }
   .card.span-4,
   .card.span-6 {
@@ -1559,7 +2091,10 @@ img {
   .role-box h3,
   .speaker-name,
   .team-card strong,
-  .eisi-hero-lead {
+  .eisi-hero-lead,
+  .pp-tier-col h3,
+  .pp-arg-item h3,
+  .pp-exec-lead {
     font-size: 18px;
   }
 }
@@ -2109,289 +2644,454 @@ def build_creditos_2025_content() -> str:
 
 
 def build_evaluation_page(root_prefix: str = "../") -> str:
-    """Genera la página completa dedicada al Sistema de Evaluación Prexia (PDF)."""
+    """Genera la plataforma ejecutiva del Sistema de Evaluación Prexia (PP)."""
     return f"""
-<main class="shell page-layout">
-  <article class="page-article">
-    <h1 class="page-title">Sistema de Evaluación Prexia.</h1>
-    <nav class="breadcrumb-trail" aria-label="Ruta de navegación">
-      <span><a href="{root_prefix}index.html">Directorio</a></span>
-      <span><a href="{root_prefix}../index.html">Inicio PREXIA</a></span>
-      <span>Sistema de Evaluación (PP)</span>
-    </nav>
-    <div class="eval-hero-actions" style="margin: 20px 0 28px; display: flex; gap: 16px; flex-wrap: wrap;">
-      <a href="#simulador" class="nav-cta">Simulador de Puntos Prexia</a>
-      <a href="{root_prefix}index.html" style="display:inline-flex; align-items:center; padding:10px 20px; background:var(--surface); color:var(--ink); font-family:var(--font-display); font-size:14px; font-weight:700; border-radius:var(--radius);">Catálogo de 40 Páginas</a>
-    </div>
-    <p class="meta-original">
-      Documento oficial de gestión del rendimiento y reconocimiento formativo en la Facultad de Minas, Universidad Nacional de Colombia.
-    </p>
+<main>
+  <!-- ══ 1. HERO EJECUTIVO + KPIs DE DIRECCIÓN + SIMULADOR EN TIEMPO REAL ══ -->
+  <section class="pp-exec-hero" id="simulador">
+    <div class="shell">
+      <div class="pp-exec-hero-grid">
+        <div>
+          <h1 class="pp-exec-title">Sistema de Puntos Prexia.</h1>
+        </div>
+        <div>
+          <p class="pp-exec-lead">
+            Auditoría de impacto real, no de horas silla: medimos entregables verificables y retorno organizacional ajustados al ciclo formativo de cada consultor.
+          </p>
+          <p class="pp-exec-sublead">
+            Sustentado en Hackman &amp; Oldham y en Daniel Pink (Autonomía, Maestría y Propósito), el modelo del Plan Estratégico 2026-2 transforma las Horas Semanales Acordadas (HSA) en una curva de exigencia que crece +1% semanal hasta alcanzar el 115% en la semana 16.
+          </p>
+          <a href="{root_prefix}../Sistema%20de%20Evaluaci%C3%B3n%20Prexia%20Puntos%20y%20Multiplicadores(1).PDF" target="_blank" rel="noreferrer" class="pp-exec-pdf-link">Descargar Documento Oficial Plan 2026-2 (PDF) →</a>
+        </div>
+      </div>
 
-    <div class="page-copy">
-      <h2>1. Propósito y Fundamentación Teórica</h2>
-      <p>
-        El sistema mide el aporte de cada integrante de la línea de Consultoría en <strong>Puntos Prexia (PP)</strong>, no en horas reloj, y ajusta la exigencia al nivel de avance real de su carrera de ingeniería.
-      </p>
-      <p>
-        Medir únicamente horas presenciales en una facultad de ingeniería presenta distorsiones graves: castiga a quien cursa materias de alta exigencia (Cálculo, Álgebra Lineal, Física) cuyo tiempo libre es fragmentado, y premia la permanencia pasiva sin entregables concretos.
-      </p>
-      <ul>
-        <li><strong>Teoría de las Características del Puesto (Hackman &amp; Oldham):</strong> Estructuración de tareas con significado claro, autonomía en la ejecución y retroalimentación directa por resultados.</li>
-        <li><strong>Motivación Intrínseca (Daniel Pink):</strong> Tres palancas centrales: <em>Autonomía</em> (gestión de tiempos acordados), <em>Maestría</em> (crecimiento de rol formativo) y <em>Propósito</em> (impacto directo en organizaciones reales).</li>
-      </ul>
+      <!-- KPIs EJECUTIVOS DEL SISTEMA -->
+      <div class="pp-kpi-bar">
+        <div class="pp-kpi-card">
+          <span class="pp-kpi-num">100 PP</span>
+          <strong class="pp-kpi-title">Línea Base por HSA</strong>
+          <span class="pp-kpi-desc">Conversión directa: 1 Hora Semanal Acordada equivale a 100 Puntos Prexia base.</span>
+        </div>
+        <div class="pp-kpi-card">
+          <span class="pp-kpi-num">115%</span>
+          <strong class="pp-kpi-title">Meta en Semana 16</strong>
+          <span class="pp-kpi-desc">Regla del +1% semanal: crecimiento continuo cubierto con calidad, no con más horas.</span>
+        </div>
+        <div class="pp-kpi-card">
+          <span class="pp-kpi-num">+10%</span>
+          <strong class="pp-kpi-title">Bono Máximo de Impacto</strong>
+          <span class="pp-kpi-desc">Multiplicadores de +2% a +10% ligados a indicadores reales del Plan 2026-2.</span>
+        </div>
+        <div class="pp-kpi-card">
+          <span class="pp-kpi-num">15 días</span>
+          <strong class="pp-kpi-title">Ciclo de Auditoría</strong>
+          <span class="pp-kpi-desc">Liquidación quincenal en matriz ejecutiva para optimizar la carga del comité evaluador.</span>
+        </div>
+      </div>
 
-      <h2>2. Los Cuatro Niveles de Avance de Carrera</h2>
-      <p>
-        En planes curriculares de diez semestres (160 a 180 créditos), el perfil del estudiante evoluciona profundamente. La exigencia se clasifica en cuatro ciclos de formación:
-      </p>
-
-      <table class="prexia-table">
-        <thead>
-          <tr>
-            <th>Nivel</th>
-            <th>Avance (%)</th>
-            <th>Semestres</th>
-            <th>Rol Formativo</th>
-            <th>Tipo de Aporte Esperado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Nivel 1: Fundamentación</strong></td>
-            <td>0% a 25%</td>
-            <td>1 a 2</td>
-            <td>Operativo</td>
-            <td>Tareas operativas cortas, apoyo logístico a eventos, recopilación de cápsulas de conocimiento y difusión.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 2: Transición</strong></td>
-            <td>26% a 50%</td>
-            <td>3 a 5</td>
-            <td>Gestor</td>
-            <td>Liderazgo en mesas temáticas, marketing digital, eventos de bienestar, comunidad y simulaciones de ventas.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 3: Profesionalización</strong></td>
-            <td>51% a 75%</td>
-            <td>6 a 8</td>
-            <td>Consultor Junior</td>
-            <td>Diagnóstico empresarial a MiPymes, diseño curricular de casos de simulación, analítica y meta del 80% de productividad de línea.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 4: Cierre y Proyección</strong></td>
-            <td>&gt; 75%</td>
-            <td>9 a 10</td>
-            <td>Líder</td>
-            <td>Gerencia de proyectos, mentoría a pares, enlace con expertos externos y acuerdos de retribución sobre impacto económico.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>3. Curva Semanal Progresiva de Metas</h2>
-      <p>
-        Al inicio de cada semestre, cada estudiante suscribe un pacto horario voluntario (POA). La meta base semanal de cada integrante nace de esa concertación: <strong>1 Hora Pactada = 100 Puntos Prexia (PP) base por semana</strong> (ejemplo: 4 horas semanales pactadas = 400 PP base).
-      </p>
-      <p>
-        La meta sube 1% de la base cada semana lectiva hasta alcanzar el <strong>110% en la semana diez</strong> (cierre de semestre). Para cubrir ese incremento sin trabajar más horas reloj, los integrantes activan multiplicadores de calidad.
-      </p>
-
-      <h2>4. Matriz Oficial de Factores Multiplicadores</h2>
-      <table class="prexia-table">
-        <thead>
-          <tr>
-            <th>Nivel</th>
-            <th>Multiplicador</th>
-            <th>Bono</th>
-            <th>Criterio y Condición de Acreditación</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Nivel 1</strong></td>
-            <td>Excelencia en Contenido</td>
-            <td>+3%</td>
-            <td>Calendario de publicaciones cumplido al 100% sin retrasos ni objeciones de fondo.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 1</strong></td>
-            <td>Generación de Valor</td>
-            <td>+3%</td>
-            <td>Cada cápsula de conocimiento adicional documentada, editada y publicada.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 1</strong></td>
-            <td>Cultura Consultor</td>
-            <td>+2%</td>
-            <td>Participación en el diseño de material pedagógico sobre la cultura PREXIA.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 2</strong></td>
-            <td>Tracción Web y Redes</td>
-            <td>+3%</td>
-            <td>Crecimiento medido de audiencia en canales del semillero superior al 10%.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 2</strong></td>
-            <td>Poder de Convocatoria</td>
-            <td>+3%</td>
-            <td>Asistencia y participación efectiva del 80% o más de integrantes en eventos.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 2</strong></td>
-            <td>Celebración y Bienestar</td>
-            <td>+2%</td>
-            <td>100% de fechas conmemorativas celebradas y reconocimientos individuales otorgados.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 3</strong></td>
-            <td>Efectividad Analítica</td>
-            <td>+5%</td>
-            <td>Informe final de consultoría entregado con calidad profesional, superando expectativas del cliente.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 3</strong></td>
-            <td>Diseño Curricular</td>
-            <td>+3%</td>
-            <td>Estructuración de casos de simulación con datos e indicadores reales de la industria.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 3</strong></td>
-            <td>Productividad Extra</td>
-            <td>+2%</td>
-            <td>Ejecución de tareas anticipadas a la planificación o vinculación de nuevos proyectos.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 4</strong></td>
-            <td>Impacto Económico</td>
-            <td>+10%</td>
-            <td>Cierre de acuerdos de retribución sobre utilidades generadas en las empresas asesoradas.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 4</strong></td>
-            <td>Relaciones Públicas</td>
-            <td>+3%</td>
-            <td>Vinculación efectiva de profesores o conferencistas internacionales invitados.</td>
-          </tr>
-          <tr>
-            <td><strong>Nivel 4</strong></td>
-            <td>Finalización de Curso</td>
-            <td>+2%</td>
-            <td>Culminación satisfactoria del curso de formación de consultores con certificación superior al 80%.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <section id="simulador" style="margin-top: 40px; padding: 28px; background: var(--surface); border-radius: var(--radius);">
-        <h2 style="margin-top: 0;">Simulador Interactivo de Puntos Prexia (PP)</h2>
-        <p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">Calcula la meta y bonificaciones del POA según las horas pactadas y el avance de carrera.</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px;">
+      <!-- MOTOR DE SIMULACIÓN DE RENDIMIENTO Y LIQUIDACIÓN -->
+      <div class="pp-sim-engine">
+        <div class="pp-sim-controls">
           <div>
-            <label for="sim-nivel" style="display:block; font-family:var(--font-display); font-size:14px; font-weight:700; margin-bottom:6px;">Nivel formativo</label>
-            <select id="sim-nivel" style="width:100%; padding:10px 12px; font-family:inherit; font-size:14px; background:var(--bg); border:none; border-radius:var(--radius);">
-              <option value="1">Nivel 1: Fundamentación (0-25%)</option>
-              <option value="2">Nivel 2: Transición (26-50%)</option>
-              <option value="3" selected>Nivel 3: Profesionalización (51-75%)</option>
-              <option value="4">Nivel 4: Cierre y Proyección (&gt;75%)</option>
-            </select>
+            <span class="pp-control-label">1. Selecciona el nivel de seniority y avance curricular</span>
+            <div class="pp-level-pills" id="sim-level-pills">
+              <button type="button" class="pp-lvl-btn" data-level="1">
+                <strong>Nivel 1 · Operativo</strong>
+                <span>0% a 30% · Semestres 1 a 3</span>
+              </button>
+              <button type="button" class="pp-lvl-btn" data-level="2">
+                <strong>Nivel 2 · Gestor</strong>
+                <span>31% a 60% · Semestres 4 a 6</span>
+              </button>
+              <button type="button" class="pp-lvl-btn active" data-level="3">
+                <strong>Nivel 3 · Consultor Jr.</strong>
+                <span>61% a 85% · Semestres 7 a 9</span>
+              </button>
+              <button type="button" class="pp-lvl-btn" data-level="4">
+                <strong>Nivel 4 · Líder</strong>
+                <span>Más de 85% · Semestre 10</span>
+              </button>
+            </div>
           </div>
-          <div>
-            <label for="sim-horas" style="display:block; font-family:var(--font-display); font-size:14px; font-weight:700; margin-bottom:6px;">Horas semanales</label>
-            <input type="number" id="sim-horas" value="4" min="1" max="20" style="width:100%; padding:10px 12px; font-family:inherit; font-size:14px; background:var(--bg); border:none; border-radius:var(--radius);">
+
+          <div class="pp-sliders-2col">
+            <div class="pp-slider-box">
+              <label for="sim-horas" class="pp-control-label" style="margin-bottom:4px;">2. Pacto de dedicación (HSA)</label>
+              <input type="range" id="sim-horas" class="pp-range-slider" min="1" max="12" value="4">
+              <div class="pp-range-meta">
+                <span>Base semanal:</span>
+                <strong id="sim-horas-label">4 HSA · 400 PP</strong>
+              </div>
+            </div>
+
+            <div class="pp-slider-box">
+              <label for="sim-semana" class="pp-control-label" style="margin-bottom:4px;">3. Semana de corte (1 a 16)</label>
+              <input type="range" id="sim-semana" class="pp-range-slider" min="1" max="16" value="1">
+              <div class="pp-range-meta">
+                <span>Curva activa:</span>
+                <strong id="sim-semana-label">Sem. 1 · 100%</strong>
+              </div>
+            </div>
           </div>
+
           <div>
-            <label for="sim-semana" style="display:block; font-family:var(--font-display); font-size:14px; font-weight:700; margin-bottom:6px;">Semana (1 a 10)</label>
-            <input type="number" id="sim-semana" value="10" min="1" max="10" style="width:100%; padding:10px 12px; font-family:inherit; font-size:14px; background:var(--bg); border:none; border-radius:var(--radius);">
+            <span class="pp-control-label">4. Multiplicadores de desempeño acreditados en el corte</span>
+            <div id="sim-mult-container" class="pp-mult-list"></div>
           </div>
         </div>
 
-        <div style="margin-bottom: 20px;">
-          <div style="font-family:var(--font-display); font-size:14px; font-weight:700; margin-bottom:8px;">Multiplicadores activados</div>
-          <div id="sim-mult-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
-        </div>
+        <div class="pp-sim-output" data-ui>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+              <span style="font-family:var(--font-display); font-size:14px; font-weight:800; color:var(--field-navy-muted);">BALANCE DE AUDITORÍA QUINCENAL</span>
+              <span id="res-role-pill" style="font-family:var(--font-display); font-size:14px; font-weight:700; color:var(--mint-light);">Rol: Consultor Junior</span>
+            </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; background: var(--bg); padding: 18px; border-radius: var(--radius);" data-ui>
-          <div>
-            <strong id="res-base" style="font-family:var(--font-display); font-size:22px; color:var(--ink); display:block;">400 PP</strong>
-            <span style="font-size:14px; color:var(--muted);">Meta base semanal</span>
+            <table class="pp-ledger">
+              <tbody>
+                <tr>
+                  <td>Línea base pactada (HSA × 100 PP)</td>
+                  <td id="res-base">400 PP</td>
+                </tr>
+                <tr>
+                  <td id="res-meta-label">Meta exigida en Semana 1 (100%)</td>
+                  <td id="res-meta-semana">400 PP</td>
+                </tr>
+                <tr>
+                  <td>Bonificación por multiplicadores de calidad</td>
+                  <td id="res-bono">+6% (+24 PP)</td>
+                </tr>
+                <tr>
+                  <td>Índice de cumplimiento sobre meta</td>
+                  <td id="res-cumplimiento">106%</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div>
-            <strong id="res-meta-semana" style="font-family:var(--font-display); font-size:22px; color:var(--ink); display:block;">440 PP (110%)</strong>
-            <span style="font-size:14px; color:var(--muted);">Exigencia semanal</span>
+
+          <div class="pp-progress-wrap">
+            <div class="pp-progress-head">
+              <span>Progreso frente a la meta exigida</span>
+              <span id="res-progress-pct">106% completado</span>
+            </div>
+            <div class="pp-progress-track">
+              <div class="pp-progress-fill" id="res-progress-bar" style="transform: scaleX(1);"></div>
+            </div>
           </div>
-          <div>
-            <strong id="res-bono" style="font-family:var(--font-display); font-size:22px; color:var(--mint-dark); display:block;">+0 PP</strong>
-            <span style="font-size:14px; color:var(--muted);">Bonificación POA</span>
+
+          <div class="pp-total-row">
+            <span style="font-size:18px; color:var(--field-navy-muted);">Puntos finales liquidados</span>
+            <span class="pp-total-num" id="res-total">424 PP</span>
           </div>
-          <div>
-            <strong id="res-total" style="font-family:var(--font-display); font-size:22px; color:var(--ink); display:block;">400 PP</strong>
-            <span style="font-size:14px; color:var(--muted);">Puntos finales</span>
+
+          <div class="pp-status-box">
+            <strong id="res-status-title">Objetivo Superado · Acredita Insignia de Reconocimiento</strong>
+            <p id="res-status-desc">Con 4 HSA y +6% en multiplicadores de impacto, alcanzas 424 PP y superas la meta de 400 PP sin incrementar horas reloj.</p>
           </div>
         </div>
-      </section>
-    </div>
-  </article>
-
-  <aside class="sidebar">
-    <div class="sidebar-box">
-      <div class="sidebar-heading">HERRAMIENTAS</div>
-      <div class="sidebar-nav-list">
-        <a class="sidebar-nav-item" href="#simulador">Simulador Interactivo PP</a>
-        <a class="sidebar-nav-item" href="{root_prefix}index.html">Catálogo de Páginas Migradas</a>
-        <a class="sidebar-nav-item" href="{root_prefix}pages/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada.html">Línea de Consultoría</a>
       </div>
     </div>
-    <div class="sidebar-box">
-      <div class="sidebar-heading">DATOS DEL DOCUMENTO</div>
-      <p style="font-size:14px;color:var(--muted);line-height:1.5;">
-        Fuente: Sistema de Evaluación Prexia Puntos y Multiplicadores.PDF<br>
-        Facultad de Minas · UNAL Medellín
-      </p>
+  </section>
+
+  <!-- ══ 2. ARQUITECTURA INTEGRADA DE CARRERA Y MATRIZ DE MULTIPLICADORES ══ -->
+  <section class="shell section" id="arquitectura">
+    <div class="section-header">
+      <h2 class="section-title">Arquitectura de carrera y bonos.</h2>
+      <p class="section-desc">En carreras de 10 semestres (166 a 176 créditos), el sistema cruza el porcentaje de avance curricular con la disponibilidad real para asignar responsabilidades y multiplicadores alineados al Plan 2026-2.</p>
     </div>
-  </aside>
+
+    <div class="pp-matrix-grid">
+      <!-- NIVEL 1 -->
+      <article class="pp-tier-col">
+        <div class="pp-tier-head">
+          <span class="pp-tier-badge">NIVEL 1 · 0% A 30% (SEM. 1–3)</span>
+          <h3>Fundamentación · Operativo</h3>
+          <p class="pp-tier-role">Alta carga de Cálculo, Álgebra y Física. Ejecuta tareas operativas cortas: logística de eventos, cápsulas de conocimiento y redes.</p>
+        </div>
+        <div class="pp-tier-bonuses">
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Excelencia en Contenido</strong>
+              <em>+3%</em>
+            </div>
+            <p>Calendario de publicaciones cumplido al 100% sin retrasos (meta base ≥80%).</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Generación de Valor</strong>
+              <em>+4%</em>
+            </div>
+            <p>Cada cápsula de conocimiento extra recopilada, editada y publicada (meta ≥4).</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Cultura Consultor</strong>
+              <em>+2%</em>
+            </div>
+            <p>Diseño y publicación de contenido sobre la cultura de un Consultor Prexia.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- NIVEL 2 -->
+      <article class="pp-tier-col">
+        <div class="pp-tier-head">
+          <span class="pp-tier-badge">NIVEL 2 · 31% A 60% (SEM. 4–6)</span>
+          <h3>Transición · Gestor</h3>
+          <p class="pp-tier-role">Liderazgo, proactividad y gestión de comunidad: bienestar, diseño web, marketing de eventos y simulaciones de ventas.</p>
+        </div>
+        <div class="pp-tier-bonuses">
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Tracción Web y Redes</strong>
+              <em>+5%</em>
+            </div>
+            <p>Crecimiento medido de audiencia en redes de la línea del 15% o más.</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Poder de Convocatoria</strong>
+              <em>+4%</em>
+            </div>
+            <p>Integraciones o eventos con participación efectiva del 70% o más del equipo.</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Celebración y Bienestar</strong>
+              <em>+2%</em>
+            </div>
+            <p>100% de cumpleaños celebrados y reconocimientos individuales entregados.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- NIVEL 3 -->
+      <article class="pp-tier-col">
+        <div class="pp-tier-head">
+          <span class="pp-tier-badge">NIVEL 3 · 61% A 85% (SEM. 7–9)</span>
+          <h3>Profesionalización · Consultor Jr.</h3>
+          <p class="pp-tier-role">Intervención en terreno y meta de +4% de productividad de línea: consultoría a empresas, diseño curricular y casos reales.</p>
+        </div>
+        <div class="pp-tier-bonuses">
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Efectividad Analítica</strong>
+              <em>+6%</em>
+            </div>
+            <p>100% de informes finales entregados con calidad profesional, superando expectativas.</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Diseño Curricular</strong>
+              <em>+5%</em>
+            </div>
+            <p>Estructura del curso o casos de simulación construidos con datos reales del sector.</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Productividad Extra</strong>
+              <em>+4%</em>
+            </div>
+            <p>Ejecuta más tareas o vincula más emprendimientos de los pactados inicialmente.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- NIVEL 4 -->
+      <article class="pp-tier-col">
+        <div class="pp-tier-head">
+          <span class="pp-tier-badge">NIVEL 4 · MÁS DE 85% (SEM. 10)</span>
+          <h3>Cierre y Proyección · Líder</h3>
+          <p class="pp-tier-role">Gerencia estratégica y legado institucional: liderazgo de línea, expertos externos y acuerdos de retribución empresarial.</p>
+        </div>
+        <div class="pp-tier-bonuses">
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Impacto Económico</strong>
+              <em>+10%</em>
+            </div>
+            <p>Cierra negociaciones de retribución sobre utilidades con las empresas asesoradas.</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Relaciones Públicas</strong>
+              <em>+8%</em>
+            </div>
+            <p>Vincula profesores o expertos externos para dictar el curso (meta ≥6 sesiones).</p>
+          </div>
+          <div class="pp-bonus-row">
+            <div class="pp-bonus-top">
+              <strong>Finalización de Curso</strong>
+              <em>+5%</em>
+            </div>
+            <p>80% o más de los participantes culminan satisfactoriamente el curso de consultoría.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══ 3. GOBERNANZA, AUDITORÍA QUINCENAL Y CASOS TESTIGO ══ -->
+  <section class="section" style="background:var(--surface);" id="gobernanza">
+    <div class="shell">
+      <div class="pp-editorial-2col" style="margin-bottom: 48px;">
+        <div>
+          <h2 class="section-title">Gobernanza e implementación.</h2>
+          <p class="section-desc">El seguimiento se ejecuta quincenalmente en matriz centralizada (Google Sheets / Portal Web) para garantizar trazabilidad ejecutiva sin saturar a los coordinadores.</p>
+        </div>
+        <div class="pp-arg-list">
+          <div class="pp-arg-item">
+            <h3>1. Concertación de HSA al inicio del semestre</h3>
+            <p>El coordinador cruza el avance curricular (créditos inscritos y materias de Ciencias Básicas) con la disponibilidad del integrante y se firma el pacto de Horas Semanales Acordadas (1 HSA = 100 PP base).</p>
+          </div>
+          <div class="pp-arg-item">
+            <h3>2. Evaluación diferenciada por entregables</h3>
+            <p>El Nivel 1 se audita por rigor y cumplimiento operativo; los Niveles 3 y 4 se evalúan por informes técnicos de consultoría, casos sectoriales y acuerdos de retribución firmados.</p>
+          </div>
+          <div class="pp-arg-item">
+            <h3>3. Insignias de Bienestar y Reconocimiento</h3>
+            <p>Los multiplicadores otorgan insignias que alimentan el indicador individual de Bienestar (Proyecto 3), publicando el cuadro de honor quincenal en los canales oficiales de PREXIA.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-bottom: 16px;">
+        <h3 class="editorial-subhead" style="margin-top:0;">Casos testigo de liquidación en matriz (Semana 1 vs. Semana 16)</h3>
+      </div>
+
+      <div class="table-wrap">
+        <table class="prexia-table">
+          <thead>
+            <tr>
+              <th>Integrante / Rol</th>
+              <th>Nivel</th>
+              <th>Pacto HSA</th>
+              <th>Meta exigida</th>
+              <th>Multiplicador acreditado</th>
+              <th>Liquidación final</th>
+              <th>Cumplimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ana</strong> · Encargada de redes</td>
+              <td>Nivel&nbsp;1</td>
+              <td>5&nbsp;HSA</td>
+              <td>500&nbsp;PP (Sem.&nbsp;1 · 100%)</td>
+              <td>+3% (Excelencia en contenido: calendario 100% al día)</td>
+              <td><strong>515&nbsp;PP</strong></td>
+              <td><strong style="color:var(--mint-dark);">103%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Carlos</strong> · Consultor aplicado</td>
+              <td>Nivel&nbsp;3</td>
+              <td>8&nbsp;HSA</td>
+              <td>800&nbsp;PP (Sem.&nbsp;1 · 100%)</td>
+              <td>+6% (Efectividad analítica: informe final impecable)</td>
+              <td><strong>848&nbsp;PP</strong></td>
+              <td><strong style="color:var(--mint-dark);">106%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Proyección Cierre</strong> · Consultor Senior</td>
+              <td>Nivel&nbsp;4</td>
+              <td>4&nbsp;HSA</td>
+              <td>460&nbsp;PP (Sem.&nbsp;16 · 115%)</td>
+              <td>+18% (Impacto económico +10% y Relaciones públicas +8%)</td>
+              <td><strong>472&nbsp;PP</strong></td>
+              <td><strong style="color:var(--mint-dark);">103%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. EVIDENCIA EN TERRENO ══ -->
+  <section class="shell section">
+    <div class="section-header">
+      <h2 class="section-title">Intervención en terreno.</h2>
+      <p class="section-desc">Sesiones de diagnóstico a organizaciones, plenarios de evaluación y transferencia de conocimiento en la Facultad de Minas UNAL.</p>
+    </div>
+    <div class="pp-evidence-grid">
+      <figure class="pp-evidence-card">
+        <img src="{root_prefix}assets/photos/grupo-prexia-2024.png" alt="Plenaria de evaluación y seguimiento del Semillero PREXIA en la Facultad de Minas" loading="lazy">
+        <figcaption>Plenaria de seguimiento semestral · Facultad de Minas UNAL</figcaption>
+      </figure>
+      <figure class="pp-evidence-card">
+        <img src="{root_prefix}images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada__02__8f979a294317.jpg" alt="Mesa directiva y diagnóstico organizacional con empresas aliadas" loading="lazy">
+        <figcaption>Diagnóstico organizacional en terreno con MiPymes aliadas</figcaption>
+      </figure>
+      <figure class="pp-evidence-card">
+        <img src="{root_prefix}images/unal-edu-co__prexiaforum__home__l-c3-adneas-prexia__prexia-consultor-c3-ada__03__12c3a000f461.jpg" alt="Sesión de formación de consultores PREXIA" loading="lazy">
+        <figcaption>Formación técnica de consultores Junior y Senior</figcaption>
+      </figure>
+      <figure class="pp-evidence-card">
+        <img src="{root_prefix}assets/photos/semillero-equipo-completo.png" alt="Líderes e investigadores de PREXIA en cooperación internacional" loading="lazy">
+        <figcaption>Cooperación interinstitucional y liderazgo de líneas</figcaption>
+      </figure>
+    </div>
+  </section>
 </main>
 
 <script>
   (function() {{
+    const roleNames = {{
+      1: "Rol: Operativo (Fundamentación)",
+      2: "Rol: Gestor (Transición)",
+      3: "Rol: Consultor Junior (Profesionalización)",
+      4: "Rol: Líder de Línea (Cierre y Proyección)"
+    }};
+
     const multByLevel = {{
       1: [
-        {{ label: "Excelencia en Contenido (+3%)", pct: 3 }},
-        {{ label: "Generación de Valor (+3%)", pct: 3 }},
-        {{ label: "Cultura Consultor (+2%)", pct: 2 }}
+        {{ label: "Excelencia en Contenido (calendario 100% al día)", pct: 3 }},
+        {{ label: "Generación de Valor (cápsula extra publicada)", pct: 4 }},
+        {{ label: "Cultura Consultor (contenido sobre cultura Prexia)", pct: 2 }}
       ],
       2: [
-        {{ label: "Tracción Web y Redes (+3%)", pct: 3 }},
-        {{ label: "Poder de Convocatoria (+3%)", pct: 3 }},
-        {{ label: "Celebración y Bienestar (+2%)", pct: 2 }}
+        {{ label: "Tracción Web y Redes (crecimiento de audiencia ≥15%)", pct: 5 }},
+        {{ label: "Poder de Convocatoria (participación ≥70% en eventos)", pct: 4 }},
+        {{ label: "Celebración y Bienestar (100% cumpleaños y reconocimientos)", pct: 2 }}
       ],
       3: [
-        {{ label: "Efectividad Analítica (+5%)", pct: 5 }},
-        {{ label: "Diseño Curricular (+3%)", pct: 3 }},
-        {{ label: "Productividad Extra (+2%)", pct: 2 }}
+        {{ label: "Efectividad Analítica (100% informes finales impecables)", pct: 6 }},
+        {{ label: "Diseño Curricular (estructura del curso o casos reales)", pct: 5 }},
+        {{ label: "Productividad Extra (más tareas o emprendimientos vinculados)", pct: 4 }}
       ],
       4: [
-        {{ label: "Impacto Económico (+10%)", pct: 10 }},
-        {{ label: "Relaciones Públicas (+3%)", pct: 3 }},
-        {{ label: "Finalización de Curso (+2%)", pct: 2 }}
+        {{ label: "Impacto Económico (retribución sobre utilidades con empresas)", pct: 10 }},
+        {{ label: "Relaciones Públicas (6+ sesiones con expertos externos)", pct: 8 }},
+        {{ label: "Finalización de Curso (≥80% culminan curso de consultoría)", pct: 5 }}
       ]
     }};
 
-    const nivelSelect = document.getElementById('sim-nivel');
+    let currentLevel = "3";
+    const levelButtons = document.querySelectorAll('.pp-lvl-btn');
     const horasInput = document.getElementById('sim-horas');
     const semanaInput = document.getElementById('sim-semana');
+    const horasLabel = document.getElementById('sim-horas-label');
+    const semanaLabel = document.getElementById('sim-semana-label');
     const multContainer = document.getElementById('sim-mult-container');
+    const resRolePill = document.getElementById('res-role-pill');
     const resBase = document.getElementById('res-base');
+    const resMetaLabel = document.getElementById('res-meta-label');
     const resMetaSemana = document.getElementById('res-meta-semana');
     const resBono = document.getElementById('res-bono');
+    const resCumplimiento = document.getElementById('res-cumplimiento');
+    const resProgressPct = document.getElementById('res-progress-pct');
+    const resProgressBar = document.getElementById('res-progress-bar');
     const resTotal = document.getElementById('res-total');
+    const resStatusTitle = document.getElementById('res-status-title');
+    const resStatusDesc = document.getElementById('res-status-desc');
 
     function renderCheckboxes() {{
-      const level = nivelSelect.value;
-      const mults = multByLevel[level] || [];
-      multContainer.innerHTML = mults.map(m => `
-        <label style="display:flex; align-items:center; gap:8px; font-size:14px; cursor:pointer;">
-          <input type="checkbox" class="sim-check" data-pct="${{m.pct}}" style="accent-color:var(--ink);" checked>
+      const mults = multByLevel[currentLevel] || [];
+      resRolePill.textContent = roleNames[currentLevel] || "";
+      multContainer.innerHTML = mults.map((m, idx) => `
+        <label class="pp-mult-item">
+          <input type="checkbox" class="sim-check" data-pct="${{m.pct}}" ${{idx === 0 ? 'checked' : ''}}>
           <span>${{m.label}}</span>
+          <em>+${{m.pct}}%</em>
         </label>
       `).join('');
       multContainer.querySelectorAll('.sim-check').forEach(chk => chk.addEventListener('change', recalc));
@@ -2400,10 +3100,13 @@ def build_evaluation_page(root_prefix: str = "../") -> str:
 
     function recalc() {{
       const horas = Math.max(1, parseInt(horasInput.value || 4, 10));
-      const semana = Math.min(10, Math.max(1, parseInt(semanaInput.value || 10, 10)));
+      const semana = Math.min(16, Math.max(1, parseInt(semanaInput.value || 1, 10)));
       const base = horas * 100;
-      const pctSemana = 100 + semana;
+      const pctSemana = 100 + (semana - 1);
       const metaSemana = Math.round(base * (pctSemana / 100));
+
+      horasLabel.textContent = `${{horas}} HSA · ${{base}} PP`;
+      semanaLabel.textContent = `Sem. ${{semana}} · ${{pctSemana}}%`;
 
       let bonusPct = 0;
       multContainer.querySelectorAll('.sim-check:checked').forEach(chk => {{
@@ -2412,15 +3115,37 @@ def build_evaluation_page(root_prefix: str = "../") -> str:
 
       const bonusPP = Math.round(base * (bonusPct / 100));
       const finalPP = base + bonusPP;
+      const cumplimientoPct = Math.round((finalPP / metaSemana) * 100);
+      const scaleRatio = Math.min(1, Math.max(0.08, finalPP / metaSemana));
 
-      resBase.textContent = base + ' PP';
-      resMetaSemana.textContent = `${{metaSemana}} PP (${{pctSemana}}%)`;
-      resBono.textContent = `+${{bonusPP}} PP (+${{bonusPct}}%)`;
+      resBase.textContent = `${{base}} PP`;
+      resMetaLabel.textContent = `Meta exigida en Semana ${{semana}} (${{pctSemana}}%)`;
+      resMetaSemana.textContent = `${{metaSemana}} PP`;
+      resBono.textContent = `+${{bonusPct}}% (+${{bonusPP}} PP)`;
+      resCumplimiento.textContent = `${{cumplimientoPct}}%`;
+      resProgressPct.textContent = `${{cumplimientoPct}}% de la meta exigida`;
+      resProgressBar.style.transform = `scaleX(${{scaleRatio}})`;
       resTotal.textContent = `${{finalPP}} PP`;
-      resTotal.style.color = finalPP >= metaSemana ? 'var(--mint-dark)' : 'var(--ink)';
+
+      if (finalPP >= metaSemana) {{
+        resStatusTitle.textContent = `Objetivo Superado (${{cumplimientoPct}}%) · Acredita Insignia de Reconocimiento`;
+        resStatusDesc.textContent = `Con ${{horas}} HSA y +${{bonusPct}}% en multiplicadores de impacto, alcanzas ${{finalPP}} PP frente a los ${{metaSemana}} PP exigidos en la semana ${{semana}}.`;
+      }} else {{
+        const diff = metaSemana - finalPP;
+        resStatusTitle.textContent = `En Progreso (${{cumplimientoPct}}% de la meta de Semana ${{semana}})`;
+        resStatusDesc.textContent = `Liquidación actual de ${{finalPP}} PP sobre ${{metaSemana}} PP exigidos. Activa multiplicadores de calidad para cubrir la brecha de ${{diff}} PP sin aumentar horas.`;
+      }}
     }}
 
-    nivelSelect.addEventListener('change', renderCheckboxes);
+    levelButtons.forEach(btn => {{
+      btn.addEventListener('click', () => {{
+        levelButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentLevel = btn.getAttribute('data-level');
+        renderCheckboxes();
+      }});
+    }});
+
     horasInput.addEventListener('input', recalc);
     semanaInput.addEventListener('input', recalc);
     renderCheckboxes();
@@ -2552,7 +3277,7 @@ def build_site() -> None:
         }}
       }});
     }}, {{ threshold: 0.08 }});
-    document.querySelectorAll('.section, .mesa-card, .role-box, .card, .gallery-thumb, .allies-strip-section, .sidebar-box, .speaker-card, .team-card').forEach(el => {{
+    document.querySelectorAll('.section, .mesa-card, .role-box, .card, .gallery-thumb, .allies-strip-section, .sidebar-box, .speaker-card, .team-card, .pp-level-card, .pp-sim-band, .table-wrap, .pp-kpi-card, .pp-tier-col, .pp-arg-item, .pp-sim-engine').forEach(el => {{
       el.classList.add('reveal-item');
       observer.observe(el);
     }});

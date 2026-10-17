@@ -918,26 +918,530 @@ img {
   color: var(--ink);
 }
 
-/* ── TABLAS FORMALES (PDF PREXIA) ── */
+/* ── SISTEMA DE EVALUACIÓN PREXIA (INTERFAZ EJECUTIVA / CEO) ── */
+.pp-exec-hero {
+  background: var(--field-navy);
+  color: var(--field-navy-ink);
+  padding: 64px 0 72px;
+}
+
+.pp-exec-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.pp-exec-tag {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint-light);
+}
+
+.pp-exec-pdf-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mint-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s ease-out;
+}
+
+.pp-exec-pdf-link:hover {
+  color: var(--field-navy-ink);
+}
+
+.pp-exec-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 56%) 1fr;
+  gap: calc(var(--gutter) * 1.5);
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.pp-exec-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.8vw, 4.35rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.038em;
+  color: var(--field-navy-ink);
+}
+
+.pp-exec-lead {
+  font-size: 22px;
+  line-height: 1.52;
+  color: var(--field-navy-ink);
+  margin-bottom: 14px;
+}
+
+.pp-exec-sublead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--field-navy-muted);
+}
+
+.pp-kpi-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.pp-kpi-card {
+  background: var(--field-navy-surface);
+  padding: 24px 22px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pp-kpi-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--mint-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-kpi-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--field-navy-ink);
+}
+
+.pp-kpi-desc {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--field-navy-muted);
+}
+
+/* ── SIMULADOR EJECUTIVO PP (EN EL HERO / PRIMER IMPACTO) ── */
+.pp-sim-engine {
+  display: grid;
+  grid-template-columns: minmax(0, 52%) 1fr;
+  gap: var(--gutter);
+  align-items: stretch;
+  margin-top: 36px;
+}
+
+.pp-sim-controls,
+.pp-sim-output {
+  background: var(--field-navy-surface);
+  padding: 36px 32px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pp-sim-output {
+  justify-content: space-between;
+}
+
+.pp-control-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--field-navy-ink);
+  margin-bottom: 10px;
+}
+
+.pp-level-pills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.pp-lvl-btn {
+  padding: 12px 10px;
+  background: var(--field-navy);
+  color: var(--field-navy-muted);
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease-out, color 0.15s ease-out, transform 0.15s var(--ease-out);
+}
+
+.pp-lvl-btn strong {
+  display: block;
+  font-size: 14px;
+  color: inherit;
+}
+
+.pp-lvl-btn span {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.pp-lvl-btn:hover {
+  color: var(--field-navy-ink);
+}
+
+.pp-lvl-btn.active {
+  background: var(--mint-light);
+  color: var(--ink);
+}
+
+.pp-sliders-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pp-slider-box {
+  background: var(--field-navy);
+  padding: 16px 18px;
+  border-radius: var(--radius);
+}
+
+.pp-range-slider {
+  width: 100%;
+  accent-color: var(--mint-light);
+  cursor: pointer;
+  margin: 6px 0;
+}
+
+.pp-range-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14px;
+  color: var(--field-navy-muted);
+}
+
+.pp-range-meta strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--mint-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-mult-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pp-mult-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--field-navy);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--field-navy-ink);
+  transition: opacity 0.15s ease-out;
+}
+
+.pp-mult-item input {
+  accent-color: var(--mint-light);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.pp-mult-item em {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-light);
+  margin-left: auto;
+  padding-left: 8px;
+}
+
+.pp-ledger {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pp-ledger td {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14); /* taste-skill-ignore */
+  font-size: 18px;
+}
+
+.pp-ledger td:first-child {
+  color: var(--field-navy-muted);
+}
+
+.pp-ledger td:last-child {
+  text-align: right;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--field-navy-ink);
+}
+
+.pp-progress-wrap {
+  background: var(--field-navy);
+  padding: 16px 18px;
+  border-radius: var(--radius);
+}
+
+.pp-progress-head {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--field-navy-muted);
+  margin-bottom: 8px;
+}
+
+.pp-progress-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.pp-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--mint-light);
+  transform-origin: left center;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.pp-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 4px;
+}
+
+.pp-total-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.6rem);
+  font-weight: 800;
+  color: var(--mint-light);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.pp-status-box {
+  background: var(--field-navy);
+  padding: 18px 20px;
+  border-radius: var(--radius);
+}
+
+.pp-status-box strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-light);
+  margin-bottom: 6px;
+}
+
+.pp-status-box p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--field-navy-muted);
+}
+
+/* ── ARQUITECTURA DE CARRERA Y MULTIPLICADORES (4 COLUMNAS EJECUTIVAS) ── */
+.pp-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.pp-tier-col {
+  background: var(--surface);
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pp-tier-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pp-tier-badge {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-dark);
+}
+
+.pp-tier-col h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.pp-tier-role {
+  font-size: 18px;
+  line-height: 1.52;
+  color: var(--muted);
+}
+
+.pp-tier-bonuses {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.pp-bonus-row {
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: var(--radius);
+}
+
+.pp-bonus-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pp-bonus-top strong {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.pp-bonus-top em {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.pp-bonus-row p {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ── TABLA EJECUTIVA DE AUDITORÍA QUINCENAL ── */
+.table-wrap {
+  width: 100%;
+  margin: 24px 0 36px;
+}
+
 .prexia-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 24px 0;
-  font-size: 14px;
+  font-size: 18px;
+  background: var(--bg);
+  border-radius: var(--radius);
 }
 
 .prexia-table th,
 .prexia-table td {
-  padding: 12px 14px;
+  padding: 16px 18px;
   text-align: left;
+  vertical-align: middle;
   border-bottom: 1px solid var(--line); /* taste-skill-ignore */
 }
 
 .prexia-table th {
   font-family: var(--font-display);
+  font-size: 14px;
   font-weight: 800;
   color: var(--ink);
+  background: var(--surface-alt);
+}
+
+.pp-editorial-2col {
+  display: grid;
+  grid-template-columns: minmax(0, 42%) 1fr;
+  gap: calc(var(--gutter) * 1.8);
+  align-items: start;
+}
+
+.pp-arg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pp-arg-item {
+  background: var(--bg);
+  padding: 24px 26px;
+  border-radius: var(--radius);
+}
+
+.pp-arg-item h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.pp-arg-item p {
+  font-size: 18px;
+  line-height: 1.58;
+  color: var(--muted);
+}
+
+.pp-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.pp-evidence-card {
   background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-evidence-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.pp-evidence-card figcaption {
+  padding: 14px 16px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
 }
 
 /* ── FOOTER SITIO CON ISOTIPO Y REDES ── */
@@ -1001,8 +1505,36 @@ img {
   .eisi-hero-grid,
   .roles-grid-3,
   .page-layout,
-  .archive-stats-box {
+  .archive-stats-box,
+  .pp-exec-hero-grid,
+  .pp-kpi-bar,
+  .pp-sim-engine,
+  .pp-level-pills,
+  .pp-sliders-2col,
+  .pp-matrix-grid,
+  .pp-editorial-2col,
+  .pp-evidence-grid {
     grid-template-columns: 1fr;
+  }
+  .prexia-table thead {
+    display: none;
+  }
+  .prexia-table,
+  .prexia-table tbody,
+  .prexia-table tr,
+  .prexia-table td {
+    display: block;
+    width: 100%;
+  }
+  .prexia-table tr {
+    background: var(--bg);
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: var(--radius);
+  }
+  .prexia-table td {
+    padding: 6px 0;
+    border-bottom: none;
   }
   .card.span-4,
   .card.span-6 {
@@ -1018,7 +1550,10 @@ img {
   .role-box h3,
   .speaker-name,
   .team-card strong,
-  .eisi-hero-lead {
+  .eisi-hero-lead,
+  .pp-tier-col h3,
+  .pp-arg-item h3,
+  .pp-exec-lead {
     font-size: 18px;
   }
 }
