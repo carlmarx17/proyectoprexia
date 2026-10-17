@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plataforma POA · Login, Usuarios, Niveles y Auditoría Maestro · PREXIA UNAL</title>
+  <meta name="description" content="Plataforma interactiva del Sistema de Evaluación Prexia (Puntos Prexia y Multiplicadores). Inicio de sesión por niveles (1 a 4), panel de Usuario Maestro, evolución académica y persistencia en Git.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <script src="../assets/prexia-db.js"></script>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ecebe6;
+      --surface-strong: #e2e0d8;
+      --card: #ffffff;
+      --ink: #1f1a3a;
+      --muted: #4a4662;
+      --navy: #1f1a3a;
+      --navy-surface: #2b244d;
+      --navy-card: #342c5c;
+      --mint-dark: #0f652e;
+      --mint-light: #84fbaa;
+      --cyan-light: #60eaf0;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+      --border: rgba(31, 26, 58, 0.12);
+      --font-display: 'Libre Franklin', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-text: 'Source Serif 4', Georgia, serif;
+      --radius: 3px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
+      margin: 0;
+    }
+
+    /* ── BARRA SUPERIOR DE SESIÓN Y ESTADO GIT ── */
+    .poa-status-strip {
+      background: var(--navy);
+      color: #f7f7f5;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: var(--font-display);
+      font-size: 13px;
+    }
+
+    .poa-status-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .poa-status-left,
+    .poa-status-right {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .git-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px;
+      border-radius: 2px;
+      background: var(--navy-surface);
+      color: #e2e0d8;
+      font-weight: 600;
+      font-size: 12px;
+      border: 1px solid rgba(132, 251, 170, 0.25);
+    }
+
+    .git-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mint-light);
+    }
+
+    .git-dot.dirty {
+      background: #fbbf24;
+    }
+
+    .poa-top-btn {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      color: #f7f7f5;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .poa-top-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .poa-top-btn.mint {
+      background: var(--mint-light);
+      color: var(--ink);
+      border-color: var(--mint-light);
+      font-weight: 800;
+    }
+
+    .poa-top-btn.mint:hover {
+      opacity: 0.92;
+    }
+
+    .quick-switcher-select {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 2px;
+      background: var(--navy-card);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      cursor: pointer;
+    }
+
+    /* ── LAYOUT GENERAL DE LA PLATAFORMA ── */
+    .platform-wrap {
+      padding: 36px 0 88px;
+    }
+
+    .toast-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--navy);
+      color: #fff;
+      border-left: 4px solid var(--mint-light);
+      padding: 14px 20px;
+      border-radius: 3px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+      font-family: var(--font-display);
+      font-size: 14px;
+      max-width: 420px;
+      display: none;
+    }
+
+    .toast-banner.show {
+      display: block;
+    }
+
+    /* ── PANTALLA DE LOGIN Y DIRECTORIO DE ACCESO EN 1 CLIC ── */
+    .login-hero-box {
+      background: var(--navy);
+      color: #f7f7f5;
+      padding: 40px;
+      border-radius: var(--radius);
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 52%) 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .login-hero-box h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.6vw, 3.1rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 8px 0 14px;
+      color: #fff;
+    }
+
+    .login-hero-box p {
+      font-size: 17px;
+      line-height: 1.58;
+      color: #c2bddb;
+      margin: 0;
+    }
+
+    .login-kpis {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .login-kpi-item {
+      background: var(--navy-surface);
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .login-kpi-item strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--mint-light);
+    }
+
+    .login-kpi-item span {
+      font-size: 13px;
+      color: #c2bddb;
+      font-family: var(--font-display);
+    }
+
+    .login-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+      position: sticky;
+      top: 92px;
+    }
+
+    .login-card h2 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .login-card p.sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .field-group {
+      margin-bottom: 16px;
+    }
+
+    .field-group label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 11px 13px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      border: 1px solid rgba(31, 26, 58, 0.22);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    .field-input:focus {
+      outline: 2px solid var(--navy);
+      background: #fff;
+    }
+
+    .btn-primary-full {
+      width: 100%;
+      padding: 13px 18px;
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 800;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-primary-full:hover {
+      opacity: 0.92;
+    }
+
+    .login-error {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #fee2e2;
+      color: #991b1b;
+      font-family: var(--font-display);
+      font-size: 13px;
+      border-radius: var(--radius);
+      display: none;
+    }
+
+    /* ── TARJETAS DE ACCESO RÁPIDO POR NIVEL ── */
+    .demo-accounts-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .master-login-banner {
+      background: var(--navy);
+      color: #fff;
+      padding: 24px 26px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      border-left: 5px solid var(--mint-light);
+    }
+
+    .master-login-banner h3 {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 800;
+      margin: 4px 0 6px;
+      color: #fff;
+    }
+
+    .master-login-banner p {
+      font-size: 14px;
+      color: #c2bddb;
+      margin: 0;
+      max-width: 58ch;
+    }
+
+    .level-group-block {
+      background: var(--surface);
+      padding: 20px 22px;
+      border-radius: var(--radius);
+    }
+
+    .level-group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .level-group-header h3 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .level-group-header span {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--mint-dark);
+    }
+
+    .demo-user-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .demo-user-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .demo-user-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--navy);
+    }
+
+    .demo-user-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--mint-light);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .demo-user-meta strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .demo-user-meta span {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .demo-user-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .stat-pill {
+      padding: 3px 8px;
+      background: var(--surface);
+      border-radius: 2px;
+      color: var(--ink);
+    }
+
+    .stat-pill.mint {
+      background: #dcfce7;
+      color: #0f652e;
+    }
+
+    .demo-user-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 8px;
+      border-top: 1px solid var(--surface);
+      font-family: var(--font-display);
+      font-size: 12px;
+    }
+
+    .demo-user-actions code {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .btn-enter-user {
+      padding: 6px 12px;
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .btn-enter-user:hover {
+      background: var(--mint-dark);
+    }
+
+    /* ── DASHBOARD HEADER COMÚN ── */
+    .dash-topbar {
+      background: var(--navy);
+      color: #fff;
+      padding: 28px 32px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .dash-user-welcome {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .dash-avatar-lg {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--mint-light);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .dash-user-welcome h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 800;
+      margin: 2px 0 4px;
+      color: #fff;
+    }
+
+    .dash-role-tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      background: rgba(132, 251, 170, 0.18);
+      color: var(--mint-light);
+      border-radius: 2px;
+    }
+
+    .dash-week-box {
+      background: var(--navy-surface);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .dash-week-box strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--mint-light);
+    }
+
+    .dash-week-box span {
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: #c2bddb;
+    }
+
+    /* ── KPI STRIP 4 COLUMNAS ── */
+    .kpi-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: var(--radius);
+    }
+
+    .kpi-card .kpi-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .kpi-card .kpi-val {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--ink);
+      display: block;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .kpi-card .kpi-foot {
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: var(--mint-dark);
+      font-weight: 600;
+    }
+
+    /* ── BARRA DE CONTROL DEL MAESTRO (SEMANA + FILTROS + NUEVO USUARIO) ── */
+    .master-toolbar {
+      background: var(--surface);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    /* ── TABLA MAESTRA DE PROGRESO Y CRECIMIENTO ── */
+    .master-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+
+    .master-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-display);
+      font-size: 13px;
+    }
+
+    .master-table th {
+      background: var(--navy);
+      color: #fff;
+      text-align: left;
+      padding: 13px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .master-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--surface);
+      vertical-align: top;
+    }
+
+    .master-table tr:hover td {
+      background: #fafaf8;
+    }
+
+    .lvl-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .lvl-1 { background: #dcfce7; color: #0f652e; }
+    .lvl-2 { background: #e0f2fe; color: #0369a1; }
+    .lvl-3 { background: #e0e7ff; color: #4338ca; }
+    .lvl-4 { background: #ede9fe; color: #1f1a3a; }
+
+    .mini-progress-bar {
+      width: 100%;
+      min-width: 110px;
+      height: 7px;
+      background: var(--surface);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+
+    .mini-progress-fill {
+      height: 100%;
+      background: var(--mint-dark);
+      transition: width 0.25s ease;
+    }
+
+    .mult-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      max-width: 260px;
+    }
+
+    .mult-chip-btn {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .mult-chip-btn.active {
+      background: #dcfce7;
+      color: #0f652e;
+      border-color: #86efac;
+    }
+
+    .mult-chip-btn:hover {
+      border-color: var(--navy);
+    }
+
+    .action-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .btn-sm-action {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      white-space: nowrap;
+      text-align: left;
+    }
+
+    .btn-sm-action:hover {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .btn-sm-action.promote {
+      background: #dcfce7;
+      color: #0f652e;
+      border-color: #86efac;
+    }
+
+    .btn-sm-action.promote:hover {
+      background: #0f652e;
+      color: #fff;
+    }
+
+    /* ── ESCALERA DE CRECIMIENTO DEL ESTUDIANTE (4 NIVELES) ── */
+    .career-ladder-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+    }
+
+    .ladder-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .ladder-step {
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 2px solid var(--surface);
+      background: var(--bg);
+      position: relative;
+    }
+
+    .ladder-step.completed {
+      border-color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .ladder-step.current {
+      border-color: var(--navy);
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(31, 26, 58, 0.08);
+    }
+
+    .ladder-step-tag {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .ladder-step h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+
+    .ladder-step p {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── PANEL 2 COLUMNAS DEL ESTUDIANTE ── */
+    .student-2col {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .panel-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 26px;
+      border-radius: var(--radius);
+    }
+
+    .panel-box h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 8px;
+      color: var(--ink);
+    }
+
+    .mult-card-interactive {
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--bg);
+    }
+
+    .mult-card-interactive.active {
+      background: #f0fdf4;
+      border-color: #86efac;
+    }
+
+    .badge-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .insignia-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--navy);
+      color: var(--mint-light);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 2px;
+    }
+
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .timeline-item {
+      padding: 12px 14px;
+      background: var(--bg);
+      border-left: 3px solid var(--mint-dark);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .timeline-item strong {
+      font-family: var(--font-display);
+      font-size: 12px;
+      color: var(--muted);
+      display: block;
+    }
+
+    /* ── MODAL DE PERSISTENCIA EN GIT ── */
+    .git-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(31, 26, 58, 0.68);
+      z-index: 950;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .git-modal-backdrop.open {
+      display: flex;
+    }
+
+    .git-modal-card {
+      background: var(--card);
+      color: var(--ink);
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .git-method-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+    }
+
+    .git-method-box h4 {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: var(--ink);
+    }
+
+    .code-snippet {
+      background: var(--navy);
+      color: var(--mint-light);
+      padding: 12px 14px;
+      border-radius: 2px;
+      font-family: monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 1024px) {
+      .login-hero-box,
+      .login-grid,
+      .student-2col,
+      .kpi-grid-4,
+      .ladder-steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .demo-user-cards {
+        grid-template-columns: 1fr;
+      }
+      .login-card {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ BARRA DE ESTADO DE SESIÓN Y PERSISTENCIA EN GIT ══ -->
+  <div class="poa-status-strip">
+    <div class="shell poa-status-inner">
+      <div class="poa-status-left">
+        <span class="git-pill" id="git-status-pill">
+          <span class="git-dot" id="git-status-dot"></span>
+          <span id="git-status-text">DB Git: data/prexia-users-db.json · Sincronizado</span>
+        </span>
+        <span style="color:#c2bddb;" id="header-week-indicator">Corte activo: Semana 6 (Exigencia 105%)</span>
+      </div>
+
+      <div class="poa-status-right">
+        <label for="quick-user-switcher" style="color:#c2bddb;font-weight:600;">Cambiar vista de usuario:</label>
+        <select id="quick-user-switcher" class="quick-switcher-select" aria-label="Cambiar rápidamente de usuario"></select>
+        <button type="button" class="poa-top-btn mint" id="btn-open-git-modal">Guardar en Git / Sincronizar</button>
+        <button type="button" class="poa-top-btn" id="btn-logout-top" style="display:none;">Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CABECERA GLOBAL PREXIA ══ -->
+  <header class="topbar">
+    <div class="shell topbar-inner" role="navigation" aria-label="Navegación principal">
+      <a class="brand" href="../../index.html">
+        <svg width="28" height="28" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#0f652e" stroke-width="4" stroke-linecap="round"/>
+          <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#1f1a3a" stroke-width="4" stroke-linecap="round"/>
+          <path d="M16 16 C20 28 28 36 44 44" stroke="#0f652e" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M44 16 C40 28 32 36 16 44" stroke="#1f1a3a" stroke-width="2.8" stroke-linecap="round"/>
+        </svg>
+        <span>PRE<em>XIA</em></span>
+        <span class="brand-sub">Plataforma POA 2026-2 · UNAL Minas</span>
+      </a>
+      <nav class="nav-links">
+        <a href="../../index.html">Portada Principal</a>
+        <a href="plataforma-prexia.html" style="color:var(--ink);text-decoration:underline;text-underline-offset:4px;">Plataforma &amp; Login</a>
+        <a href="sistema-evaluacion-prexia.html">Manual Sistema PP</a>
+        <a href="unal-edu-co__prexiaforum__home__vi-eisi-2025.html">VI EISI 2025</a>
+        <a href="../index.html">Archivo (40)</a>
+      </nav>
+      <a href="../../index.html#contacto" class="nav-cta">Contactar</a>
+    </div>
+  </header>
+
+  <main class="shell platform-wrap">
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         VISTA 1: PANTALLA DE INICIO DE SESIÓN Y DIRECTORIO MULTINIVEL (1 A 4)
+         ════════════════════════════════════════════════════════════════════════ -->
+    <section id="login-view">
+      <div class="login-hero-box">
+        <div>
+          <span class="dash-role-tag">SISTEMA INTERACTIVO POA 2026-2 · PERSISTENCIA GIT</span>
+          <h1>Plataforma de Usuarios, Niveles y Auditoría Maestro.</h1>
+          <p>
+            Ingresa con cualquiera de los integrantes de los <strong>4 niveles formativos</strong> (Operativo, Gestor, Consultor Junior y Líder) o accede con el <strong>Usuario Maestro</strong> para auditar el progreso de toda la línea, acreditar multiplicadores, promover estudiantes de nivel y guardar el estado en el repositorio Git.
+          </p>
+        </div>
+        <div class="login-kpis">
+          <div class="login-kpi-item">
+            <strong id="login-kpi-users">9 Perfiles</strong>
+            <span>1 Maestro + 8 Consultores (Niveles 1 a 4)</span>
+          </div>
+          <div class="login-kpi-item">
+            <strong>100% → 115%</strong>
+            <span>Curva semanal +1% (Semanas 1 a 16)</span>
+          </div>
+          <div class="login-kpi-item">
+            <strong>+2% a +10%</strong>
+            <span>12 Multiplicadores oficiales por nivel</span>
+          </div>
+          <div class="login-kpi-item">
+            <strong>Git JSON</strong>
+            <span>Sincronizado en data/prexia-users-db.json</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-grid">
+        <!-- FORMULARIO DE LOGIN -->
+        <aside class="login-card">
+          <h2>Iniciar sesión en PREXIA</h2>
+          <p class="sub">Ingresa usuario o correo institucional UNAL. Para todos los perfiles de demostración la clave es <strong>123</strong>.</p>
+
+          <form id="login-form">
+            <div class="field-group">
+              <label for="login-user">Usuario o Correo UNAL</label>
+              <input type="text" id="login-user" class="field-input" placeholder="Ej: maestro, ana, camila, carlos, laura..." value="maestro" required>
+            </div>
+            <div class="field-group">
+              <label for="login-pass">Contraseña de acceso</label>
+              <input type="password" id="login-pass" class="field-input" value="123" required>
+            </div>
+            <button type="submit" class="btn-primary-full">Entrar a la Plataforma →</button>
+            <div class="login-error" id="login-error-box"></div>
+          </form>
+
+          <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--surface);font-family:var(--font-display);font-size:12px;color:var(--muted);line-height:1.55;">
+            <strong style="color:var(--ink);display:block;margin-bottom:4px;">Credenciales rápidas:</strong>
+            • <strong>Maestro:</strong> <code>maestro</code> / <code>123</code><br>
+            • <strong>Nivel 1 (Operativo):</strong> <code>ana</code> o <code>mateo</code><br>
+            • <strong>Nivel 2 (Gestor):</strong> <code>camila</code> o <code>santiago</code><br>
+            • <strong>Nivel 3 (Consultor Jr.):</strong> <code>carlos</code> o <code>valentina</code><br>
+            • <strong>Nivel 4 (Líder):</strong> <code>laura</code> o <code>andres</code>
+          </div>
+        </aside>
+
+        <!-- TARJETAS DE ACCESO EN 1 CLIC POR NIVEL -->
+        <div class="demo-accounts-panel">
+          <!-- TARJETA DESTACADA: USUARIO MAESTRO -->
+          <div class="master-login-banner">
+            <div>
+              <span class="dash-role-tag">ACCESO DIRECCIÓN Y AUDITORÍA GLOBAL</span>
+              <h3>Prof. José Ignacio Maya · Usuario Maestro</h3>
+              <p>
+                Visualiza el progreso consolidado de todos los integrantes, avanza la semana activa del semestre (1 a 16), acredita multiplicadores, promueve estudiantes de nivel y guarda cambios en Git.
+              </p>
+            </div>
+            <button type="button" class="poa-top-btn mint" style="padding:12px 20px;font-size:13px;" onclick="window.entrarConUsuario('maestro')">
+              Entrar como Usuario Maestro →
+            </button>
+          </div>
+
+          <!-- CONTENEDOR DINÁMICO DE NIVELES 1 A 4 -->
+          <div id="login-levels-directory"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         VISTA 2: PANEL DEL USUARIO MAESTRO (AUDITORÍA Y CRECIMIENTO DE TODOS)
+         ════════════════════════════════════════════════════════════════════════ -->
+    <section id="master-view" style="display:none;">
+      <div class="dash-topbar">
+        <div class="dash-user-welcome">
+          <div class="dash-avatar-lg">JM</div>
+          <div>
+            <span class="dash-role-tag">PANEL MAESTRO DE AUDITORÍA Y CRECIMIENTO · POA 2026-2</span>
+            <h1>Prof. José Ignacio Maya · Vista General de la Cohorte</h1>
+            <p style="margin:0;font-size:14px;color:#c2bddb;font-family:var(--font-display);">
+              Control centralizado de niveles (1 a 4), curva semanal del +1%, acreditación de multiplicadores y ascenso de integrantes.
+            </p>
+          </div>
+        </div>
+
+        <div class="dash-week-box">
+          <div>
+            <span>Semana Activa de Evaluación</span>
+            <strong id="master-week-title">Semana 6 · Meta 105%</strong>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <input type="range" id="master-week-slider" min="1" max="16" value="6" style="width:120px;accent-color:#84fbaa;cursor:pointer;">
+            <button type="button" class="poa-top-btn mint" id="btn-advance-week">+1 Semana</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs GLOBALES DEL MAESTRO -->
+      <div class="kpi-grid-4">
+        <div class="kpi-card">
+          <span class="kpi-label">Integrantes Activos</span>
+          <strong class="kpi-val" id="m-kpi-total-users">8</strong>
+          <span class="kpi-foot" id="m-kpi-levels-dist">Distribuidos en Niveles 1, 2, 3 y 4</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Puntos Prexia Liquidados (Corte)</span>
+          <strong class="kpi-val" id="m-kpi-total-pp">4,962 PP</strong>
+          <span class="kpi-foot" id="m-kpi-target-pp">Meta exigida corte: 4,725 PP</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Cumplimiento Promedio Línea</span>
+          <strong class="kpi-val" id="m-kpi-avg-comp">108%</strong>
+          <span class="kpi-foot" id="m-kpi-superan">8 de 8 superan la curva progresiva</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Insignias y Ascensos</span>
+          <strong class="kpi-val" id="m-kpi-badges">23</strong>
+          <span class="kpi-foot">Proyecto 3 Bienestar y Reconocimiento</span>
+        </div>
+      </div>
+
+      <!-- BARRA DE HERRAMIENTAS DEL MAESTRO -->
+      <div class="master-toolbar">
+        <div class="filter-pills" id="master-level-filters">
+          <button type="button" class="filter-pill active" data-filter="all">Todos los niveles</button>
+          <button type="button" class="filter-pill" data-filter="1">Nivel 1 · Operativo</button>
+          <button type="button" class="filter-pill" data-filter="2">Nivel 2 · Gestor</button>
+          <button type="button" class="filter-pill" data-filter="3">Nivel 3 · Consultor Jr.</button>
+          <button type="button" class="filter-pill" data-filter="4">Nivel 4 · Líder</button>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn-enter-user" style="background:var(--mint-dark);padding:9px 14px;" id="btn-toggle-new-user-form">
+            + Registrar Nuevo Integrante
+          </button>
+          <button type="button" class="btn-enter-user" style="padding:9px 14px;" onclick="window.abrirModalGit()">
+            Guardar Progreso en Git →
+          </button>
+        </div>
+      </div>
+
+      <!-- FORMULARIO DESPLEGABLE PARA CREAR NUEVO INTEGRANTE -->
+      <div id="new-user-drawer" class="panel-box" style="display:none;margin-bottom:24px;background:#fdfdfc;border:2px solid var(--navy);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <h3>Registrar nuevo integrante en el Sistema POA</h3>
+          <button type="button" class="btn-sm-action" onclick="document.getElementById('new-user-drawer').style.display='none'">Cerrar ✕</button>
+        </div>
+        <form id="form-create-user" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:14px;align-items:end;">
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Nombre completo</label>
+            <input type="text" id="nu-nombre" class="field-input" placeholder="Ej: Mariana Duque Restrepo" required>
+          </div>
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Usuario de login</label>
+            <input type="text" id="nu-user" class="field-input" placeholder="Ej: mariana" required>
+          </div>
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Programa académico</label>
+            <select id="nu-carrera" class="field-input">
+              <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+              <option value="Ingeniería Administrativa">Ingeniería Administrativa</option>
+              <option value="Ingeniería de Sistemas e Informática">Ingeniería de Sistemas e Informática</option>
+              <option value="Ingeniería Financiera / Gestión">Ingeniería Financiera / Gestión</option>
+            </select>
+          </div>
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Créditos aprobados (de 172)</label>
+            <input type="number" id="nu-creditos" class="field-input" min="5" max="172" value="38" required>
+          </div>
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Pacto HSA (Horas/Semana)</label>
+            <input type="number" id="nu-hsa" class="field-input" min="1" max="12" value="5" required>
+          </div>
+          <div>
+            <button type="submit" class="btn-primary-full">Crear e Incorporar al Nivel →</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- MATRIZ MAESTRA INTERACTIVA DE TODOS LOS ESTUDIANTES -->
+      <div class="master-table-wrap">
+        <table class="master-table">
+          <thead>
+            <tr>
+              <th>Integrante / Credencial</th>
+              <th>Nivel y Rol Actual</th>
+              <th>Avance de Carrera (172 créd.)</th>
+              <th>Pacto HSA y Meta Corte</th>
+              <th>Multiplicadores Acreditados (Clic para activar)</th>
+              <th>Liquidación Final PP</th>
+              <th>Crecimiento y Acciones Maestro</th>
+            </tr>
+          </thead>
+          <tbody id="master-users-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         VISTA 3: PORTAL INDIVIDUAL DEL CONSULTOR / ESTUDIANTE Y SU CRECIMIENTO
+         ════════════════════════════════════════════════════════════════════════ -->
+    <section id="student-view" style="display:none;">
+      <div id="master-inspect-banner" style="display:none;background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:12px 18px;border-radius:3px;margin-bottom:16px;font-family:var(--font-display);font-size:13px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <span><strong>Modo Auditoría Maestro:</strong> Estás visualizando y gestionando el expediente individual de este integrante.</span>
+        <button type="button" class="btn-enter-user" onclick="window.volverAPanelMaestro()">← Volver a la Matriz Maestra de Todos</button>
+      </div>
+
+      <div class="dash-topbar">
+        <div class="dash-user-welcome">
+          <div class="dash-avatar-lg" id="st-avatar">AR</div>
+          <div>
+            <span class="dash-role-tag" id="st-level-badge">NIVEL 1 · FUNDAMENTACIÓN · ROL OPERATIVO</span>
+            <h1 id="st-name">Ana Sofía Restrepo</h1>
+            <p id="st-meta-line" style="margin:0;font-size:14px;color:#c2bddb;font-family:var(--font-display);">
+              Ingeniería Industrial · Semestre 2 · PREXIA Consultoría
+            </p>
+          </div>
+        </div>
+
+        <div class="dash-week-box">
+          <div>
+            <span id="st-week-label">Liquidación Semana 6 (Meta 105%)</span>
+            <strong id="st-final-pp-big">535 PP · 102% Cumplimiento</strong>
+          </div>
+          <button type="button" class="poa-top-btn mint" id="btn-st-promote-quick">
+            ⬆ Avanzar Semestre (+18 créd.)
+          </button>
+        </div>
+      </div>
+
+      <!-- KPIs DEL ESTUDIANTE -->
+      <div class="kpi-grid-4">
+        <div class="kpi-card">
+          <span class="kpi-label">Pacto Semanal (HSA)</span>
+          <strong class="kpi-val" id="st-kpi-hsa">5 HSA</strong>
+          <span class="kpi-foot" id="st-kpi-base">Línea base: 500 PP / semana</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label" id="st-kpi-target-label">Meta Exigida Sem. 6</span>
+          <strong class="kpi-val" id="st-kpi-target">525 PP</strong>
+          <span class="kpi-foot">Regla del +1% semanal (100% a 115%)</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Bonificación Multiplicadores</span>
+          <strong class="kpi-val" id="st-kpi-bonus">+7% (+35 PP)</strong>
+          <span class="kpi-foot" id="st-kpi-status">Supera la meta sin más horas reloj</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Avance Curricular</span>
+          <strong class="kpi-val" id="st-kpi-career">19%</strong>
+          <span class="kpi-foot" id="st-kpi-credits">32 de 172 créditos aprobados</span>
+        </div>
+      </div>
+
+      <!-- ESCALERA DE CRECIMIENTO (NIVEL 1 A NIVEL 4) -->
+      <div class="career-ladder-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <span style="font-family:var(--font-display);font-size:12px;font-weight:800;color:var(--mint-dark);text-transform:uppercase;">Ruta de Crecimiento en el Semillero PREXIA</span>
+            <h3 style="font-family:var(--font-display);font-size:20px;font-weight:800;margin:4px 0 0;" id="st-ladder-headline">
+              Progreso de Carrera y Ascenso de Nivel
+            </h3>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button type="button" class="btn-sm-action promote" id="btn-st-add-credits">
+              + Aprobar Semestre (+18 créditos)
+            </button>
+            <button type="button" class="btn-sm-action" style="background:var(--navy);color:#fff;" id="btn-st-force-levelup">
+              🚀 Promover al Siguiente Nivel Ahora
+            </button>
+          </div>
+        </div>
+
+        <div class="ladder-steps-grid" id="st-ladder-steps"></div>
+      </div>
+
+      <!-- 2 COLUMNAS: MULTIPLICADORES / ENTREGABLES + HISTORIAL / INSIGNIAS -->
+      <div class="student-2col">
+        <!-- COLUMNA IZQUIERDA: MULTIPLICADORES Y REGISTRO DE ENTREGABLES -->
+        <div class="panel-box">
+          <h3>Factores Multiplicadores de tu Nivel</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:16px;" id="st-mult-desc">
+            Activa o acredita los bonos de calidad de tu nivel para superar la curva del +1% semanal sin incrementar tus horas pactadas.
+          </p>
+
+          <div id="st-multipliers-list"></div>
+
+          <hr style="border:none;border-top:1px solid var(--surface);margin:24px 0;">
+
+          <h3>Registrar Nuevo Entregable o Hito de Crecimiento</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">
+            Registra un avance verificable en la línea para sumar puntos acumulados, acreditar un multiplicador y ganar una Insignia de Bienestar.
+          </p>
+          <form id="form-student-deliverable" style="display:flex;flex-direction:column;gap:12px;">
+            <div>
+              <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Título del entregable o resultado logrado</label>
+              <input type="text" id="deliv-title" class="field-input" placeholder="Ej: Informe técnico de diagnóstico / Cápsula #4 publicada / Evento con 80% asistencia" required>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div>
+                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Vincular a multiplicador de nivel</label>
+                <select id="deliv-mult" class="field-input"></select>
+              </div>
+              <div>
+                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Insignia de reconocimiento (opcional)</label>
+                <input type="text" id="deliv-badge" class="field-input" placeholder="Ej: Hito Destacado POA">
+              </div>
+            </div>
+            <button type="submit" class="btn-primary-full">Registrar Entregable y Actualizar Progreso →</button>
+          </form>
+
+          <div style="margin-top:22px;">
+            <h4 style="font-family:var(--font-display);font-size:14px;font-weight:800;margin-bottom:10px;">Entregables Acreditados en el Semestre</h4>
+            <div id="st-deliverables-list"></div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: INSIGNIAS, EVOLUCIÓN QUINCENAL Y BITÁCORA -->
+        <div style="display:flex;flex-direction:column;gap:24px;">
+          <div class="panel-box">
+            <h3>Insignias de Bienestar y Reconocimiento (Proyecto 3)</h3>
+            <p style="font-size:14px;color:var(--muted);margin:0;">
+              Reconocimientos verificables ganados por multiplicadores de calidad y ascensos de nivel.
+            </p>
+            <div class="badge-cloud" id="st-badges-cloud"></div>
+          </div>
+
+          <div class="panel-box">
+            <h3>Historial de Auditorías Quincenales (PP)</h3>
+            <div class="table-wrap" style="margin-top:10px;">
+              <table class="master-table" style="font-size:12px;">
+                <thead>
+                  <tr>
+                    <th>Semana</th>
+                    <th>Base</th>
+                    <th>Meta (+1%)</th>
+                    <th>Bono</th>
+                    <th>Final PP</th>
+                    <th>Cumpl.</th>
+                  </tr>
+                </thead>
+                <tbody id="st-history-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel-box">
+            <h3>Bitácora de Crecimiento y Ascensos</h3>
+            <ul class="timeline-list" id="st-growth-log"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════════════════════════════════════
+       MODAL: CENTRO DE GUARDADO Y PERSISTENCIA EN GIT / GITHUB
+       ════════════════════════════════════════════════════════════════════════ -->
+  <div class="git-modal-backdrop" id="git-modal">
+    <div class="git-modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+          <span class="dash-role-tag" style="background:#dcfce7;color:#0f652e;">PERSISTENCIA DEL SISTEMA EN GIT</span>
+          <h2 style="font-family:var(--font-display);font-size:22px;font-weight:800;margin:6px 0 0;">
+            Guardar Progreso y Niveles en el Repositorio Git
+          </h2>
+        </div>
+        <button type="button" class="btn-sm-action" onclick="window.cerrarModalGit()">Cerrar ✕</button>
+      </div>
+
+      <p style="font-size:15px;color:var(--muted);margin-bottom:20px;">
+        Todos los avances de semana, ascensos de nivel, nuevos usuarios y multiplicadores se guardan instantáneamente en tu navegador y se sincronizan con el archivo versionado <code>data/prexia-users-db.json</code> del repositorio Git.
+      </p>
+
+      <!-- OPCIÓN 1: SERVIDOR GIT LOCAL AUTOMÁTICO -->
+      <div class="git-method-box">
+        <h4>1. Guardado y Commit Directo en Git Local (Recomendado en tu computador)</h4>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">
+          Si ejecutaste <code>python3 scripts/servidor_prexia_git.py</code>, este botón escribe directamente en <code>data/prexia-users-db.json</code> y ejecuta <code>git add</code> + <code>git commit</code> (y opcionalmente <code>git push</code>).
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <input type="text" id="git-commit-msg" class="field-input" style="flex:1;min-width:240px;" value="chore(poa): actualizar progreso, niveles y multiplicadores PREXIA">
+          <label style="font-family:var(--font-display);font-size:12px;display:flex;align-items:center;gap:6px;">
+            <input type="checkbox" id="git-do-push" checked> Hacer git push a origin
+          </label>
+          <button type="button" class="btn-enter-user" style="background:var(--mint-dark);padding:10px 16px;" id="btn-save-local-git">
+            Guardar y Hacer Commit en Git Local →
+          </button>
+        </div>
+        <div id="local-git-feedback" style="margin-top:10px;font-family:var(--font-display);font-size:12px;display:none;"></div>
+      </div>
+
+      <!-- OPCIÓN 2: GITHUB API DIRECTO DESDE LA NUBE -->
+      <div class="git-method-box">
+        <h4>2. Commit Directo a GitHub desde el Navegador (GitHub Pages / API REST)</h4>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">
+          Si estás usando la plataforma publicada en GitHub Pages (<code>carlmarx17/proyectoprexia</code>), ingresa un Personal Access Token (PAT) de GitHub para hacer commit directo de <code>data/prexia-users-db.json</code> a la rama <code>main</code>.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;">
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:11px;font-weight:700;margin-bottom:4px;">Repositorio (owner/repo)</label>
+            <input type="text" id="gh-repo" class="field-input" value="carlmarx17/proyectoprexia">
+          </div>
+          <div>
+            <label style="display:block;font-family:var(--font-display);font-size:11px;font-weight:700;margin-bottom:4px;">GitHub Token (PAT con permiso repo)</label>
+            <input type="password" id="gh-token" class="field-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+          </div>
+          <button type="button" class="btn-enter-user" style="padding:11px 16px;" id="btn-save-github-api">
+            Subir Commit a GitHub →
+          </button>
+        </div>
+        <div id="gh-api-feedback" style="margin-top:10px;font-family:var(--font-display);font-size:12px;display:none;"></div>
+      </div>
+
+      <!-- OPCIÓN 3: EXPORTAR / IMPORTAR ARCHIVO JSON VERSIONADO -->
+      <div class="git-method-box" style="margin-bottom:0;">
+        <h4>3. Descargar / Importar <code>prexia-users-db.json</code> o Restaurar Base</h4>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">
+          Descarga el archivo JSON actualizado para reemplazar <code>data/prexia-users-db.json</code> o carga una copia previa.
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="button" class="btn-sm-action promote" onclick="PrexiaDB.descargarJSONParaGit()">
+            ⬇ Descargar data/prexia-users-db.json
+          </button>
+          <label class="btn-sm-action" style="cursor:pointer;">
+            ⬆ Importar archivo JSON
+            <input type="file" id="import-json-input" accept=".json" style="display:none;">
+          </label>
+          <button type="button" class="btn-sm-action" id="btn-reset-db">
+            ↺ Restaurar estado inicial de fábrica
+          </button>
+        </div>
+        <div class="code-snippet">
+          git add data/prexia-users-db.json &amp;&amp; git commit -m "chore(poa): actualizar progreso usuarios PREXIA" &amp;&amp; git push
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFICACIÓN FLOTANTE -->
+  <div class="toast-banner" id="toast-banner"></div>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div class="footer-info">
+        <div class="footer-brand-row">
+          <svg width="26" height="26" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#84fbaa" stroke-width="4" stroke-linecap="round"/>
+            <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#60eaf0" stroke-width="4" stroke-linecap="round"/>
+            <path d="M16 16 C20 28 28 36 44 44" stroke="#84fbaa" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M44 16 C40 28 32 36 16 44" stroke="#60eaf0" stroke-width="2.8" stroke-linecap="round"/>
+          </svg>
+          <span>PRE<em>XIA</em> · UNAL MINAS</span>
+        </div>
+        <p>Plataforma Oficial del Sistema de Evaluación por Puntos Prexia (PP) y Multiplicadores · Plan de Acción 2026-2.</p>
+      </div>
+      <div class="footer-links-row">
+        <a href="../../index.html">Portada Principal</a>
+        <a href="plataforma-prexia.html">Plataforma POA</a>
+        <a href="sistema-evaluacion-prexia.html">Manual Sistema PP</a>
+        <a href="../../data/prexia-users-db.json" target="_blank">Base de Datos JSON (Git)</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      let currentFilterLevel = "all";
+      let inspectedStudentId = null; // Permite al Maestro inspeccionar la vista detallada de un estudiante
+
+      const loginView = document.getElementById("login-view");
+      const masterView = document.getElementById("master-view");
+      const studentView = document.getElementById("student-view");
+      const quickSwitcher = document.getElementById("quick-user-switcher");
+      const btnLogoutTop = document.getElementById("btn-logout-top");
+      const toastBanner = document.getElementById("toast-banner");
+
+      function showToast(msg) {
+        toastBanner.textContent = msg;
+        toastBanner.classList.add("show");
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => {
+          toastBanner.classList.remove("show");
+        }, 3800);
+      }
+
+      function updateTopStatusBar() {
+        const db = PrexiaDB.getDB();
+        const syncMeta = PrexiaDB.getGitSyncMeta();
+        const currentUser = PrexiaDB.getCurrentUser();
+        const dot = document.getElementById("git-status-dot");
+        const txt = document.getElementById("git-status-text");
+        const weekInd = document.getElementById("header-week-indicator");
+
+        const sem = db.meta.semanaActual || 6;
+        weekInd.textContent = `Corte activo: Semana ${sem} (Exigencia ${100 + sem - 1}%)`;
+
+        if (syncMeta.pendingChanges > 0) {
+          dot.classList.add("dirty");
+          txt.textContent = `Git: ${syncMeta.pendingChanges} cambio(s) guardado(s) localmente · Clic en "Guardar en Git"`;
+        } else {
+          dot.classList.remove("dirty");
+          txt.textContent = `DB Git: data/prexia-users-db.json · Sincronizado`;
+        }
+
+        // Poblar selector rápido
+        const optionsHtml = [
+          `<option value="">— Seleccionar perfil (${db.usuarios.length} usuarios) —</option>`
+        ];
+        db.usuarios.forEach((u) => {
+          const isMaster = u.rolSistema === "maestro";
+          const label = isMaster
+            ? `★ MAESTRO: ${u.nombre}`
+            : `Nivel ${u.nivel} (${PrexiaDB.LEVELS_CONFIG[u.nivel].rol}): ${u.nombre}`;
+          const selected = currentUser && currentUser.id === u.id ? "selected" : "";
+          optionsHtml.push(`<option value="${u.username}" ${selected}>${label}</option>`);
+        });
+        quickSwitcher.innerHTML = optionsHtml.join("");
+
+        btnLogoutTop.style.display = currentUser ? "inline-block" : "none";
+      }
+
+      // ── RENDERIZAR DIRECTORIO DE LOGIN POR NIVELES ──
+      function renderLoginDirectory() {
+        const db = PrexiaDB.getDB();
+        document.getElementById("login-kpi-users").textContent = `${db.usuarios.length} Perfiles`;
+
+        const container = document.getElementById("login-levels-directory");
+        const htmlBlocks = [];
+
+        [1, 2, 3, 4].forEach((lvl) => {
+          const cfg = PrexiaDB.LEVELS_CONFIG[lvl];
+          const usersInLevel = db.usuarios.filter((u) => u.rolSistema !== "maestro" && u.nivel === lvl);
+
+          const cardsHtml = usersInLevel
+            .map((u) => {
+              const liq = PrexiaDB.calcularLiquidacionUsuario(u, db.meta.semanaActual);
+              return `
+                <article class="demo-user-card">
+                  <div>
+                    <div class="demo-user-top">
+                      <div class="avatar-circle">${u.avatar || "PX"}</div>
+                      <div class="demo-user-meta">
+                        <strong>${u.nombre}</strong>
+                        <span>${u.carrera} · Semestre ${u.semestre} (${liq.avanceCarreraPct}% carrera)</span>
+                      </div>
+                    </div>
+                    <div class="demo-user-stats" style="margin-top:10px;">
+                      <span class="stat-pill">Pacto: ${u.hsa} HSA (${liq.basePP} PP)</span>
+                      <span class="stat-pill mint">Liquidación: ${liq.finalPP} PP (${liq.cumplimientoPct}%)</span>
+                      <span class="stat-pill">+${liq.bonoPct}% Bono</span>
+                    </div>
+                  </div>
+                  <div class="demo-user-actions">
+                    <code>Usuario: <strong>${u.username}</strong> · Clave: 123</code>
+                    <button type="button" class="btn-enter-user" onclick="window.entrarConUsuario('${u.username}')">
+                      Iniciar sesión →
+                    </button>
+                  </div>
+                </article>
+              `;
+            })
+            .join("");
+
+          htmlBlocks.push(`
+            <div class="level-group-block" style="margin-bottom:16px;">
+              <div class="level-group-header">
+                <h3>Nivel ${lvl}: ${cfg.nombre} · Rol ${cfg.rol}</h3>
+                <span>Avance curricular: ${cfg.rangoPct} (${cfg.semestres})</span>
+              </div>
+              <div class="demo-user-cards">
+                ${cardsHtml || `<p style="font-size:13px;color:var(--muted);">No hay integrantes en este nivel actualmente.</p>`}
+              </div>
+            </div>
+          `);
+        });
+
+        container.innerHTML = htmlBlocks.join("");
+      }
+
+      // ── RENDERIZAR VISTA MAESTRO ──
+      function renderMasterView() {
+        const db = PrexiaDB.getDB();
+        const sem = db.meta.semanaActual || 6;
+        const exigenciaPct = 100 + (sem - 1);
+
+        document.getElementById("master-week-title").textContent = `Semana ${sem} · Meta ${exigenciaPct}%`;
+        document.getElementById("master-week-slider").value = sem;
+
+        const estudiantes = db.usuarios.filter((u) => u.rolSistema !== "maestro");
+        const countByLvl = { 1: 0, 2: 0, 3: 0, 4: 0 };
+        let totalPP = 0;
+        let totalMetaPP = 0;
+        let sumaCumplimiento = 0;
+        let superanMetaCount = 0;
+        let totalBadges = 0;
+
+        estudiantes.forEach((u) => {
+          countByLvl[u.nivel] = (countByLvl[u.nivel] || 0) + 1;
+          const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
+          totalPP += liq.finalPP;
+          totalMetaPP += liq.metaSemanaPP;
+          sumaCumplimiento += liq.cumplimientoPct;
+          if (liq.superoMeta) superanMetaCount += 1;
+          totalBadges += (u.insignias || []).length;
+        });
+
+        const avgComp = estudiantes.length ? Math.round(sumaCumplimiento / estudiantes.length) : 100;
+
+        document.getElementById("m-kpi-total-users").textContent = `${estudiantes.length} Consultores`;
+        document.getElementById("m-kpi-levels-dist").textContent = `N1: ${countByLvl[1]} · N2: ${countByLvl[2]} · N3: ${countByLvl[3]} · N4: ${countByLvl[4]}`;
+        document.getElementById("m-kpi-total-pp").textContent = `${totalPP.toLocaleString("es-CO")} PP`;
+        document.getElementById("m-kpi-target-pp").textContent = `Meta exigida Semana ${sem}: ${totalMetaPP.toLocaleString("es-CO")} PP`;
+        document.getElementById("m-kpi-avg-comp").textContent = `${avgComp}%`;
+        document.getElementById("m-kpi-superan").textContent = `${superanMetaCount} de ${estudiantes.length} superan la curva del +1%`;
+        document.getElementById("m-kpi-badges").textContent = `${totalBadges} Insignias`;
+
+        const filtered =
+          currentFilterLevel === "all"
+            ? estudiantes
+            : estudiantes.filter((u) => String(u.nivel) === String(currentFilterLevel));
+
+        const tbody = document.getElementById("master-users-tbody");
+        tbody.innerHTML = filtered
+          .map((u) => {
+            const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
+            const cfg = PrexiaDB.LEVELS_CONFIG[u.nivel];
+
+            const multButtons = cfg.multiplicadores
+              .map((m) => {
+                const isActive = (u.multiplicadoresActivos || []).includes(m.id);
+                return `
+                  <button type="button"
+                    class="mult-chip-btn ${isActive ? "active" : ""}"
+                    title="${m.condicion}"
+                    onclick="window.maestroToggleMult('${u.id}', '${m.id}')">
+                    ${isActive ? "✓ " : "+ "}${m.nombre} (+${m.bono}%)
+                  </button>
+                `;
+              })
+              .join("");
+
+            const canPromote = u.nivel < 4;
+
+            return `
+              <tr>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar-circle" style="width:34px;height:34px;font-size:12px;">${u.avatar}</div>
+                    <div>
+                      <strong style="font-size:14px;color:var(--ink);display:block;">${u.nombre}</strong>
+                      <span style="font-size:11px;color:var(--muted);">${u.carrera} · Sem. ${u.semestre}</span><br>
+                      <code style="font-size:11px;color:var(--mint-dark);">usr: ${u.username}</code>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <span class="lvl-badge lvl-${u.nivel}">Nivel ${u.nivel} · ${cfg.rol}</span>
+                  <div style="font-size:11px;color:var(--muted);margin-top:4px;">${cfg.nombre} (${cfg.rangoPct})</div>
+                </td>
+                <td>
+                  <strong>${u.creditosAprobados} / ${u.creditosTotales} créd. (${liq.avanceCarreraPct}%)</strong>
+                  <div class="mini-progress-bar">
+                    <div class="mini-progress-fill" style="width:${liq.avanceCarreraPct}%;"></div>
+                  </div>
+                  <span style="font-size:11px;color:var(--muted);display:block;margin-top:4px;">
+                    Acumulado: ${(u.puntosAcumuladosSemestre || 0).toLocaleString("es-CO")} PP
+                  </span>
+                </td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                    <strong>${u.hsa} HSA</strong>
+                    <span style="color:var(--muted);">(${liq.basePP} PP)</span>
+                    <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa - 1})" title="Reducir 1 HSA">-</button>
+                    <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa + 1})" title="Aumentar 1 HSA">+</button>
+                  </div>
+                  <div style="font-size:11px;color:var(--muted);">
+                    Meta Sem. ${sem} (${exigenciaPct}%): <strong>${liq.metaSemanaPP} PP</strong>
+                  </div>
+                </td>
+                <td>
+                  <div class="mult-chip-list">
+                    ${multButtons}
+                  </div>
+                </td>
+                <td>
+                  <strong style="font-size:16px;color:var(--ink);display:block;">${liq.finalPP} PP</strong>
+                  <span style="font-size:11px;font-weight:800;color:${liq.superoMeta ? "#0f652e" : "#b45309"};">
+                    ${liq.cumplimientoPct}% · ${liq.superoMeta ? "Supera Meta" : `Faltan ${liq.brechaPP} PP`}
+                  </span>
+                  <div style="font-size:11px;color:var(--muted);margin-top:3px;">
+                    Bono activo: +${liq.bonoPct}% (+${liq.bonoPP} PP)
+                  </div>
+                </td>
+                <td>
+                  <div class="action-btn-group">
+                    <button type="button" class="btn-sm-action promote" onclick="window.maestroAvanzarCreditos('${u.id}', false)">
+                      ⬆ +18 Créd. / Avanzar Semestre
+                    </button>
+                    ${
+                      canPromote
+                        ? `<button type="button" class="btn-sm-action" onclick="window.maestroAvanzarCreditos('${u.id}', true)">
+                            🚀 Ascender a Nivel ${u.nivel + 1} (${PrexiaDB.LEVELS_CONFIG[u.nivel + 1].rol})
+                           </button>`
+                        : `<span style="font-size:11px;color:var(--mint-dark);font-weight:700;">★ Nivel Máximo (Líder Nivel 4)</span>`
+                    }
+                    <button type="button" class="btn-sm-action" onclick="window.inspeccionarEstudiante('${u.id}')">
+                      👁 Auditar Expediente Detallado
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      // ── RENDERIZAR VISTA INDIVIDUAL DEL ESTUDIANTE ──
+      function renderStudentView(user) {
+        const db = PrexiaDB.getDB();
+        const sem = db.meta.semanaActual || 6;
+        const liq = PrexiaDB.calcularLiquidacionUsuario(user, sem);
+        const cfg = PrexiaDB.LEVELS_CONFIG[user.nivel];
+
+        const loggedUser = PrexiaDB.getCurrentUser();
+        const isMasterInspecting = loggedUser && loggedUser.rolSistema === "maestro" && inspectedStudentId;
+        document.getElementById("master-inspect-banner").style.display = isMasterInspecting ? "flex" : "none";
+
+        document.getElementById("st-avatar").textContent = user.avatar || "PX";
+        document.getElementById("st-level-badge").textContent = `NIVEL ${user.nivel} · ${cfg.nombre.toUpperCase()} · ROL ${cfg.rol.toUpperCase()}`;
+        document.getElementById("st-name").textContent = user.nombre;
+        document.getElementById("st-meta-line").textContent = `${user.carrera} · Semestre ${user.semestre} (${user.creditosAprobados}/${user.creditosTotales} créditos) · ${user.linea}`;
+
+        document.getElementById("st-week-label").textContent = `Liquidación Semana ${sem} (Meta ${liq.curvaPct}%)`;
+        document.getElementById("st-final-pp-big").textContent = `${liq.finalPP} PP · ${liq.cumplimientoPct}% Cumplimiento`;
+
+        document.getElementById("st-kpi-hsa").textContent = `${user.hsa} HSA`;
+        document.getElementById("st-kpi-base").textContent = `Línea base: ${liq.basePP} PP / semana`;
+        document.getElementById("st-kpi-target-label").textContent = `Meta Exigida Sem. ${sem} (${liq.curvaPct}%)`;
+        document.getElementById("st-kpi-target").textContent = `${liq.metaSemanaPP} PP`;
+        document.getElementById("st-kpi-bonus").textContent = `+${liq.bonoPct}% (+${liq.bonoPP} PP)`;
+        document.getElementById("st-kpi-status").textContent = liq.superoMeta
+          ? "✓ Supera la meta progresiva con insignia"
+          : `Activa +${Math.max(1, liq.curvaPct - 100 - liq.bonoPct)}% en bonos para cubrir la curva`;
+        document.getElementById("st-kpi-career").textContent = `${liq.avanceCarreraPct}%`;
+        document.getElementById("st-kpi-credits").textContent = `${user.creditosAprobados} de ${user.creditosTotales} créditos aprobados`;
+
+        // Escalera de los 4 niveles
+        const stepsHtml = [1, 2, 3, 4]
+          .map((lvl) => {
+            const lCfg = PrexiaDB.LEVELS_CONFIG[lvl];
+            let stateClass = "";
+            let stateLabel = `Nivel ${lvl} · ${lCfg.rangoPct}`;
+            if (lvl < user.nivel) {
+              stateClass = "completed";
+              stateLabel = `✓ Nivel ${lvl} Superado`;
+            } else if (lvl === user.nivel) {
+              stateClass = "current";
+              stateLabel = `● Nivel ${lvl} Actual (${lCfg.rangoPct})`;
+            }
+            return `
+              <div class="ladder-step ${stateClass}">
+                <span class="ladder-step-tag">${stateLabel}</span>
+                <h4>${lCfg.nombre} · ${lCfg.rol}</h4>
+                <p>${lCfg.descripcion}</p>
+                <div style="margin-top:8px;font-family:var(--font-display);font-size:11px;font-weight:700;color:var(--mint-dark);">
+                  ${lCfg.semestres} · ${lCfg.creditosRef}
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+        document.getElementById("st-ladder-steps").innerHTML = stepsHtml;
+
+        const forceBtn = document.getElementById("btn-st-force-levelup");
+        if (user.nivel < 4) {
+          const nextCfg = PrexiaDB.LEVELS_CONFIG[user.nivel + 1];
+          forceBtn.style.display = "inline-block";
+          forceBtn.textContent = `🚀 Ascender a Nivel ${user.nivel + 1} (${nextCfg.rol})`;
+        } else {
+          forceBtn.style.display = "none";
+        }
+
+        // Multiplicadores interactivos del nivel actual
+        const multListEl = document.getElementById("st-multipliers-list");
+        multListEl.innerHTML = cfg.multiplicadores
+          .map((m) => {
+            const active = (user.multiplicadoresActivos || []).includes(m.id);
+            return `
+              <div class="mult-card-interactive ${active ? "active" : ""}">
+                <div>
+                  <strong style="font-family:var(--font-display);font-size:15px;color:var(--ink);">
+                    ${m.nombre} <span style="color:var(--mint-dark);">+${m.bono}% (+${Math.round(liq.basePP * (m.bono / 100))} PP)</span>
+                  </strong>
+                  <p style="font-size:13px;color:var(--muted);margin:4px 0 0;">${m.condicion}</p>
+                </div>
+                <button type="button"
+                  class="btn-enter-user"
+                  style="background:${active ? "#0f652e" : "var(--navy)"};white-space:nowrap;"
+                  onclick="window.estudianteToggleMult('${user.id}', '${m.id}')">
+                  ${active ? "✓ Acreditado" : "Acreditar Bono"}
+                </button>
+              </div>
+            `;
+          })
+          .join("");
+
+        // Selector de multiplicador en formulario de entregables
+        const delivMultSelect = document.getElementById("deliv-mult");
+        delivMultSelect.innerHTML =
+          `<option value="">— Solo registrar entregable —</option>` +
+          cfg.multiplicadores
+            .map((m) => `<option value="${m.id}">Acreditar: ${m.nombre} (+${m.bono}%)</option>`)
+            .join("");
+
+        // Lista de entregables
+        const delivContainer = document.getElementById("st-deliverables-list");
+        delivContainer.innerHTML = (user.entregables || [])
+          .map(
+            (e) => `
+            <div style="padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:2px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--font-display);font-size:12px;">
+              <div>
+                <strong style="color:var(--ink);display:block;">${e.titulo}</strong>
+                <span style="color:var(--muted);">Semana ${e.semana} · ${e.tipo}</span>
+              </div>
+              <span class="lvl-badge lvl-1">${e.estado}</span>
+            </div>
+          `
+          )
+          .join("");
+
+        // Insignias
+        const badgesCloud = document.getElementById("st-badges-cloud");
+        badgesCloud.innerHTML = (user.insignias || [])
+          .map((b) => `<span class="insignia-pill">★ ${b}</span>`)
+          .join("");
+
+        // Historial quincenal
+        const histTbody = document.getElementById("st-history-tbody");
+        histTbody.innerHTML = (user.historialQuincenal || [])
+          .map(
+            (h) => `
+            <tr>
+              <td><strong>Sem. ${h.semana}</strong></td>
+              <td>${h.basePP} PP</td>
+              <td>${h.metaPP} PP</td>
+              <td>+${h.bonoPct}%</td>
+              <td><strong>${h.finalPP} PP</strong></td>
+              <td><strong style="color:${h.cumplimiento >= 100 ? "#0f652e" : "#b45309"};">${h.cumplimiento}%</strong></td>
+            </tr>
+          `
+          )
+          .join("");
+
+        // Bitácora de crecimiento
+        const logList = document.getElementById("st-growth-log");
+        logList.innerHTML = (user.bitacoraCrecimiento || [])
+          .map(
+            (item) => `
+            <li class="timeline-item">
+              <strong>${item.fecha}</strong>
+              <span>${item.evento}</span>
+            </li>
+          `
+          )
+          .join("");
+
+        // Conectar botones de avance de este usuario
+        document.getElementById("btn-st-promote-quick").onclick = () => window.maestroAvanzarCreditos(user.id, false);
+        document.getElementById("btn-st-add-credits").onclick = () => window.maestroAvanzarCreditos(user.id, false);
+        document.getElementById("btn-st-force-levelup").onclick = () => window.maestroAvanzarCreditos(user.id, true);
+
+        const formDeliv = document.getElementById("form-student-deliverable");
+        formDeliv.onsubmit = (ev) => {
+          ev.preventDefault();
+          const titulo = document.getElementById("deliv-title").value.trim();
+          const multId = document.getElementById("deliv-mult").value;
+          const badge = document.getElementById("deliv-badge").value.trim();
+          if (!titulo) return;
+          PrexiaDB.agregarEntregable(user.id, {
+            titulo,
+            multId: multId || null,
+            insigniaExtra: badge || null,
+            tipo: multId ? "Multiplicador verificable" : `Entregable Nivel ${user.nivel}`,
+            estado: "Aprobado"
+          });
+          document.getElementById("deliv-title").value = "";
+          document.getElementById("deliv-badge").value = "";
+          showToast(`Entregable registrado y puntos actualizados para ${user.nombre}.`);
+          renderApp();
+        };
+      }
+
+      // ── ENRUTADOR DE VISTAS ──
+      function renderApp() {
+        updateTopStatusBar();
+        const currentUser = PrexiaDB.getCurrentUser();
+        const db = PrexiaDB.getDB();
+
+        if (!currentUser) {
+          loginView.style.display = "block";
+          masterView.style.display = "none";
+          studentView.style.display = "none";
+          renderLoginDirectory();
+          return;
+        }
+
+        loginView.style.display = "none";
+
+        if (currentUser.rolSistema === "maestro") {
+          if (inspectedStudentId) {
+            const target = db.usuarios.find((u) => u.id === inspectedStudentId);
+            if (target) {
+              masterView.style.display = "none";
+              studentView.style.display = "block";
+              renderStudentView(target);
+              return;
+            }
+          }
+          masterView.style.display = "block";
+          studentView.style.display = "none";
+          renderMasterView();
+        } else {
+          masterView.style.display = "none";
+          studentView.style.display = "block";
+          renderStudentView(currentUser);
+        }
+      }
+
+      // ── FUNCIONES GLOBALES INTERACTIVAS ──
+      window.entrarConUsuario = function (username) {
+        inspectedStudentId = null;
+        const res = PrexiaDB.login(username, "123");
+        if (res.ok) {
+          showToast(`Sesión iniciada como ${res.user.nombre} (${res.user.rolSistema === "maestro" ? "Usuario Maestro" : "Nivel " + res.user.nivel}).`);
+          renderApp();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      };
+
+      window.inspeccionarEstudiante = function (userId) {
+        inspectedStudentId = userId;
+        renderApp();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      window.volverAPanelMaestro = function () {
+        inspectedStudentId = null;
+        renderApp();
+      };
+
+      window.maestroToggleMult = function (userId, multId) {
+        const u = PrexiaDB.toggleMultiplicador(userId, multId);
+        if (u) {
+          showToast(`Multiplicador actualizado para ${u.nombre}.`);
+          renderApp();
+        }
+      };
+
+      window.estudianteToggleMult = function (userId, multId) {
+        const u = PrexiaDB.toggleMultiplicador(userId, multId);
+        if (u) {
+          showToast(`Multiplicador actualizado en tu liquidación quincenal.`);
+          renderApp();
+        }
+      };
+
+      window.maestroCambiarHSA = function (userId, nuevasHSA) {
+        const u = PrexiaDB.actualizarPactoHSA(userId, nuevasHSA);
+        if (u) {
+          showToast(`Pacto actualizado a ${u.hsa} HSA (${u.hsa * 100} PP base) para ${u.nombre}.`);
+          renderApp();
+        }
+      };
+
+      window.maestroAvanzarCreditos = function (userId, forzarAscensoNivel) {
+        const res = PrexiaDB.avanzarCrecimientoUsuario(userId, {
+          creditosExtra: 18,
+          forzarAscensoNivel
+        });
+        if (res) {
+          if (res.ascendio) {
+            const cfg = PrexiaDB.LEVELS_CONFIG[res.nivelNuevo];
+            showToast(`🎉 ¡${res.user.nombre} ascendió a Nivel ${res.nivelNuevo} (${cfg.nombre} · Rol ${cfg.rol})!`);
+          } else {
+            showToast(`Avance académico registrado para ${res.user.nombre} (${res.user.creditosAprobados}/172 créditos).`);
+          }
+          renderApp();
+        }
+      };
+
+      window.abrirModalGit = function () {
+        document.getElementById("git-modal").classList.add("open");
+      };
+
+      window.cerrarModalGit = function () {
+        document.getElementById("git-modal").classList.remove("open");
+      };
+
+      // ── EVENTOS DE FORMULARIOS Y BOTONES ──
+      document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const u = document.getElementById("login-user").value;
+        const p = document.getElementById("login-pass").value;
+        const errBox = document.getElementById("login-error-box");
+        const res = PrexiaDB.login(u, p);
+        if (!res.ok) {
+          errBox.textContent = res.error;
+          errBox.style.display = "block";
+        } else {
+          errBox.style.display = "none";
+          inspectedStudentId = null;
+          showToast(`Bienvenido(a), ${res.user.nombre}.`);
+          renderApp();
+        }
+      });
+
+      quickSwitcher.addEventListener("change", () => {
+        const val = quickSwitcher.value;
+        if (!val) {
+          PrexiaDB.logout();
+          inspectedStudentId = null;
+          renderApp();
+        } else {
+          window.entrarConUsuario(val);
+        }
+      });
+
+      btnLogoutTop.addEventListener("click", () => {
+        PrexiaDB.logout();
+        inspectedStudentId = null;
+        showToast("Sesión finalizada. Selecciona cualquier usuario para ingresar.");
+        renderApp();
+      });
+
+      document.getElementById("master-week-slider").addEventListener("input", (e) => {
+        PrexiaDB.cambiarSemanaGlobal(e.target.value);
+        renderApp();
+      });
+
+      document.getElementById("btn-advance-week").addEventListener("click", () => {
+        const db = PrexiaDB.getDB();
+        const next = db.meta.semanaActual < 16 ? db.meta.semanaActual + 1 : 1;
+        PrexiaDB.cambiarSemanaGlobal(next);
+        showToast(`Corte avanzado a Semana ${next} (Meta exigida: ${100 + next - 1}%).`);
+        renderApp();
+      });
+
+      document.querySelectorAll("#master-level-filters .filter-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#master-level-filters .filter-pill").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilterLevel = btn.getAttribute("data-filter");
+          renderMasterView();
+        });
+      });
+
+      document.getElementById("btn-toggle-new-user-form").addEventListener("click", () => {
+        const drawer = document.getElementById("new-user-drawer");
+        drawer.style.display = drawer.style.display === "none" ? "block" : "none";
+      });
+
+      document.getElementById("form-create-user").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const nuevo = PrexiaDB.crearNuevoUsuario({
+          nombre: document.getElementById("nu-nombre").value,
+          username: document.getElementById("nu-user").value,
+          carrera: document.getElementById("nu-carrera").value,
+          creditosAprobados: document.getElementById("nu-creditos").value,
+          hsa: document.getElementById("nu-hsa").value
+        });
+        document.getElementById("nu-nombre").value = "";
+        document.getElementById("nu-user").value = "";
+        document.getElementById("new-user-drawer").style.display = "none";
+        showToast(`Nuevo integrante creado: ${nuevo.nombre} en Nivel ${nuevo.nivel} (${PrexiaDB.LEVELS_CONFIG[nuevo.nivel].rol}).`);
+        renderApp();
+      });
+
+      // Eventos Modal Git
+      document.getElementById("btn-open-git-modal").addEventListener("click", window.abrirModalGit);
+
+      document.getElementById("btn-save-local-git").addEventListener("click", async () => {
+        const fb = document.getElementById("local-git-feedback");
+        fb.style.display = "block";
+        fb.style.color = "var(--ink)";
+        fb.textContent = "Guardando en data/prexia-users-db.json y ejecutando git commit...";
+        try {
+          const msg = document.getElementById("git-commit-msg").value;
+          const doPush = document.getElementById("git-do-push").checked;
+          const res = await PrexiaDB.guardarEnServidorGitLocal(msg, doPush);
+          fb.style.color = "#0f652e";
+          fb.innerHTML = `✓ Guardado en <code>data/prexia-users-db.json</code> · Commit: <strong>${res.git.lastCommit || "OK"}</strong>`;
+          showToast("Base de datos guardada y confirmada en Git local.");
+          updateTopStatusBar();
+        } catch (err) {
+          fb.style.color = "#b45309";
+          fb.innerHTML = `Aviso: Para commit directo en disco local, inicia <code>python3 scripts/servidor_prexia_git.py</code> o descarga el archivo JSON abajo. (Tus cambios ya están guardados en el navegador).`;
+        }
+      });
+
+      document.getElementById("btn-save-github-api").addEventListener("click", async () => {
+        const fb = document.getElementById("gh-api-feedback");
+        fb.style.display = "block";
+        fb.style.color = "var(--ink)";
+        fb.textContent = "Conectando con GitHub API...";
+        try {
+          const repoFull = document.getElementById("gh-repo").value.trim().split("/");
+          const token = document.getElementById("gh-token").value.trim();
+          const msg = document.getElementById("git-commit-msg").value.trim();
+          await PrexiaDB.guardarEnGitHubAPI({
+            token,
+            owner: repoFull[0] || "carlmarx17",
+            repo: repoFull[1] || "proyectoprexia",
+            commitMessage: msg
+          });
+          fb.style.color = "#0f652e";
+          fb.textContent = "✓ Commit subido directamente a GitHub en data/prexia-users-db.json.";
+          showToast("Cambios guardados en el repositorio de GitHub.");
+          updateTopStatusBar();
+        } catch (err) {
+          fb.style.color = "#991b1b";
+          fb.textContent = "Error: " + err.message;
+        }
+      });
+
+      document.getElementById("import-json-input").addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            PrexiaDB.importarJSONDesdeTexto(reader.result);
+            showToast("Base de datos JSON importada correctamente.");
+            renderApp();
+          } catch (err) {
+            alert(err.message);
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      document.getElementById("btn-reset-db").addEventListener("click", () => {
+        PrexiaDB.resetToFactoryGitDB();
+        showToast("Base de datos restaurada al estado original del repositorio Git.");
+        renderApp();
+      });
+
+      // Sincronizar con data/prexia-users-db.json al iniciar y permitir entrar por parámetro ?user=
+      PrexiaDB.syncFromCanonicalJSON("../../data/prexia-users-db.json").then(() => {
+        const params = new URLSearchParams(window.location.search);
+        const autoUser = params.get("user");
+        if (autoUser) {
+          PrexiaDB.login(autoUser, "123");
+        }
+        renderApp();
+      });
+    })();
+  </script>
+</body>
+</html>

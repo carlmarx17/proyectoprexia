@@ -1,0 +1,506 @@
+{
+  "meta": {
+    "sistema": "PREXIA POA · Sistema de Evaluación por Puntos Prexia (PP) y Multiplicadores",
+    "periodo": "2026-2",
+    "semanaActual": 6,
+    "totalSemanas": 16,
+    "creditosCarrera": 172,
+    "semestresCarrera": 10,
+    "repositorioGit": "https://github.com/carlmarx17/proyectoprexia",
+    "archivoDatos": "data/prexia-users-db.json",
+    "ultimaActualizacion": "2026-10-17T14:40:00-05:00",
+    "ultimoAutor": "Prof. José Ignacio Maya (Maestro)"
+  },
+  "usuarios": [
+    {
+      "id": "usr-maestro",
+      "username": "maestro",
+      "password": "123",
+      "nombre": "Prof. José Ignacio Maya",
+      "email": "jimaya@unal.edu.co",
+      "rolSistema": "maestro",
+      "cargo": "Director General y Coordinador Maestro POA",
+      "carrera": "Docente Dpto. Ingeniería de la Organización",
+      "linea": "Dirección General · 4 Líneas PREXIA",
+      "avatar": "JM",
+      "nivel": 4,
+      "semestre": 10,
+      "creditosAprobados": 172,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "hsa": 8,
+      "multiplicadoresActivos": ["n4_impacto", "n4_relaciones", "n4_curso"],
+      "puntosAcumuladosSemestre": 5420,
+      "insignias": [
+        "Fundador PREXIA UNAL",
+        "Auditor Maestro POA 2026-2",
+        "Articulación Internacional EISI"
+      ],
+      "entregables": [
+        {
+          "id": "ent-m1",
+          "semana": 1,
+          "titulo": "Firma de Pactos HSA 2026-2 con toda la cohorte",
+          "tipo": "Gobernanza",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-m2",
+          "semana": 4,
+          "titulo": "Auditoría Quincenal 2 y Cuadro de Honor Bienestar",
+          "tipo": "Auditoría",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 800, "metaPP": 800, "bonoPct": 23, "finalPP": 984, "cumplimiento": 123 },
+        { "semana": 2, "basePP": 800, "metaPP": 808, "bonoPct": 23, "finalPP": 984, "cumplimiento": 122 },
+        { "semana": 4, "basePP": 800, "metaPP": 824, "bonoPct": 23, "finalPP": 984, "cumplimiento": 119 },
+        { "semana": 6, "basePP": 800, "metaPP": 840, "bonoPct": 23, "finalPP": 984, "cumplimiento": 117 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-08-01", "evento": "Configuración inicial del Plan de Acción 2026-2 y matriz de Puntos Prexia." }
+      ]
+    },
+    {
+      "id": "usr-ana",
+      "username": "ana",
+      "password": "123",
+      "nombre": "Ana Sofía Restrepo",
+      "email": "asrestrepo@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Encargada de Redes y Cápsulas",
+      "carrera": "Ingeniería Industrial",
+      "linea": "PREXIA Consultoría · Apoyo Conecta",
+      "avatar": "AR",
+      "nivel": 1,
+      "semestre": 2,
+      "creditosAprobados": 32,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": true,
+      "detalleMaterias": "Cálculo Integral, Álgebra Lineal, Física Mecánica",
+      "hsa": 5,
+      "multiplicadoresActivos": ["n1_contenido", "n1_valor"],
+      "puntosAcumuladosSemestre": 1595,
+      "insignias": [
+        "Excelencia en Contenido Sem. 1",
+        "Generadora de Cápsulas POA",
+        "Pertenencia Nivel 1"
+      ],
+      "entregables": [
+        {
+          "id": "ent-a1",
+          "semana": 1,
+          "titulo": "Calendario de publicaciones 100% al día sin retrasos",
+          "tipo": "Multiplicador +3%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-a2",
+          "semana": 4,
+          "titulo": "2 cápsulas de conocimiento recopiladas y editadas",
+          "tipo": "Multiplicador +4%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-a3",
+          "semana": 6,
+          "titulo": "Infografía sobre Cultura de un Consultor Prexia",
+          "tipo": "Multiplicador +2%",
+          "estado": "En revisión"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 500, "metaPP": 500, "bonoPct": 3, "finalPP": 515, "cumplimiento": 103 },
+        { "semana": 2, "basePP": 500, "metaPP": 505, "bonoPct": 5, "finalPP": 525, "cumplimiento": 104 },
+        { "semana": 4, "basePP": 500, "metaPP": 515, "bonoPct": 7, "finalPP": 535, "cumplimiento": 104 },
+        { "semana": 6, "basePP": 500, "metaPP": 525, "bonoPct": 7, "finalPP": 535, "cumplimiento": 102 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-08-05", "evento": "Ingreso en Nivel 1 (Fundamentación · 18.6% avance curricular). Pacto de 5 HSA (500 PP base)." },
+        { "fecha": "2026-09-15", "evento": "Acreditó bono de Generación de Valor (+4%) tras publicar su segunda cápsula técnica." }
+      ]
+    },
+    {
+      "id": "usr-mateo",
+      "username": "mateo",
+      "password": "123",
+      "nombre": "Mateo Valencia Ríos",
+      "email": "mvalenciar@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Operativo de Logística y Eventos",
+      "carrera": "Ingeniería Administrativa",
+      "linea": "PREXIA Consultoría",
+      "avatar": "MV",
+      "nivel": 1,
+      "semestre": 3,
+      "creditosAprobados": 49,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": true,
+      "detalleMaterias": "Cálculo en Varias Variables, Física de Electricidad y Magnetismo",
+      "hsa": 4,
+      "multiplicadoresActivos": ["n1_contenido", "n1_cultura"],
+      "puntosAcumuladosSemestre": 1248,
+      "insignias": [
+        "Rigor Operativo EISI",
+        "Cultura Consultor"
+      ],
+      "entregables": [
+        {
+          "id": "ent-mt1",
+          "semana": 2,
+          "titulo": "Protocolo logístico de aulas M8B y Auditorio M3",
+          "tipo": "Operativo Nivel 1",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-mt2",
+          "semana": 6,
+          "titulo": "Pieza editorial sobre hábitos del consultor junior",
+          "tipo": "Multiplicador +2%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 400, "metaPP": 400, "bonoPct": 3, "finalPP": 412, "cumplimiento": 103 },
+        { "semana": 2, "basePP": 400, "metaPP": 404, "bonoPct": 3, "finalPP": 412, "cumplimiento": 102 },
+        { "semana": 4, "basePP": 400, "metaPP": 412, "bonoPct": 5, "finalPP": 420, "cumplimiento": 102 },
+        { "semana": 6, "basePP": 400, "metaPP": 420, "bonoPct": 5, "finalPP": 420, "cumplimiento": 100 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-08-05", "evento": "Ubicado en Nivel 1 (28.5% avance curricular). A solo 3 créditos de ascender a Nivel 2 (Gestor)." }
+      ]
+    },
+    {
+      "id": "usr-camila",
+      "username": "camila",
+      "password": "123",
+      "nombre": "Camila Mejía Botero",
+      "email": "cmejiab@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Gestora de Bienestar y Tracción Digital",
+      "carrera": "Ingeniería Administrativa",
+      "linea": "PREXIA Consultoría · Proyecto 3 Bienestar",
+      "avatar": "CM",
+      "nivel": 2,
+      "semestre": 5,
+      "creditosAprobados": 82,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "detalleMaterias": "Ingeniería Económica, Estadística II, Marketing Organizacional",
+      "hsa": 6,
+      "multiplicadoresActivos": ["n2_traccion", "n2_convocatoria", "n2_bienestar"],
+      "puntosAcumuladosSemestre": 1998,
+      "insignias": [
+        "Ascenso a Gestora Nivel 2",
+        "Tracción Digital +15%",
+        "Embajadora de Bienestar 100%"
+      ],
+      "entregables": [
+        {
+          "id": "ent-c1",
+          "semana": 2,
+          "titulo": "Crecimiento del 18.4% en alcance orgánico de la línea",
+          "tipo": "Multiplicador +5%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-c2",
+          "semana": 4,
+          "titulo": "Integración semestral con 78% de asistencia efectiva",
+          "tipo": "Multiplicador +4%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-c3",
+          "semana": 6,
+          "titulo": "Reconocimientos individuales quincenales al 100%",
+          "tipo": "Multiplicador +2%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 600, "metaPP": 600, "bonoPct": 6, "finalPP": 636, "cumplimiento": 106 },
+        { "semana": 2, "basePP": 600, "metaPP": 606, "bonoPct": 9, "finalPP": 654, "cumplimiento": 108 },
+        { "semana": 4, "basePP": 600, "metaPP": 618, "bonoPct": 11, "finalPP": 666, "cumplimiento": 108 },
+        { "semana": 6, "basePP": 600, "metaPP": 630, "bonoPct": 11, "finalPP": 666, "cumplimiento": 106 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-02-10", "evento": "Ingresó como Nivel 1 Operativo en 2026-1." },
+        { "fecha": "2026-08-02", "evento": "Ascendió a Nivel 2 (Transición · Rol Gestor) al superar el 31% de créditos aprobados (47.7%)." }
+      ]
+    },
+    {
+      "id": "usr-santiago",
+      "username": "santiago",
+      "password": "123",
+      "nombre": "Santiago Gómez Arango",
+      "email": "sgomeza@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Gestor de Simulaciones Comerciales y Web",
+      "carrera": "Ingeniería Industrial",
+      "linea": "PREXIA Consultoría · Emprende",
+      "avatar": "SG",
+      "nivel": 2,
+      "semestre": 6,
+      "creditosAprobados": 101,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "detalleMaterias": "Investigación de Operaciones, Gestión Tecnológica, Costos",
+      "hsa": 5,
+      "multiplicadoresActivos": ["n2_traccion", "n2_convocatoria"],
+      "puntosAcumuladosSemestre": 1635,
+      "insignias": [
+        "Poder de Convocatoria (>70%)",
+        "Arquitecto Web PREXIA"
+      ],
+      "entregables": [
+        {
+          "id": "ent-s1",
+          "semana": 3,
+          "titulo": "Simulación comercial B2B para portafolio de consultoría",
+          "tipo": "Proyecto Nivel 2",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-s2",
+          "semana": 6,
+          "titulo": "Convocatoria plenaria VI EISI con 74% de participación",
+          "tipo": "Multiplicador +4%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 500, "metaPP": 500, "bonoPct": 5, "finalPP": 525, "cumplimiento": 105 },
+        { "semana": 2, "basePP": 500, "metaPP": 505, "bonoPct": 5, "finalPP": 525, "cumplimiento": 104 },
+        { "semana": 4, "basePP": 500, "metaPP": 515, "bonoPct": 9, "finalPP": 545, "cumplimiento": 106 },
+        { "semana": 6, "basePP": 500, "metaPP": 525, "bonoPct": 9, "finalPP": 545, "cumplimiento": 104 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-08-05", "evento": "Nivel 2 consolidado (58.7% de avance curricular). Candidato directo a Nivel 3 Consultor Junior." }
+      ]
+    },
+    {
+      "id": "usr-carlos",
+      "username": "carlos",
+      "password": "123",
+      "nombre": "Carlos Alberto Martínez",
+      "email": "camartinez@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Consultor Junior · Líder Técnico de Diagnóstico",
+      "carrera": "Ingeniería Industrial",
+      "linea": "PREXIA Consultoría",
+      "avatar": "CM",
+      "nivel": 3,
+      "semestre": 8,
+      "creditosAprobados": 132,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "detalleMaterias": "Ingeniería de Métodos, Simulación Discreta, Consultoría Organizacional",
+      "hsa": 8,
+      "multiplicadoresActivos": ["n3_analitica", "n3_curricular", "n3_productividad"],
+      "puntosAcumuladosSemestre": 2760,
+      "insignias": [
+        "Efectividad Analítica Impecable (+6%)",
+        "Diseñador Curricular con Datos Reales",
+        "Productividad Extra +4% Línea",
+        "Cuadro de Honor POA"
+      ],
+      "entregables": [
+        {
+          "id": "ent-ca1",
+          "semana": 1,
+          "titulo": "Informe final de diagnóstico MiPyme entregado con calidad impecable",
+          "tipo": "Multiplicador +6%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-ca2",
+          "semana": 4,
+          "titulo": "Caso de simulación con datos reales del sector manufacturero",
+          "tipo": "Multiplicador +5%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-ca3",
+          "semana": 6,
+          "titulo": "Vinculación de emprendimiento adicional sobre la cuota pactada",
+          "tipo": "Multiplicador +4%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 800, "metaPP": 800, "bonoPct": 6, "finalPP": 848, "cumplimiento": 106 },
+        { "semana": 2, "basePP": 800, "metaPP": 808, "bonoPct": 11, "finalPP": 888, "cumplimiento": 110 },
+        { "semana": 4, "basePP": 800, "metaPP": 824, "bonoPct": 15, "finalPP": 920, "cumplimiento": 112 },
+        { "semana": 6, "basePP": 800, "metaPP": 840, "bonoPct": 15, "finalPP": 920, "cumplimiento": 110 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2025-08-10", "evento": "Ascendió de Nivel 2 (Gestor) a Nivel 3 (Consultor Junior) al superar el 61% de la carrera." },
+        { "fecha": "2026-08-12", "evento": "Caso testigo Semana 1: 8 HSA (800 PP base) + 6% Efectividad Analítica = 848 PP (106% cumplimiento)." },
+        { "fecha": "2026-10-01", "evento": "Completó los 3 multiplicadores de Nivel 3 (+15% total = 920 PP semanales)." }
+      ]
+    },
+    {
+      "id": "usr-valentina",
+      "username": "valentina",
+      "password": "123",
+      "nombre": "Valentina Salazar Cano",
+      "email": "vsalazarc@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Consultora Junior · Analítica y Datos Reales",
+      "carrera": "Ingeniería de Sistemas e Informática",
+      "linea": "PREXIA Consultoría · Investiga",
+      "avatar": "VS",
+      "nivel": 3,
+      "semestre": 9,
+      "creditosAprobados": 144,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "detalleMaterias": "Ciencia de Datos Aplicada, Arquitectura de Software, Finanzas",
+      "hsa": 6,
+      "multiplicadoresActivos": ["n3_analitica", "n3_curricular"],
+      "puntosAcumuladosSemestre": 1998,
+      "insignias": [
+        "Efectividad Analítica (+6%)",
+        "Simulación Sectorial Real"
+      ],
+      "entregables": [
+        {
+          "id": "ent-v1",
+          "semana": 2,
+          "titulo": "Tablero de indicadores financieros para empresa aliada",
+          "tipo": "Multiplicador +6%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-v2",
+          "semana": 5,
+          "titulo": "Repositorio de datasets reales anonimizados para el curso de consultoría",
+          "tipo": "Multiplicador +5%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 600, "metaPP": 600, "bonoPct": 6, "finalPP": 636, "cumplimiento": 106 },
+        { "semana": 2, "basePP": 600, "metaPP": 606, "bonoPct": 6, "finalPP": 636, "cumplimiento": 105 },
+        { "semana": 4, "basePP": 600, "metaPP": 618, "bonoPct": 11, "finalPP": 666, "cumplimiento": 108 },
+        { "semana": 6, "basePP": 600, "metaPP": 630, "bonoPct": 11, "finalPP": 666, "cumplimiento": 106 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-08-05", "evento": "Ubicada en Nivel 3 (83.7% de avance curricular). A solo 3 créditos de ascender a Nivel 4 (Líder)." }
+      ]
+    },
+    {
+      "id": "usr-laura",
+      "username": "laura",
+      "password": "123",
+      "nombre": "Laura Gaviria Londoño",
+      "email": "lgavirial@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Líder de Línea Consultoría y Negociación",
+      "carrera": "Ingeniería Industrial",
+      "linea": "PREXIA Consultoría (Liderazgo)",
+      "avatar": "LG",
+      "nivel": 4,
+      "semestre": 10,
+      "creditosAprobados": 159,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "detalleMaterias": "Trabajo de Grado, Gerencia Estratégica",
+      "hsa": 6,
+      "multiplicadoresActivos": ["n4_impacto", "n4_relaciones", "n4_curso"],
+      "puntosAcumuladosSemestre": 2214,
+      "insignias": [
+        "Líder Nivel 4 · Legado PREXIA",
+        "Impacto Económico (+10%)",
+        "Relaciones Públicas Internacionales (+8%)",
+        "Mentora Senior de Consultores"
+      ],
+      "entregables": [
+        {
+          "id": "ent-l1",
+          "semana": 2,
+          "titulo": "Acuerdo de retribución sobre utilidades firmado con MiPyme del Valle de Aburrá",
+          "tipo": "Multiplicador +10%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-l2",
+          "semana": 4,
+          "titulo": "Vinculación de 6 expertos externos (UNAL / UNESP / Industria) al curso",
+          "tipo": "Multiplicador +8%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-l3",
+          "semana": 6,
+          "titulo": "Seguimiento de cohorte: 88% de permanencia activa en el curso de consultoría",
+          "tipo": "Multiplicador +5%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 600, "metaPP": 600, "bonoPct": 10, "finalPP": 660, "cumplimiento": 110 },
+        { "semana": 2, "basePP": 600, "metaPP": 606, "bonoPct": 18, "finalPP": 708, "cumplimiento": 117 },
+        { "semana": 4, "basePP": 600, "metaPP": 618, "bonoPct": 23, "finalPP": 738, "cumplimiento": 119 },
+        { "semana": 6, "basePP": 600, "metaPP": 630, "bonoPct": 23, "finalPP": 738, "cumplimiento": 117 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2024-08-01", "evento": "Recorrió Nivel 2 y Nivel 3 liderando diagnósticos empresariales." },
+        { "fecha": "2026-08-01", "evento": "Promovida a Nivel 4 (Cierre y Proyección · 92.4% de carrera). Mentora general de la línea." }
+      ]
+    },
+    {
+      "id": "usr-andres",
+      "username": "andres",
+      "password": "123",
+      "nombre": "Andrés Felipe Ochoa",
+      "email": "afochoa@unal.edu.co",
+      "rolSistema": "estudiante",
+      "cargo": "Líder de Relaciones Públicas y Expertos Externos",
+      "carrera": "Ingeniería Administrativa",
+      "linea": "PREXIA Consultoría · Alianzas EISI",
+      "avatar": "AO",
+      "nivel": 4,
+      "semestre": 10,
+      "creditosAprobados": 165,
+      "creditosTotales": 172,
+      "materiasAltoImpacto": false,
+      "detalleMaterias": "Práctica Profesional / Proyecto de Grado",
+      "hsa": 4,
+      "multiplicadoresActivos": ["n4_impacto", "n4_relaciones"],
+      "puntosAcumuladosSemestre": 1416,
+      "insignias": [
+        "Líder Nivel 4",
+        "Embajador Coorganizador Brasil-Colombia",
+        "Impacto Económico (+10%)"
+      ],
+      "entregables": [
+        {
+          "id": "ent-ao1",
+          "semana": 3,
+          "titulo": "Convenio con 7 conferencistas invitados y expertos sectoriales",
+          "tipo": "Multiplicador +8%",
+          "estado": "Aprobado"
+        },
+        {
+          "id": "ent-ao2",
+          "semana": 5,
+          "titulo": "Cierre de negociación de retribución con emprendimiento asesorado",
+          "tipo": "Multiplicador +10%",
+          "estado": "Aprobado"
+        }
+      ],
+      "historialQuincenal": [
+        { "semana": 1, "basePP": 400, "metaPP": 400, "bonoPct": 8, "finalPP": 432, "cumplimiento": 108 },
+        { "semana": 2, "basePP": 400, "metaPP": 404, "bonoPct": 18, "finalPP": 472, "cumplimiento": 117 },
+        { "semana": 4, "basePP": 400, "metaPP": 412, "bonoPct": 18, "finalPP": 472, "cumplimiento": 115 },
+        { "semana": 6, "basePP": 400, "metaPP": 420, "bonoPct": 18, "finalPP": 472, "cumplimiento": 112 }
+      ],
+      "bitacoraCrecimiento": [
+        { "fecha": "2026-08-01", "evento": "Nivel 4 (95.9% de avance curricular). Caso testigo de cierre de semestre con 4 HSA y +18% de multiplicador (472 PP)." }
+      ]
+    }
+  ]
+}
