@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../assets/logos/isotipo-prexia.png">
   <link rel="stylesheet" href="../assets/styles.css">
   <script src="../assets/prexia-db.js"></script>
   <style>
@@ -986,6 +987,100 @@
         position: static;
       }
     }
+
+    /* ── BARRA DE PESTAÑAS GLOBALES (PROGRESO PÚBLICO SOLO LECTURA VS PORTAL) ── */
+    .mode-tabs-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--surface);
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .mode-tabs-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .mode-tab-btn {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .mode-tab-btn:hover {
+      border-color: var(--navy);
+    }
+
+    .mode-tab-btn.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    .mode-tab-btn .ro-pill {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 2px;
+      background: var(--mint-light);
+      color: var(--ink);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .ro-chip {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 2px;
+      background: #dcfce7;
+      color: #0f652e;
+      border: 1px solid #86efac;
+      margin: 2px 4px 2px 0;
+    }
+
+    .ro-skill-box {
+      font-family: var(--font-text);
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink);
+      max-width: 290px;
+    }
+
+    .ro-lock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 11px;
+      border-radius: 2px;
+      background: rgba(132, 251, 170, 0.18);
+      color: var(--mint-light);
+      border: 1px solid rgba(132, 251, 170, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
   </style>
 </head>
 <body>
@@ -1014,13 +1109,7 @@
   <header class="topbar">
     <div class="shell topbar-inner" role="navigation" aria-label="Navegación principal">
       <a class="brand" href="../../index.html">
-        <svg width="28" height="28" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#0f652e" stroke-width="4" stroke-linecap="round"/>
-          <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#1f1a3a" stroke-width="4" stroke-linecap="round"/>
-          <path d="M16 16 C20 28 28 36 44 44" stroke="#0f652e" stroke-width="2.8" stroke-linecap="round"/>
-          <path d="M44 16 C40 28 32 36 16 44" stroke="#1f1a3a" stroke-width="2.8" stroke-linecap="round"/>
-        </svg>
-        <span>PRE<em>XIA</em></span>
+        <img src="../assets/logos/logo-prexia-header.png" alt="Logo oficial PREXIA" style="height:34px;width:auto;display:block;">
         <span class="brand-sub">Plataforma POA 2026-2 · UNAL Minas</span>
       </a>
       <nav class="nav-links">
@@ -1035,6 +1124,106 @@
   </header>
 
   <main class="shell platform-wrap">
+
+    <!-- ══ BARRA DE NAVEGACIÓN DE APARTADOS (DISPONIBLE PARA TODOS) ══ -->
+    <div class="mode-tabs-bar" id="platform-mode-tabs">
+      <div class="mode-tabs-group">
+        <button type="button" class="mode-tab-btn active" id="tab-btn-progreso" onclick="window.cambiarPestanaPlataforma('progreso')">
+          📊 Progreso General de Todos (13 Participantes)
+          <span class="ro-pill">Solo Lectura · Público</span>
+        </button>
+        <button type="button" class="mode-tab-btn" id="tab-btn-portal" onclick="window.cambiarPestanaPlataforma('portal')">
+          🔐 <span id="tab-portal-label">Iniciar Sesión / Portal Interactivo</span>
+        </button>
+      </div>
+      <div style="font-family:var(--font-display);font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;">
+        <span>📋 Cohorte oficial: <strong>Participantes Línea de Consultoría 2026-2</strong></span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════════════════
+         VISTA 0 (NUEVO APARTADO PÚBLICO): PROGRESO DE TODOS SIN MODIFICAR NADA
+         ════════════════════════════════════════════════════════════════════════ -->
+    <section id="public-progress-view">
+      <div class="dash-topbar" style="border-left:5px solid var(--mint-light);">
+        <div class="dash-user-welcome">
+          <img src="../assets/logos/isotipo-prexia.png" alt="Isotipo Prexia" style="width:52px;height:52px;object-fit:contain;background:var(--navy-surface);padding:6px;border-radius:8px;">
+          <div>
+            <span class="ro-lock-badge">🔒 MODO SOLO LECTURA · DISPONIBLE PARA TODOS SIN MODIFICAR NADA</span>
+            <h1 style="margin-top:6px;">Progreso General · Participantes Línea de Consultoría 2026-2</h1>
+            <p style="margin:0;font-size:14px;color:#c2bddb;font-family:var(--font-display);">
+              Consulta abierta de caracterización, niveles (1 a 4), horas semanales pactadas, herramientas/habilidades y liquidación de Puntos Prexia (PP) de toda la cohorte.
+            </p>
+          </div>
+        </div>
+
+        <div class="dash-week-box">
+          <div>
+            <span>Corte Semestral Vigente</span>
+            <strong id="pub-week-title">Semana 6 · Exigencia 105%</strong>
+            <span style="display:block;margin-top:2px;font-size:11px;color:#84fbaa;">Vista protegida (sin edición)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPIs GLOBALES DE LA COHORTE (SOLO LECTURA) -->
+      <div class="kpi-grid-4">
+        <div class="kpi-card">
+          <span class="kpi-label">Participantes Caracterizados</span>
+          <strong class="kpi-val" id="pub-kpi-total-users">13 Consultores</strong>
+          <span class="kpi-foot" id="pub-kpi-levels-dist">N1: 5 · N2: 2 · N3: 5 · N4: 1</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Puntos Prexia Liquidados (Corte)</span>
+          <strong class="kpi-val" id="pub-kpi-total-pp">7,463 PP</strong>
+          <span class="kpi-foot" id="pub-kpi-target-pp">Meta exigida corte: 7,035 PP</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Cumplimiento Promedio Cohorte</span>
+          <strong class="kpi-val" id="pub-kpi-avg-comp">105%</strong>
+          <span class="kpi-foot" id="pub-kpi-superan">13 de 13 cumplen o superan la meta</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Horas Semanales Pactadas</span>
+          <strong class="kpi-val" id="pub-kpi-total-hsa">67 HSA</strong>
+          <span class="kpi-foot">Equivalentes a 6,700 PP base / semana</span>
+        </div>
+      </div>
+
+      <!-- BARRA DE FILTROS Y BÚSQUEDA (SOLO LECTURA) -->
+      <div class="master-toolbar">
+        <div class="filter-pills" id="public-level-filters">
+          <button type="button" class="filter-pill active" data-filter="all">Todos los participantes (13)</button>
+          <button type="button" class="filter-pill" data-filter="1">Nivel 1 · Operativo (5)</button>
+          <button type="button" class="filter-pill" data-filter="2">Nivel 2 · Gestor (2)</button>
+          <button type="button" class="filter-pill" data-filter="3">Nivel 3 · Consultor Jr. (5)</button>
+          <button type="button" class="filter-pill" data-filter="4">Nivel 4 · Líder (1)</button>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;flex:1;justify-content:flex-end;">
+          <input type="search" id="public-search-input" class="field-input" style="max-width:340px;background:#fff;" placeholder="Buscar por nombre, correo, carrera o habilidad...">
+        </div>
+      </div>
+
+      <!-- TABLA DE PROGRESO Y CARACTERIZACIÓN DE TODOS (SOLO LECTURA) -->
+      <div class="master-table-wrap">
+        <table class="master-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Dirección de correo / Nombre completo</th>
+              <th>Programa académico</th>
+              <th>% de Avance y Nivel PP</th>
+              <th>Horas Semanales / Base PP</th>
+              <th>¿Con qué herramientas o habilidades cuentas actualmente?</th>
+              <th>Multiplicadores e Insignias</th>
+              <th>Progreso Puntos Prexia (PP)</th>
+            </tr>
+          </thead>
+          <tbody id="public-users-tbody"></tbody>
+        </table>
+      </div>
+    </section>
 
     <!-- ════════════════════════════════════════════════════════════════════════
          VISTA 1: PANTALLA DE INICIO DE SESIÓN Y DIRECTORIO MULTINIVEL (1 A 4)
@@ -1077,7 +1266,7 @@
           <form id="login-form">
             <div class="field-group">
               <label for="login-user">Usuario o Correo UNAL</label>
-              <input type="text" id="login-user" class="field-input" placeholder="Ej: maestro, ana, camila, carlos, laura..." value="maestro" required>
+              <input type="text" id="login-user" class="field-input" placeholder="Ej: maestro, jvargassan, dlozanoy, juloperag, bmartinezag..." value="maestro" required>
             </div>
             <div class="field-group">
               <label for="login-pass">Contraseña de acceso</label>
@@ -1088,12 +1277,12 @@
           </form>
 
           <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--surface);font-family:var(--font-display);font-size:12px;color:var(--muted);line-height:1.55;">
-            <strong style="color:var(--ink);display:block;margin-bottom:4px;">Credenciales rápidas:</strong>
-            • <strong>Maestro:</strong> <code>maestro</code> / <code>123</code><br>
-            • <strong>Nivel 1 (Operativo):</strong> <code>ana</code> o <code>mateo</code><br>
-            • <strong>Nivel 2 (Gestor):</strong> <code>camila</code> o <code>santiago</code><br>
-            • <strong>Nivel 3 (Consultor Jr.):</strong> <code>carlos</code> o <code>valentina</code><br>
-            • <strong>Nivel 4 (Líder):</strong> <code>laura</code> o <code>andres</code>
+            <strong style="color:var(--ink);display:block;margin-bottom:4px;">Credenciales rápidas (Clave: 123):</strong>
+            • <strong>Maestro:</strong> <code>maestro</code><br>
+            • <strong>Nivel 4 (Líder · 96%):</strong> <code>juloperag</code> (Julian David Lopera)<br>
+            • <strong>Nivel 3 (Consultor Jr. · 70%–80%):</strong> <code>jvargassan</code>, <code>bmartinezag</code>, <code>lyepez</code>, <code>evreydi</code>, <code>dana</code><br>
+            • <strong>Nivel 2 (Gestor · 38%–51%):</strong> <code>dlozanoy</code> (Dahiana), <code>omar</code><br>
+            • <strong>Nivel 1 (Operativo · 0%–27%):</strong> <code>jvalencia</code>, <code>timi</code>, <code>dani</code>, <code>sofia</code>, <code>zuly</code>
           </div>
         </aside>
 
@@ -1490,6 +1679,26 @@
     </div>
   </div>
 
+  <!-- ════════════════════════════════════════════════════════════════════════
+       MODAL DE CONSULTA PÚBLICA (SOLO LECTURA · SIN MODIFICAR NADA)
+       ════════════════════════════════════════════════════════════════════════ -->
+  <div class="git-modal-backdrop" id="readonly-user-modal">
+    <div class="git-modal-card" style="max-width:740px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap;">
+        <div>
+          <span class="dash-role-tag" style="background:#dcfce7;color:#0f652e;">🔒 EXPEDIENTE DE SOLO LECTURA · DISPONIBLE PARA TODOS</span>
+          <h2 style="font-family:var(--font-display);font-size:22px;font-weight:800;margin:6px 0 0;" id="ro-modal-name">
+            Participante PREXIA
+          </h2>
+          <p style="font-family:var(--font-display);font-size:13px;color:var(--muted);margin:2px 0 0;" id="ro-modal-sub"></p>
+        </div>
+        <button type="button" class="btn-sm-action" onclick="window.cerrarModalSoloLectura()">Cerrar ✕</button>
+      </div>
+
+      <div id="ro-modal-body"></div>
+    </div>
+  </div>
+
   <!-- NOTIFICACIÓN FLOTANTE -->
   <div class="toast-banner" id="toast-banner"></div>
 
@@ -1497,13 +1706,8 @@
     <div class="shell footer-inner">
       <div class="footer-info">
         <div class="footer-brand-row">
-          <svg width="26" height="26" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M30 8 C18 8 8 18 8 30 C8 42 18 52 30 52" stroke="#84fbaa" stroke-width="4" stroke-linecap="round"/>
-            <path d="M30 8 C42 8 52 18 52 30 C52 42 42 52 30 52" stroke="#60eaf0" stroke-width="4" stroke-linecap="round"/>
-            <path d="M16 16 C20 28 28 36 44 44" stroke="#84fbaa" stroke-width="2.8" stroke-linecap="round"/>
-            <path d="M44 16 C40 28 32 36 16 44" stroke="#60eaf0" stroke-width="2.8" stroke-linecap="round"/>
-          </svg>
-          <span>PRE<em>XIA</em> · UNAL MINAS</span>
+          <img src="../assets/logos/logo-prexia-footer.png" alt="Logo oficial PREXIA" style="height:32px;width:auto;display:block;">
+          <span>· UNAL MINAS</span>
         </div>
         <p>Plataforma Oficial del Sistema de Evaluación por Puntos Prexia (PP) y Multiplicadores · Plan de Acción 2026-2.</p>
       </div>
@@ -1519,8 +1723,12 @@
   <script>
     (function () {
       let currentFilterLevel = "all";
-      let inspectedStudentId = null; // Permite al Maestro inspeccionar la vista detallada de un estudiante
+      let publicFilterLevel = "all";
+      let publicSearchQuery = "";
+      let activePlatformTab = "portal"; // "progreso" | "portal"
+      let inspectedStudentId = null;
 
+      const publicProgressView = document.getElementById("public-progress-view");
       const loginView = document.getElementById("login-view");
       const masterView = document.getElementById("master-view");
       const studentView = document.getElementById("student-view");
@@ -1556,34 +1764,178 @@
           txt.textContent = `DB Git: data/prexia-users-db.json · Sincronizado`;
         }
 
-        // Poblar selector rápido
         const optionsHtml = [
-          `<option value="">— Seleccionar perfil (${db.usuarios.length} usuarios) —</option>`
+          `<option value="__public__">📊 Vista Pública: Progreso de Todos (Solo Lectura)</option>`,
+          `<option value="" ${!currentUser && activePlatformTab === "portal" ? "selected" : ""}>— Pantalla de Login (${db.usuarios.length - 1} participantes + Maestro) —</option>`
         ];
         db.usuarios.forEach((u) => {
           const isMaster = u.rolSistema === "maestro";
           const label = isMaster
             ? `★ MAESTRO: ${u.nombre}`
             : `Nivel ${u.nivel} (${PrexiaDB.LEVELS_CONFIG[u.nivel].rol}): ${u.nombre}`;
-          const selected = currentUser && currentUser.id === u.id ? "selected" : "";
+          const selected = currentUser && currentUser.id === u.id && activePlatformTab === "portal" ? "selected" : "";
           optionsHtml.push(`<option value="${u.username}" ${selected}>${label}</option>`);
         });
         quickSwitcher.innerHTML = optionsHtml.join("");
+        if (activePlatformTab === "progreso") {
+          quickSwitcher.value = "__public__";
+        }
 
         btnLogoutTop.style.display = currentUser ? "inline-block" : "none";
+
+        const tabPortalLabel = document.getElementById("tab-portal-label");
+        if (tabPortalLabel) {
+          if (!currentUser) {
+            tabPortalLabel.textContent = "Iniciar Sesión / Acceso por Nivel (13 Participantes + Maestro)";
+          } else if (currentUser.rolSistema === "maestro") {
+            tabPortalLabel.textContent = `Panel Usuario Maestro (${currentUser.nombre})`;
+          } else {
+            tabPortalLabel.textContent = `Mi Expediente Individual (${currentUser.nombre} · Nivel ${currentUser.nivel})`;
+          }
+        }
+      }
+
+      // ── RENDERIZAR APARTADO PÚBLICO: PROGRESO DE TODOS (SOLO LECTURA · SIN MODIFICAR NADA) ──
+      function renderPublicProgressView() {
+        const db = PrexiaDB.getDB();
+        const sem = db.meta.semanaActual || 6;
+        const exigenciaPct = 100 + (sem - 1);
+
+        document.getElementById("pub-week-title").textContent = `Semana ${sem} · Exigencia ${exigenciaPct}%`;
+
+        const estudiantes = db.usuarios
+          .filter((u) => u.rolSistema !== "maestro")
+          .sort((a, b) => (a.ordenHoja || 99) - (b.ordenHoja || 99));
+
+        const countByLvl = { 1: 0, 2: 0, 3: 0, 4: 0 };
+        let totalPP = 0;
+        let totalMetaPP = 0;
+        let totalHSA = 0;
+        let sumaCumplimiento = 0;
+        let superanMetaCount = 0;
+
+        estudiantes.forEach((u) => {
+          countByLvl[u.nivel] = (countByLvl[u.nivel] || 0) + 1;
+          const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
+          totalPP += liq.finalPP;
+          totalMetaPP += liq.metaSemanaPP;
+          totalHSA += liq.hsa;
+          sumaCumplimiento += liq.cumplimientoPct;
+          if (liq.superoMeta) superanMetaCount += 1;
+        });
+
+        const avgComp = estudiantes.length ? Math.round(sumaCumplimiento / estudiantes.length) : 100;
+
+        document.getElementById("pub-kpi-total-users").textContent = `${estudiantes.length} Participantes`;
+        document.getElementById("pub-kpi-levels-dist").textContent = `N1: ${countByLvl[1]} · N2: ${countByLvl[2]} · N3: ${countByLvl[3]} · N4: ${countByLvl[4]}`;
+        document.getElementById("pub-kpi-total-pp").textContent = `${totalPP.toLocaleString("es-CO")} PP`;
+        document.getElementById("pub-kpi-target-pp").textContent = `Meta exigida Semana ${sem}: ${totalMetaPP.toLocaleString("es-CO")} PP`;
+        document.getElementById("pub-kpi-avg-comp").textContent = `${avgComp}%`;
+        document.getElementById("pub-kpi-superan").textContent = `${superanMetaCount} de ${estudiantes.length} cumplen o superan la curva del +1%`;
+        document.getElementById("pub-kpi-total-hsa").textContent = `${totalHSA} HSA`;
+
+        const filtered = estudiantes.filter((u) => {
+          if (publicFilterLevel !== "all" && String(u.nivel) !== String(publicFilterLevel)) {
+            return false;
+          }
+          if (publicSearchQuery) {
+            const q = publicSearchQuery.toLowerCase();
+            const haystack = `${u.nombre} ${u.email} ${u.correoCaracterizacion || ""} ${u.carrera} ${u.herramientasHabilidades || ""} ${u.horasSemanalesTexto || ""}`.toLowerCase();
+            return haystack.includes(q);
+          }
+          return true;
+        });
+
+        const tbody = document.getElementById("public-users-tbody");
+        tbody.innerHTML = filtered
+          .map((u, idx) => {
+            const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
+            const cfg = PrexiaDB.LEVELS_CONFIG[u.nivel];
+            const numOrden = u.ordenHoja || idx + 1;
+            const correoMostrar = u.correoCaracterizacion && u.correoCaracterizacion !== "—"
+              ? `<a href="mailto:${u.correoCaracterizacion}" style="color:var(--mint-dark);text-decoration:underline;font-size:12px;">${u.correoCaracterizacion}</a>`
+              : `<span style="color:var(--muted);font-size:12px;">Sin correo reportado en hoja (${u.username})</span>`;
+
+            const activeMultChips = (liq.multDetalles || [])
+              .map((m) => `<span class="ro-chip">✓ ${m.nombre} (+${m.bono}%)</span>`)
+              .join("");
+
+            const progressPctBar = Math.min(100, Math.round((liq.finalPP / liq.metaSemanaPP) * 100));
+
+            return `
+              <tr>
+                <td style="font-weight:800;color:var(--muted);">${numOrden}</td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="avatar-circle" style="width:36px;height:36px;font-size:12px;">${u.avatar}</div>
+                    <div>
+                      <strong style="font-size:14px;color:var(--ink);display:block;">${u.nombre}</strong>
+                      ${correoMostrar}
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <strong style="font-size:13px;color:var(--ink);">${u.carrera || "—"}</strong>
+                  <span style="display:block;font-size:11px;color:var(--muted);">Línea de Consultoría 2026-2</span>
+                </td>
+                <td>
+                  <span class="lvl-badge lvl-${u.nivel}">Nivel ${u.nivel} · ${cfg.rol}</span>
+                  <div style="margin-top:6px;font-size:12px;">
+                    Avance hoja: <strong>${liq.avanceDisplay}</strong>
+                  </div>
+                  <div class="mini-progress-bar">
+                    <div class="mini-progress-fill" style="width:${Math.min(100, liq.avanceCarreraPct)}%;"></div>
+                  </div>
+                </td>
+                <td>
+                  <strong style="font-size:14px;color:var(--ink);display:block;">${liq.horasDisplay} h/sem</strong>
+                  <span style="font-size:12px;color:var(--mint-dark);font-weight:700;">Pacto: ${u.hsa} HSA (${liq.basePP} PP base)</span>
+                  <span style="display:block;font-size:11px;color:var(--muted);">Meta Sem. ${sem}: ${liq.metaSemanaPP} PP</span>
+                </td>
+                <td>
+                  <div class="ro-skill-box">${liq.herramientas}</div>
+                </td>
+                <td>
+                  <div>${activeMultChips || `<span style="font-size:11px;color:var(--muted);">Sin multiplicadores</span>`}</div>
+                  <div style="margin-top:4px;font-size:11px;color:var(--muted);">
+                    ${(u.insignias || []).length} insignia(s) activa(s)
+                  </div>
+                </td>
+                <td>
+                  <strong style="font-size:16px;color:var(--ink);display:block;">${liq.finalPP} PP</strong>
+                  <span style="font-size:11px;font-weight:800;color:${liq.superoMeta ? "#0f652e" : "#b45309"};">
+                    ${liq.cumplimientoPct}% · ${liq.superoMeta ? "Meta Cumplida" : `En progreso`}
+                  </span>
+                  <div class="mini-progress-bar" style="margin-top:4px;">
+                    <div class="mini-progress-fill" style="width:${progressPctBar}%;background:${liq.superoMeta ? "#0f652e" : "#b45309"};"></div>
+                  </div>
+                  <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+                    Acumulado semestral: <strong>${(u.puntosAcumuladosSemestre || 0).toLocaleString("es-CO")} PP</strong>
+                  </div>
+                  <button type="button" class="btn-sm-action" style="margin-top:6px;width:100%;text-align:center;" onclick="window.verFichaSoloLectura('${u.id}')">
+                    👁 Ver Ficha (Solo Lectura)
+                  </button>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
       }
 
       // ── RENDERIZAR DIRECTORIO DE LOGIN POR NIVELES ──
       function renderLoginDirectory() {
         const db = PrexiaDB.getDB();
-        document.getElementById("login-kpi-users").textContent = `${db.usuarios.length} Perfiles`;
+        const totalEst = db.usuarios.filter((u) => u.rolSistema !== "maestro").length;
+        document.getElementById("login-kpi-users").textContent = `${totalEst} Participantes`;
 
         const container = document.getElementById("login-levels-directory");
         const htmlBlocks = [];
 
-        [1, 2, 3, 4].forEach((lvl) => {
+        [4, 3, 2, 1].forEach((lvl) => {
           const cfg = PrexiaDB.LEVELS_CONFIG[lvl];
-          const usersInLevel = db.usuarios.filter((u) => u.rolSistema !== "maestro" && u.nivel === lvl);
+          const usersInLevel = db.usuarios
+            .filter((u) => u.rolSistema !== "maestro" && u.nivel === lvl)
+            .sort((a, b) => (a.ordenHoja || 99) - (b.ordenHoja || 99));
 
           const cardsHtml = usersInLevel
             .map((u) => {
@@ -1595,20 +1947,28 @@
                       <div class="avatar-circle">${u.avatar || "PX"}</div>
                       <div class="demo-user-meta">
                         <strong>${u.nombre}</strong>
-                        <span>${u.carrera} · Semestre ${u.semestre} (${liq.avanceCarreraPct}% carrera)</span>
+                        <span>${u.carrera || "Línea de Consultoría"} · Avance: <strong>${liq.avanceDisplay}</strong></span>
                       </div>
                     </div>
+                    <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4;">
+                      <strong>Habilidades:</strong> ${liq.herramientas}
+                    </div>
                     <div class="demo-user-stats" style="margin-top:10px;">
-                      <span class="stat-pill">Pacto: ${u.hsa} HSA (${liq.basePP} PP)</span>
+                      <span class="stat-pill">Horas: ${liq.horasDisplay} (${u.hsa} HSA · ${liq.basePP} PP)</span>
                       <span class="stat-pill mint">Liquidación: ${liq.finalPP} PP (${liq.cumplimientoPct}%)</span>
                       <span class="stat-pill">+${liq.bonoPct}% Bono</span>
                     </div>
                   </div>
                   <div class="demo-user-actions">
                     <code>Usuario: <strong>${u.username}</strong> · Clave: 123</code>
-                    <button type="button" class="btn-enter-user" onclick="window.entrarConUsuario('${u.username}')">
-                      Iniciar sesión →
-                    </button>
+                    <div style="display:flex;gap:6px;">
+                      <button type="button" class="btn-sm-action" onclick="window.verFichaSoloLectura('${u.id}')">
+                        Solo lectura
+                      </button>
+                      <button type="button" class="btn-enter-user" onclick="window.entrarConUsuario('${u.username}')">
+                        Iniciar sesión →
+                      </button>
+                    </div>
                   </div>
                 </article>
               `;
@@ -1618,7 +1978,7 @@
           htmlBlocks.push(`
             <div class="level-group-block" style="margin-bottom:16px;">
               <div class="level-group-header">
-                <h3>Nivel ${lvl}: ${cfg.nombre} · Rol ${cfg.rol}</h3>
+                <h3>Nivel ${lvl}: ${cfg.nombre} · Rol ${cfg.rol} (${usersInLevel.length} integrante${usersInLevel.length === 1 ? "" : "s"})</h3>
                 <span>Avance curricular: ${cfg.rangoPct} (${cfg.semestres})</span>
               </div>
               <div class="demo-user-cards">
@@ -1640,7 +2000,9 @@
         document.getElementById("master-week-title").textContent = `Semana ${sem} · Meta ${exigenciaPct}%`;
         document.getElementById("master-week-slider").value = sem;
 
-        const estudiantes = db.usuarios.filter((u) => u.rolSistema !== "maestro");
+        const estudiantes = db.usuarios
+          .filter((u) => u.rolSistema !== "maestro")
+          .sort((a, b) => (a.ordenHoja || 99) - (b.ordenHoja || 99));
         const countByLvl = { 1: 0, 2: 0, 3: 0, 4: 0 };
         let totalPP = 0;
         let totalMetaPP = 0;
@@ -1702,7 +2064,7 @@
                     <div class="avatar-circle" style="width:34px;height:34px;font-size:12px;">${u.avatar}</div>
                     <div>
                       <strong style="font-size:14px;color:var(--ink);display:block;">${u.nombre}</strong>
-                      <span style="font-size:11px;color:var(--muted);">${u.carrera} · Sem. ${u.semestre}</span><br>
+                      <span style="font-size:11px;color:var(--muted);">${u.carrera} · Correo: ${liq.correoHoja}</span><br>
                       <code style="font-size:11px;color:var(--mint-dark);">usr: ${u.username}</code>
                     </div>
                   </div>
@@ -1712,18 +2074,18 @@
                   <div style="font-size:11px;color:var(--muted);margin-top:4px;">${cfg.nombre} (${cfg.rangoPct})</div>
                 </td>
                 <td>
-                  <strong>${u.creditosAprobados} / ${u.creditosTotales} créd. (${liq.avanceCarreraPct}%)</strong>
+                  <strong>Avance: ${liq.avanceDisplay} (${u.creditosAprobados}/${u.creditosTotales} créd.)</strong>
                   <div class="mini-progress-bar">
-                    <div class="mini-progress-fill" style="width:${liq.avanceCarreraPct}%;"></div>
+                    <div class="mini-progress-fill" style="width:${Math.min(100, liq.avanceCarreraPct)}%;"></div>
                   </div>
                   <span style="font-size:11px;color:var(--muted);display:block;margin-top:4px;">
-                    Acumulado: ${(u.puntosAcumuladosSemestre || 0).toLocaleString("es-CO")} PP
+                    Habilidades: ${liq.herramientas}
                   </span>
                 </td>
                 <td>
                   <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
                     <strong>${u.hsa} HSA</strong>
-                    <span style="color:var(--muted);">(${liq.basePP} PP)</span>
+                    <span style="color:var(--muted);">(${liq.horasDisplay}h · ${liq.basePP} PP)</span>
                     <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa - 1})" title="Reducir 1 HSA">-</button>
                     <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa + 1})" title="Aumentar 1 HSA">+</button>
                   </div>
@@ -1782,12 +2144,12 @@
         document.getElementById("st-avatar").textContent = user.avatar || "PX";
         document.getElementById("st-level-badge").textContent = `NIVEL ${user.nivel} · ${cfg.nombre.toUpperCase()} · ROL ${cfg.rol.toUpperCase()}`;
         document.getElementById("st-name").textContent = user.nombre;
-        document.getElementById("st-meta-line").textContent = `${user.carrera} · Semestre ${user.semestre} (${user.creditosAprobados}/${user.creditosTotales} créditos) · ${user.linea}`;
+        document.getElementById("st-meta-line").textContent = `${user.carrera} · Avance hoja: ${liq.avanceDisplay} · Horas Semanales: ${liq.horasDisplay} · Herramientas: ${liq.herramientas}`;
 
         document.getElementById("st-week-label").textContent = `Liquidación Semana ${sem} (Meta ${liq.curvaPct}%)`;
         document.getElementById("st-final-pp-big").textContent = `${liq.finalPP} PP · ${liq.cumplimientoPct}% Cumplimiento`;
 
-        document.getElementById("st-kpi-hsa").textContent = `${user.hsa} HSA`;
+        document.getElementById("st-kpi-hsa").textContent = `${user.hsa} HSA (${liq.horasDisplay}h)`;
         document.getElementById("st-kpi-base").textContent = `Línea base: ${liq.basePP} PP / semana`;
         document.getElementById("st-kpi-target-label").textContent = `Meta Exigida Sem. ${sem} (${liq.curvaPct}%)`;
         document.getElementById("st-kpi-target").textContent = `${liq.metaSemanaPP} PP`;
@@ -1795,10 +2157,9 @@
         document.getElementById("st-kpi-status").textContent = liq.superoMeta
           ? "✓ Supera la meta progresiva con insignia"
           : `Activa +${Math.max(1, liq.curvaPct - 100 - liq.bonoPct)}% en bonos para cubrir la curva`;
-        document.getElementById("st-kpi-career").textContent = `${liq.avanceCarreraPct}%`;
-        document.getElementById("st-kpi-credits").textContent = `${user.creditosAprobados} de ${user.creditosTotales} créditos aprobados`;
+        document.getElementById("st-kpi-career").textContent = `${liq.avanceDisplay}`;
+        document.getElementById("st-kpi-credits").textContent = `Correo caracterización: ${liq.correoHoja}`;
 
-        // Escalera de los 4 niveles
         const stepsHtml = [1, 2, 3, 4]
           .map((lvl) => {
             const lCfg = PrexiaDB.LEVELS_CONFIG[lvl];
@@ -1834,7 +2195,6 @@
           forceBtn.style.display = "none";
         }
 
-        // Multiplicadores interactivos del nivel actual
         const multListEl = document.getElementById("st-multipliers-list");
         multListEl.innerHTML = cfg.multiplicadores
           .map((m) => {
@@ -1858,7 +2218,6 @@
           })
           .join("");
 
-        // Selector de multiplicador en formulario de entregables
         const delivMultSelect = document.getElementById("deliv-mult");
         delivMultSelect.innerHTML =
           `<option value="">— Solo registrar entregable —</option>` +
@@ -1866,7 +2225,6 @@
             .map((m) => `<option value="${m.id}">Acreditar: ${m.nombre} (+${m.bono}%)</option>`)
             .join("");
 
-        // Lista de entregables
         const delivContainer = document.getElementById("st-deliverables-list");
         delivContainer.innerHTML = (user.entregables || [])
           .map(
@@ -1882,13 +2240,11 @@
           )
           .join("");
 
-        // Insignias
         const badgesCloud = document.getElementById("st-badges-cloud");
         badgesCloud.innerHTML = (user.insignias || [])
           .map((b) => `<span class="insignia-pill">★ ${b}</span>`)
           .join("");
 
-        // Historial quincenal
         const histTbody = document.getElementById("st-history-tbody");
         histTbody.innerHTML = (user.historialQuincenal || [])
           .map(
@@ -1905,7 +2261,6 @@
           )
           .join("");
 
-        // Bitácora de crecimiento
         const logList = document.getElementById("st-growth-log");
         logList.innerHTML = (user.bitacoraCrecimiento || [])
           .map(
@@ -1918,7 +2273,6 @@
           )
           .join("");
 
-        // Conectar botones de avance de este usuario
         document.getElementById("btn-st-promote-quick").onclick = () => window.maestroAvanzarCreditos(user.id, false);
         document.getElementById("btn-st-add-credits").onclick = () => window.maestroAvanzarCreditos(user.id, false);
         document.getElementById("btn-st-force-levelup").onclick = () => window.maestroAvanzarCreditos(user.id, true);
@@ -1947,8 +2301,27 @@
       // ── ENRUTADOR DE VISTAS ──
       function renderApp() {
         updateTopStatusBar();
+        renderPublicProgressView();
+
+        const tabBtnProgreso = document.getElementById("tab-btn-progreso");
+        const tabBtnPortal = document.getElementById("tab-btn-portal");
         const currentUser = PrexiaDB.getCurrentUser();
         const db = PrexiaDB.getDB();
+
+        if (activePlatformTab === "progreso") {
+          tabBtnProgreso.classList.add("active");
+          tabBtnPortal.classList.remove("active");
+          publicProgressView.style.display = "block";
+          loginView.style.display = "none";
+          masterView.style.display = "none";
+          studentView.style.display = "none";
+          return;
+        }
+
+        tabBtnProgreso.classList.remove("active");
+        tabBtnPortal.classList.add("active");
+        // En modo portal, mostramos el portal arriba y mantenemos el apartado público de solo lectura disponible abajo
+        publicProgressView.style.display = "block";
 
         if (!currentUser) {
           loginView.style.display = "block";
@@ -1981,8 +2354,119 @@
       }
 
       // ── FUNCIONES GLOBALES INTERACTIVAS ──
+      window.cambiarPestanaPlataforma = function (tab) {
+        activePlatformTab = tab === "progreso" ? "progreso" : "portal";
+        renderApp();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      window.verFichaSoloLectura = function (userId) {
+        const db = PrexiaDB.getDB();
+        const user = db.usuarios.find((u) => u.id === userId);
+        if (!user) return;
+        const sem = db.meta.semanaActual || 6;
+        const liq = PrexiaDB.calcularLiquidacionUsuario(user, sem);
+        const cfg = PrexiaDB.LEVELS_CONFIG[user.nivel];
+
+        document.getElementById("ro-modal-name").textContent = user.nombre;
+        document.getElementById("ro-modal-sub").textContent = `Nivel ${user.nivel} (${cfg.nombre} · Rol ${cfg.rol}) · ${user.carrera || "Línea de Consultoría"} · Correo: ${liq.correoHoja}`;
+
+        const multsHtml = (liq.multDetalles || [])
+          .map((m) => `<span class="ro-chip">✓ ${m.nombre} (+${m.bono}%)</span>`)
+          .join("") || `<span style="font-size:13px;color:var(--muted);">Sin multiplicadores activos</span>`;
+
+        const badgesHtml = (user.insignias || [])
+          .map((b) => `<span class="insignia-pill">★ ${b}</span>`)
+          .join("");
+
+        const histRows = (user.historialQuincenal || [])
+          .map(
+            (h) => `
+            <tr>
+              <td><strong>Semana ${h.semana}</strong></td>
+              <td>${h.basePP} PP</td>
+              <td>${h.metaPP} PP</td>
+              <td>+${h.bonoPct}%</td>
+              <td><strong>${h.finalPP} PP</strong></td>
+              <td><strong style="color:#0f652e;">${h.cumplimiento}%</strong></td>
+            </tr>
+          `
+          )
+          .join("");
+
+        document.getElementById("ro-modal-body").innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px;font-family:var(--font-display);">
+            <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
+              <span style="font-size:11px;color:var(--muted);display:block;">% Avance (Hoja)</span>
+              <strong style="font-size:20px;color:var(--ink);">${liq.avanceDisplay}</strong>
+            </div>
+            <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
+              <span style="font-size:11px;color:var(--muted);display:block;">Horas Semanales</span>
+              <strong style="font-size:20px;color:var(--ink);">${liq.horasDisplay} h (${user.hsa} HSA)</strong>
+            </div>
+            <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
+              <span style="font-size:11px;color:var(--muted);display:block;">Liquidación Sem. ${sem}</span>
+              <strong style="font-size:20px;color:var(--mint-dark);">${liq.finalPP} PP (${liq.cumplimientoPct}%)</strong>
+            </div>
+            <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
+              <span style="font-size:11px;color:var(--muted);display:block;">Acumulado Semestral</span>
+              <strong style="font-size:20px;color:var(--ink);">${(user.puntosAcumuladosSemestre || 0).toLocaleString("es-CO")} PP</strong>
+            </div>
+          </div>
+
+          <div style="background:var(--bg);padding:14px 16px;border-radius:3px;border:1px solid var(--border);margin-bottom:16px;">
+            <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;">
+              ¿Con qué herramientas o habilidades cuentas actualmente? (Caracterización 2026-2)
+            </strong>
+            <p style="margin:0;font-size:15px;color:var(--ink);">${liq.herramientas}</p>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">
+              Multiplicadores Acreditados (Solo Lectura)
+            </strong>
+            <div>${multsHtml}</div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">
+              Insignias de Reconocimiento
+            </strong>
+            <div class="badge-cloud" style="margin-top:4px;">${badgesHtml}</div>
+          </div>
+
+          <div>
+            <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">
+              Historial de Auditorías Quincenales (Solo Lectura)
+            </strong>
+            <div class="master-table-wrap" style="margin-bottom:0;">
+              <table class="master-table" style="font-size:12px;">
+                <thead>
+                  <tr>
+                    <th>Corte</th>
+                    <th>Base PP</th>
+                    <th>Meta (+1%)</th>
+                    <th>Bono</th>
+                    <th>Final PP</th>
+                    <th>Cumplimiento</th>
+                  </tr>
+                </thead>
+                <tbody>${histRows}</tbody>
+              </table>
+            </div>
+          </div>
+        `;
+
+        document.getElementById("readonly-user-modal").classList.add("open");
+      };
+
+      window.cerrarModalSoloLectura = function () {
+        document.getElementById("readonly-user-modal").classList.remove("open");
+      };
+
       window.entrarConUsuario = function (username) {
         inspectedStudentId = null;
+        activePlatformTab = "portal";
         const res = PrexiaDB.login(username, "123");
         if (res.ok) {
           showToast(`Sesión iniciada como ${res.user.nombre} (${res.user.rolSistema === "maestro" ? "Usuario Maestro" : "Nivel " + res.user.nivel}).`);
@@ -1993,6 +2477,7 @@
 
       window.inspeccionarEstudiante = function (userId) {
         inspectedStudentId = userId;
+        activePlatformTab = "portal";
         renderApp();
         window.scrollTo({ top: 0, behavior: "smooth" });
       };
@@ -2063,6 +2548,7 @@
         } else {
           errBox.style.display = "none";
           inspectedStudentId = null;
+          activePlatformTab = "portal";
           showToast(`Bienvenido(a), ${res.user.nombre}.`);
           renderApp();
         }
@@ -2070,9 +2556,12 @@
 
       quickSwitcher.addEventListener("change", () => {
         const val = quickSwitcher.value;
-        if (!val) {
+        if (val === "__public__") {
+          window.cambiarPestanaPlataforma("progreso");
+        } else if (!val) {
           PrexiaDB.logout();
           inspectedStudentId = null;
+          activePlatformTab = "portal";
           renderApp();
         } else {
           window.entrarConUsuario(val);
@@ -2082,7 +2571,7 @@
       btnLogoutTop.addEventListener("click", () => {
         PrexiaDB.logout();
         inspectedStudentId = null;
-        showToast("Sesión finalizada. Selecciona cualquier usuario para ingresar.");
+        showToast("Sesión finalizada. Selecciona cualquier usuario o consulta el progreso público.");
         renderApp();
       });
 
@@ -2107,6 +2596,23 @@
           renderMasterView();
         });
       });
+
+      document.querySelectorAll("#public-level-filters .filter-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#public-level-filters .filter-pill").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          publicFilterLevel = btn.getAttribute("data-filter");
+          renderPublicProgressView();
+        });
+      });
+
+      const pubSearchInput = document.getElementById("public-search-input");
+      if (pubSearchInput) {
+        pubSearchInput.addEventListener("input", (e) => {
+          publicSearchQuery = e.target.value.trim();
+          renderPublicProgressView();
+        });
+      }
 
       document.getElementById("btn-toggle-new-user-form").addEventListener("click", () => {
         const drawer = document.getElementById("new-user-drawer");
@@ -2198,11 +2704,15 @@
         renderApp();
       });
 
-      // Sincronizar con data/prexia-users-db.json al iniciar y permitir entrar por parámetro ?user=
+      // Sincronizar con data/prexia-users-db.json al iniciar y soportar ?user= y ?view=progreso
       PrexiaDB.syncFromCanonicalJSON("../../data/prexia-users-db.json").then(() => {
         const params = new URLSearchParams(window.location.search);
         const autoUser = params.get("user");
-        if (autoUser) {
+        const viewParam = params.get("view");
+        if (viewParam === "progreso") {
+          activePlatformTab = "progreso";
+        } else if (autoUser) {
+          activePlatformTab = "portal";
           PrexiaDB.login(autoUser, "123");
         }
         renderApp();
