@@ -1,16 +1,17 @@
 {
   "meta": {
-    "sistema": "PREXIA POA · Sistema de Evaluación por Puntos Prexia (PP) y Multiplicadores",
+    "sistema": "PREXIA POA · Sistema de Evaluación por Puntos Prexia (PP), Multiplicadores Multinivel y Control de Incumplimientos",
     "cohorte": "Participantes Línea de Consultoría 2026-2",
     "periodo": "2026-2",
-    "semanaActual": 6,
+    "semanaActual": 1,
     "totalSemanas": 16,
     "creditosCarrera": 172,
     "semestresCarrera": 10,
     "repositorioGit": "https://github.com/carlmarx17/proyectoprexia",
     "archivoDatos": "data/prexia-users-db.json",
-    "ultimaActualizacion": "2026-10-21T20:10:00-05:00",
-    "ultimoAutor": "Coordinación Línea de Consultoría PREXIA"
+    "ultimaActualizacion": "2026-10-27T14:48:20.827Z",
+    "ultimoAutor": "Coordinación Línea de Consultoría PREXIA",
+    "ultimaAccion": "Inicialización del sistema (Barra en 0 PP)"
   },
   "usuarios": [
     {
@@ -35,13 +36,12 @@
       "detalleMaterias": "Dirección Académica y Coordinación General Semillero PREXIA",
       "horasSemanalesTexto": "8",
       "hsa": 8,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Dirección estratégica, consultoría organizacional, evaluación por Puntos Prexia (PP) y articulación internacional EISI.",
-      "multiplicadoresActivos": [
-        "n4_impacto",
-        "n4_relaciones",
-        "n4_curso"
-      ],
-      "puntosAcumuladosSemestre": 3936,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
         "Fundador PREXIA UNAL",
         "Auditor Maestro POA 2026-2",
@@ -54,53 +54,13 @@
           "titulo": "Caracterización oficial Participantes Línea de Consultoría 2026-2 (13 integrantes)",
           "tipo": "Gobernanza",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-m2",
-          "semana": 6,
-          "titulo": "Seguimiento de Asistencia a Curso de Consultoría y Auditoría Quincenal",
-          "tipo": "Auditoría",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 800,
-          "metaPP": 800,
-          "bonoPct": 23,
-          "finalPP": 984,
-          "cumplimiento": 123
-        },
-        {
-          "semana": 2,
-          "basePP": 800,
-          "metaPP": 808,
-          "bonoPct": 23,
-          "finalPP": 984,
-          "cumplimiento": 122
-        },
-        {
-          "semana": 4,
-          "basePP": 800,
-          "metaPP": 824,
-          "bonoPct": 23,
-          "finalPP": 984,
-          "cumplimiento": 119
-        },
-        {
-          "semana": 6,
-          "basePP": 800,
-          "metaPP": 840,
-          "bonoPct": 23,
-          "finalPP": 984,
-          "cumplimiento": 117
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Actualización oficial de la lista de Participantes Línea de Consultoría 2026-2 (13 consultores caracterizados)."
+          "fecha": "2026-10-27",
+          "evento": "Sistema inicializado con barra de rendimiento desde 0 PP, multiplicadores abiertos entre niveles y control de anotaciones por incumplimiento."
         }
       ]
     },
@@ -114,12 +74,12 @@
       "correoCaracterizacion": "jvargassan@unal.edu.co",
       "rolSistema": "estudiante",
       "cargo": "Consultor Junior · Gestión de Proyectos y Datos",
-      "carrera": "Ingenieria Administrativa",
+      "carrera": "Ingeniería Administrativa",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "JV",
       "nivel": 3,
       "semestre": 8,
-      "porcentajeAvance": 75.0,
+      "porcentajeAvance": 75,
       "porcentajeAvanceTexto": "75%",
       "creditosAprobados": 129,
       "creditosTotales": 172,
@@ -127,16 +87,14 @@
       "detalleMaterias": "Gestión de proyectos, Análisis de datos",
       "horasSemanalesTexto": "2 a 4",
       "hsa": 3,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Gestion de proyectos, Analisis de datos",
-      "multiplicadoresActivos": [
-        "n3_analitica",
-        "n3_productividad"
-      ],
-      "puntosAcumuladosSemestre": 1302,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 3 · Consultor Junior (75%)",
-        "Efectividad Analítica (+6%)",
-        "Gestión de Proyectos"
+        "Nivel 3 · Consultor Junior (75%)"
       ],
       "entregables": [
         {
@@ -145,53 +103,13 @@
           "titulo": "Caracterización y Pacto de Dedicación (2 a 4 horas semanales · 75% avance)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-jj2",
-          "semana": 6,
-          "titulo": "Estructuración analítica y cronograma de proyecto de consultoría",
-          "tipo": "Multiplicador +6%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 300,
-          "metaPP": 300,
-          "bonoPct": 6,
-          "finalPP": 318,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 2,
-          "basePP": 300,
-          "metaPP": 303,
-          "bonoPct": 6,
-          "finalPP": 318,
-          "cumplimiento": 105
-        },
-        {
-          "semana": 4,
-          "basePP": 300,
-          "metaPP": 309,
-          "bonoPct": 10,
-          "finalPP": 330,
-          "cumplimiento": 107
-        },
-        {
-          "semana": 6,
-          "basePP": 300,
-          "metaPP": 315,
-          "bonoPct": 10,
-          "finalPP": 330,
-          "cumplimiento": 105
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Administrativa, 75% de avance (Nivel 3), 2 a 4 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -210,7 +128,7 @@
       "avatar": "DL",
       "nivel": 2,
       "semestre": 4,
-      "porcentajeAvance": 38.0,
+      "porcentajeAvance": 38,
       "porcentajeAvanceTexto": "38%",
       "creditosAprobados": 65,
       "creditosTotales": 172,
@@ -218,16 +136,14 @@
       "detalleMaterias": "Analisis de datos, Marketing digital, Uso de herramientas como Power BI y Looker Studio.",
       "horasSemanalesTexto": "8 a 10",
       "hsa": 9,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Analisis de datos, Marketing digital, Uso de herramientas como Power BI y Looker Studio.",
-      "multiplicadoresActivos": [
-        "n2_traccion",
-        "n2_convocatoria"
-      ],
-      "puntosAcumuladosSemestre": 3852,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 2 · Rol Gestor (38%)",
-        "Power BI & Looker Studio",
-        "Tracción Web y Redes (+5%)"
+        "Nivel 2 · Rol Gestor (38%)"
       ],
       "entregables": [
         {
@@ -236,53 +152,13 @@
           "titulo": "Caracterización y Pacto de Alta Dedicación (8 a 10 horas semanales · 38% avance)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-dl2",
-          "semana": 6,
-          "titulo": "Tablero de seguimiento en Power BI / Looker Studio y estrategia de marketing digital",
-          "tipo": "Multiplicador +5%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 900,
-          "metaPP": 900,
-          "bonoPct": 5,
-          "finalPP": 945,
-          "cumplimiento": 105
-        },
-        {
-          "semana": 2,
-          "basePP": 900,
-          "metaPP": 909,
-          "bonoPct": 5,
-          "finalPP": 945,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 4,
-          "basePP": 900,
-          "metaPP": 927,
-          "bonoPct": 9,
-          "finalPP": 981,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 6,
-          "basePP": 900,
-          "metaPP": 945,
-          "bonoPct": 9,
-          "finalPP": 981,
-          "cumplimiento": 104
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 38% de avance (Nivel 2), 8 a 10 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 9 HSA = 900 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -301,7 +177,7 @@
       "avatar": "JL",
       "nivel": 4,
       "semestre": 10,
-      "porcentajeAvance": 96.0,
+      "porcentajeAvance": 96,
       "porcentajeAvanceTexto": "96%",
       "creditosAprobados": 165,
       "creditosTotales": 172,
@@ -309,16 +185,14 @@
       "detalleMaterias": "Investigación, coordinar equipos de trabajo (monitor fisica), basicas de ofimatica. Analitica de datos",
       "horasSemanalesTexto": "6 a 8",
       "hsa": 7,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Investigación, coordinar equipos de trabajo (monitor fisica), basicas de ofimatica. Analitica de datos",
-      "multiplicadoresActivos": [
-        "n4_impacto",
-        "n4_curso"
-      ],
-      "puntosAcumuladosSemestre": 3150,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 4 · Rol Líder (96%)",
-        "Coordinación de Equipos & Investigación",
-        "Impacto Económico (+10%)"
+        "Nivel 4 · Rol Líder (96%)"
       ],
       "entregables": [
         {
@@ -327,53 +201,13 @@
           "titulo": "Caracterización y Liderazgo Senior (6 a 8 horas semanales · 96% avance en Ingeniería Física)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-jl2",
-          "semana": 6,
-          "titulo": "Coordinación metodológica de equipos de trabajo y analítica de datos en consultoría",
-          "tipo": "Multiplicador +10%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 700,
-          "metaPP": 700,
-          "bonoPct": 10,
-          "finalPP": 770,
-          "cumplimiento": 110
-        },
-        {
-          "semana": 2,
-          "basePP": 700,
-          "metaPP": 707,
-          "bonoPct": 10,
-          "finalPP": 770,
-          "cumplimiento": 109
-        },
-        {
-          "semana": 4,
-          "basePP": 700,
-          "metaPP": 721,
-          "bonoPct": 15,
-          "finalPP": 805,
-          "cumplimiento": 112
-        },
-        {
-          "semana": 6,
-          "basePP": 700,
-          "metaPP": 735,
-          "bonoPct": 15,
-          "finalPP": 805,
-          "cumplimiento": 110
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Física, 96% de avance (Nivel 4 · Líder), 6 a 8 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -392,24 +226,22 @@
       "avatar": "JA",
       "nivel": 1,
       "semestre": 1,
-      "porcentajeAvance": 0.0,
-      "porcentajeAvanceTexto": "0",
+      "porcentajeAvance": 0,
+      "porcentajeAvanceTexto": "0%",
       "creditosAprobados": 0,
       "creditosTotales": 172,
       "materiasAltoImpacto": true,
       "detalleMaterias": "Ofimatica avanzada, negociación, manejo de equipos",
       "horasSemanalesTexto": "6 a 8",
       "hsa": 7,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Ofimatica avanzada, negociación, manejo de equipos",
-      "multiplicadoresActivos": [
-        "n1_contenido",
-        "n1_valor"
-      ],
-      "puntosAcumuladosSemestre": 2940,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 1 · Rol Operativo (0%)",
-        "Ofimática Avanzada y Negociación",
-        "Generación de Valor (+4%)"
+        "Nivel 1 · Rol Operativo (0%)"
       ],
       "entregables": [
         {
@@ -418,53 +250,13 @@
           "titulo": "Caracterización e Ingreso Nivel 1 (6 a 8 horas semanales · Administrativa)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-ja2",
-          "semana": 6,
-          "titulo": "Estructuración ofimática avanzada y apoyo en manejo de equipos",
-          "tipo": "Multiplicador +4%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 700,
-          "metaPP": 700,
-          "bonoPct": 3,
-          "finalPP": 721,
-          "cumplimiento": 103
-        },
-        {
-          "semana": 2,
-          "basePP": 700,
-          "metaPP": 707,
-          "bonoPct": 7,
-          "finalPP": 749,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 4,
-          "basePP": 700,
-          "metaPP": 721,
-          "bonoPct": 7,
-          "finalPP": 749,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 6,
-          "basePP": 700,
-          "metaPP": 735,
-          "bonoPct": 7,
-          "finalPP": 749,
-          "cumplimiento": 102
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Administrativa, 0% de avance (Nivel 1), 6 a 8 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -478,7 +270,7 @@
       "correoCaracterizacion": "bmartinezag@unal.edu.co",
       "rolSistema": "estudiante",
       "cargo": "Consultor Junior · Analítica de Datos en Power BI",
-      "carrera": "Ingenieria industrial",
+      "carrera": "Ingeniería Industrial",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "BM",
       "nivel": 3,
@@ -491,16 +283,14 @@
       "detalleMaterias": "Comunicacion asertiva, ofimática nivel media, analítica de datos en Power Bi.",
       "horasSemanalesTexto": "6 a 8",
       "hsa": 7,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Comunicacion asertiva, ofimática nivel media, analítica de datos en Power Bi.",
-      "multiplicadoresActivos": [
-        "n3_analitica",
-        "n3_curricular"
-      ],
-      "puntosAcumuladosSemestre": 3038,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 3 · Consultor Junior (76,40%)",
-        "Analítica en Power BI",
-        "Efectividad Analítica (+6%)"
+        "Nivel 3 · Consultor Junior (76,40%)"
       ],
       "entregables": [
         {
@@ -509,53 +299,13 @@
           "titulo": "Caracterización y Pacto Semestral (6 a 8 horas semanales · 76,40% avance)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-bm2",
-          "semana": 6,
-          "titulo": "Informe de diagnóstico y visualización analítica en Power BI",
-          "tipo": "Multiplicador +6%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 700,
-          "metaPP": 700,
-          "bonoPct": 6,
-          "finalPP": 742,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 2,
-          "basePP": 700,
-          "metaPP": 707,
-          "bonoPct": 6,
-          "finalPP": 742,
-          "cumplimiento": 105
-        },
-        {
-          "semana": 4,
-          "basePP": 700,
-          "metaPP": 721,
-          "bonoPct": 11,
-          "finalPP": 777,
-          "cumplimiento": 108
-        },
-        {
-          "semana": 6,
-          "basePP": 700,
-          "metaPP": 735,
-          "bonoPct": 11,
-          "finalPP": 777,
-          "cumplimiento": 106
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 76,40% de avance (Nivel 3), 6 a 8 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -569,7 +319,7 @@
       "correoCaracterizacion": "lyepez@unal.edu.co",
       "rolSistema": "estudiante",
       "cargo": "Consultor Junior · Programación y Medios Digitales",
-      "carrera": "Ingenieria Industrial",
+      "carrera": "Ingeniería Industrial",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "LY",
       "nivel": 3,
@@ -582,16 +332,14 @@
       "detalleMaterias": "Trabajo equipo, comunicación acertiva, ofimatica media, programación, edicion de videos.",
       "horasSemanalesTexto": "6 a 8",
       "hsa": 7,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Trabajo equipo, comunicación acertiva, ofimatica media, programación, edicion de videos.",
-      "multiplicadoresActivos": [
-        "n3_analitica",
-        "n3_productividad"
-      ],
-      "puntosAcumuladosSemestre": 3010,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 3 · Consultor Junior (76,40%)",
-        "Programación y Edición Audiovisual",
-        "Efectividad Analítica (+6%)"
+        "Nivel 3 · Consultor Junior (76,40%)"
       ],
       "entregables": [
         {
@@ -600,53 +348,13 @@
           "titulo": "Caracterización y Pacto Semestral (6 a 8 horas semanales · 76,40% avance)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-ly2",
-          "semana": 6,
-          "titulo": "Automatización y recursos audiovisuales para el Curso de Consultoría",
-          "tipo": "Multiplicador +4%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 700,
-          "metaPP": 700,
-          "bonoPct": 6,
-          "finalPP": 742,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 2,
-          "basePP": 700,
-          "metaPP": 707,
-          "bonoPct": 6,
-          "finalPP": 742,
-          "cumplimiento": 105
-        },
-        {
-          "semana": 4,
-          "basePP": 700,
-          "metaPP": 721,
-          "bonoPct": 10,
-          "finalPP": 770,
-          "cumplimiento": 107
-        },
-        {
-          "semana": 6,
-          "basePP": 700,
-          "metaPP": 735,
-          "bonoPct": 10,
-          "finalPP": 770,
-          "cumplimiento": 105
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 76,40% de avance (Nivel 3), 6 a 8 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -660,12 +368,12 @@
       "correoCaracterizacion": "—",
       "rolSistema": "estudiante",
       "cargo": "Operativo · Gestión de Talento Humano (GTH)",
-      "carrera": "Ingenieria Industrial",
+      "carrera": "Ingeniería Industrial",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "DG",
       "nivel": 1,
       "semestre": 2,
-      "porcentajeAvance": 20.0,
+      "porcentajeAvance": 20,
       "porcentajeAvanceTexto": "—",
       "creditosAprobados": 34,
       "creditosTotales": 172,
@@ -673,15 +381,14 @@
       "detalleMaterias": "Gestión de Talento Humano (GTH) · Línea de Consultoría",
       "horasSemanalesTexto": "3",
       "hsa": 3,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "—",
-      "multiplicadoresActivos": [
-        "n1_contenido",
-        "n1_cultura"
-      ],
-      "puntosAcumuladosSemestre": 1248,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 1 · Rol Operativo",
-        "Enlace Gestión de Talento Humano (GTH)"
+        "Nivel 1 · Rol Operativo"
       ],
       "entregables": [
         {
@@ -692,44 +399,11 @@
           "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 300,
-          "metaPP": 300,
-          "bonoPct": 3,
-          "finalPP": 309,
-          "cumplimiento": 103
-        },
-        {
-          "semana": 2,
-          "basePP": 300,
-          "metaPP": 303,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 4,
-          "basePP": 300,
-          "metaPP": 309,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 102
-        },
-        {
-          "semana": 6,
-          "basePP": 300,
-          "metaPP": 315,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 100
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 3 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -748,7 +422,7 @@
       "avatar": "EO",
       "nivel": 3,
       "semestre": 8,
-      "porcentajeAvance": 80.0,
+      "porcentajeAvance": 80,
       "porcentajeAvanceTexto": "80%",
       "creditosAprobados": 138,
       "creditosTotales": 172,
@@ -756,17 +430,14 @@
       "detalleMaterias": "Comunicación, organización, creatividad, un poco de finanzas y de programación, suelo tener pensamiento social y comunitario",
       "horasSemanalesTexto": "8",
       "hsa": 8,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Comunicación, organización, creatividad, un poco de finanzas y de programación, suelo tener pensamiento social y comunitario",
-      "multiplicadoresActivos": [
-        "n3_analitica",
-        "n3_curricular",
-        "n3_productividad"
-      ],
-      "puntosAcumuladosSemestre": 3576,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 3 · Consultora Junior (80%)",
-        "Pensamiento Social y Comunitario",
-        "Efectividad Analítica (+6%)"
+        "Nivel 3 · Consultora Junior (80%)"
       ],
       "entregables": [
         {
@@ -775,53 +446,13 @@
           "titulo": "Caracterización y Pacto de 8 Horas Semanales (80% avance en Ingeniería Industrial)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-eo2",
-          "semana": 6,
-          "titulo": "Estructuración financiera y enfoque comunitario para empresas asesoradas",
-          "tipo": "Multiplicador +6%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 800,
-          "metaPP": 800,
-          "bonoPct": 6,
-          "finalPP": 848,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 2,
-          "basePP": 800,
-          "metaPP": 808,
-          "bonoPct": 11,
-          "finalPP": 888,
-          "cumplimiento": 110
-        },
-        {
-          "semana": 4,
-          "basePP": 800,
-          "metaPP": 824,
-          "bonoPct": 15,
-          "finalPP": 920,
-          "cumplimiento": 112
-        },
-        {
-          "semana": 6,
-          "basePP": 800,
-          "metaPP": 840,
-          "bonoPct": 15,
-          "finalPP": 920,
-          "cumplimiento": 110
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 80% de avance (Nivel 3), 8 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 8 HSA = 800 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -835,12 +466,12 @@
       "correoCaracterizacion": "—",
       "rolSistema": "estudiante",
       "cargo": "Gestor · Toma de Decisiones, Excel y Ventas",
-      "carrera": "Ingenieria industrial",
+      "carrera": "Ingeniería Industrial",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "OM",
       "nivel": 2,
       "semestre": 5,
-      "porcentajeAvance": 51.0,
+      "porcentajeAvance": 51,
       "porcentajeAvanceTexto": "51%",
       "creditosAprobados": 88,
       "creditosTotales": 172,
@@ -848,16 +479,14 @@
       "detalleMaterias": "Trabajo en equipo, comunicación, toma de desciciones, Excel e interes por las ventas.",
       "horasSemanalesTexto": "2",
       "hsa": 2,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Trabajo en equipo, comunicación, toma de desciciones, Excel e interes por las ventas.",
-      "multiplicadoresActivos": [
-        "n2_traccion",
-        "n2_bienestar"
-      ],
-      "puntosAcumuladosSemestre": 848,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 2 · Rol Gestor (51%)",
-        "Simulación Comercial y Ventas",
-        "Tracción y Comunidad (+5%)"
+        "Nivel 2 · Rol Gestor (51%)"
       ],
       "entregables": [
         {
@@ -866,53 +495,13 @@
           "titulo": "Caracterización y Pacto de 2 Horas Semanales (51% avance en Ingeniería Industrial)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-om2",
-          "semana": 6,
-          "titulo": "Modelación en Excel y apoyo en estructuración de ventas",
-          "tipo": "Multiplicador +5%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 200,
-          "metaPP": 200,
-          "bonoPct": 5,
-          "finalPP": 210,
-          "cumplimiento": 105
-        },
-        {
-          "semana": 2,
-          "basePP": 200,
-          "metaPP": 202,
-          "bonoPct": 5,
-          "finalPP": 210,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 4,
-          "basePP": 200,
-          "metaPP": 206,
-          "bonoPct": 7,
-          "finalPP": 214,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 6,
-          "basePP": 200,
-          "metaPP": 210,
-          "bonoPct": 7,
-          "finalPP": 214,
-          "cumplimiento": 102
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 51% de avance (Nivel 2), 2 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 2 HSA = 200 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -926,12 +515,12 @@
       "correoCaracterizacion": "—",
       "rolSistema": "estudiante",
       "cargo": "Operativo · Apoyo Línea de Consultoría",
-      "carrera": "—",
+      "carrera": "Por registrar",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "SF",
       "nivel": 1,
       "semestre": 2,
-      "porcentajeAvance": 15.0,
+      "porcentajeAvance": 15,
       "porcentajeAvanceTexto": "—",
       "creditosAprobados": 26,
       "creditosTotales": 172,
@@ -939,15 +528,14 @@
       "detalleMaterias": "Participante activa Curso y Línea de Consultoría 2026-2",
       "horasSemanalesTexto": "3",
       "hsa": 3,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "—",
-      "multiplicadoresActivos": [
-        "n1_contenido",
-        "n1_cultura"
-      ],
-      "puntosAcumuladosSemestre": 1248,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 1 · Rol Operativo",
-        "Pertenencia Línea Consultoría"
+        "Nivel 1 · Rol Operativo"
       ],
       "entregables": [
         {
@@ -958,44 +546,11 @@
           "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 300,
-          "metaPP": 300,
-          "bonoPct": 3,
-          "finalPP": 309,
-          "cumplimiento": 103
-        },
-        {
-          "semana": 2,
-          "basePP": 300,
-          "metaPP": 303,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 4,
-          "basePP": 300,
-          "metaPP": 309,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 102
-        },
-        {
-          "semana": 6,
-          "basePP": 300,
-          "metaPP": 315,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 100
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: 3 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -1009,12 +564,12 @@
       "correoCaracterizacion": "—",
       "rolSistema": "estudiante",
       "cargo": "Operativo · Informática y Sistemas Digitales",
-      "carrera": "Ingenieria Industrial",
+      "carrera": "Ingeniería Industrial",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "TM",
       "nivel": 1,
       "semestre": 3,
-      "porcentajeAvance": 27.0,
+      "porcentajeAvance": 27,
       "porcentajeAvanceTexto": "27%",
       "creditosAprobados": 46,
       "creditosTotales": 172,
@@ -1022,16 +577,14 @@
       "detalleMaterias": "Todo lo relacionado con Informática",
       "horasSemanalesTexto": "6",
       "hsa": 6,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Todo lo relacionado con Informática",
-      "multiplicadoresActivos": [
-        "n1_contenido",
-        "n1_valor"
-      ],
-      "puntosAcumuladosSemestre": 2544,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 1 · Rol Operativo (27%)",
-        "Soporte Informático y Tecnológico",
-        "Generación de Valor (+4%)"
+        "Nivel 1 · Rol Operativo (27%)"
       ],
       "entregables": [
         {
@@ -1040,53 +593,13 @@
           "titulo": "Caracterización y Pacto de 6 Horas Semanales (27% avance en Ingeniería Industrial)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-tm2",
-          "semana": 6,
-          "titulo": "Herramientas informáticas y soporte digital para la Línea de Consultoría",
-          "tipo": "Multiplicador +4%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 600,
-          "metaPP": 600,
-          "bonoPct": 3,
-          "finalPP": 618,
-          "cumplimiento": 103
-        },
-        {
-          "semana": 2,
-          "basePP": 600,
-          "metaPP": 606,
-          "bonoPct": 7,
-          "finalPP": 642,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 4,
-          "basePP": 600,
-          "metaPP": 618,
-          "bonoPct": 7,
-          "finalPP": 642,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 6,
-          "basePP": 600,
-          "metaPP": 630,
-          "bonoPct": 7,
-          "finalPP": 642,
-          "cumplimiento": 102
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 27% de avance (Nivel 1 · próximo a ascender a Nivel 2), 6 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 6 HSA = 600 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -1100,12 +613,12 @@
       "correoCaracterizacion": "—",
       "rolSistema": "estudiante",
       "cargo": "Operativo · Apoyo Ingeniería Industrial",
-      "carrera": "Ingenieria Industrial",
+      "carrera": "Ingeniería Industrial",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "ZL",
       "nivel": 1,
       "semestre": 2,
-      "porcentajeAvance": 20.0,
+      "porcentajeAvance": 20,
       "porcentajeAvanceTexto": "—",
       "creditosAprobados": 34,
       "creditosTotales": 172,
@@ -1113,15 +626,14 @@
       "detalleMaterias": "Participante activa Curso y Línea de Consultoría 2026-2",
       "horasSemanalesTexto": "3",
       "hsa": 3,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "—",
-      "multiplicadoresActivos": [
-        "n1_contenido",
-        "n1_cultura"
-      ],
-      "puntosAcumuladosSemestre": 1248,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 1 · Rol Operativo",
-        "Cultura Consultor (+2%)"
+        "Nivel 1 · Rol Operativo"
       ],
       "entregables": [
         {
@@ -1132,44 +644,11 @@
           "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 300,
-          "metaPP": 300,
-          "bonoPct": 3,
-          "finalPP": 309,
-          "cumplimiento": 103
-        },
-        {
-          "semana": 2,
-          "basePP": 300,
-          "metaPP": 303,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 104
-        },
-        {
-          "semana": 4,
-          "basePP": 300,
-          "metaPP": 309,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 102
-        },
-        {
-          "semana": 6,
-          "basePP": 300,
-          "metaPP": 315,
-          "bonoPct": 5,
-          "finalPP": 315,
-          "cumplimiento": 100
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 3 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     },
@@ -1183,12 +662,12 @@
       "correoCaracterizacion": "—",
       "rolSistema": "estudiante",
       "cargo": "Consultora Junior · Gestión de Equipos, Negocios y Redes",
-      "carrera": "Ingenieria Administrativa",
+      "carrera": "Ingeniería Administrativa",
       "linea": "Línea de Consultoría 2026-2",
       "avatar": "DN",
       "nivel": 3,
       "semestre": 7,
-      "porcentajeAvance": 70.0,
+      "porcentajeAvance": 70,
       "porcentajeAvanceTexto": "70%",
       "creditosAprobados": 120,
       "creditosTotales": 172,
@@ -1196,16 +675,14 @@
       "detalleMaterias": "Redes sociales, Gestión de equipos, negocios y Ofimática",
       "horasSemanalesTexto": "3",
       "hsa": 3,
+      "horasCumplidas": 0,
+      "puntosExtraManual": 0,
       "herramientasHabilidades": "Redes sociales, Gestión de equipos, negocios y Ofimática",
-      "multiplicadoresActivos": [
-        "n3_analitica",
-        "n3_productividad"
-      ],
-      "puntosAcumuladosSemestre": 1296,
+      "multiplicadoresActivos": [],
+      "anotaciones": [],
+      "puntosAcumuladosSemestre": 0,
       "insignias": [
-        "Nivel 3 · Consultora Junior (70%)",
-        "Gestión de Equipos y Negocios",
-        "Productividad Extra (+4%)"
+        "Nivel 3 · Consultora Junior (70%)"
       ],
       "entregables": [
         {
@@ -1214,53 +691,13 @@
           "titulo": "Caracterización y Pacto de 3 Horas Semanales (70% avance en Ingeniería Administrativa)",
           "tipo": "Caracterización 2026-2",
           "estado": "Aprobado"
-        },
-        {
-          "id": "ent-dn2",
-          "semana": 6,
-          "titulo": "Gestión de equipos, posicionamiento en redes y estructuración de negocios",
-          "tipo": "Multiplicador +6%",
-          "estado": "Aprobado"
         }
       ],
-      "historialQuincenal": [
-        {
-          "semana": 1,
-          "basePP": 300,
-          "metaPP": 300,
-          "bonoPct": 6,
-          "finalPP": 318,
-          "cumplimiento": 106
-        },
-        {
-          "semana": 2,
-          "basePP": 300,
-          "metaPP": 303,
-          "bonoPct": 6,
-          "finalPP": 318,
-          "cumplimiento": 105
-        },
-        {
-          "semana": 4,
-          "basePP": 300,
-          "metaPP": 309,
-          "bonoPct": 10,
-          "finalPP": 330,
-          "cumplimiento": 107
-        },
-        {
-          "semana": 6,
-          "basePP": 300,
-          "metaPP": 315,
-          "bonoPct": 10,
-          "finalPP": 330,
-          "cumplimiento": 105
-        }
-      ],
+      "historialQuincenal": [],
       "bitacoraCrecimiento": [
         {
-          "fecha": "2026-10-21",
-          "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Administrativa, 70% de avance (Nivel 3), 3 horas semanales."
+          "fecha": "2026-10-27",
+          "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
         }
       ]
     }

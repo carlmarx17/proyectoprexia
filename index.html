@@ -1708,167 +1708,213 @@
       <div class="sim-engine">
         <div class="sim-controls">
           <div class="control-group">
-            <label for="level-select">Ciclo académico y rol formativo (Plan 2026-2)</label>
+            <label for="level-select">Ciclo académico y rol formativo del participante (Plan 2026-2)</label>
             <select id="level-select" class="sim-select">
-              <option value="1">Nivel 1: Fundamentación (0%–30% · Semestres 1 a 3) · Rol Operativo</option>
+              <option value="1" selected>Nivel 1: Fundamentación (0%–30% · Semestres 1 a 3) · Rol Operativo</option>
               <option value="2">Nivel 2: Transición (31%–60% · Semestres 4 a 6) · Rol Gestor</option>
-              <option value="3" selected>Nivel 3: Profesionalización (61%–85% · Semestres 7 a 9) · Consultor Junior</option>
+              <option value="3">Nivel 3: Profesionalización (61%–85% · Semestres 7 a 9) · Consultor Junior</option>
               <option value="4">Nivel 4: Cierre y Proyección (&gt;85% · Semestre 10) · Rol Líder</option>
             </select>
           </div>
 
           <div class="control-group range-row">
-            <label for="hours-slider">Pacto de dedicación semanal (1 HSA = 100 PP base)</label>
-            <input type="range" id="hours-slider" class="range-slider" min="1" max="12" value="8">
+            <label for="hours-slider">Pacto de dedicación semanal acordada (1 HSA = 100 PP meta base)</label>
+            <input type="range" id="hours-slider" class="range-slider" min="1" max="12" value="7">
             <div class="range-meta">
               <span>Horas Semanales Acordadas (HSA):</span>
-              <strong id="hours-display">8 horas/semana (800 PP)</strong>
+              <strong id="hours-display">7 horas/semana (700 PP meta base)</strong>
+            </div>
+          </div>
+
+          <div class="control-group range-row">
+            <label for="done-hours-slider">Puntos / Hora cumplidos (La barra arranca en 0 y avanza 100 PP por hora)</label>
+            <input type="range" id="done-hours-slider" class="range-slider" min="0" max="12" step="0.5" value="0">
+            <div class="range-meta">
+              <span>Horas cumplidas acreditadas:</span>
+              <strong id="done-hours-display" style="color:var(--mint-light);">0 horas cumplidas (+0 PP)</strong>
             </div>
           </div>
 
           <div class="control-group range-row">
             <label for="week-slider">Semana lectiva del semestre (Regla del +1%: 100% en Sem. 1 a 115% en Sem. 16)</label>
-            <input type="range" id="week-slider" class="range-slider" min="1" max="16" value="1">
+            <input type="range" id="week-slider" class="range-slider" min="1" max="16" value="6">
             <div class="range-meta">
               <span>Semana evaluada:</span>
-              <strong id="week-display">Semana 1 (Exigencia 100%)</strong>
+              <strong id="week-display">Semana 6 (Exigencia 105%)</strong>
             </div>
           </div>
 
           <div class="control-group">
-            <label>Factores multiplicadores de calidad acreditados (Plan 2026-2)</label>
-            <div class="mult-grid" id="multipliers-container">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+              <label style="margin:0;">Puntos Multiplicadores sin importar el nivel (Niveles 1 a 4)</label>
+              <label style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-display);font-size:12px;color:var(--mint-light);cursor:pointer;margin:0;">
+                <input type="checkbox" id="sim-cross-level-toggle" checked>
+                Permitir multiplicadores de otros niveles (ej. Nivel 1 asume tarea Nivel 3)
+              </label>
+            </div>
+            <div class="mult-grid" id="multipliers-container" style="max-height:290px;overflow-y:auto;padding-right:4px;">
               <!-- Nivel 1 -->
               <label class="mult-option" data-level="1">
                 <input type="checkbox" value="3" class="mult-check">
-                <span>Excelencia en Contenido (calendario cumplido al 100% sin retrasos)</span>
+                <span><strong style="color:var(--mint-light);">[Nivel 1]</strong> Excelencia en Contenido (calendario cumplido al 100% sin retrasos)</span>
                 <em>+3%</em>
               </label>
               <label class="mult-option" data-level="1">
                 <input type="checkbox" value="4" class="mult-check">
-                <span>Generación de Valor (cápsula de conocimiento extra publicada)</span>
+                <span><strong style="color:var(--mint-light);">[Nivel 1]</strong> Generación de Valor (cápsula de conocimiento extra publicada)</span>
                 <em>+4%</em>
               </label>
               <label class="mult-option" data-level="1">
                 <input type="checkbox" value="2" class="mult-check">
-                <span>Cultura Consultor (contenido sobre la cultura de un Consultor Prexia)</span>
+                <span><strong style="color:var(--mint-light);">[Nivel 1]</strong> Cultura Consultor (contenido sobre la cultura de un Consultor Prexia)</span>
                 <em>+2%</em>
               </label>
               <!-- Nivel 2 -->
               <label class="mult-option" data-level="2">
                 <input type="checkbox" value="5" class="mult-check">
-                <span>Tracción Web y Redes (crecimiento de audiencia &ge;15%)</span>
+                <span><strong style="color:var(--cyan-light);">[Nivel 2]</strong> Tracción Web y Redes (crecimiento de audiencia &ge;15%)</span>
                 <em>+5%</em>
               </label>
               <label class="mult-option" data-level="2">
                 <input type="checkbox" value="4" class="mult-check">
-                <span>Poder de Convocatoria (eventos con participación &ge;70%)</span>
+                <span><strong style="color:var(--cyan-light);">[Nivel 2]</strong> Poder de Convocatoria (eventos con participación &ge;70%)</span>
                 <em>+4%</em>
               </label>
               <label class="mult-option" data-level="2">
                 <input type="checkbox" value="2" class="mult-check">
-                <span>Celebración y Bienestar (100% cumpleaños y reconocimientos)</span>
+                <span><strong style="color:var(--cyan-light);">[Nivel 2]</strong> Celebración y Bienestar (100% cumpleaños y reconocimientos)</span>
                 <em>+2%</em>
               </label>
               <!-- Nivel 3 -->
               <label class="mult-option" data-level="3">
-                <input type="checkbox" value="6" class="mult-check" checked>
-                <span>Efectividad Analítica (100% informes finales impecables)</span>
+                <input type="checkbox" value="6" class="mult-check">
+                <span><strong style="color:#c4b5fd;">[Nivel 3]</strong> Efectividad Analítica (100% informes finales impecables)</span>
                 <em>+6%</em>
               </label>
               <label class="mult-option" data-level="3">
                 <input type="checkbox" value="5" class="mult-check">
-                <span>Diseño Curricular (casos de simulación con datos reales del sector)</span>
+                <span><strong style="color:#c4b5fd;">[Nivel 3]</strong> Diseño Curricular (casos de simulación con datos reales del sector)</span>
                 <em>+5%</em>
               </label>
               <label class="mult-option" data-level="3">
                 <input type="checkbox" value="4" class="mult-check">
-                <span>Productividad Extra (más tareas o emprendimientos vinculados)</span>
+                <span><strong style="color:#c4b5fd;">[Nivel 3]</strong> Productividad Extra (más tareas o emprendimientos vinculados)</span>
                 <em>+4%</em>
               </label>
               <!-- Nivel 4 -->
               <label class="mult-option" data-level="4">
                 <input type="checkbox" value="10" class="mult-check">
-                <span>Impacto Económico (negociación de retribución sobre utilidades)</span>
+                <span><strong style="color:#fcd34d;">[Nivel 4]</strong> Impacto Económico (negociación de retribución sobre utilidades)</span>
                 <em>+10%</em>
               </label>
               <label class="mult-option" data-level="4">
                 <input type="checkbox" value="8" class="mult-check">
-                <span>Relaciones Públicas (expertos externos para dictar el curso, 6+ sesiones)</span>
+                <span><strong style="color:#fcd34d;">[Nivel 4]</strong> Relaciones Públicas (expertos externos para dictar el curso, 6+ sesiones)</span>
                 <em>+8%</em>
               </label>
               <label class="mult-option" data-level="4">
                 <input type="checkbox" value="5" class="mult-check">
-                <span>Finalización de Curso (&ge;80% culminan el curso de consultoría)</span>
+                <span><strong style="color:#fcd34d;">[Nivel 4]</strong> Finalización de Curso (&ge;80% culminan el curso de consultoría)</span>
                 <em>+5%</em>
               </label>
+            </div>
+          </div>
+
+          <!-- RESTA DE PUNTOS: INCUMPLIMIENTO DE FECHA Y HORA SIN JUSTA CAUSA (ROJO A LAS 3) -->
+          <div class="control-group" style="background:rgba(220,38,38,0.12);border:1px solid rgba(248,113,113,0.45);padding:14px 16px;border-radius:var(--radius);">
+            <label for="penalty-slider" style="color:#fca5a5;margin-bottom:6px;display:block;">
+              ⚠ Resta Puntos: Incumplimiento de fecha y hora de entrega o encuentro sin justa causa (-50 PP c/u · En ROJO a las 3 anotaciones)
+            </label>
+            <input type="range" id="penalty-slider" class="range-slider" min="0" max="4" step="1" value="0">
+            <div class="range-meta" style="margin-top:6px;">
+              <span>Anotaciones acumuladas:</span>
+              <strong id="penalty-display" style="color:#fca5a5;">0 / 3 anotaciones (0 PP restados)</strong>
             </div>
           </div>
         </div>
 
         <div class="sim-output" data-ui>
           <div class="sim-output-title">LIQUIDACIÓN QUINCENAL ESTIMADA (PUNTOS PREXIA)</div>
+
+          <!-- BARRA DE RENDIMIENTO EN VIVO (ARRANCA DESDE 0) -->
+          <div id="sim-perf-bar-box" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);padding:14px 16px;border-radius:var(--radius);margin-bottom:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display);font-size:12px;margin-bottom:6px;">
+              <strong id="sim-bar-label" style="color:#fff;">Barra de Rendimiento (Arranca en 0 PP)</strong>
+              <span id="sim-bar-pct" style="font-weight:800;color:var(--mint-light);">0%</span>
+            </div>
+            <div style="height:12px;background:rgba(255,255,255,0.14);border-radius:999px;overflow:hidden;">
+              <div id="sim-bar-fill" style="height:100%;width:0%;background:linear-gradient(90deg,#1fd88a,#38bdf8);transition:width 0.25s ease,background 0.25s ease;"></div>
+            </div>
+            <div id="sim-bar-sub" style="font-family:var(--font-display);font-size:11px;color:var(--field-navy-muted);margin-top:6px;">
+              +0 PP/hora · +0 PP multiplicadores · -0 PP incumplimientos
+            </div>
+          </div>
+
           <table class="sim-ledger">
             <tbody>
               <tr>
-                <td>Meta base semanal (100 PP/HSA)</td>
-                <td id="out-base">800 PP</td>
+                <td>Meta exigida en <span id="out-target-label">Semana 6 (105%)</span></td>
+                <td id="out-target">735 PP</td>
               </tr>
               <tr>
-                <td id="out-target-label">Meta exigida en Semana 1 (100%)</td>
-                <td id="out-target">800 PP</td>
+                <td>Puntos / Hora cumplidos (arranca en 0)</td>
+                <td id="out-base" style="color:var(--mint-light);">+0 PP (0h)</td>
               </tr>
               <tr>
-                <td>Bonificación por multiplicadores activos</td>
-                <td id="out-mult">+6% (+48 PP)</td>
+                <td>Puntos Multiplicadores (Niveles 1 a 4)</td>
+                <td id="out-mult">+0% (+0 PP)</td>
+              </tr>
+              <tr>
+                <td>Resta por incumplimiento sin justa causa</td>
+                <td id="out-penalty" style="color:#fca5a5;">-0 PP (0/3)</td>
               </tr>
             </tbody>
           </table>
 
           <div class="sim-total-block">
-            <span class="sim-total-label">Rendimiento neto acreditado</span>
-            <span class="sim-total-number" id="out-final">848 PP</span>
+            <span class="sim-total-label">Rendimiento neto en barra</span>
+            <span class="sim-total-number" id="out-final">0 PP</span>
           </div>
 
-          <div class="sim-status-box">
-            <strong id="out-badge">Meta Progresiva Superada con Insignia de Excelencia</strong>
+          <div class="sim-status-box" id="sim-status-box">
+            <strong id="out-badge">Barra en 0 PP · Lista para sumar horas y multiplicadores</strong>
             <p id="out-message">
-              Alcanzas 848 PP (106% de cumplimiento) mediante multiplicadores de calidad sin aumentar horas reloj.
+              Desliza las horas cumplidas o activa multiplicadores de cualquier nivel (N1 a N4) para ver cómo avanza la barra desde 0.
             </p>
           </div>
 
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:8px;">
-            <a href="site/pages/plataforma-prexia.html" class="btn-mint">Entrar a Plataforma con Login y Usuario Maestro →</a>
-            <a href="site/pages/sistema-evaluacion-prexia.html" style="font-size:14px;color:var(--field-navy-ink);text-decoration:underline;">Ver manual completo del PDF →</a>
+            <a href="site/pages/plataforma-prexia.html" class="btn-mint">Gestionar en Plataforma Oficial (Usuario Maestro) →</a>
+            <a href="site/pages/sistema-evaluacion-prexia.html" style="font-size:14px;color:var(--field-navy-ink);text-decoration:underline;">Ver manual completo del sistema →</a>
           </div>
         </div>
       </div>
 
-      <!-- ── APARTADO PÚBLICO DE PROGRESO GENERAL (SOLO LECTURA · DISPONIBLE PARA TODOS) ── -->
+      <!-- ── APARTADO DE PROGRESO GENERAL (BARRA JUSTO DESPUÉS DEL NOMBRE · ARRANCA EN 0) ── -->
       <div id="progreso-general" style="margin-top:44px;background:var(--field-navy-surface);padding:34px 32px;border-radius:var(--radius);border:1px solid rgba(132,251,170,0.28);">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;margin-bottom:22px;">
           <div>
             <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(132,251,170,0.14);color:var(--mint-light);border:1px solid rgba(132,251,170,0.35);padding:5px 12px;border-radius:2px;font-family:var(--font-display);font-size:12px;font-weight:800;letter-spacing:0.04em;margin-bottom:10px;">
-              🔒 MODO SOLO LECTURA · DISPONIBLE PARA TODOS SIN MODIFICAR NADA
+              📊 BARRA DE RENDIMIENTO DESDE 0 · UBICADA JUSTO DESPUÉS DEL NOMBRE · MULTIPLICADORES N1 A N4
             </div>
             <h3 style="font-family:var(--font-display);font-size:clamp(1.45rem, 2.4vw, 2rem);font-weight:800;color:#fff;line-height:1.1;">
               Progreso General · Participantes Línea de Consultoría 2026-2
             </h3>
-            <p style="font-size:15px;color:var(--field-navy-muted);margin-top:6px;max-width:76ch;">
-              Tablero abierto de consulta pública sincronizado con la hoja oficial de <strong>Caracterización 2026-2</strong> y con la base de datos de Puntos Prexia (<code style="color:var(--mint-light);">data/prexia-users-db.json</code>). Cualquier integrante o visitante puede consultar el avance y caracterización de los 13 participantes sin riesgo de alterar datos.
+            <p style="font-size:15px;color:var(--field-navy-muted);margin-top:6px;max-width:78ch;">
+              La <strong>Barra de Rendimiento (Progreso Puntos Prexia)</strong> se muestra inmediatamente después del nombre de cada participante, arranca desde <strong>0 PP</strong> y avanza a medida que se suman <strong>Puntos / Hora</strong> y <strong>Puntos Multiplicadores (de cualquier nivel N1 a N4)</strong>. Si un participante acumula <strong>3 anotaciones</strong> de <em>Incumplimiento de fecha y hora de entrega o encuentro sin justa causa</em>, su barra y fila se ponen en <strong style="color:#f87171;">ROJO</strong>.
             </p>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="site/pages/plataforma-prexia.html?view=progreso" class="btn-mint" style="padding:11px 18px;">
-              Ver Tablero Completo en Plataforma →
-            </a>
+            <button type="button" id="btn-home-toggle-edit" class="btn-mint" style="padding:11px 16px;border:none;cursor:pointer;">
+              ⚡ Activar Controles Rápidos en Tabla
+            </button>
             <a href="site/pages/plataforma-prexia.html?user=maestro" class="btn-navy-sec" style="padding:11px 18px;border:1px solid rgba(255,255,255,0.2);">
-              ★ Panel Maestro (Edición) →
+              ★ Abrir Panel Maestro Completo →
             </a>
           </div>
         </div>
 
-        <!-- Filtros rápidos en vivo (Solo Lectura) -->
+        <!-- Filtros rápidos en vivo -->
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.12);">
           <div style="display:flex;gap:8px;flex-wrap:wrap;" id="home-ro-filters">
             <button type="button" class="home-ro-btn active" data-filter="all" style="padding:7px 13px;font-family:var(--font-display);font-size:12px;font-weight:800;border-radius:2px;border:1px solid var(--mint-light);background:var(--mint-light);color:var(--ink);cursor:pointer;">Todos (13)</button>
@@ -1880,153 +1926,21 @@
           <input type="search" id="home-ro-search" placeholder="Buscar por nombre, correo, carrera o habilidad..." style="padding:8px 12px;min-width:260px;background:var(--field-navy);color:#fff;border:1px solid rgba(255,255,255,0.22);border-radius:2px;font-family:var(--font-display);font-size:13px;">
         </div>
 
-        <!-- Tabla de Caracterización y Progreso PP (Solo Lectura) -->
+        <!-- Tabla de Caracterización y Progreso PP (Barra justo después del nombre) -->
         <div style="overflow-x:auto;background:var(--field-navy);border-radius:2px;border:1px solid rgba(255,255,255,0.12);">
-          <table style="width:100%;border-collapse:collapse;min-width:980px;font-size:14px;text-align:left;">
+          <table style="width:100%;border-collapse:collapse;min-width:1080px;font-size:14px;text-align:left;">
             <thead>
               <tr style="background:rgba(255,255,255,0.06);font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:0.04em;color:var(--mint-light);">
                 <th style="padding:12px 14px;"># · Participante</th>
-                <th style="padding:12px 14px;">Correo</th>
-                <th style="padding:12px 14px;">Carrera</th>
-                <th style="padding:12px 14px;">% Avance</th>
-                <th style="padding:12px 14px;">Nivel PP</th>
-                <th style="padding:12px 14px;">Horas Sem.</th>
-                <th style="padding:12px 14px;">Herramientas y Habilidades Actuales</th>
-                <th style="padding:12px 14px;">Progreso Puntos Prexia</th>
+                <th style="padding:12px 14px;min-width:280px;">Barra de Rendimiento (Progreso Puntos Prexia)</th>
+                <th style="padding:12px 14px;">Nivel PP / Avance</th>
+                <th style="padding:12px 14px;">Puntos / Hora y Multiplicadores (N1–N4)</th>
+                <th style="padding:12px 14px;">Incumplimiento Fecha/Hora (Rojo = 3)</th>
+                <th style="padding:12px 14px;">Carrera y Habilidades Actuales</th>
               </tr>
             </thead>
             <tbody id="home-ro-tbody">
-              <!-- Se hidrata automáticamente con prexia-db.js (y fallback estático de los 13 participantes) -->
-              <tr data-level="3">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">1. Juan José Vargas Sánchez</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">jvargassan@unal.edu.co</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Administrativa</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">75%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 3 · Consultor Jr.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">2 a 4 (3 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Gestion de proyectos, Analisis de datos</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">318 / 300 PP (106%)</td>
-              </tr>
-              <tr data-level="2">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">2. Dahiana Lozano Yepes</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">dlozanoy@unal.edu.co</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--cyan-light);">38%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 2 · Gestora</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">8 a 10 (9 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Analisis de datos, Marketing digital, Uso de herramientas como Power BI y Looker Studio.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">945 / 900 PP (105%)</td>
-              </tr>
-              <tr data-level="4">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">3. Julian David Lopera Grisales</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">juloperag@unal.edu.co</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Física</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">96%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 4 · Líder</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">6 a 8 (7 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Investigación, coordinar equipos de trabajo (monitor fisica), basicas de ofimatica. Analitica de datos</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">770 / 700 PP (110%)</td>
-              </tr>
-              <tr data-level="1">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">4. Jhon Alejandro Valencia</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Administrativa</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;">0%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 1 · Operativo</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">6 a 8 (7 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Ofimatica avanzada, negociación, manejo de equipos</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">721 / 700 PP (103%)</td>
-              </tr>
-              <tr data-level="3">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">5. Brayan Julian Martinez Aguilar</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">bmartinezag@unal.edu.co</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">76,40%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 3 · Consultor Jr.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">6 a 8 (7 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Comunicacion asertiva, ofimática nivel media, analítica de datos en Power Bi.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">742 / 700 PP (106%)</td>
-              </tr>
-              <tr data-level="3">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">6. Luis Daniel Yepez Gaviria</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">lyepez@unal.edu.co</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">76,40%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 3 · Consultor Jr.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">6 a 8 (7 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Trabajo equipo, comunicación acertiva, ofimatica media, programación, edicion de videos.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">735 / 700 PP (105%)</td>
-              </tr>
-              <tr data-level="1">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">7. Dani GTH</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 1 · Operativo</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">3 (3 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">306 / 300 PP (102%)</td>
-              </tr>
-              <tr data-level="3">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">8. Evreydi Orduz Prexia</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">80%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 3 · Consultora Jr.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">8 (8 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Comunicación, organización, creatividad, un poco de finanzas y de programación, pensamiento social y comunitario</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">848 / 800 PP (106%)</td>
-              </tr>
-              <tr data-level="2">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">9. Omar</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--cyan-light);">51%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 2 · Gestor</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">2 (2 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Trabajo en equipo, comunicación, toma de desciciones, Excel e interes por las ventas.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">208 / 200 PP (104%)</td>
-              </tr>
-              <tr data-level="1">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">10. Sofia</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Por registrar</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 1 · Operativo</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">3 (3 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">306 / 300 PP (102%)</td>
-              </tr>
-              <tr data-level="1">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">11. Timi</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;">27%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 1 · Operativo</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">6 (6 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Todo lo relacionado con Informática</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">624 / 600 PP (104%)</td>
-              </tr>
-              <tr data-level="1">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">12. Zuly</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Industrial</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 1 · Operativo</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">3 (3 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">306 / 300 PP (102%)</td>
-              </tr>
-              <tr data-level="3">
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;color:#fff;">13. Dana</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-family:monospace;font-size:12px;">—</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">Ingeniería Administrativa</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">70%</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:700;">Nivel 3 · Consultora Jr.</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">3 (3 HSA)</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:13px;">Redes sociales, Gestión de equipos, negocios y Ofimática</td>
-                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);font-weight:800;color:var(--mint-light);">312 / 300 PP (104%)</td>
-              </tr>
+              <!-- Se hidrata dinámicamente con assets/prexia-db.js -->
             </tbody>
           </table>
         </div>
@@ -2051,7 +1965,7 @@
           <a href="site/pages/plataforma-prexia.html?user=juloperag" style="background:var(--field-navy-card);padding:14px 16px;border-radius:var(--radius);display:block;border-left:3px solid #60eaf0;">
             <strong style="color:#fff;font-size:14px;display:block;">Nivel 4 · Líder (1 integrante)</strong>
             <span style="color:var(--cyan-light);font-size:12px;font-weight:700;">Julian David Lopera Grisales (96%)</span>
-            <span style="color:var(--field-navy-muted);font-size:12px;display:block;margin-top:4px;">Ingeniería Física · 6 a 8 h (770 PP) →</span>
+            <span style="color:var(--field-navy-muted);font-size:12px;display:block;margin-top:4px;">Ingeniería Física · Pacto 7 HSA →</span>
           </a>
         </div>
       </div>
@@ -2385,7 +2299,8 @@
     </div>
   </footer>
 
-  <!-- ══ SCRIPTS: MOTION + SIMULADOR PP + FORMULARIO CONTACTO ══ -->
+  <!-- ══ SCRIPTS: BASE DE DATOS PREXIA + MOTION + SIMULADOR PP + TABLERO PROGRESO ══ -->
+  <script src="assets/prexia-db.js"></script>
   <script>
     requestAnimationFrame(() => {
       document.documentElement.classList.add('in');
@@ -2403,12 +2318,18 @@
 
     revealElements.forEach((el) => revealObserver.observe(el));
 
-    /* ── SIMULADOR DE PUNTOS PREXIA (PP) ── */
+    /* ── SIMULADOR DE PUNTOS PREXIA (PP) DESDE 0 + MULTIPLICADORES N1-N4 + RESTA DE PUNTOS ── */
     const levelSelect = document.getElementById('level-select');
     const hoursSlider = document.getElementById('hours-slider');
+    const doneHoursSlider = document.getElementById('done-hours-slider');
     const weekSlider = document.getElementById('week-slider');
+    const penaltySlider = document.getElementById('penalty-slider');
+    const crossLevelToggle = document.getElementById('sim-cross-level-toggle');
+
     const hoursDisplay = document.getElementById('hours-display');
+    const doneHoursDisplay = document.getElementById('done-hours-display');
     const weekDisplay = document.getElementById('week-display');
+    const penaltyDisplay = document.getElementById('penalty-display');
     const multOptions = document.querySelectorAll('.mult-option');
     const multChecks = document.querySelectorAll('.mult-check');
 
@@ -2416,16 +2337,25 @@
     const outTargetLabel = document.getElementById('out-target-label');
     const outTarget = document.getElementById('out-target');
     const outMult = document.getElementById('out-mult');
+    const outPenalty = document.getElementById('out-penalty');
     const outFinal = document.getElementById('out-final');
     const outBadge = document.getElementById('out-badge');
     const outMessage = document.getElementById('out-message');
 
+    const simBarBox = document.getElementById('sim-perf-bar-box');
+    const simBarLabel = document.getElementById('sim-bar-label');
+    const simBarPct = document.getElementById('sim-bar-pct');
+    const simBarFill = document.getElementById('sim-bar-fill');
+    const simBarSub = document.getElementById('sim-bar-sub');
+    const simStatusBox = document.getElementById('sim-status-box');
+
     function filterMultipliersByLevel() {
       const selectedLevel = levelSelect.value;
+      const allowAllLevels = crossLevelToggle && crossLevelToggle.checked;
       multOptions.forEach((opt) => {
         const optLevel = opt.getAttribute('data-level');
         const checkbox = opt.querySelector('input');
-        if (optLevel === selectedLevel) {
+        if (allowAllLevels || optLevel === selectedLevel) {
           opt.style.display = 'flex';
         } else {
           opt.style.display = 'none';
@@ -2436,13 +2366,20 @@
     }
 
     function calculatePoints() {
-      const hours = parseInt(hoursSlider.value, 10);
-      const week = parseInt(weekSlider.value, 10);
-      const basePP = hours * 100;
+      const pactoHSA = parseInt(hoursSlider.value, 10) || 1;
+      const horasCumplidas = parseFloat(doneHoursSlider ? doneHoursSlider.value : 0) || 0;
+      const week = parseInt(weekSlider.value, 10) || 1;
+      const anotaciones = parseInt(penaltySlider ? penaltySlider.value : 0, 10) || 0;
+
+      const basePP = pactoHSA * 100;
+      const puntosHoraPP = Math.round(horasCumplidas * 100);
       const progressivePct = 100 + (week - 1);
       const targetPP = Math.round(basePP * (progressivePct / 100));
 
-      hoursDisplay.textContent = hours + (hours === 1 ? ' hora/semana (' : ' horas/semana (') + basePP + ' PP)';
+      hoursDisplay.textContent = pactoHSA + (pactoHSA === 1 ? ' hora/semana (' : ' horas/semana (') + basePP + ' PP meta base)';
+      if (doneHoursDisplay) {
+        doneHoursDisplay.textContent = horasCumplidas + 'h cumplidas (+' + puntosHoraPP + ' PP)';
+      }
       weekDisplay.textContent = 'Semana ' + week + ' (Exigencia ' + progressivePct + '%)';
 
       let bonusPct = 0;
@@ -2453,50 +2390,241 @@
       });
 
       const bonusPP = Math.round(basePP * (bonusPct / 100));
-      const finalPP = basePP + bonusPP;
+      const penaltyPP = anotaciones * 50;
+      const isRedAlert = anotaciones >= 3;
+      const finalPP = Math.max(0, puntosHoraPP + bonusPP - penaltyPP);
+      const barPct = targetPP > 0 ? Math.min(100, Math.round((finalPP / targetPP) * 100)) : 0;
 
-      outBase.textContent = basePP + ' PP';
-      outTargetLabel.textContent = 'Meta exigida en Semana ' + week + ' (' + progressivePct + '%)';
+      if (penaltyDisplay) {
+        penaltyDisplay.textContent = isRedAlert
+          ? '🚨 ROJO: ' + anotaciones + ' / 3 anotaciones (-' + penaltyPP + ' PP)'
+          : anotaciones + ' / 3 anotaciones (-' + penaltyPP + ' PP restados)';
+        penaltyDisplay.style.color = isRedAlert ? '#f87171' : '#fca5a5';
+      }
+
+      outTargetLabel.textContent = 'Semana ' + week + ' (' + progressivePct + '%)';
       outTarget.textContent = targetPP + ' PP';
+      outBase.textContent = '+' + puntosHoraPP + ' PP (' + horasCumplidas + 'h)';
       outMult.textContent = '+' + bonusPct + '% (+' + bonusPP + ' PP)';
+      if (outPenalty) {
+        outPenalty.textContent = '-' + penaltyPP + ' PP (' + anotaciones + '/3)';
+      }
       outFinal.textContent = finalPP + ' PP';
+      outFinal.style.color = isRedAlert ? '#f87171' : 'var(--mint-light)';
 
-      if (finalPP >= targetPP) {
-        outBadge.textContent = 'Meta Progresiva Superada · Insignia de Excelencia POA';
-        outMessage.textContent = 'Alcanzas ' + finalPP + ' PP y superas la meta de la Semana ' + week + ' (' + targetPP + ' PP) mediante multiplicadores de calidad sin aumentar horas reloj.';
+      if (simBarFill && simBarPct && simBarSub && simBarBox) {
+        const visualWidth = isRedAlert ? Math.max(100, barPct) : barPct;
+        simBarFill.style.width = visualWidth + '%';
+        simBarFill.style.background = isRedAlert
+          ? 'linear-gradient(90deg, #dc2626, #ef4444)'
+          : finalPP >= targetPP
+          ? 'linear-gradient(90deg, #10b981, #84fbaa)'
+          : 'linear-gradient(90deg, #1fd88a, #38bdf8)';
+        simBarBox.style.borderColor = isRedAlert ? '#ef4444' : 'rgba(255,255,255,0.16)';
+        simBarBox.style.background = isRedAlert ? 'rgba(220,38,38,0.18)' : 'rgba(255,255,255,0.06)';
+        simBarLabel.textContent = isRedAlert
+          ? '🚨 BARRA EN ROJO (' + anotaciones + '/3 Incumplimientos sin justa causa)'
+          : 'Barra de Rendimiento: ' + finalPP + ' / ' + targetPP + ' PP';
+        simBarPct.textContent = isRedAlert ? 'ROJO · ' + barPct + '%' : barPct + '%';
+        simBarPct.style.color = isRedAlert ? '#f87171' : 'var(--mint-light)';
+        simBarSub.textContent = '+' + puntosHoraPP + ' PP/hora · +' + bonusPP + ' PP multiplicadores · -' + penaltyPP + ' PP incumplimientos';
+      }
+
+      if (isRedAlert) {
+        if (simStatusBox) {
+          simStatusBox.style.borderColor = '#ef4444';
+          simStatusBox.style.background = 'rgba(220,38,38,0.18)';
+        }
+        outBadge.textContent = '🚨 ALERTA ROJA: 3+ Anotaciones por Incumplimiento sin Justa Causa';
+        outMessage.textContent = 'El participante acumuló ' + anotaciones + ' anotaciones de incumplimiento de fecha y hora de entrega o encuentro sin justa causa (-' + penaltyPP + ' PP). La barra pasa a estado ROJO.';
       } else {
-        const diff = targetPP - finalPP;
-        outBadge.textContent = 'Cumplimiento Base (' + finalPP + ' de ' + targetPP + ' PP)';
-        outMessage.textContent = 'Cubres la base de ' + basePP + ' PP. Activa multiplicadores de calidad adicionales para cubrir los ' + diff + ' PP restantes de la curva progresiva.';
+        if (simStatusBox) {
+          simStatusBox.style.borderColor = '';
+          simStatusBox.style.background = '';
+        }
+        if (finalPP === 0) {
+          outBadge.textContent = 'Barra en 0 PP · Lista para sumar horas y multiplicadores';
+          outMessage.textContent = 'Arranca en 0 PP. Suma horas cumplidas o activa multiplicadores de cualquier nivel (N1 a N4) para avanzar hacia la meta de ' + targetPP + ' PP.';
+        } else if (finalPP >= targetPP) {
+          outBadge.textContent = '✓ Meta Progresiva Superada · Insignia de Excelencia POA';
+          outMessage.textContent = 'Alcanzas ' + finalPP + ' PP (' + barPct + '% de avance) combinando horas cumplidas y multiplicadores de calidad.';
+        } else {
+          const diff = targetPP - finalPP;
+          outBadge.textContent = 'En Progreso (' + finalPP + ' de ' + targetPP + ' PP · ' + barPct + '%)';
+          outMessage.textContent = 'Llevas ' + finalPP + ' PP acumulados. Suma ' + diff + ' PP adicionales mediante horas cumplidas o multiplicadores (N1 a N4) para completar la meta.';
+        }
       }
     }
 
     levelSelect.addEventListener('change', filterMultipliersByLevel);
+    if (crossLevelToggle) crossLevelToggle.addEventListener('change', filterMultipliersByLevel);
     hoursSlider.addEventListener('input', calculatePoints);
+    if (doneHoursSlider) doneHoursSlider.addEventListener('input', calculatePoints);
     weekSlider.addEventListener('input', calculatePoints);
+    if (penaltySlider) penaltySlider.addEventListener('input', calculatePoints);
     multChecks.forEach((chk) => chk.addEventListener('change', calculatePoints));
 
     filterMultipliersByLevel();
 
-    
-    /* ── FILTRO Y SINCRONIZACIÓN DE TABLA PÚBLICA DE SOLO LECTURA (#progreso-general) ── */
+    /* ── TABLA DE PROGRESO GENERAL (#progreso-general) CON BARRA JUSTO DESPUÉS DEL NOMBRE ── */
     (function() {
       const filterBtns = document.querySelectorAll('.home-ro-btn');
       const searchInput = document.getElementById('home-ro-search');
       const tbody = document.getElementById('home-ro-tbody');
-      if (!tbody) return;
-      let activeLevel = 'all';
+      const btnToggleEdit = document.getElementById('btn-home-toggle-edit');
+      if (!tbody || typeof PrexiaDB === 'undefined') return;
 
-      function applyHomeRoFilter() {
-        const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
-        tbody.querySelectorAll('tr').forEach((tr) => {
-          const lvl = tr.getAttribute('data-level') || '';
-          const txt = tr.textContent.toLowerCase();
-          const matchLvl = activeLevel === 'all' || lvl === activeLevel;
-          const matchQ = !q || txt.includes(q);
-          tr.style.display = (matchLvl && matchQ) ? '' : 'none';
+      let activeLevel = 'all';
+      let quickEditMode = false;
+
+      if (btnToggleEdit) {
+        btnToggleEdit.addEventListener('click', () => {
+          quickEditMode = !quickEditMode;
+          btnToggleEdit.textContent = quickEditMode
+            ? '✓ Ocultar Controles Rápidos en Tabla'
+            : '⚡ Activar Controles Rápidos en Tabla';
+          renderHomeProgressTable();
         });
       }
+
+      function renderHomeProgressTable() {
+        const db = PrexiaDB.getDB();
+        const sem = db.meta.semanaActual || 6;
+        const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
+
+        const estudiantes = db.usuarios
+          .filter((u) => u.rolSistema !== 'maestro')
+          .sort((a, b) => (a.ordenHoja || 99) - (b.ordenHoja || 99));
+
+        const rowsHtml = estudiantes
+          .filter((u) => {
+            const matchLvl = activeLevel === 'all' || String(u.nivel) === String(activeLevel);
+            const haystack = (u.nombre + ' ' + (u.correoCaracterizacion || '') + ' ' + (u.carrera || '') + ' ' + (u.herramientasHabilidades || '')).toLowerCase();
+            const matchQ = !q || haystack.includes(q);
+            return matchLvl && matchQ;
+          })
+          .map((u, idx) => {
+            const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
+            const cfg = PrexiaDB.LEVELS_CONFIG[u.nivel];
+            const num = u.ordenHoja || idx + 1;
+            const isRed = liq.enAlertaRoja;
+            const visualWidth = isRed ? Math.max(100, liq.barraPct) : liq.barraPct;
+            const barColor = isRed
+              ? 'linear-gradient(90deg, #dc2626, #ef4444)'
+              : liq.superoMeta
+              ? 'linear-gradient(90deg, #10b981, #84fbaa)'
+              : 'linear-gradient(90deg, #1fd88a, #38bdf8)';
+
+            const activeMultsHtml = (liq.multDetalles || [])
+              .map((m) => `<span style="display:inline-block;padding:2px 7px;margin:2px 3px 2px 0;border-radius:3px;font-size:11px;font-family:var(--font-display);font-weight:700;background:${m.esOtroNivel ? 'rgba(59,130,246,0.25)' : 'rgba(132,251,170,0.16)'};color:${m.esOtroNivel ? '#93c5fd' : 'var(--mint-light)'};border:1px solid ${m.esOtroNivel ? 'rgba(147,197,253,0.4)' : 'rgba(132,251,170,0.3)'};">✓ [N${m.nivelOrigen}] ${m.nombre} (+${m.bono}%)</span>`)
+              .join('');
+
+            const selectCrossOpts = [1, 2, 3, 4]
+              .map((lvlNum) => {
+                const lCfg = PrexiaDB.LEVELS_CONFIG[lvlNum];
+                const opts = lCfg.multiplicadores
+                  .map((m) => {
+                    const act = (u.multiplicadoresActivos || []).includes(m.id);
+                    return `<option value="${m.id}">${act ? '✓ Quitar ' : '+ Añadir '}[N${lvlNum}] ${m.nombre} (+${m.bono}%)</option>`;
+                  })
+                  .join('');
+                return `<optgroup label="Nivel ${lvlNum} · ${lCfg.rol}">${opts}</optgroup>`;
+              })
+              .join('');
+
+            return `
+              <tr data-level="${u.nivel}" style="${isRed ? 'background:rgba(220,38,38,0.16);' : ''}">
+                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">
+                  <strong style="color:${isRed ? '#fca5a5' : '#fff'};font-size:14px;display:block;">${num}. ${u.nombre}</strong>
+                  <span style="color:var(--field-navy-muted);font-family:monospace;font-size:11px;">${liq.correoHoja !== '—' ? liq.correoHoja : 'usr: ' + u.username}</span>
+                </td>
+                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);min-width:280px;">
+                  <!-- Barra de rendimiento justo después del nombre (arranca desde 0) -->
+                  <div style="background:${isRed ? 'rgba(220,38,38,0.22)' : 'rgba(255,255,255,0.05)'};border:1px solid ${isRed ? '#ef4444' : 'rgba(255,255,255,0.14)'};padding:8px 10px;border-radius:4px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display);font-size:12px;margin-bottom:5px;">
+                      <strong style="color:#fff;">${liq.finalPP} / ${liq.metaSemanaPP} PP (${liq.barraPct}%)</strong>
+                      <span style="font-weight:800;font-size:11px;color:${isRed ? '#f87171' : liq.superoMeta ? 'var(--mint-light)' : '#93c5fd'};">
+                        ${isRed ? '🚨 ROJO (' + liq.numAnotaciones + '/3)' : liq.finalPP === 0 ? 'Arranca en 0 PP' : liq.barraPct + '% avance'}
+                      </span>
+                    </div>
+                    <div style="height:10px;background:rgba(255,255,255,0.14);border-radius:999px;overflow:hidden;">
+                      <div style="height:100%;width:${visualWidth}%;background:${barColor};transition:width 0.25s ease;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:5px;font-family:var(--font-display);font-size:10px;color:var(--field-navy-muted);">
+                      <span style="color:var(--mint-light);">+${liq.puntosHoraPP} PP/hora (${liq.horasCumplidas}h)</span>
+                      <span style="color:#93c5fd;">+${liq.bonoPP} PP mult.</span>
+                      <span style="color:${liq.numAnotaciones > 0 ? '#f87171' : 'var(--field-navy-muted)'};">-${liq.puntosRestadosPP} PP (${liq.numAnotaciones}/3)</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">
+                  <strong style="color:var(--mint-light);display:block;font-size:13px;">Nivel ${u.nivel} · ${cfg.rol}</strong>
+                  <span style="font-size:12px;color:var(--field-navy-muted);">Avance: ${liq.avanceDisplay} · Pacto: ${u.hsa} HSA</span>
+                </td>
+                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);">
+                  <div style="font-family:var(--font-display);font-size:12px;color:#fff;margin-bottom:4px;">
+                    Horas: <strong>${liq.horasCumplidas}h / ${u.hsa}h</strong> (+${liq.puntosHoraPP} PP) · Mult: <strong>+${liq.bonoPct}%</strong>
+                  </div>
+                  <div>${activeMultsHtml || '<span style="font-size:11px;color:var(--field-navy-muted);">Sin multiplicadores activos</span>'}</div>
+                  ${
+                    quickEditMode
+                      ? `<div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;">
+                           <button type="button" onclick="window.homeAddHour('${u.id}', 1)" style="padding:3px 7px;font-size:11px;font-weight:800;background:var(--mint-light);color:var(--ink);border:none;border-radius:2px;cursor:pointer;">+1h (+100 PP)</button>
+                           <button type="button" onclick="window.homeAddHour('${u.id}', -1)" style="padding:3px 7px;font-size:11px;background:rgba(255,255,255,0.12);color:#fff;border:none;border-radius:2px;cursor:pointer;">-1h</button>
+                           <button type="button" onclick="window.homeResetZero('${u.id}')" style="padding:3px 7px;font-size:11px;background:rgba(255,255,255,0.12);color:#fff;border:none;border-radius:2px;cursor:pointer;">0 PP</button>
+                           <select onchange="if(this.value){window.homeToggleMult('${u.id}', this.value);this.value='';}" style="padding:3px 6px;font-size:11px;background:#0f172a;color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:2px;max-width:190px;">
+                             <option value="">+ Multiplicador (N1 a N4)...</option>
+                             ${selectCrossOpts}
+                           </select>
+                         </div>`
+                      : ''
+                  }
+                </td>
+                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);font-family:var(--font-display);">
+                  <span style="display:inline-block;padding:3px 8px;border-radius:3px;font-size:11px;font-weight:800;background:${isRed ? '#dc2626' : liq.numAnotaciones > 0 ? 'rgba(248,113,113,0.2)' : 'rgba(255,255,255,0.08)'};color:${isRed ? '#fff' : liq.numAnotaciones > 0 ? '#fca5a5' : 'var(--field-navy-muted)'};">
+                    ${isRed ? '🚨 ROJO · ' : ''}${liq.numAnotaciones} / 3 Incumplimientos (-${liq.puntosRestadosPP} PP)
+                  </span>
+                  ${
+                    quickEditMode
+                      ? `<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap;">
+                           <button type="button" onclick="window.homeAddPenalty('${u.id}')" style="padding:3px 7px;font-size:11px;font-weight:800;background:#dc2626;color:#fff;border:none;border-radius:2px;cursor:pointer;">⚠ +1 Incumpl. (-50 PP)</button>
+                           ${liq.numAnotaciones > 0 ? `<button type="button" onclick="window.homeRemovePenalty('${u.id}')" style="padding:3px 7px;font-size:11px;background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:2px;cursor:pointer;">↺ Quitar</button>` : ''}
+                         </div>`
+                      : ''
+                  }
+                </td>
+                <td style="padding:12px 14px;border-top:1px solid rgba(255,255,255,0.08);color:var(--field-navy-muted);font-size:12px;">
+                  <strong style="color:#fff;display:block;">${u.carrera || '—'}</strong>
+                  ${liq.herramientas}
+                </td>
+              </tr>
+            `;
+          })
+          .join('');
+
+        tbody.innerHTML = rowsHtml;
+      }
+
+      window.homeAddHour = function(userId, delta) {
+        PrexiaDB.ajustarHorasCumplidas(userId, delta);
+        renderHomeProgressTable();
+      };
+      window.homeToggleMult = function(userId, multId) {
+        PrexiaDB.toggleMultiplicador(userId, multId);
+        renderHomeProgressTable();
+      };
+      window.homeAddPenalty = function(userId) {
+        PrexiaDB.agregarAnotacionIncumplimiento(userId, { puntosRestados: 50 });
+        renderHomeProgressTable();
+      };
+      window.homeRemovePenalty = function(userId) {
+        PrexiaDB.eliminarAnotacionIncumplimiento(userId);
+        renderHomeProgressTable();
+      };
+      window.homeResetZero = function(userId) {
+        PrexiaDB.reiniciarProgresoUsuario(userId);
+        renderHomeProgressTable();
+      };
 
       filterBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -2507,13 +2635,16 @@
             b.style.color = isAct ? 'var(--ink)' : '#fff';
             b.style.borderColor = isAct ? 'var(--mint-light)' : 'rgba(255,255,255,0.2)';
           });
-          applyHomeRoFilter();
+          renderHomeProgressTable();
         });
       });
 
       if (searchInput) {
-        searchInput.addEventListener('input', applyHomeRoFilter);
+        searchInput.addEventListener('input', renderHomeProgressTable);
       }
+
+      PrexiaDB.syncFromCanonicalJSON('data/prexia-users-db.json').then(renderHomeProgressTable);
+      renderHomeProgressTable();
     })();
 
     /* ── FORMULARIO DE CONTACTO ── */

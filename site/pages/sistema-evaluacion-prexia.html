@@ -82,9 +82,9 @@
       <div class="pp-sim-engine">
         <div class="pp-sim-controls">
           <div>
-            <span class="pp-control-label">1. Selecciona el nivel de seniority y avance curricular</span>
+            <span class="pp-control-label">1. Selecciona el nivel base del participante (Plan 2026-2)</span>
             <div class="pp-level-pills" id="sim-level-pills">
-              <button type="button" class="pp-lvl-btn" data-level="1">
+              <button type="button" class="pp-lvl-btn active" data-level="1">
                 <strong>Nivel 1 · Operativo</strong>
                 <span>0% a 30% · Semestres 1 a 3</span>
               </button>
@@ -92,7 +92,7 @@
                 <strong>Nivel 2 · Gestor</strong>
                 <span>31% a 60% · Semestres 4 a 6</span>
               </button>
-              <button type="button" class="pp-lvl-btn active" data-level="3">
+              <button type="button" class="pp-lvl-btn" data-level="3">
                 <strong>Nivel 3 · Consultor Jr.</strong>
                 <span>61% a 85% · Semestres 7 a 9</span>
               </button>
@@ -105,27 +105,53 @@
 
           <div class="pp-sliders-2col">
             <div class="pp-slider-box">
-              <label for="sim-horas" class="pp-control-label" style="margin-bottom:4px;">2. Pacto de dedicación (HSA)</label>
-              <input type="range" id="sim-horas" class="pp-range-slider" min="1" max="12" value="4">
+              <label for="sim-horas" class="pp-control-label" style="margin-bottom:4px;">2. Pacto semanal acordado (HSA)</label>
+              <input type="range" id="sim-horas" class="pp-range-slider" min="1" max="12" value="7">
               <div class="pp-range-meta">
-                <span>Base semanal:</span>
-                <strong id="sim-horas-label">4 HSA · 400 PP</strong>
+                <span>Pacto base:</span>
+                <strong id="sim-horas-label">7 HSA · 700 PP</strong>
               </div>
             </div>
 
             <div class="pp-slider-box">
-              <label for="sim-semana" class="pp-control-label" style="margin-bottom:4px;">3. Semana de corte (1 a 16)</label>
-              <input type="range" id="sim-semana" class="pp-range-slider" min="1" max="16" value="1">
+              <label for="sim-horas-cumplidas" class="pp-control-label" style="margin-bottom:4px;">3. Puntos / Hora cumplidos (arranca en 0)</label>
+              <input type="range" id="sim-horas-cumplidas" class="pp-range-slider" min="0" max="12" step="0.5" value="0">
+              <div class="pp-range-meta">
+                <span>Acreditado:</span>
+                <strong id="sim-horas-cumplidas-label" style="color:var(--mint-light);">0h (+0 PP)</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="pp-sliders-2col">
+            <div class="pp-slider-box">
+              <label for="sim-semana" class="pp-control-label" style="margin-bottom:4px;">4. Semana de corte (1 a 16)</label>
+              <input type="range" id="sim-semana" class="pp-range-slider" min="1" max="16" value="6">
               <div class="pp-range-meta">
                 <span>Curva activa:</span>
-                <strong id="sim-semana-label">Sem. 1 · 100%</strong>
+                <strong id="sim-semana-label">Sem. 6 · 105%</strong>
+              </div>
+            </div>
+
+            <div class="pp-slider-box" style="border:1px solid rgba(248,113,113,0.45);background:rgba(220,38,38,0.12);">
+              <label for="sim-anotaciones" class="pp-control-label" style="margin-bottom:4px;color:#fca5a5;">5. Resta Puntos: Incumplimiento sin justa causa</label>
+              <input type="range" id="sim-anotaciones" class="pp-range-slider" min="0" max="4" step="1" value="0">
+              <div class="pp-range-meta">
+                <span>Rojo a las 3 anot.:</span>
+                <strong id="sim-anotaciones-label" style="color:#fca5a5;">0/3 (-0 PP)</strong>
               </div>
             </div>
           </div>
 
           <div>
-            <span class="pp-control-label">4. Multiplicadores de desempeño acreditados en el corte</span>
-            <div id="sim-mult-container" class="pp-mult-list"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px;">
+              <span class="pp-control-label" style="margin:0;">6. Puntos Multiplicadores sin importar el nivel (N1 a N4)</span>
+              <label style="font-family:var(--font-display);font-size:12px;color:var(--mint-light);cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+                <input type="checkbox" id="sim-allow-cross" checked>
+                Mostrar todos los niveles (N1 puede asumir tarea N3)
+              </label>
+            </div>
+            <div id="sim-mult-container" class="pp-mult-list" style="max-height:260px;overflow-y:auto;padding-right:4px;"></div>
           </div>
         </div>
 
@@ -133,26 +159,30 @@
           <div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
               <span style="font-family:var(--font-display); font-size:14px; font-weight:800; color:var(--field-navy-muted);">BALANCE DE AUDITORÍA QUINCENAL</span>
-              <span id="res-role-pill" style="font-family:var(--font-display); font-size:14px; font-weight:700; color:var(--mint-light);">Rol: Consultor Junior</span>
+              <span id="res-role-pill" style="font-family:var(--font-display); font-size:14px; font-weight:700; color:var(--mint-light);">Rol: Operativo</span>
             </div>
 
             <table class="pp-ledger">
               <tbody>
                 <tr>
-                  <td>Línea base pactada (HSA × 100 PP)</td>
-                  <td id="res-base">400 PP</td>
+                  <td id="res-meta-label">Meta exigida en Semana 6 (105%)</td>
+                  <td id="res-meta-semana">735 PP</td>
                 </tr>
                 <tr>
-                  <td id="res-meta-label">Meta exigida en Semana 1 (100%)</td>
-                  <td id="res-meta-semana">400 PP</td>
+                  <td>Puntos / Hora cumplidos (arranca en 0)</td>
+                  <td id="res-base">+0 PP (0h)</td>
                 </tr>
                 <tr>
-                  <td>Bonificación por multiplicadores de calidad</td>
-                  <td id="res-bono">+6% (+24 PP)</td>
+                  <td>Puntos Multiplicadores (Niveles 1 a 4)</td>
+                  <td id="res-bono">+0% (+0 PP)</td>
                 </tr>
                 <tr>
-                  <td>Índice de cumplimiento sobre meta</td>
-                  <td id="res-cumplimiento">106%</td>
+                  <td>Resta por incumplimiento sin justa causa</td>
+                  <td id="res-resta" style="color:#fca5a5;">-0 PP (0/3)</td>
+                </tr>
+                <tr>
+                  <td>Avance en barra sobre meta</td>
+                  <td id="res-cumplimiento">0%</td>
                 </tr>
               </tbody>
             </table>
@@ -160,22 +190,22 @@
 
           <div class="pp-progress-wrap">
             <div class="pp-progress-head">
-              <span>Progreso frente a la meta exigida</span>
-              <span id="res-progress-pct">106% completado</span>
+              <span>Barra de Rendimiento (Arranca en 0 PP)</span>
+              <span id="res-progress-pct">0% completado</span>
             </div>
             <div class="pp-progress-track">
-              <div class="pp-progress-fill" id="res-progress-bar" style="transform: scaleX(1);"></div>
+              <div class="pp-progress-fill" id="res-progress-bar" style="transform: scaleX(0);"></div>
             </div>
           </div>
 
           <div class="pp-total-row">
-            <span style="font-size:18px; color:var(--field-navy-muted);">Puntos finales liquidados</span>
-            <span class="pp-total-num" id="res-total">424 PP</span>
+            <span style="font-size:18px; color:var(--field-navy-muted);">Puntos netos en barra</span>
+            <span class="pp-total-num" id="res-total">0 PP</span>
           </div>
 
-          <div class="pp-status-box">
-            <strong id="res-status-title">Objetivo Superado · Acredita Insignia de Reconocimiento</strong>
-            <p id="res-status-desc">Con 4 HSA y +6% en multiplicadores de impacto, alcanzas 424 PP y superas la meta de 400 PP sin incrementar horas reloj.</p>
+          <div class="pp-status-box" id="res-status-box">
+            <strong id="res-status-title">Barra en 0 PP · Lista para sumar horas y multiplicadores</strong>
+            <p id="res-status-desc">Suma horas cumplidas o activa multiplicadores de cualquier nivel (N1 a N4) para ver cómo avanza la barra desde 0.</p>
           </div>
         </div>
       </div>
@@ -347,13 +377,13 @@
       <div class="section-header" style="margin-bottom: 16px; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:14px;">
         <div>
           <span style="display:inline-block;background:var(--mint-light);color:var(--ink);font-family:var(--font-display);font-size:11px;font-weight:800;padding:4px 10px;border-radius:2px;margin-bottom:6px;">
-            🔒 MODO SOLO LECTURA DISPONIBLE PARA TODOS · CARACTERIZACIÓN 2026-2
+            📊 BARRA DE RENDIMIENTO DESDE 0 · UBICADA JUSTO DESPUÉS DEL NOMBRE · MULTIPLICADORES N1 A N4
           </span>
           <h3 class="editorial-subhead" style="margin-top:0;margin-bottom:4px;">Progreso General · Participantes Línea de Consultoría 2026-2 (13 Integrantes)</h3>
-          <p style="font-size:15px;color:var(--muted);margin:0;">Listado oficial sincronizado con la hoja de Caracterización y el sistema de Puntos Prexia (PP).</p>
+          <p style="font-size:15px;color:var(--muted);margin:0;">La Barra de Rendimiento arranca en 0 PP justo después del nombre, avanza con Puntos/Hora y Multiplicadores (de cualquier nivel N1–N4), y pasa a ROJO al acumular 3 anotaciones de incumplimiento sin justa causa.</p>
         </div>
-        <a href="plataforma-prexia.html?view=progreso" style="background:var(--ink);color:#fff;font-family:var(--font-display);font-size:13px;font-weight:800;padding:10px 18px;border-radius:2px;text-decoration:none;">
-          Abrir Apartado de Progreso (Solo Lectura) →
+        <a href="plataforma-prexia.html" style="background:var(--ink);color:#fff;font-family:var(--font-display);font-size:13px;font-weight:800;padding:10px 18px;border-radius:2px;text-decoration:none;">
+          Abrir Plataforma Interactiva →
         </a>
       </div>
 
@@ -362,146 +392,15 @@
           <thead>
             <tr>
               <th># · Nombre</th>
-              <th>Correo</th>
-              <th>Carrera</th>
-              <th>% Avance</th>
-              <th>Nivel PP</th>
-              <th>Horas Semanales</th>
-              <th>Herramientas y Habilidades Actuales</th>
-              <th>Liquidación PP</th>
+              <th style="min-width:270px;">Barra de Rendimiento (Progreso Puntos Prexia)</th>
+              <th>Nivel PP / Avance</th>
+              <th>Puntos / Hora y Multiplicadores (N1–N4)</th>
+              <th>Incumplimiento Fecha/Hora (Rojo = 3)</th>
+              <th>Carrera y Habilidades Actuales</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td><strong>1. Juan José Vargas Sánchez</strong></td>
-              <td>jvargassan@unal.edu.co</td>
-              <td>Ingeniería Administrativa</td>
-              <td>75%</td>
-              <td>Nivel&nbsp;3 · Consultor Jr.</td>
-              <td>2 a 4 (3&nbsp;HSA)</td>
-              <td>Gestion de proyectos, Analisis de datos</td>
-              <td><strong style="color:var(--mint-dark);">318 / 300 PP (106%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>2. Dahiana Lozano Yepes</strong></td>
-              <td>dlozanoy@unal.edu.co</td>
-              <td>Ingeniería Industrial</td>
-              <td>38%</td>
-              <td>Nivel&nbsp;2 · Gestora</td>
-              <td>8 a 10 (9&nbsp;HSA)</td>
-              <td>Analisis de datos, Marketing digital, Uso de herramientas como Power BI y Looker Studio.</td>
-              <td><strong style="color:var(--mint-dark);">945 / 900 PP (105%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>3. Julian David Lopera Grisales</strong></td>
-              <td>juloperag@unal.edu.co</td>
-              <td>Ingeniería Física</td>
-              <td>96%</td>
-              <td>Nivel&nbsp;4 · Líder</td>
-              <td>6 a 8 (7&nbsp;HSA)</td>
-              <td>Investigación, coordinar equipos de trabajo (monitor fisica), basicas de ofimatica. Analitica de datos</td>
-              <td><strong style="color:var(--mint-dark);">770 / 700 PP (110%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>4. Jhon Alejandro Valencia</strong></td>
-              <td>—</td>
-              <td>Administrativa</td>
-              <td>0%</td>
-              <td>Nivel&nbsp;1 · Operativo</td>
-              <td>6 a 8 (7&nbsp;HSA)</td>
-              <td>Ofimatica avanzada, negociación, manejo de equipos</td>
-              <td><strong style="color:var(--mint-dark);">721 / 700 PP (103%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>5. Brayan Julian Martinez Aguilar</strong></td>
-              <td>bmartinezag@unal.edu.co</td>
-              <td>Ingeniería Industrial</td>
-              <td>76,40%</td>
-              <td>Nivel&nbsp;3 · Consultor Jr.</td>
-              <td>6 a 8 (7&nbsp;HSA)</td>
-              <td>Comunicacion asertiva, ofimática nivel media, analítica de datos en Power Bi.</td>
-              <td><strong style="color:var(--mint-dark);">742 / 700 PP (106%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>6. Luis Daniel Yepez Gaviria</strong></td>
-              <td>lyepez@unal.edu.co</td>
-              <td>Ingeniería Industrial</td>
-              <td>76,40%</td>
-              <td>Nivel&nbsp;3 · Consultor Jr.</td>
-              <td>6 a 8 (7&nbsp;HSA)</td>
-              <td>Trabajo equipo, comunicación acertiva, ofimatica media, programación, edicion de videos.</td>
-              <td><strong style="color:var(--mint-dark);">735 / 700 PP (105%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>7. Dani GTH</strong></td>
-              <td>—</td>
-              <td>Ingeniería Industrial</td>
-              <td>—</td>
-              <td>Nivel&nbsp;1 · Operativo</td>
-              <td>3 (3&nbsp;HSA)</td>
-              <td>—</td>
-              <td><strong style="color:var(--mint-dark);">306 / 300 PP (102%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>8. Evreydi Orduz Prexia</strong></td>
-              <td>—</td>
-              <td>Ingeniería Industrial</td>
-              <td>80%</td>
-              <td>Nivel&nbsp;3 · Consultora Jr.</td>
-              <td>8 (8&nbsp;HSA)</td>
-              <td>Comunicación, organización, creatividad, un poco de finanzas y de programación, suelo tener pensamiento social y comunitario</td>
-              <td><strong style="color:var(--mint-dark);">848 / 800 PP (106%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>9. Omar</strong></td>
-              <td>—</td>
-              <td>Ingeniería Industrial</td>
-              <td>51%</td>
-              <td>Nivel&nbsp;2 · Gestor</td>
-              <td>2 (2&nbsp;HSA)</td>
-              <td>Trabajo en equipo, comunicación, toma de desciciones, Excel e interes por las ventas.</td>
-              <td><strong style="color:var(--mint-dark);">208 / 200 PP (104%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>10. Sofia</strong></td>
-              <td>—</td>
-              <td>Por registrar</td>
-              <td>—</td>
-              <td>Nivel&nbsp;1 · Operativo</td>
-              <td>3 (3&nbsp;HSA)</td>
-              <td>—</td>
-              <td><strong style="color:var(--mint-dark);">306 / 300 PP (102%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>11. Timi</strong></td>
-              <td>—</td>
-              <td>Ingeniería Industrial</td>
-              <td>27%</td>
-              <td>Nivel&nbsp;1 · Operativo</td>
-              <td>6 (6&nbsp;HSA)</td>
-              <td>Todo lo relacionado con Informática</td>
-              <td><strong style="color:var(--mint-dark);">624 / 600 PP (104%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>12. Zuly</strong></td>
-              <td>—</td>
-              <td>Ingeniería Industrial</td>
-              <td>—</td>
-              <td>Nivel&nbsp;1 · Operativo</td>
-              <td>3 (3&nbsp;HSA)</td>
-              <td>—</td>
-              <td><strong style="color:var(--mint-dark);">306 / 300 PP (102%)</strong></td>
-            </tr>
-            <tr>
-              <td><strong>13. Dana</strong></td>
-              <td>—</td>
-              <td>Ingeniería Administrativa</td>
-              <td>70%</td>
-              <td>Nivel&nbsp;3 · Consultora Jr.</td>
-              <td>3 (3&nbsp;HSA)</td>
-              <td>Redes sociales, Gestión de equipos, negocios y Ofimática</td>
-              <td><strong style="color:var(--mint-dark);">312 / 300 PP (104%)</strong></td>
-            </tr>
+          <tbody id="manual-pp-tbody">
+            <!-- Hidratado dinámicamente desde ../assets/prexia-db.js -->
           </tbody>
         </table>
       </div>
@@ -535,6 +434,7 @@
   </section>
 </main>
 
+<script src="../assets/prexia-db.js"></script>
 <script>
   (function() {
     const roleNames = {
@@ -546,68 +446,104 @@
 
     const multByLevel = {
       1: [
-        { label: "Excelencia en Contenido (calendario 100% al día)", pct: 3 },
-        { label: "Generación de Valor (cápsula extra publicada)", pct: 4 },
-        { label: "Cultura Consultor (contenido sobre cultura Prexia)", pct: 2 }
+        { id: "m1_1", lvl: 1, label: "Excelencia en Contenido (calendario 100% al día)", pct: 3 },
+        { id: "m1_2", lvl: 1, label: "Generación de Valor (cápsula extra publicada)", pct: 4 },
+        { id: "m1_3", lvl: 1, label: "Cultura Consultor (contenido sobre cultura Prexia)", pct: 2 }
       ],
       2: [
-        { label: "Tracción Web y Redes (crecimiento de audiencia ≥15%)", pct: 5 },
-        { label: "Poder de Convocatoria (participación ≥70% en eventos)", pct: 4 },
-        { label: "Celebración y Bienestar (100% cumpleaños y reconocimientos)", pct: 2 }
+        { id: "m2_1", lvl: 2, label: "Tracción Web y Redes (crecimiento de audiencia ≥15%)", pct: 5 },
+        { id: "m2_2", lvl: 2, label: "Poder de Convocatoria (participación ≥70% en eventos)", pct: 4 },
+        { id: "m2_3", lvl: 2, label: "Celebración y Bienestar (100% cumpleaños y reconocimientos)", pct: 2 }
       ],
       3: [
-        { label: "Efectividad Analítica (100% informes finales impecables)", pct: 6 },
-        { label: "Diseño Curricular (estructura del curso o casos reales)", pct: 5 },
-        { label: "Productividad Extra (más tareas o emprendimientos vinculados)", pct: 4 }
+        { id: "m3_1", lvl: 3, label: "Efectividad Analítica (100% informes finales impecables)", pct: 6 },
+        { id: "m3_2", lvl: 3, label: "Diseño Curricular (estructura del curso o casos reales)", pct: 5 },
+        { id: "m3_3", lvl: 3, label: "Productividad Extra (más tareas o emprendimientos vinculados)", pct: 4 }
       ],
       4: [
-        { label: "Impacto Económico (retribución sobre utilidades con empresas)", pct: 10 },
-        { label: "Relaciones Públicas (6+ sesiones con expertos externos)", pct: 8 },
-        { label: "Finalización de Curso (≥80% culminan curso de consultoría)", pct: 5 }
+        { id: "m4_1", lvl: 4, label: "Impacto Económico (retribución sobre utilidades con empresas)", pct: 10 },
+        { id: "m4_2", lvl: 4, label: "Relaciones Públicas (6+ sesiones con expertos externos)", pct: 8 },
+        { id: "m4_3", lvl: 4, label: "Finalización de Curso (≥80% culminan curso de consultoría)", pct: 5 }
       ]
     };
 
-    let currentLevel = "3";
+    let currentLevel = "1";
+    const checkedMultIds = new Set();
+
     const levelButtons = document.querySelectorAll('.pp-lvl-btn');
     const horasInput = document.getElementById('sim-horas');
+    const horasCumplidasInput = document.getElementById('sim-horas-cumplidas');
     const semanaInput = document.getElementById('sim-semana');
+    const anotacionesInput = document.getElementById('sim-anotaciones');
+    const allowCrossInput = document.getElementById('sim-allow-cross');
+
     const horasLabel = document.getElementById('sim-horas-label');
+    const horasCumplidasLabel = document.getElementById('sim-horas-cumplidas-label');
     const semanaLabel = document.getElementById('sim-semana-label');
+    const anotacionesLabel = document.getElementById('sim-anotaciones-label');
     const multContainer = document.getElementById('sim-mult-container');
+
     const resRolePill = document.getElementById('res-role-pill');
     const resBase = document.getElementById('res-base');
     const resMetaLabel = document.getElementById('res-meta-label');
     const resMetaSemana = document.getElementById('res-meta-semana');
     const resBono = document.getElementById('res-bono');
+    const resResta = document.getElementById('res-resta');
     const resCumplimiento = document.getElementById('res-cumplimiento');
     const resProgressPct = document.getElementById('res-progress-pct');
     const resProgressBar = document.getElementById('res-progress-bar');
     const resTotal = document.getElementById('res-total');
+    const resStatusBox = document.getElementById('res-status-box');
     const resStatusTitle = document.getElementById('res-status-title');
     const resStatusDesc = document.getElementById('res-status-desc');
 
     function renderCheckboxes() {
-      const mults = multByLevel[currentLevel] || [];
       resRolePill.textContent = roleNames[currentLevel] || "";
-      multContainer.innerHTML = mults.map((m, idx) => `
-        <label class="pp-mult-item">
-          <input type="checkbox" class="sim-check" data-pct="${m.pct}" ${idx === 0 ? 'checked' : ''}>
-          <span>${m.label}</span>
-          <em>+${m.pct}%</em>
-        </label>
-      `).join('');
-      multContainer.querySelectorAll('.sim-check').forEach(chk => chk.addEventListener('change', recalc));
+      const showAll = allowCrossInput && allowCrossInput.checked;
+      const levelsToRender = showAll ? [1, 2, 3, 4] : [Number(currentLevel)];
+      const items = [];
+      levelsToRender.forEach((lvl) => {
+        (multByLevel[lvl] || []).forEach((m) => items.push(m));
+      });
+
+      multContainer.innerHTML = items.map((m) => {
+        const isChecked = checkedMultIds.has(m.id);
+        const isCross = String(m.lvl) !== String(currentLevel);
+        return `
+          <label class="pp-mult-item">
+            <input type="checkbox" class="sim-check" data-id="${m.id}" data-pct="${m.pct}" ${isChecked ? 'checked' : ''}>
+            <span><strong style="color:${isCross ? '#93c5fd' : 'var(--mint-light)'};">[Nivel ${m.lvl}${isCross ? ' · Tarea asumida' : ''}]</strong> ${m.label}</span>
+            <em>+${m.pct}%</em>
+          </label>
+        `;
+      }).join('');
+
+      multContainer.querySelectorAll('.sim-check').forEach((chk) => {
+        chk.addEventListener('change', () => {
+          const id = chk.getAttribute('data-id');
+          if (chk.checked) checkedMultIds.add(id);
+          else checkedMultIds.delete(id);
+          recalc();
+        });
+      });
       recalc();
     }
 
     function recalc() {
-      const horas = Math.max(1, parseInt(horasInput.value || 4, 10));
-      const semana = Math.min(16, Math.max(1, parseInt(semanaInput.value || 1, 10)));
+      const horas = Math.max(1, parseInt(horasInput.value || 7, 10));
+      const horasCumplidas = Math.max(0, parseFloat(horasCumplidasInput ? horasCumplidasInput.value : 0));
+      const semana = Math.min(16, Math.max(1, parseInt(semanaInput.value || 6, 10)));
+      const anotaciones = Math.max(0, parseInt(anotacionesInput ? anotacionesInput.value : 0, 10));
+
       const base = horas * 100;
+      const puntosHora = Math.round(horasCumplidas * 100);
       const pctSemana = 100 + (semana - 1);
       const metaSemana = Math.round(base * (pctSemana / 100));
 
       horasLabel.textContent = `${horas} HSA · ${base} PP`;
+      if (horasCumplidasLabel) {
+        horasCumplidasLabel.textContent = `${horasCumplidas}h (+${puntosHora} PP)`;
+      }
       semanaLabel.textContent = `Sem. ${semana} · ${pctSemana}%`;
 
       let bonusPct = 0;
@@ -616,26 +552,54 @@
       });
 
       const bonusPP = Math.round(base * (bonusPct / 100));
-      const finalPP = base + bonusPP;
-      const cumplimientoPct = Math.round((finalPP / metaSemana) * 100);
-      const scaleRatio = Math.min(1, Math.max(0.08, finalPP / metaSemana));
+      const restaPP = anotaciones * 50;
+      const isRed = anotaciones >= 3;
+      const finalPP = Math.max(0, puntosHora + bonusPP - restaPP);
+      const cumplimientoPct = metaSemana > 0 ? Math.min(100, Math.round((finalPP / metaSemana) * 100)) : 0;
+      const scaleRatio = isRed ? 1 : Math.min(1, Math.max(0, finalPP / metaSemana));
 
-      resBase.textContent = `${base} PP`;
+      if (anotacionesLabel) {
+        anotacionesLabel.textContent = isRed ? `🚨 ROJO ${anotaciones}/3 (-${restaPP} PP)` : `${anotaciones}/3 (-${restaPP} PP)`;
+        anotacionesLabel.style.color = isRed ? '#f87171' : '#fca5a5';
+      }
+
       resMetaLabel.textContent = `Meta exigida en Semana ${semana} (${pctSemana}%)`;
       resMetaSemana.textContent = `${metaSemana} PP`;
+      resBase.textContent = `+${puntosHora} PP (${horasCumplidas}h)`;
       resBono.textContent = `+${bonusPct}% (+${bonusPP} PP)`;
+      if (resResta) {
+        resResta.textContent = `-${restaPP} PP (${anotaciones}/3)`;
+      }
       resCumplimiento.textContent = `${cumplimientoPct}%`;
-      resProgressPct.textContent = `${cumplimientoPct}% de la meta exigida`;
+      resProgressPct.textContent = isRed ? `🚨 ROJO (${anotaciones}/3 incumplimientos)` : `${cumplimientoPct}% de la meta exigida`;
       resProgressBar.style.transform = `scaleX(${scaleRatio})`;
+      resProgressBar.style.background = isRed ? 'linear-gradient(90deg, #dc2626, #ef4444)' : '';
       resTotal.textContent = `${finalPP} PP`;
+      resTotal.style.color = isRed ? '#f87171' : '';
 
-      if (finalPP >= metaSemana) {
-        resStatusTitle.textContent = `Objetivo Superado (${cumplimientoPct}%) · Acredita Insignia de Reconocimiento`;
-        resStatusDesc.textContent = `Con ${horas} HSA y +${bonusPct}% en multiplicadores de impacto, alcanzas ${finalPP} PP frente a los ${metaSemana} PP exigidos en la semana ${semana}.`;
+      if (isRed) {
+        if (resStatusBox) {
+          resStatusBox.style.borderColor = '#ef4444';
+          resStatusBox.style.background = 'rgba(220,38,38,0.18)';
+        }
+        resStatusTitle.textContent = `🚨 ALERTA ROJA: ${anotaciones}/3 Anotaciones por Incumplimiento sin Justa Causa`;
+        resStatusDesc.textContent = `Al acumular 3 anotaciones de incumplimiento de fecha y hora de entrega o encuentro sin justa causa (-${restaPP} PP), la barra se pone en ROJO.`;
       } else {
-        const diff = metaSemana - finalPP;
-        resStatusTitle.textContent = `En Progreso (${cumplimientoPct}% de la meta de Semana ${semana})`;
-        resStatusDesc.textContent = `Liquidación actual de ${finalPP} PP sobre ${metaSemana} PP exigidos. Activa multiplicadores de calidad para cubrir la brecha de ${diff} PP sin aumentar horas.`;
+        if (resStatusBox) {
+          resStatusBox.style.borderColor = '';
+          resStatusBox.style.background = '';
+        }
+        if (finalPP === 0) {
+          resStatusTitle.textContent = `Barra en 0 PP · Lista para sumar horas y multiplicadores`;
+          resStatusDesc.textContent = `Arranca desde 0 PP. Suma horas cumplidas o activa multiplicadores de cualquier nivel (N1 a N4) para avanzar.`;
+        } else if (finalPP >= metaSemana) {
+          resStatusTitle.textContent = `✓ Objetivo Superado (${cumplimientoPct}%) · Acredita Insignia de Reconocimiento`;
+          resStatusDesc.textContent = `Alcanzas ${finalPP} PP frente a los ${metaSemana} PP exigidos en la semana ${semana}.`;
+        } else {
+          const diff = metaSemana - finalPP;
+          resStatusTitle.textContent = `En Progreso (${cumplimientoPct}% de la meta de Semana ${semana})`;
+          resStatusDesc.textContent = `Llevas ${finalPP} PP sobre ${metaSemana} PP exigidos. Suma ${diff} PP en horas o multiplicadores (N1 a N4).`;
+        }
       }
     }
 
@@ -649,8 +613,73 @@
     });
 
     horasInput.addEventListener('input', recalc);
+    if (horasCumplidasInput) horasCumplidasInput.addEventListener('input', recalc);
     semanaInput.addEventListener('input', recalc);
+    if (anotacionesInput) anotacionesInput.addEventListener('input', recalc);
+    if (allowCrossInput) allowCrossInput.addEventListener('change', renderCheckboxes);
     renderCheckboxes();
+
+    // Hidratar tabla con PrexiaDB (barra justo después del nombre, arrancando desde 0)
+    const manualTbody = document.getElementById('manual-pp-tbody');
+    function renderManualTable() {
+      if (!manualTbody || typeof PrexiaDB === 'undefined') return;
+      const db = PrexiaDB.getDB();
+      const sem = db.meta.semanaActual || 6;
+      const est = db.usuarios
+        .filter((u) => u.rolSistema !== 'maestro')
+        .sort((a, b) => (a.ordenHoja || 99) - (b.ordenHoja || 99));
+
+      manualTbody.innerHTML = est.map((u, idx) => {
+        const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
+        const cfg = PrexiaDB.LEVELS_CONFIG[u.nivel];
+        const num = u.ordenHoja || idx + 1;
+        const isRed = liq.enAlertaRoja;
+        const visualW = isRed ? Math.max(100, liq.barraPct) : liq.barraPct;
+        const barColor = isRed ? '#dc2626' : liq.superoMeta ? '#10b981' : '#0284c7';
+
+        return `
+          <tr style="${isRed ? 'background:#fef2f2;' : ''}">
+            <td>
+              <strong style="color:${isRed ? '#991b1b' : 'var(--ink)'};">${num}. ${u.nombre}</strong><br>
+              <span style="font-size:12px;color:var(--muted);">${liq.correoHoja !== '—' ? liq.correoHoja : 'usr: ' + u.username}</span>
+            </td>
+            <td style="min-width:260px;">
+              <div style="padding:8px 10px;border:1px solid ${isRed ? '#ef4444' : 'var(--border)'};background:${isRed ? '#fee2e2' : '#f8fafc'};border-radius:4px;">
+                <div style="display:flex;justify-content:space-between;font-family:var(--font-display);font-size:12px;margin-bottom:4px;">
+                  <strong>${liq.finalPP} / ${liq.metaSemanaPP} PP (${liq.barraPct}%)</strong>
+                  <span style="font-weight:800;color:${isRed ? '#dc2626' : '#0f652e'};">${isRed ? '🚨 ROJO (' + liq.numAnotaciones + '/3)' : liq.finalPP === 0 ? 'En 0 PP' : liq.barraPct + '%'}</span>
+                </div>
+                <div style="height:9px;background:#e2e8f0;border-radius:999px;overflow:hidden;">
+                  <div style="height:100%;width:${visualW}%;background:${barColor};"></div>
+                </div>
+                <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:var(--font-display);">
+                  +${liq.puntosHoraPP} PP/hora · +${liq.bonoPP} PP mult. · -${liq.puntosRestadosPP} PP resta
+                </div>
+              </div>
+            </td>
+            <td>
+              <strong>Nivel ${u.nivel} · ${cfg.rol}</strong><br>
+              <span style="font-size:12px;color:var(--muted);">Avance: ${liq.avanceDisplay} · Pacto: ${u.hsa} HSA</span>
+            </td>
+            <td>
+              <strong>${liq.horasCumplidas}h / ${u.hsa}h</strong> (+${liq.puntosHoraPP} PP)<br>
+              <span style="font-size:12px;color:var(--muted);">Multiplicadores N1–N4: +${liq.bonoPct}% (+${liq.bonoPP} PP)</span>
+            </td>
+            <td>
+              <strong style="color:${isRed ? '#dc2626' : liq.numAnotaciones > 0 ? '#b45309' : '#0f652e'};">
+                ${isRed ? '🚨 ROJO · ' : ''}${liq.numAnotaciones}/3 Anotaciones (-${liq.puntosRestadosPP} PP)
+              </strong>
+            </td>
+            <td>
+              <strong>${u.carrera || '—'}</strong><br>
+              <span style="font-size:12px;color:var(--muted);">${liq.herramientas}</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+    PrexiaDB.syncFromCanonicalJSON('../../data/prexia-users-db.json').then(renderManualTable);
+    renderManualTable();
   })();
 </script>
 

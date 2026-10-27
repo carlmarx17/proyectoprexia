@@ -1,11 +1,19 @@
 /**
- * PREXIA POA 2026-2 · Motor de Datos, Niveles, Progreso y Sincronización con Git
- * Basado íntegramente en "Sistema de Evaluación Prexia: Puntos y Multiplicadores"
+ * PREXIA POA 2026-2 · Motor de Datos, Niveles, Progreso, Multiplicadores Multinivel,
+ * Penalizaciones por Incumplimiento y Sincronización con Git.
+ * Basado en "Sistema de Evaluación Prexia: Puntos y Multiplicadores"
  */
 (function (window) {
-  const STORAGE_KEY = "prexia_poa_sistema_db_v2";
-  const SESSION_KEY = "prexia_poa_session_user_v2";
-  const GIT_SYNC_META_KEY = "prexia_poa_git_meta_v2";
+  const STORAGE_KEY = "prexia_poa_sistema_db_v3";
+  const SESSION_KEY = "prexia_poa_session_user_v3";
+  const GIT_SYNC_META_KEY = "prexia_poa_git_meta_v3";
+
+  const PENALTY_CONFIG = {
+    id: "incumplimiento_entrega_encuentro",
+    nombre: "Incumplimiento de fecha y hora de entrega o encuentro sin justa causa",
+    puntosRestaDefault: 50,
+    limiteAlertaRoja: 3
+  };
 
   const LEVELS_CONFIG = {
     1: {
@@ -152,16 +160,16 @@
 
   const DEFAULT_DB = {
     "meta": {
-      "sistema": "PREXIA POA · Sistema de Evaluación por Puntos Prexia (PP) y Multiplicadores",
+      "sistema": "PREXIA POA · Sistema de Evaluación por Puntos Prexia (PP), Multiplicadores Multinivel y Control de Incumplimientos",
       "cohorte": "Participantes Línea de Consultoría 2026-2",
       "periodo": "2026-2",
-      "semanaActual": 6,
+      "semanaActual": 1,
       "totalSemanas": 16,
       "creditosCarrera": 172,
       "semestresCarrera": 10,
       "repositorioGit": "https://github.com/carlmarx17/proyectoprexia",
       "archivoDatos": "data/prexia-users-db.json",
-      "ultimaActualizacion": "2026-10-21T20:10:00-05:00",
+      "ultimaActualizacion": "2026-10-27T15:45:00-05:00",
       "ultimoAutor": "Coordinación Línea de Consultoría PREXIA"
     },
     "usuarios": [
@@ -187,13 +195,12 @@
         "detalleMaterias": "Dirección Académica y Coordinación General Semillero PREXIA",
         "horasSemanalesTexto": "8",
         "hsa": 8,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Dirección estratégica, consultoría organizacional, evaluación por Puntos Prexia (PP) y articulación internacional EISI.",
-        "multiplicadoresActivos": [
-          "n4_impacto",
-          "n4_relaciones",
-          "n4_curso"
-        ],
-        "puntosAcumuladosSemestre": 3936,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
           "Fundador PREXIA UNAL",
           "Auditor Maestro POA 2026-2",
@@ -206,53 +213,13 @@
             "titulo": "Caracterización oficial Participantes Línea de Consultoría 2026-2 (13 integrantes)",
             "tipo": "Gobernanza",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-m2",
-            "semana": 6,
-            "titulo": "Seguimiento de Asistencia a Curso de Consultoría y Auditoría Quincenal",
-            "tipo": "Auditoría",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 800,
-            "metaPP": 800,
-            "bonoPct": 23,
-            "finalPP": 984,
-            "cumplimiento": 123
-          },
-          {
-            "semana": 2,
-            "basePP": 800,
-            "metaPP": 808,
-            "bonoPct": 23,
-            "finalPP": 984,
-            "cumplimiento": 122
-          },
-          {
-            "semana": 4,
-            "basePP": 800,
-            "metaPP": 824,
-            "bonoPct": 23,
-            "finalPP": 984,
-            "cumplimiento": 119
-          },
-          {
-            "semana": 6,
-            "basePP": 800,
-            "metaPP": 840,
-            "bonoPct": 23,
-            "finalPP": 984,
-            "cumplimiento": 117
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Actualización oficial de la lista de Participantes Línea de Consultoría 2026-2 (13 consultores caracterizados)."
+            "fecha": "2026-10-27",
+            "evento": "Sistema inicializado con barra de rendimiento desde 0 PP, multiplicadores abiertos entre niveles y control de anotaciones por incumplimiento."
           }
         ]
       },
@@ -266,7 +233,7 @@
         "correoCaracterizacion": "jvargassan@unal.edu.co",
         "rolSistema": "estudiante",
         "cargo": "Consultor Junior · Gestión de Proyectos y Datos",
-        "carrera": "Ingenieria Administrativa",
+        "carrera": "Ingeniería Administrativa",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "JV",
         "nivel": 3,
@@ -279,16 +246,14 @@
         "detalleMaterias": "Gestión de proyectos, Análisis de datos",
         "horasSemanalesTexto": "2 a 4",
         "hsa": 3,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Gestion de proyectos, Analisis de datos",
-        "multiplicadoresActivos": [
-          "n3_analitica",
-          "n3_productividad"
-        ],
-        "puntosAcumuladosSemestre": 1302,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 3 · Consultor Junior (75%)",
-          "Efectividad Analítica (+6%)",
-          "Gestión de Proyectos"
+          "Nivel 3 · Consultor Junior (75%)"
         ],
         "entregables": [
           {
@@ -297,53 +262,13 @@
             "titulo": "Caracterización y Pacto de Dedicación (2 a 4 horas semanales · 75% avance)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-jj2",
-            "semana": 6,
-            "titulo": "Estructuración analítica y cronograma de proyecto de consultoría",
-            "tipo": "Multiplicador +6%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 300,
-            "metaPP": 300,
-            "bonoPct": 6,
-            "finalPP": 318,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 2,
-            "basePP": 300,
-            "metaPP": 303,
-            "bonoPct": 6,
-            "finalPP": 318,
-            "cumplimiento": 105
-          },
-          {
-            "semana": 4,
-            "basePP": 300,
-            "metaPP": 309,
-            "bonoPct": 10,
-            "finalPP": 330,
-            "cumplimiento": 107
-          },
-          {
-            "semana": 6,
-            "basePP": 300,
-            "metaPP": 315,
-            "bonoPct": 10,
-            "finalPP": 330,
-            "cumplimiento": 105
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Administrativa, 75% de avance (Nivel 3), 2 a 4 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -370,16 +295,14 @@
         "detalleMaterias": "Analisis de datos, Marketing digital, Uso de herramientas como Power BI y Looker Studio.",
         "horasSemanalesTexto": "8 a 10",
         "hsa": 9,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Analisis de datos, Marketing digital, Uso de herramientas como Power BI y Looker Studio.",
-        "multiplicadoresActivos": [
-          "n2_traccion",
-          "n2_convocatoria"
-        ],
-        "puntosAcumuladosSemestre": 3852,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 2 · Rol Gestor (38%)",
-          "Power BI & Looker Studio",
-          "Tracción Web y Redes (+5%)"
+          "Nivel 2 · Rol Gestor (38%)"
         ],
         "entregables": [
           {
@@ -388,53 +311,13 @@
             "titulo": "Caracterización y Pacto de Alta Dedicación (8 a 10 horas semanales · 38% avance)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-dl2",
-            "semana": 6,
-            "titulo": "Tablero de seguimiento en Power BI / Looker Studio y estrategia de marketing digital",
-            "tipo": "Multiplicador +5%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 900,
-            "metaPP": 900,
-            "bonoPct": 5,
-            "finalPP": 945,
-            "cumplimiento": 105
-          },
-          {
-            "semana": 2,
-            "basePP": 900,
-            "metaPP": 909,
-            "bonoPct": 5,
-            "finalPP": 945,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 4,
-            "basePP": 900,
-            "metaPP": 927,
-            "bonoPct": 9,
-            "finalPP": 981,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 6,
-            "basePP": 900,
-            "metaPP": 945,
-            "bonoPct": 9,
-            "finalPP": 981,
-            "cumplimiento": 104
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 38% de avance (Nivel 2), 8 a 10 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 9 HSA = 900 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -461,16 +344,14 @@
         "detalleMaterias": "Investigación, coordinar equipos de trabajo (monitor fisica), basicas de ofimatica. Analitica de datos",
         "horasSemanalesTexto": "6 a 8",
         "hsa": 7,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Investigación, coordinar equipos de trabajo (monitor fisica), basicas de ofimatica. Analitica de datos",
-        "multiplicadoresActivos": [
-          "n4_impacto",
-          "n4_curso"
-        ],
-        "puntosAcumuladosSemestre": 3150,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 4 · Rol Líder (96%)",
-          "Coordinación de Equipos & Investigación",
-          "Impacto Económico (+10%)"
+          "Nivel 4 · Rol Líder (96%)"
         ],
         "entregables": [
           {
@@ -479,53 +360,13 @@
             "titulo": "Caracterización y Liderazgo Senior (6 a 8 horas semanales · 96% avance en Ingeniería Física)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-jl2",
-            "semana": 6,
-            "titulo": "Coordinación metodológica de equipos de trabajo y analítica de datos en consultoría",
-            "tipo": "Multiplicador +10%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 700,
-            "metaPP": 700,
-            "bonoPct": 10,
-            "finalPP": 770,
-            "cumplimiento": 110
-          },
-          {
-            "semana": 2,
-            "basePP": 700,
-            "metaPP": 707,
-            "bonoPct": 10,
-            "finalPP": 770,
-            "cumplimiento": 109
-          },
-          {
-            "semana": 4,
-            "basePP": 700,
-            "metaPP": 721,
-            "bonoPct": 15,
-            "finalPP": 805,
-            "cumplimiento": 112
-          },
-          {
-            "semana": 6,
-            "basePP": 700,
-            "metaPP": 735,
-            "bonoPct": 15,
-            "finalPP": 805,
-            "cumplimiento": 110
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Física, 96% de avance (Nivel 4 · Líder), 6 a 8 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -545,23 +386,21 @@
         "nivel": 1,
         "semestre": 1,
         "porcentajeAvance": 0.0,
-        "porcentajeAvanceTexto": "0",
+        "porcentajeAvanceTexto": "0%",
         "creditosAprobados": 0,
         "creditosTotales": 172,
         "materiasAltoImpacto": true,
         "detalleMaterias": "Ofimatica avanzada, negociación, manejo de equipos",
         "horasSemanalesTexto": "6 a 8",
         "hsa": 7,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Ofimatica avanzada, negociación, manejo de equipos",
-        "multiplicadoresActivos": [
-          "n1_contenido",
-          "n1_valor"
-        ],
-        "puntosAcumuladosSemestre": 2940,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 1 · Rol Operativo (0%)",
-          "Ofimática Avanzada y Negociación",
-          "Generación de Valor (+4%)"
+          "Nivel 1 · Rol Operativo (0%)"
         ],
         "entregables": [
           {
@@ -570,53 +409,13 @@
             "titulo": "Caracterización e Ingreso Nivel 1 (6 a 8 horas semanales · Administrativa)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-ja2",
-            "semana": 6,
-            "titulo": "Estructuración ofimática avanzada y apoyo en manejo de equipos",
-            "tipo": "Multiplicador +4%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 700,
-            "metaPP": 700,
-            "bonoPct": 3,
-            "finalPP": 721,
-            "cumplimiento": 103
-          },
-          {
-            "semana": 2,
-            "basePP": 700,
-            "metaPP": 707,
-            "bonoPct": 7,
-            "finalPP": 749,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 4,
-            "basePP": 700,
-            "metaPP": 721,
-            "bonoPct": 7,
-            "finalPP": 749,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 6,
-            "basePP": 700,
-            "metaPP": 735,
-            "bonoPct": 7,
-            "finalPP": 749,
-            "cumplimiento": 102
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Administrativa, 0% de avance (Nivel 1), 6 a 8 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -630,7 +429,7 @@
         "correoCaracterizacion": "bmartinezag@unal.edu.co",
         "rolSistema": "estudiante",
         "cargo": "Consultor Junior · Analítica de Datos en Power BI",
-        "carrera": "Ingenieria industrial",
+        "carrera": "Ingeniería Industrial",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "BM",
         "nivel": 3,
@@ -643,16 +442,14 @@
         "detalleMaterias": "Comunicacion asertiva, ofimática nivel media, analítica de datos en Power Bi.",
         "horasSemanalesTexto": "6 a 8",
         "hsa": 7,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Comunicacion asertiva, ofimática nivel media, analítica de datos en Power Bi.",
-        "multiplicadoresActivos": [
-          "n3_analitica",
-          "n3_curricular"
-        ],
-        "puntosAcumuladosSemestre": 3038,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 3 · Consultor Junior (76,40%)",
-          "Analítica en Power BI",
-          "Efectividad Analítica (+6%)"
+          "Nivel 3 · Consultor Junior (76,40%)"
         ],
         "entregables": [
           {
@@ -661,53 +458,13 @@
             "titulo": "Caracterización y Pacto Semestral (6 a 8 horas semanales · 76,40% avance)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-bm2",
-            "semana": 6,
-            "titulo": "Informe de diagnóstico y visualización analítica en Power BI",
-            "tipo": "Multiplicador +6%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 700,
-            "metaPP": 700,
-            "bonoPct": 6,
-            "finalPP": 742,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 2,
-            "basePP": 700,
-            "metaPP": 707,
-            "bonoPct": 6,
-            "finalPP": 742,
-            "cumplimiento": 105
-          },
-          {
-            "semana": 4,
-            "basePP": 700,
-            "metaPP": 721,
-            "bonoPct": 11,
-            "finalPP": 777,
-            "cumplimiento": 108
-          },
-          {
-            "semana": 6,
-            "basePP": 700,
-            "metaPP": 735,
-            "bonoPct": 11,
-            "finalPP": 777,
-            "cumplimiento": 106
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 76,40% de avance (Nivel 3), 6 a 8 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -721,7 +478,7 @@
         "correoCaracterizacion": "lyepez@unal.edu.co",
         "rolSistema": "estudiante",
         "cargo": "Consultor Junior · Programación y Medios Digitales",
-        "carrera": "Ingenieria Industrial",
+        "carrera": "Ingeniería Industrial",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "LY",
         "nivel": 3,
@@ -734,16 +491,14 @@
         "detalleMaterias": "Trabajo equipo, comunicación acertiva, ofimatica media, programación, edicion de videos.",
         "horasSemanalesTexto": "6 a 8",
         "hsa": 7,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Trabajo equipo, comunicación acertiva, ofimatica media, programación, edicion de videos.",
-        "multiplicadoresActivos": [
-          "n3_analitica",
-          "n3_productividad"
-        ],
-        "puntosAcumuladosSemestre": 3010,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 3 · Consultor Junior (76,40%)",
-          "Programación y Edición Audiovisual",
-          "Efectividad Analítica (+6%)"
+          "Nivel 3 · Consultor Junior (76,40%)"
         ],
         "entregables": [
           {
@@ -752,53 +507,13 @@
             "titulo": "Caracterización y Pacto Semestral (6 a 8 horas semanales · 76,40% avance)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-ly2",
-            "semana": 6,
-            "titulo": "Automatización y recursos audiovisuales para el Curso de Consultoría",
-            "tipo": "Multiplicador +4%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 700,
-            "metaPP": 700,
-            "bonoPct": 6,
-            "finalPP": 742,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 2,
-            "basePP": 700,
-            "metaPP": 707,
-            "bonoPct": 6,
-            "finalPP": 742,
-            "cumplimiento": 105
-          },
-          {
-            "semana": 4,
-            "basePP": 700,
-            "metaPP": 721,
-            "bonoPct": 10,
-            "finalPP": 770,
-            "cumplimiento": 107
-          },
-          {
-            "semana": 6,
-            "basePP": 700,
-            "metaPP": 735,
-            "bonoPct": 10,
-            "finalPP": 770,
-            "cumplimiento": 105
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 76,40% de avance (Nivel 3), 6 a 8 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 7 HSA = 700 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -812,7 +527,7 @@
         "correoCaracterizacion": "—",
         "rolSistema": "estudiante",
         "cargo": "Operativo · Gestión de Talento Humano (GTH)",
-        "carrera": "Ingenieria Industrial",
+        "carrera": "Ingeniería Industrial",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "DG",
         "nivel": 1,
@@ -825,15 +540,14 @@
         "detalleMaterias": "Gestión de Talento Humano (GTH) · Línea de Consultoría",
         "horasSemanalesTexto": "3",
         "hsa": 3,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "—",
-        "multiplicadoresActivos": [
-          "n1_contenido",
-          "n1_cultura"
-        ],
-        "puntosAcumuladosSemestre": 1248,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 1 · Rol Operativo",
-          "Enlace Gestión de Talento Humano (GTH)"
+          "Nivel 1 · Rol Operativo"
         ],
         "entregables": [
           {
@@ -844,44 +558,11 @@
             "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 300,
-            "metaPP": 300,
-            "bonoPct": 3,
-            "finalPP": 309,
-            "cumplimiento": 103
-          },
-          {
-            "semana": 2,
-            "basePP": 300,
-            "metaPP": 303,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 4,
-            "basePP": 300,
-            "metaPP": 309,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 102
-          },
-          {
-            "semana": 6,
-            "basePP": 300,
-            "metaPP": 315,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 100
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 3 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -908,17 +589,14 @@
         "detalleMaterias": "Comunicación, organización, creatividad, un poco de finanzas y de programación, suelo tener pensamiento social y comunitario",
         "horasSemanalesTexto": "8",
         "hsa": 8,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Comunicación, organización, creatividad, un poco de finanzas y de programación, suelo tener pensamiento social y comunitario",
-        "multiplicadoresActivos": [
-          "n3_analitica",
-          "n3_curricular",
-          "n3_productividad"
-        ],
-        "puntosAcumuladosSemestre": 3576,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 3 · Consultora Junior (80%)",
-          "Pensamiento Social y Comunitario",
-          "Efectividad Analítica (+6%)"
+          "Nivel 3 · Consultora Junior (80%)"
         ],
         "entregables": [
           {
@@ -927,53 +605,13 @@
             "titulo": "Caracterización y Pacto de 8 Horas Semanales (80% avance en Ingeniería Industrial)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-eo2",
-            "semana": 6,
-            "titulo": "Estructuración financiera y enfoque comunitario para empresas asesoradas",
-            "tipo": "Multiplicador +6%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 800,
-            "metaPP": 800,
-            "bonoPct": 6,
-            "finalPP": 848,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 2,
-            "basePP": 800,
-            "metaPP": 808,
-            "bonoPct": 11,
-            "finalPP": 888,
-            "cumplimiento": 110
-          },
-          {
-            "semana": 4,
-            "basePP": 800,
-            "metaPP": 824,
-            "bonoPct": 15,
-            "finalPP": 920,
-            "cumplimiento": 112
-          },
-          {
-            "semana": 6,
-            "basePP": 800,
-            "metaPP": 840,
-            "bonoPct": 15,
-            "finalPP": 920,
-            "cumplimiento": 110
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 80% de avance (Nivel 3), 8 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 8 HSA = 800 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -987,7 +625,7 @@
         "correoCaracterizacion": "—",
         "rolSistema": "estudiante",
         "cargo": "Gestor · Toma de Decisiones, Excel y Ventas",
-        "carrera": "Ingenieria industrial",
+        "carrera": "Ingeniería Industrial",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "OM",
         "nivel": 2,
@@ -1000,16 +638,14 @@
         "detalleMaterias": "Trabajo en equipo, comunicación, toma de desciciones, Excel e interes por las ventas.",
         "horasSemanalesTexto": "2",
         "hsa": 2,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Trabajo en equipo, comunicación, toma de desciciones, Excel e interes por las ventas.",
-        "multiplicadoresActivos": [
-          "n2_traccion",
-          "n2_bienestar"
-        ],
-        "puntosAcumuladosSemestre": 848,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 2 · Rol Gestor (51%)",
-          "Simulación Comercial y Ventas",
-          "Tracción y Comunidad (+5%)"
+          "Nivel 2 · Rol Gestor (51%)"
         ],
         "entregables": [
           {
@@ -1018,53 +654,13 @@
             "titulo": "Caracterización y Pacto de 2 Horas Semanales (51% avance en Ingeniería Industrial)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-om2",
-            "semana": 6,
-            "titulo": "Modelación en Excel y apoyo en estructuración de ventas",
-            "tipo": "Multiplicador +5%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 200,
-            "metaPP": 200,
-            "bonoPct": 5,
-            "finalPP": 210,
-            "cumplimiento": 105
-          },
-          {
-            "semana": 2,
-            "basePP": 200,
-            "metaPP": 202,
-            "bonoPct": 5,
-            "finalPP": 210,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 4,
-            "basePP": 200,
-            "metaPP": 206,
-            "bonoPct": 7,
-            "finalPP": 214,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 6,
-            "basePP": 200,
-            "metaPP": 210,
-            "bonoPct": 7,
-            "finalPP": 214,
-            "cumplimiento": 102
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 51% de avance (Nivel 2), 2 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 2 HSA = 200 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -1078,7 +674,7 @@
         "correoCaracterizacion": "—",
         "rolSistema": "estudiante",
         "cargo": "Operativo · Apoyo Línea de Consultoría",
-        "carrera": "—",
+        "carrera": "Por registrar",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "SF",
         "nivel": 1,
@@ -1091,15 +687,14 @@
         "detalleMaterias": "Participante activa Curso y Línea de Consultoría 2026-2",
         "horasSemanalesTexto": "3",
         "hsa": 3,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "—",
-        "multiplicadoresActivos": [
-          "n1_contenido",
-          "n1_cultura"
-        ],
-        "puntosAcumuladosSemestre": 1248,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 1 · Rol Operativo",
-          "Pertenencia Línea Consultoría"
+          "Nivel 1 · Rol Operativo"
         ],
         "entregables": [
           {
@@ -1110,44 +705,11 @@
             "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 300,
-            "metaPP": 300,
-            "bonoPct": 3,
-            "finalPP": 309,
-            "cumplimiento": 103
-          },
-          {
-            "semana": 2,
-            "basePP": 300,
-            "metaPP": 303,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 4,
-            "basePP": 300,
-            "metaPP": 309,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 102
-          },
-          {
-            "semana": 6,
-            "basePP": 300,
-            "metaPP": 315,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 100
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: 3 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -1161,7 +723,7 @@
         "correoCaracterizacion": "—",
         "rolSistema": "estudiante",
         "cargo": "Operativo · Informática y Sistemas Digitales",
-        "carrera": "Ingenieria Industrial",
+        "carrera": "Ingeniería Industrial",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "TM",
         "nivel": 1,
@@ -1174,16 +736,14 @@
         "detalleMaterias": "Todo lo relacionado con Informática",
         "horasSemanalesTexto": "6",
         "hsa": 6,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Todo lo relacionado con Informática",
-        "multiplicadoresActivos": [
-          "n1_contenido",
-          "n1_valor"
-        ],
-        "puntosAcumuladosSemestre": 2544,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 1 · Rol Operativo (27%)",
-          "Soporte Informático y Tecnológico",
-          "Generación de Valor (+4%)"
+          "Nivel 1 · Rol Operativo (27%)"
         ],
         "entregables": [
           {
@@ -1192,53 +752,13 @@
             "titulo": "Caracterización y Pacto de 6 Horas Semanales (27% avance en Ingeniería Industrial)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-tm2",
-            "semana": 6,
-            "titulo": "Herramientas informáticas y soporte digital para la Línea de Consultoría",
-            "tipo": "Multiplicador +4%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 600,
-            "metaPP": 600,
-            "bonoPct": 3,
-            "finalPP": 618,
-            "cumplimiento": 103
-          },
-          {
-            "semana": 2,
-            "basePP": 600,
-            "metaPP": 606,
-            "bonoPct": 7,
-            "finalPP": 642,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 4,
-            "basePP": 600,
-            "metaPP": 618,
-            "bonoPct": 7,
-            "finalPP": 642,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 6,
-            "basePP": 600,
-            "metaPP": 630,
-            "bonoPct": 7,
-            "finalPP": 642,
-            "cumplimiento": 102
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrado en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 27% de avance (Nivel 1 · próximo a ascender a Nivel 2), 6 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 6 HSA = 600 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -1252,7 +772,7 @@
         "correoCaracterizacion": "—",
         "rolSistema": "estudiante",
         "cargo": "Operativo · Apoyo Ingeniería Industrial",
-        "carrera": "Ingenieria Industrial",
+        "carrera": "Ingeniería Industrial",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "ZL",
         "nivel": 1,
@@ -1265,15 +785,14 @@
         "detalleMaterias": "Participante activa Curso y Línea de Consultoría 2026-2",
         "horasSemanalesTexto": "3",
         "hsa": 3,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "—",
-        "multiplicadoresActivos": [
-          "n1_contenido",
-          "n1_cultura"
-        ],
-        "puntosAcumuladosSemestre": 1248,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 1 · Rol Operativo",
-          "Cultura Consultor (+2%)"
+          "Nivel 1 · Rol Operativo"
         ],
         "entregables": [
           {
@@ -1284,44 +803,11 @@
             "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 300,
-            "metaPP": 300,
-            "bonoPct": 3,
-            "finalPP": 309,
-            "cumplimiento": 103
-          },
-          {
-            "semana": 2,
-            "basePP": 300,
-            "metaPP": 303,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 104
-          },
-          {
-            "semana": 4,
-            "basePP": 300,
-            "metaPP": 309,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 102
-          },
-          {
-            "semana": 6,
-            "basePP": 300,
-            "metaPP": 315,
-            "bonoPct": 5,
-            "finalPP": 315,
-            "cumplimiento": 100
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Industrial, 3 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       },
@@ -1335,7 +821,7 @@
         "correoCaracterizacion": "—",
         "rolSistema": "estudiante",
         "cargo": "Consultora Junior · Gestión de Equipos, Negocios y Redes",
-        "carrera": "Ingenieria Administrativa",
+        "carrera": "Ingeniería Administrativa",
         "linea": "Línea de Consultoría 2026-2",
         "avatar": "DN",
         "nivel": 3,
@@ -1348,16 +834,14 @@
         "detalleMaterias": "Redes sociales, Gestión de equipos, negocios y Ofimática",
         "horasSemanalesTexto": "3",
         "hsa": 3,
+        "horasCumplidas": 0,
+        "puntosExtraManual": 0,
         "herramientasHabilidades": "Redes sociales, Gestión de equipos, negocios y Ofimática",
-        "multiplicadoresActivos": [
-          "n3_analitica",
-          "n3_productividad"
-        ],
-        "puntosAcumuladosSemestre": 1296,
+        "multiplicadoresActivos": [],
+        "anotaciones": [],
+        "puntosAcumuladosSemestre": 0,
         "insignias": [
-          "Nivel 3 · Consultora Junior (70%)",
-          "Gestión de Equipos y Negocios",
-          "Productividad Extra (+4%)"
+          "Nivel 3 · Consultora Junior (70%)"
         ],
         "entregables": [
           {
@@ -1366,53 +850,13 @@
             "titulo": "Caracterización y Pacto de 3 Horas Semanales (70% avance en Ingeniería Administrativa)",
             "tipo": "Caracterización 2026-2",
             "estado": "Aprobado"
-          },
-          {
-            "id": "ent-dn2",
-            "semana": 6,
-            "titulo": "Gestión de equipos, posicionamiento en redes y estructuración de negocios",
-            "tipo": "Multiplicador +6%",
-            "estado": "Aprobado"
           }
         ],
-        "historialQuincenal": [
-          {
-            "semana": 1,
-            "basePP": 300,
-            "metaPP": 300,
-            "bonoPct": 6,
-            "finalPP": 318,
-            "cumplimiento": 106
-          },
-          {
-            "semana": 2,
-            "basePP": 300,
-            "metaPP": 303,
-            "bonoPct": 6,
-            "finalPP": 318,
-            "cumplimiento": 105
-          },
-          {
-            "semana": 4,
-            "basePP": 300,
-            "metaPP": 309,
-            "bonoPct": 10,
-            "finalPP": 330,
-            "cumplimiento": 107
-          },
-          {
-            "semana": 6,
-            "basePP": 300,
-            "metaPP": 315,
-            "bonoPct": 10,
-            "finalPP": 330,
-            "cumplimiento": 105
-          }
-        ],
+        "historialQuincenal": [],
         "bitacoraCrecimiento": [
           {
-            "fecha": "2026-10-21",
-            "evento": "Registrada en Caracterización Línea de Consultoría 2026-2: Ingeniería Administrativa, 70% de avance (Nivel 3), 3 horas semanales."
+            "fecha": "2026-10-27",
+            "evento": "Barra de rendimiento inicializada en 0 PP (Meta base pactada: 3 HSA = 300 PP). Listo para sumar puntos/hora y multiplicadores."
           }
         ]
       }
@@ -1433,36 +877,82 @@
 
   function obtenerMultiplicadorInfo(multId) {
     for (const lvl of [1, 2, 3, 4]) {
-      const found = LEVELS_CONFIG[lvl].multiplicadores.find((m) => m.id === multId);
-      if (found) return { ...found, nivel: lvl };
+      const cfg = LEVELS_CONFIG[lvl];
+      const found = cfg.multiplicadores.find((m) => m.id === multId);
+      if (found) {
+        return {
+          ...found,
+          nivel: lvl,
+          rolNivel: cfg.rol,
+          nombreNivel: cfg.nombre
+        };
+      }
     }
     return null;
+  }
+
+  function obtenerTodosLosMultiplicadores() {
+    const list = [];
+    [1, 2, 3, 4].forEach((lvl) => {
+      const cfg = LEVELS_CONFIG[lvl];
+      cfg.multiplicadores.forEach((m) => {
+        list.push({
+          ...m,
+          nivel: lvl,
+          rolNivel: cfg.rol,
+          nombreNivel: cfg.nombre
+        });
+      });
+    });
+    return list;
   }
 
   function calcularLiquidacionUsuario(user, semanaEval) {
     const semana = Math.min(16, Math.max(1, parseInt(semanaEval || 1, 10)));
     const hsa = Math.max(1, parseInt(user.hsa || 4, 10));
-    const basePP = hsa * 100;
+    const basePP = hsa * 100; // Meta base semanal según pacto HSA
     const curvaPct = 100 + (semana - 1); // Sem 1 = 100%, Sem 16 = 115%
     const metaSemanaPP = Math.round(basePP * (curvaPct / 100));
+
+    // La barra de rendimiento arranca desde 0 y avanza a medida que se suman puntos/hora y multiplicadores
+    const horasCumplidas = typeof user.horasCumplidas === "number" ? Math.max(0, Number(user.horasCumplidas)) : 0;
+    const puntosExtraManual = parseInt(user.puntosExtraManual || 0, 10) || 0;
+    const puntosHoraPP = Math.max(0, Math.round(horasCumplidas * 100) + puntosExtraManual);
 
     const levelCfg = LEVELS_CONFIG[user.nivel] || LEVELS_CONFIG[1];
     let bonoPct = 0;
     const multDetalles = [];
 
     (user.multiplicadoresActivos || []).forEach((mId) => {
-      const mInfo = levelCfg.multiplicadores.find((m) => m.id === mId) || obtenerMultiplicadorInfo(mId);
+      const mInfo = obtenerMultiplicadorInfo(mId);
       if (mInfo) {
         bonoPct += mInfo.bono;
-        multDetalles.push(mInfo);
+        multDetalles.push({
+          ...mInfo,
+          esOtroNivel: mInfo.nivel !== user.nivel
+        });
       }
     });
 
+    // El bono de multiplicadores suma sobre la base pactada (basePP) sin importar el nivel
     const bonoPP = Math.round(basePP * (bonoPct / 100));
-    const finalPP = basePP + bonoPP;
-    const cumplimientoPct = Math.round((finalPP / metaSemanaPP) * 100);
-    const superoMeta = finalPP >= metaSemanaPP;
-    const brechaPP = metaSemanaPP - finalPP;
+
+    // Resta de puntos: Incumplimiento de fecha y hora de entrega o encuentro sin justa causa
+    const anotaciones = Array.isArray(user.anotaciones) ? user.anotaciones : [];
+    const numAnotaciones = anotaciones.length;
+    const puntosRestadosPP = anotaciones.reduce(
+      (acc, item) => acc + Math.max(0, parseInt(item.puntosRestados !== undefined ? item.puntosRestados : PENALTY_CONFIG.puntosRestaDefault, 10)),
+      0
+    );
+    const enAlertaRoja = numAnotaciones >= PENALTY_CONFIG.limiteAlertaRoja; // Se pone en rojo al llevar 3 anotaciones
+
+    const brutoPP = puntosHoraPP + bonoPP;
+    const finalPP = Math.max(0, brutoPP - puntosRestadosPP);
+    const cumplimientoPct = metaSemanaPP > 0 ? Math.max(0, Math.round((finalPP / metaSemanaPP) * 100)) : 0;
+    const barraPct = Math.min(100, Math.max(0, cumplimientoPct));
+    const superoMeta = finalPP >= metaSemanaPP && !enAlertaRoja;
+    const brechaPP = Math.max(0, metaSemanaPP - finalPP);
+
     const avanceCarreraPct = typeof user.porcentajeAvance === "number"
       ? user.porcentajeAvance
       : Math.min(100, Math.round(((user.creditosAprobados || 0) / (user.creditosTotales || 172)) * 100));
@@ -1474,13 +964,22 @@
     return {
       semana,
       hsa,
+      horasCumplidas,
+      puntosExtraManual,
+      puntosHoraPP,
       basePP,
       curvaPct,
       metaSemanaPP,
       bonoPct,
       bonoPP,
+      brutoPP,
+      anotaciones,
+      numAnotaciones,
+      puntosRestadosPP,
+      enAlertaRoja,
       finalPP,
       cumplimientoPct,
+      barraPct,
       superoMeta,
       brechaPP,
       avanceCarreraPct,
@@ -1493,12 +992,25 @@
     };
   }
 
+  function normalizeUserFields(u) {
+    if (typeof u.horasCumplidas !== "number") u.horasCumplidas = 0;
+    if (typeof u.puntosExtraManual !== "number") u.puntosExtraManual = 0;
+    if (!Array.isArray(u.multiplicadoresActivos)) u.multiplicadoresActivos = [];
+    if (!Array.isArray(u.anotaciones)) u.anotaciones = [];
+    if (!Array.isArray(u.insignias)) u.insignias = [];
+    if (!Array.isArray(u.entregables)) u.entregables = [];
+    if (!Array.isArray(u.historialQuincenal)) u.historialQuincenal = [];
+    if (!Array.isArray(u.bitacoraCrecimiento)) u.bitacoraCrecimiento = [];
+    return u;
+  }
+
   function getDB() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && Array.isArray(parsed.usuarios)) {
+          parsed.usuarios.forEach(normalizeUserFields);
           return parsed;
         }
       }
@@ -1506,7 +1018,8 @@
       console.warn("No se pudo leer localStorage:", e);
     }
     const initial = clone(DEFAULT_DB);
-    saveDB(initial, "Inicialización del sistema", false);
+    initial.usuarios.forEach(normalizeUserFields);
+    saveDB(initial, "Inicialización del sistema (Barra en 0 PP)", false);
     return initial;
   }
 
@@ -1538,7 +1051,7 @@
     } catch (e) {}
     return {
       pendingChanges: 0,
-      lastGitSync: "2026-10-17T14:40:00-05:00",
+      lastGitSync: "2026-10-27T15:45:00-05:00",
       lastCommitHash: "HEAD · data/prexia-users-db.json",
       lastAction: "Sincronizado con repositorio Git"
     };
@@ -1556,11 +1069,11 @@
   async function syncFromCanonicalJSON(jsonPath) {
     try {
       const res = await fetch(jsonPath, { cache: "no-store" });
-      if (!res.ok) return null;
+      if (!res.ok) return getDB();
       const remoteDB = await res.json();
       const syncMeta = getGitSyncMeta();
-      // Solo sobreescribir si no hay cambios locales pendientes
       if ((syncMeta.pendingChanges || 0) === 0 && remoteDB && Array.isArray(remoteDB.usuarios)) {
+        remoteDB.usuarios.forEach(normalizeUserFields);
         saveDB(remoteDB, "Sincronizado desde data/prexia-users-db.json", false);
         return remoteDB;
       }
@@ -1572,8 +1085,9 @@
 
   function resetToFactoryGitDB() {
     const fresh = clone(DEFAULT_DB);
-    saveDB(fresh, "Restauración a estado base del repositorio Git", false);
-    markGitSynced("Estado oficial restaurado");
+    fresh.usuarios.forEach(normalizeUserFields);
+    saveDB(fresh, "Restauración a estado base en 0 PP del repositorio Git", false);
+    markGitSynced("Estado inicial en 0 PP restaurado");
     return fresh;
   }
 
@@ -1612,16 +1126,21 @@
     localStorage.removeItem(SESSION_KEY);
   }
 
-  // ── ACCIONES DE PROGRESO Y CRECIMIENTO ──
+  // ── ACCIONES DE PROGRESO, PUNTOS/HORA, MULTIPLICADORES MULTINIVEL Y RESTA DE PUNTOS ──
   function registrarSnapshotHistorial(user, semana) {
     const liq = calcularLiquidacionUsuario(user, semana);
     user.historialQuincenal = user.historialQuincenal || [];
     const idx = user.historialQuincenal.findIndex((h) => h.semana === semana);
     const entry = {
       semana,
+      horasCumplidas: liq.horasCumplidas,
+      puntosHoraPP: liq.puntosHoraPP,
       basePP: liq.basePP,
       metaPP: liq.metaSemanaPP,
       bonoPct: liq.bonoPct,
+      bonoPP: liq.bonoPP,
+      puntosRestadosPP: liq.puntosRestadosPP,
+      numAnotaciones: liq.numAnotaciones,
       finalPP: liq.finalPP,
       cumplimiento: liq.cumplimientoPct
     };
@@ -1631,8 +1150,70 @@
       user.historialQuincenal.push(entry);
       user.historialQuincenal.sort((a, b) => a.semana - b.semana);
     }
+    user.puntosAcumuladosSemestre = user.historialQuincenal.reduce((acc, item) => acc + (item.finalPP || 0), 0);
   }
 
+  // Sumar o restar horas cumplidas (1 hora = 100 PP)
+  function ajustarHorasCumplidas(userId, deltaHoras) {
+    const db = getDB();
+    const user = db.usuarios.find((u) => u.id === userId);
+    if (!user) return null;
+
+    const actual = typeof user.horasCumplidas === "number" ? user.horasCumplidas : 0;
+    const nuevo = Math.max(0, Math.round((actual + Number(deltaHoras || 0)) * 10) / 10);
+    user.horasCumplidas = nuevo;
+
+    user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
+    user.bitacoraCrecimiento.unshift({
+      fecha: new Date().toISOString().slice(0, 10),
+      evento: `Puntos/Hora actualizados: ${nuevo}h cumplidas (${Math.round(nuevo * 100)} PP por horas de ${user.hsa * 100} PP pactados).`
+    });
+
+    registrarSnapshotHistorial(user, db.meta.semanaActual);
+    saveDB(db, `Puntos/Hora (${nuevo}h = ${Math.round(nuevo * 100)} PP) actualizados para ${user.nombre}`);
+    return user;
+  }
+
+  function establecerHorasCumplidas(userId, nuevasHoras) {
+    const db = getDB();
+    const user = db.usuarios.find((u) => u.id === userId);
+    if (!user) return null;
+
+    const nuevo = Math.max(0, Math.round(Number(nuevasHoras || 0) * 10) / 10);
+    user.horasCumplidas = nuevo;
+
+    user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
+    user.bitacoraCrecimiento.unshift({
+      fecha: new Date().toISOString().slice(0, 10),
+      evento: `Registro directo de Puntos/Hora: ${nuevo}h acreditadas (${Math.round(nuevo * 100)} PP).`
+    });
+
+    registrarSnapshotHistorial(user, db.meta.semanaActual);
+    saveDB(db, `Horas acreditadas (${nuevo}h) actualizadas para ${user.nombre}`);
+    return user;
+  }
+
+  function ajustarPuntosManual(userId, deltaPP, motivo = "Ajuste de puntos por actividad") {
+    const db = getDB();
+    const user = db.usuarios.find((u) => u.id === userId);
+    if (!user) return null;
+
+    const delta = parseInt(deltaPP || 0, 10);
+    if (!delta) return user;
+    user.puntosExtraManual = (parseInt(user.puntosExtraManual || 0, 10) || 0) + delta;
+
+    user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
+    user.bitacoraCrecimiento.unshift({
+      fecha: new Date().toISOString().slice(0, 10),
+      evento: `${delta > 0 ? "Suma" : "Ajuste"} de puntos (${delta > 0 ? "+" : ""}${delta} PP): ${motivo}.`
+    });
+
+    registrarSnapshotHistorial(user, db.meta.semanaActual);
+    saveDB(db, `Ajuste manual de ${delta > 0 ? "+" : ""}${delta} PP para ${user.nombre}`);
+    return user;
+  }
+
+  // Permite añadir puntos multiplicadores sin importar el nivel (ej: Nivel 1 puede recibir multiplicador de Nivel 3)
   function toggleMultiplicador(userId, multId) {
     const db = getDB();
     const user = db.usuarios.find((u) => u.id === userId);
@@ -1644,22 +1225,120 @@
 
     if (exists) {
       user.multiplicadoresActivos = user.multiplicadoresActivos.filter((id) => id !== multId);
+      user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
+      user.bitacoraCrecimiento.unshift({
+        fecha: new Date().toISOString().slice(0, 10),
+        evento: `Multiplicador removido en Semana ${db.meta.semanaActual}: ${mInfo ? mInfo.nombre : multId}.`
+      });
     } else {
       user.multiplicadoresActivos.push(multId);
-      const badgeName = mInfo ? `${mInfo.nombre} (+${mInfo.bono}%)` : multId;
+      const esTransversal = mInfo && mInfo.nivel !== user.nivel;
+      const badgeName = mInfo
+        ? `${esTransversal ? `[Tarea N${mInfo.nivel}] ` : ""}${mInfo.nombre} (+${mInfo.bono}%)`
+        : multId;
       if (!user.insignias.includes(badgeName)) {
         user.insignias.push(badgeName);
       }
       user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
       user.bitacoraCrecimiento.unshift({
         fecha: new Date().toISOString().slice(0, 10),
-        evento: `Multiplicador acreditado en Semana ${db.meta.semanaActual}: ${mInfo ? mInfo.nombre : multId} (+${mInfo ? mInfo.bono : 0}%).`
+        evento: `Multiplicador acreditado en Semana ${db.meta.semanaActual}: ${mInfo ? mInfo.nombre : multId} (+${mInfo ? mInfo.bono : 0}%)${esTransversal ? ` · Asumió tarea de Nivel ${mInfo.nivel} (${mInfo.rolNivel}) estando en Nivel ${user.nivel}` : ""}.`
       });
     }
 
     registrarSnapshotHistorial(user, db.meta.semanaActual);
-    saveDB(db, `Multiplicador ${exists ? "removido" : "acreditado"} para ${user.nombre}`);
+    saveDB(db, `Multiplicador ${exists ? "removido" : "acreditado"} (${mInfo ? mInfo.nombre : multId}) para ${user.nombre}`);
     return user;
+  }
+
+  // Resta puntos: Incumplimiento de fecha y hora de entrega o encuentro sin justa causa (Rojo a las 3 anotaciones)
+  function agregarAnotacionIncumplimiento(userId, opciones = {}) {
+    const db = getDB();
+    const user = db.usuarios.find((u) => u.id === userId);
+    if (!user) return null;
+
+    user.anotaciones = Array.isArray(user.anotaciones) ? user.anotaciones : [];
+    const puntosRestados = Math.max(
+      0,
+      parseInt(opciones.puntosRestados !== undefined ? opciones.puntosRestados : PENALTY_CONFIG.puntosRestaDefault, 10)
+    );
+    const detalle = (opciones.observacion || "").trim() || PENALTY_CONFIG.nombre;
+
+    const nuevaAnotacion = {
+      id: "anot-" + Date.now() + "-" + Math.floor(Math.random() * 100),
+      fecha: new Date().toISOString().slice(0, 10),
+      semana: db.meta.semanaActual,
+      tipo: PENALTY_CONFIG.nombre,
+      observacion: detalle,
+      puntosRestados
+    };
+
+    user.anotaciones.push(nuevaAnotacion);
+    const totalAnot = user.anotaciones.length;
+
+    user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
+    if (totalAnot >= PENALTY_CONFIG.limiteAlertaRoja) {
+      user.bitacoraCrecimiento.unshift({
+        fecha: nuevaAnotacion.fecha,
+        evento: `🚨 ALERTA ROJA (${totalAnot} anotaciones): "${PENALTY_CONFIG.nombre}" (-${puntosRestados} PP). El participante ha alcanzado ${totalAnot} anotaciones sin justa causa.`
+      });
+    } else {
+      user.bitacoraCrecimiento.unshift({
+        fecha: nuevaAnotacion.fecha,
+        evento: `⚠️ Resta de puntos (Anotación ${totalAnot}/3 · -${puntosRestados} PP): ${PENALTY_CONFIG.nombre}${opciones.observacion ? " · " + opciones.observacion : ""}.`
+      });
+    }
+
+    registrarSnapshotHistorial(user, db.meta.semanaActual);
+    saveDB(db, `Anotación de incumplimiento (${totalAnot}/3 · -${puntosRestados} PP) registrada para ${user.nombre}`);
+    return { user, totalAnotaciones: totalAnot, enAlertaRoja: totalAnot >= PENALTY_CONFIG.limiteAlertaRoja };
+  }
+
+  function eliminarAnotacionIncumplimiento(userId, anotacionId = null) {
+    const db = getDB();
+    const user = db.usuarios.find((u) => u.id === userId);
+    if (!user || !Array.isArray(user.anotaciones) || user.anotaciones.length === 0) return null;
+
+    let eliminada = null;
+    if (anotacionId) {
+      const idx = user.anotaciones.findIndex((a) => a.id === anotacionId);
+      if (idx >= 0) {
+        eliminada = user.anotaciones.splice(idx, 1)[0];
+      }
+    } else {
+      eliminada = user.anotaciones.pop();
+    }
+
+    if (eliminada) {
+      user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
+      user.bitacoraCrecimiento.unshift({
+        fecha: new Date().toISOString().slice(0, 10),
+        evento: `Anotación de incumplimiento removida (+${eliminada.puntosRestados || 50} PP restituidos). Total actual: ${user.anotaciones.length}/3.`
+      });
+      registrarSnapshotHistorial(user, db.meta.semanaActual);
+      saveDB(db, `Anotación de incumplimiento removida para ${user.nombre}`);
+    }
+    return user;
+  }
+
+  function reiniciarProgresoUsuario(userId) {
+    const db = getDB();
+    const targets = userId === "all" ? db.usuarios : db.usuarios.filter((u) => u.id === userId);
+    targets.forEach((u) => {
+      u.horasCumplidas = 0;
+      u.puntosExtraManual = 0;
+      u.multiplicadoresActivos = [];
+      u.anotaciones = [];
+      u.puntosAcumuladosSemestre = 0;
+      u.historialQuincenal = [];
+      u.bitacoraCrecimiento = u.bitacoraCrecimiento || [];
+      u.bitacoraCrecimiento.unshift({
+        fecha: new Date().toISOString().slice(0, 10),
+        evento: `Barra de rendimiento reiniciada a 0 PP (0 horas cumplidas, 0 multiplicadores, 0 anotaciones).`
+      });
+    });
+    saveDB(db, userId === "all" ? "Todas las barras de rendimiento reiniciadas a 0 PP" : "Barra de rendimiento reiniciada a 0 PP");
+    return db;
   }
 
   function actualizarPactoHSA(userId, nuevasHSA) {
@@ -1669,10 +1348,11 @@
 
     const hsa = Math.min(12, Math.max(1, parseInt(nuevasHSA || 4, 10)));
     user.hsa = hsa;
+    user.horasSemanalesTexto = String(hsa);
     user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
     user.bitacoraCrecimiento.unshift({
       fecha: new Date().toISOString().slice(0, 10),
-      evento: `Actualización de Pacto HSA: ${hsa} horas semanales (${hsa * 100} PP base).`
+      evento: `Actualización de Pacto HSA: ${hsa} horas semanales (${hsa * 100} PP meta base).`
     });
 
     registrarSnapshotHistorial(user, db.meta.semanaActual);
@@ -1702,15 +1382,12 @@
       user.nivel = calcularNivelPorCreditos(user.creditosAprobados, user.creditosTotales || 172);
     }
 
-    const liqAntes = calcularLiquidacionUsuario(user, db.meta.semanaActual);
-    user.puntosAcumuladosSemestre = (user.puntosAcumuladosSemestre || 0) + liqAntes.finalPP;
+    user.porcentajeAvance = Math.min(100, Math.round((user.creditosAprobados / (user.creditosTotales || 172)) * 100));
+    user.porcentajeAvanceTexto = user.porcentajeAvance + "%";
 
     if (user.nivel > nivelAnterior) {
       const cfgNuevo = LEVELS_CONFIG[user.nivel];
       user.cargo = `${cfgNuevo.rol} · ${cfgNuevo.nombre}`;
-      // Activar el primer multiplicador del nuevo nivel para arrancar con impulso
-      const primerMult = cfgNuevo.multiplicadores[0].id;
-      user.multiplicadoresActivos = [primerMult];
       const insigniaAscenso = `Ascenso a Nivel ${user.nivel}: ${cfgNuevo.rol}`;
       if (!user.insignias.includes(insigniaAscenso)) {
         user.insignias.push(insigniaAscenso);
@@ -1718,7 +1395,7 @@
       user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
       user.bitacoraCrecimiento.unshift({
         fecha: new Date().toISOString().slice(0, 10),
-        evento: `¡ASCENSO DE NIVEL! Promovido de Nivel ${nivelAnterior} a Nivel ${user.nivel} (${cfgNuevo.nombre} · Rol ${cfgNuevo.rol}) con ${user.creditosAprobados}/${user.creditosTotales} créditos (${Math.round((user.creditosAprobados / user.creditosTotales) * 100)}%).`
+        evento: `¡ASCENSO DE NIVEL! Promovido de Nivel ${nivelAnterior} a Nivel ${user.nivel} (${cfgNuevo.nombre} · Rol ${cfgNuevo.rol}) con ${user.creditosAprobados}/${user.creditosTotales} créditos (${user.porcentajeAvance}%).`
       });
     } else {
       user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
@@ -1738,22 +1415,31 @@
     const user = db.usuarios.find((u) => u.id === userId);
     if (!user) return null;
 
+    const mInfo = datosEntregable.multId ? obtenerMultiplicadorInfo(datosEntregable.multId) : null;
+    const horasSumadas = parseFloat(datosEntregable.horasSumadas || 0);
+
     const nuevo = {
       id: "ent-" + Date.now(),
       semana: db.meta.semanaActual,
       titulo: datosEntregable.titulo || "Entregable de línea PREXIA",
-      tipo: datosEntregable.tipo || `Entregable Nivel ${user.nivel}`,
+      tipo: mInfo
+        ? `Multiplicador N${mInfo.nivel} (+${mInfo.bono}%)`
+        : datosEntregable.tipo || `Entregable Nivel ${user.nivel}`,
       estado: datosEntregable.estado || "Aprobado"
     };
 
     user.entregables = user.entregables || [];
     user.entregables.unshift(nuevo);
 
+    if (horasSumadas > 0) {
+      user.horasCumplidas = Math.max(0, Math.round(((user.horasCumplidas || 0) + horasSumadas) * 10) / 10);
+    }
+
     if (datosEntregable.multId && !user.multiplicadoresActivos.includes(datosEntregable.multId)) {
       user.multiplicadoresActivos.push(datosEntregable.multId);
-      const mInfo = obtenerMultiplicadorInfo(datosEntregable.multId);
       if (mInfo) {
-        const badge = `${mInfo.nombre} (+${mInfo.bono}%)`;
+        const esTransversal = mInfo.nivel !== user.nivel;
+        const badge = `${esTransversal ? `[Tarea N${mInfo.nivel}] ` : ""}${mInfo.nombre} (+${mInfo.bono}%)`;
         if (!user.insignias.includes(badge)) user.insignias.push(badge);
       }
     }
@@ -1762,13 +1448,10 @@
       user.insignias.push(datosEntregable.insigniaExtra);
     }
 
-    const liq = calcularLiquidacionUsuario(user, db.meta.semanaActual);
-    user.puntosAcumuladosSemestre = (user.puntosAcumuladosSemestre || 0) + Math.round(liq.finalPP * 0.25);
-
     user.bitacoraCrecimiento = user.bitacoraCrecimiento || [];
     user.bitacoraCrecimiento.unshift({
       fecha: new Date().toISOString().slice(0, 10),
-      evento: `Nuevo entregable registrado en Semana ${db.meta.semanaActual}: "${nuevo.titulo}" (${nuevo.estado}).`
+      evento: `Nuevo entregable en Semana ${db.meta.semanaActual}: "${nuevo.titulo}"${horasSumadas > 0 ? ` (+${horasSumadas}h = +${Math.round(horasSumadas * 100)} PP)` : ""}${mInfo ? ` · Multiplicador N${mInfo.nivel}: ${mInfo.nombre} (+${mInfo.bono}%)` : ""}.`
     });
 
     registrarSnapshotHistorial(user, db.meta.semanaActual);
@@ -1783,14 +1466,6 @@
 
     db.usuarios.forEach((u) => {
       registrarSnapshotHistorial(u, sem);
-      if (sem > 1) {
-        const liq = calcularLiquidacionUsuario(u, sem);
-        // Asegurar acumulado coherente
-        const sumaHistorial = (u.historialQuincenal || []).reduce((acc, item) => acc + (item.finalPP || 0), 0);
-        if (sumaHistorial > (u.puntosAcumuladosSemestre || 0)) {
-          u.puntosAcumuladosSemestre = sumaHistorial;
-        }
-      }
     });
 
     saveDB(db, `Corte del sistema avanzado a Semana ${sem} (Meta progresiva ${100 + sem - 1}%)`);
@@ -1802,42 +1477,51 @@
     const nombre = (datos.nombre || "Nuevo Integrante PREXIA").trim();
     const username = (datos.username || nombre.split(" ")[0].toLowerCase().replace(/[^a-z0-9]/g, "") + Math.floor(Math.random() * 90 + 10)).trim();
     const creditosTotales = 172;
-    const creditosAprobados = Math.min(172, Math.max(5, parseInt(datos.creditosAprobados || 25, 10)));
+    const creditosAprobados = Math.min(172, Math.max(0, parseInt(datos.creditosAprobados || 25, 10)));
     const nivel = datos.nivelForzado ? parseInt(datos.nivelForzado, 10) : calcularNivelPorCreditos(creditosAprobados, creditosTotales);
-    const semestre = Math.min(10, Math.max(1, parseInt(datos.semestre || Math.ceil((creditosAprobados / creditosTotales) * 10), 10)));
+    const semestre = Math.min(10, Math.max(1, parseInt(datos.semestre || Math.ceil((Math.max(1, creditosAprobados) / creditosTotales) * 10), 10)));
     const hsa = Math.min(12, Math.max(1, parseInt(datos.hsa || 4, 10)));
     const cfg = LEVELS_CONFIG[nivel];
+    const pct = Math.round((creditosAprobados / creditosTotales) * 100);
 
     const partes = nombre.split(" ");
     const avatar = ((partes[0] ? partes[0][0] : "P") + (partes[1] ? partes[1][0] : "X")).toUpperCase();
-    const primerMult = cfg.multiplicadores[0].id;
 
     const nuevoUser = {
       id: "usr-" + username + "-" + Date.now().toString().slice(-4),
+      ordenHoja: db.usuarios.length,
       username,
       password: datos.password || "123",
       nombre,
       email: datos.email || `${username}@unal.edu.co`,
+      correoCaracterizacion: datos.email || `${username}@unal.edu.co`,
       rolSistema: datos.rolSistema || "estudiante",
       cargo: datos.cargo || `${cfg.rol} · ${cfg.nombre}`,
       carrera: datos.carrera || "Ingeniería Industrial",
-      linea: datos.linea || "PREXIA Consultoría",
+      linea: datos.linea || "Línea de Consultoría 2026-2",
       avatar,
       nivel,
       semestre,
+      porcentajeAvance: pct,
+      porcentajeAvanceTexto: pct + "%",
       creditosAprobados,
       creditosTotales,
       materiasAltoImpacto: nivel === 1,
-      detalleMaterias: nivel === 1 ? "Cálculo, Álgebra Lineal y Física" : "Asignaturas profesionales de ingeniería",
+      detalleMaterias: datos.herramientasHabilidades || (nivel === 1 ? "Cálculo, Álgebra Lineal y Física" : "Asignaturas profesionales de ingeniería"),
+      herramientasHabilidades: datos.herramientasHabilidades || "Gestión de proyectos y consultoría",
+      horasSemanalesTexto: String(hsa),
       hsa,
-      multiplicadoresActivos: [primerMult],
-      puntosAcumuladosSemestre: hsa * 100,
+      horasCumplidas: 0,
+      puntosExtraManual: 0,
+      multiplicadoresActivos: [],
+      anotaciones: [],
+      puntosAcumuladosSemestre: 0,
       insignias: [`Ingreso Nivel ${nivel} (${cfg.rol})`],
       entregables: [
         {
           id: "ent-init-" + Date.now(),
           semana: db.meta.semanaActual,
-          titulo: `Firma de Pacto Inicial (${hsa} HSA = ${hsa * 100} PP base)`,
+          titulo: `Firma de Pacto Inicial (${hsa} HSA = ${hsa * 100} PP meta base · Arranca en 0 PP)`,
           tipo: "Pacto POA",
           estado: "Aprobado"
         }
@@ -1846,12 +1530,11 @@
       bitacoraCrecimiento: [
         {
           fecha: new Date().toISOString().slice(0, 10),
-          evento: `Integrante vinculado en Nivel ${nivel} (${cfg.nombre} · Rol ${cfg.rol}) con ${creditosAprobados}/${creditosTotales} créditos y pacto de ${hsa} HSA.`
+          evento: `Integrante vinculado en Nivel ${nivel} (${cfg.nombre} · Rol ${cfg.rol}) con pacto de ${hsa} HSA y barra de rendimiento inicializada en 0 PP.`
         }
       ]
     };
 
-    registrarSnapshotHistorial(nuevoUser, db.meta.semanaActual);
     db.usuarios.push(nuevoUser);
     saveDB(db, `Nuevo integrante registrado: ${nuevoUser.nombre} (Nivel ${nivel})`);
     return nuevoUser;
@@ -1887,7 +1570,6 @@
     const db = getDB();
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
-    // 1. Obtener SHA actual del archivo si existe
     let sha = undefined;
     const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
       headers: {
@@ -1900,7 +1582,6 @@
       sha = fileData.sha;
     }
 
-    // 2. Codificar JSON en Base64 UTF-8
     const jsonString = JSON.stringify(db, null, 2) + "\n";
     const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
 
@@ -1948,12 +1629,14 @@
     if (!parsed || !Array.isArray(parsed.usuarios)) {
       throw new Error("El archivo JSON no tiene el formato válido de PREXIA POA.");
     }
+    parsed.usuarios.forEach(normalizeUserFields);
     saveDB(parsed, "Base de datos importada desde archivo JSON", true);
     return parsed;
   }
 
   window.PrexiaDB = {
     LEVELS_CONFIG,
+    PENALTY_CONFIG,
     getDB,
     saveDB,
     getGitSyncMeta,
@@ -1963,10 +1646,17 @@
     calcularNivelPorCreditos,
     calcularLiquidacionUsuario,
     obtenerMultiplicadorInfo,
+    obtenerTodosLosMultiplicadores,
     getCurrentUser,
     login,
     logout,
+    ajustarHorasCumplidas,
+    establecerHorasCumplidas,
+    ajustarPuntosManual,
     toggleMultiplicador,
+    agregarAnotacionIncumplimiento,
+    eliminarAnotacionIncumplimiento,
+    reiniciarProgresoUsuario,
     actualizarPactoHSA,
     avanzarCrecimientoUsuario,
     agregarEntregable,

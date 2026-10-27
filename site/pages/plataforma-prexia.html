@@ -694,7 +694,7 @@
     .mini-progress-bar {
       width: 100%;
       min-width: 110px;
-      height: 7px;
+      height: 8px;
       background: var(--surface);
       border-radius: 99px;
       overflow: hidden;
@@ -704,7 +704,122 @@
     .mini-progress-fill {
       height: 100%;
       background: var(--mint-dark);
-      transition: width 0.25s ease;
+      transition: width 0.28s ease, background-color 0.25s ease;
+    }
+
+    /* ── BARRA DE RENDIMIENTO JUSTO DESPUÉS DEL NOMBRE Y ESTADO ROJO (3 ANOTACIONES) ── */
+    .perf-bar-inline-box {
+      margin-top: 6px;
+      padding: 8px 10px;
+      background: #f8fafc;
+      border: 1px solid rgba(31, 26, 58, 0.14);
+      border-radius: 3px;
+      font-family: var(--font-display);
+    }
+
+    .perf-bar-inline-box.is-red-alert {
+      background: #fef2f2 !important;
+      border-color: #dc2626 !important;
+      box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.25);
+    }
+
+    .perf-bar-inline-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .perf-bar-inline-box.is-red-alert .perf-bar-inline-head {
+      color: #b91c1c;
+    }
+
+    .perf-track-lg {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 5px 0;
+      border: 1px solid rgba(31, 26, 58, 0.1);
+    }
+
+    .perf-bar-inline-box.is-red-alert .perf-track-lg {
+      background: #fee2e2;
+      border-color: #dc2626;
+    }
+
+    .perf-fill-lg {
+      height: 100%;
+      background: linear-gradient(90deg, #0f652e, #16a34a);
+      border-radius: 99px;
+      transition: width 0.3s ease, background 0.25s ease;
+    }
+
+    .perf-fill-lg.is-red {
+      background: linear-gradient(90deg, #dc2626, #ef4444) !important;
+    }
+
+    .perf-breakdown-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .master-table tr.row-red-alert td {
+      background: #fef2f2 !important;
+      border-bottom-color: #fecaca !important;
+    }
+
+    .penalty-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .penalty-pill.ok {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .penalty-pill.warn {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #f59e0b;
+    }
+
+    .penalty-pill.danger {
+      background: #dc2626;
+      color: #ffffff;
+      border: 1px solid #991b1b;
+      animation: pulseRedAlert 1.8s infinite;
+    }
+
+    @keyframes pulseRedAlert {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.45); }
+      50% { box-shadow: 0 0 0 5px rgba(220, 38, 38, 0); }
+    }
+
+    .cross-lvl-tag {
+      display: inline-block;
+      padding: 1px 5px;
+      border-radius: 2px;
+      font-size: 9px;
+      font-weight: 800;
+      background: #1f1a3a;
+      color: #84fbaa;
+      margin-right: 3px;
     }
 
     .mult-chip-list {
@@ -1211,13 +1326,12 @@
           <thead>
             <tr>
               <th>#</th>
-              <th>Dirección de correo / Nombre completo</th>
-              <th>Programa académico</th>
-              <th>% de Avance y Nivel PP</th>
-              <th>Horas Semanales / Base PP</th>
-              <th>¿Con qué herramientas o habilidades cuentas actualmente?</th>
-              <th>Multiplicadores e Insignias</th>
-              <th>Progreso Puntos Prexia (PP)</th>
+              <th>Participante / Correo</th>
+              <th>Barra de Rendimiento (Progreso Puntos Prexia)</th>
+              <th>Programa y % Avance</th>
+              <th>Horas Semanales / Meta PP</th>
+              <th>Herramientas y Habilidades</th>
+              <th>Multiplicadores (N1–N4) e Incumplimientos</th>
             </tr>
           </thead>
           <tbody id="public-users-tbody"></tbody>
@@ -1374,6 +1488,9 @@
           <button type="button" class="btn-enter-user" style="background:var(--mint-dark);padding:9px 14px;" id="btn-toggle-new-user-form">
             + Registrar Nuevo Integrante
           </button>
+          <button type="button" class="btn-enter-user" style="background:#475569;padding:9px 14px;" onclick="window.maestroReiniciarTodoCero()">
+            ↺ Reiniciar Todas las Barras a 0 PP
+          </button>
           <button type="button" class="btn-enter-user" style="padding:9px 14px;" onclick="window.abrirModalGit()">
             Guardar Progreso en Git →
           </button>
@@ -1424,12 +1541,11 @@
           <thead>
             <tr>
               <th>Integrante / Credencial</th>
-              <th>Nivel y Rol Actual</th>
-              <th>Avance de Carrera (172 créd.)</th>
-              <th>Pacto HSA y Meta Corte</th>
-              <th>Multiplicadores Acreditados (Clic para activar)</th>
-              <th>Liquidación Final PP</th>
-              <th>Crecimiento y Acciones Maestro</th>
+              <th>Barra de Rendimiento (Progreso Puntos Prexia)</th>
+              <th>Sumar Puntos / Hora (1h = 100 PP)</th>
+              <th>Multiplicadores Sin Importar Nivel (N1 a N4)</th>
+              <th>Resta Puntos: Incumplimiento sin Justa Causa (Rojo = 3)</th>
+              <th>Nivel, Carrera y Expediente</th>
             </tr>
           </thead>
           <tbody id="master-users-tbody"></tbody>
@@ -1446,12 +1562,14 @@
         <button type="button" class="btn-enter-user" onclick="window.volverAPanelMaestro()">← Volver a la Matriz Maestra de Todos</button>
       </div>
 
-      <div class="dash-topbar">
-        <div class="dash-user-welcome">
+      <div class="dash-topbar" id="st-dash-topbar">
+        <div class="dash-user-welcome" style="flex:1;min-width:280px;">
           <div class="dash-avatar-lg" id="st-avatar">AR</div>
-          <div>
+          <div style="flex:1;">
             <span class="dash-role-tag" id="st-level-badge">NIVEL 1 · FUNDAMENTACIÓN · ROL OPERATIVO</span>
             <h1 id="st-name">Ana Sofía Restrepo</h1>
+            <!-- BARRA DE RENDIMIENTO JUSTO DESPUÉS DEL NOMBRE -->
+            <div id="st-name-perf-bar" style="margin:8px 0 8px;max-width:560px;"></div>
             <p id="st-meta-line" style="margin:0;font-size:14px;color:#c2bddb;font-family:var(--font-display);">
               Ingeniería Industrial · Semestre 2 · PREXIA Consultoría
             </p>
@@ -1460,8 +1578,8 @@
 
         <div class="dash-week-box">
           <div>
-            <span id="st-week-label">Liquidación Semana 6 (Meta 105%)</span>
-            <strong id="st-final-pp-big">535 PP · 102% Cumplimiento</strong>
+            <span id="st-week-label">Liquidación Semana 1 (Meta 100%)</span>
+            <strong id="st-final-pp-big">0 PP · 0% Cumplimiento</strong>
           </div>
           <button type="button" class="poa-top-btn mint" id="btn-st-promote-quick">
             ⬆ Avanzar Semestre (+18 créd.)
@@ -1472,24 +1590,24 @@
       <!-- KPIs DEL ESTUDIANTE -->
       <div class="kpi-grid-4">
         <div class="kpi-card">
-          <span class="kpi-label">Pacto Semanal (HSA)</span>
-          <strong class="kpi-val" id="st-kpi-hsa">5 HSA</strong>
-          <span class="kpi-foot" id="st-kpi-base">Línea base: 500 PP / semana</span>
+          <span class="kpi-label">Puntos / Hora Acumulados</span>
+          <strong class="kpi-val" id="st-kpi-hsa">0h (0 PP)</strong>
+          <span class="kpi-foot" id="st-kpi-base">Pacto meta: 5 HSA (500 PP base)</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-label" id="st-kpi-target-label">Meta Exigida Sem. 6</span>
-          <strong class="kpi-val" id="st-kpi-target">525 PP</strong>
+          <span class="kpi-label" id="st-kpi-target-label">Meta Exigida Sem. 1</span>
+          <strong class="kpi-val" id="st-kpi-target">500 PP</strong>
           <span class="kpi-foot">Regla del +1% semanal (100% a 115%)</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-label">Bonificación Multiplicadores</span>
-          <strong class="kpi-val" id="st-kpi-bonus">+7% (+35 PP)</strong>
-          <span class="kpi-foot" id="st-kpi-status">Supera la meta sin más horas reloj</span>
+          <span class="kpi-label">Bonificación Multiplicadores (N1–N4)</span>
+          <strong class="kpi-val" id="st-kpi-bonus">+0% (+0 PP)</strong>
+          <span class="kpi-foot" id="st-kpi-status">Arranca en 0 y avanza al sumar bonos</span>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-label">Avance Curricular</span>
-          <strong class="kpi-val" id="st-kpi-career">19%</strong>
-          <span class="kpi-foot" id="st-kpi-credits">32 de 172 créditos aprobados</span>
+        <div class="kpi-card" id="st-kpi-penalty-card">
+          <span class="kpi-label">Resta por Incumplimiento</span>
+          <strong class="kpi-val" id="st-kpi-career">0 / 3</strong>
+          <span class="kpi-foot" id="st-kpi-credits">0 PP restados (Rojo a las 3 anotaciones)</span>
         </div>
       </div>
 
@@ -1515,39 +1633,56 @@
         <div class="ladder-steps-grid" id="st-ladder-steps"></div>
       </div>
 
-      <!-- 2 COLUMNAS: MULTIPLICADORES / ENTREGABLES + HISTORIAL / INSIGNIAS -->
+      <!-- 2 COLUMNAS: HORAS + MULTIPLICADORES MULTINIVEL + ENTREGABLES | RESTA PUNTOS + INSIGNIAS + HISTORIAL -->
       <div class="student-2col">
-        <!-- COLUMNA IZQUIERDA: MULTIPLICADORES Y REGISTRO DE ENTREGABLES -->
+        <!-- COLUMNA IZQUIERDA: PUNTOS/HORA + MULTIPLICADORES DE CUALQUIER NIVEL + ENTREGABLES -->
         <div class="panel-box">
-          <h3>Factores Multiplicadores de tu Nivel</h3>
-          <p style="font-size:14px;color:var(--muted);margin-bottom:16px;" id="st-mult-desc">
-            Activa o acredita los bonos de calidad de tu nivel para superar la curva del +1% semanal sin incrementar tus horas pactadas.
+          <h3>1. Sumar Puntos / Hora (Avance de Barra desde 0)</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">
+            La barra de rendimiento arranca en <strong>0 PP</strong>. Cada hora acreditada suma <strong>+100 PP</strong> a tu barra de progreso.
           </p>
+          <div id="st-hours-controls-box" style="background:var(--bg);border:1px solid var(--border);padding:14px;border-radius:3px;margin-bottom:22px;"></div>
+
+          <h3>2. Añadir Puntos Multiplicadores (Sin Importar el Nivel · N1 a N4)</h3>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:12px;" id="st-mult-desc">
+            Puedes recibir puntos multiplicadores de <strong>cualquier nivel (Nivel 1, 2, 3 o 4)</strong> si asumiste una tarea correspondiente a ese nivel.
+          </p>
+          <div class="filter-pills" id="st-mult-level-tabs" style="margin-bottom:14px;">
+            <button type="button" class="filter-pill active" data-mlvl="all">Todos (N1–N4)</button>
+            <button type="button" class="filter-pill" data-mlvl="1">Nivel 1 · Operativo</button>
+            <button type="button" class="filter-pill" data-mlvl="2">Nivel 2 · Gestor</button>
+            <button type="button" class="filter-pill" data-mlvl="3">Nivel 3 · Consultor Jr.</button>
+            <button type="button" class="filter-pill" data-mlvl="4">Nivel 4 · Líder</button>
+          </div>
 
           <div id="st-multipliers-list"></div>
 
           <hr style="border:none;border-top:1px solid var(--surface);margin:24px 0;">
 
-          <h3>Registrar Nuevo Entregable o Hito de Crecimiento</h3>
+          <h3>3. Registrar Nuevo Entregable o Hito de Crecimiento</h3>
           <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">
-            Registra un avance verificable en la línea para sumar puntos acumulados, acreditar un multiplicador y ganar una Insignia de Bienestar.
+            Registra un avance verificable en la línea para sumar horas/puntos y vincular cualquier multiplicador (Nivel 1 a 4).
           </p>
           <form id="form-student-deliverable" style="display:flex;flex-direction:column;gap:12px;">
             <div>
-              <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Título del entregable o resultado logrado</label>
-              <input type="text" id="deliv-title" class="field-input" placeholder="Ej: Informe técnico de diagnóstico / Cápsula #4 publicada / Evento con 80% asistencia" required>
+              <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Título del entregable o tarea asumida</label>
+              <input type="text" id="deliv-title" class="field-input" placeholder="Ej: Informe técnico de diagnóstico (Tarea Nivel 3) / Cápsula publicada" required>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
               <div>
-                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Vincular a multiplicador de nivel</label>
+                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Horas invertidas (+100 PP/h)</label>
+                <input type="number" id="deliv-hours" class="field-input" min="0" max="12" step="0.5" value="1">
+              </div>
+              <div>
+                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Multiplicador (Niveles 1 a 4)</label>
                 <select id="deliv-mult" class="field-input"></select>
               </div>
               <div>
-                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Insignia de reconocimiento (opcional)</label>
+                <label style="display:block;font-family:var(--font-display);font-size:12px;font-weight:700;margin-bottom:4px;">Insignia extra (opcional)</label>
                 <input type="text" id="deliv-badge" class="field-input" placeholder="Ej: Hito Destacado POA">
               </div>
             </div>
-            <button type="submit" class="btn-primary-full">Registrar Entregable y Actualizar Progreso →</button>
+            <button type="submit" class="btn-primary-full">Registrar Entregable y Avanzar Barra →</button>
           </form>
 
           <div style="margin-top:22px;">
@@ -1556,12 +1691,25 @@
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA: INSIGNIAS, EVOLUCIÓN QUINCENAL Y BITÁCORA -->
+        <!-- COLUMNA DERECHA: RESTA DE PUNTOS (INCUMPLIMIENTOS) + INSIGNIAS + HISTORIAL + BITÁCORA -->
         <div style="display:flex;flex-direction:column;gap:24px;">
+          <!-- PANEL DE RESTA DE PUNTOS E INCUMPLIMIENTO -->
+          <div class="panel-box" id="st-penalty-panel-box" style="border:2px solid rgba(220, 38, 38, 0.25);">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
+              <h3 style="margin:0;color:#991b1b;">⚠️ Resta de Puntos · Control de Incumplimientos</h3>
+              <span id="st-penalty-counter-pill" class="penalty-pill ok">0 / 3 Anotaciones</span>
+            </div>
+            <p style="font-size:13px;color:var(--muted);margin:0 0 12px;">
+              <strong>Causal oficial:</strong> Incumplimiento de fecha y hora de entrega o encuentro sin justa causa.
+              <strong style="color:#dc2626;">Se pone en ROJO al acumular 3 anotaciones de la misma.</strong>
+            </p>
+            <div id="st-penalty-controls-area"></div>
+          </div>
+
           <div class="panel-box">
             <h3>Insignias de Bienestar y Reconocimiento (Proyecto 3)</h3>
             <p style="font-size:14px;color:var(--muted);margin:0;">
-              Reconocimientos verificables ganados por multiplicadores de calidad y ascensos de nivel.
+              Reconocimientos verificables ganados por multiplicadores (incluyendo tareas de otros niveles) y ascensos.
             </p>
             <div class="badge-cloud" id="st-badges-cloud"></div>
           </div>
@@ -1573,11 +1721,11 @@
                 <thead>
                   <tr>
                     <th>Semana</th>
-                    <th>Base</th>
-                    <th>Meta (+1%)</th>
+                    <th>Horas PP</th>
+                    <th>Meta</th>
                     <th>Bono</th>
+                    <th>Resta</th>
                     <th>Final PP</th>
-                    <th>Cumpl.</th>
                   </tr>
                 </thead>
                 <tbody id="st-history-tbody"></tbody>
@@ -1586,7 +1734,7 @@
           </div>
 
           <div class="panel-box">
-            <h3>Bitácora de Crecimiento y Ascensos</h3>
+            <h3>Bitácora de Crecimiento, Multiplicadores y Anotaciones</h3>
             <ul class="timeline-list" id="st-growth-log"></ul>
           </div>
         </div>
@@ -1727,6 +1875,7 @@
       let publicSearchQuery = "";
       let activePlatformTab = "portal"; // "progreso" | "portal"
       let inspectedStudentId = null;
+      let studentMultFilterLevel = "all"; // "all" | "1" | "2" | "3" | "4"
 
       const publicProgressView = document.getElementById("public-progress-view");
       const loginView = document.getElementById("login-view");
@@ -1742,7 +1891,47 @@
         clearTimeout(showToast._timer);
         showToast._timer = setTimeout(() => {
           toastBanner.classList.remove("show");
-        }, 3800);
+        }, 4000);
+      }
+
+      // ── HELPER: BARRA DE RENDIMIENTO (ARRANCA EN 0 Y AVANZA CON PUNTOS/HORA + MULTIPLICADORES, EN ROJO A LAS 3 ANOTACIONES) ──
+      function renderBarraRendimientoHTML(u, liq, opts) {
+        const options = opts || {};
+        const isRed = liq.enAlertaRoja;
+        const fillClass = isRed ? "is-red" : liq.superoMeta ? "is-mint" : "";
+        // Si está en alerta roja (>=3 anotaciones) y tiene 0 PP, mostramos la barra al 100% en rojo vivo para que la alerta visual sea inmediata
+        const visualWidth = isRed ? Math.max(100, liq.barraPct) : liq.barraPct;
+
+        const statusBadge = isRed
+          ? `<span style="color:#dc2626;font-weight:800;">🚨 ROJO (${liq.numAnotaciones}/3 Incumplimientos · -${liq.puntosRestadosPP} PP)</span>`
+          : liq.finalPP === 0 && liq.numAnotaciones === 0
+          ? `<span style="color:var(--muted);">En 0 PP · Suma horas o multiplicadores para avanzar</span>`
+          : liq.superoMeta
+          ? `<span style="color:#0f652e;font-weight:800;">✓ Meta superada (${liq.cumplimientoPct}%)</span>`
+          : `<span style="color:#0284c7;font-weight:700;">Avance: ${liq.cumplimientoPct}% de ${liq.metaSemanaPP} PP</span>`;
+
+        return `
+          <div class="perf-bar-inline-box ${isRed ? "is-red-alert" : ""}" style="${options.darkBg ? "background:rgba(15,23,42,0.85);border-color:rgba(255,255,255,0.22);color:#fff;" : ""}">
+            <div class="perf-bar-header">
+              <strong style="${options.darkBg ? "color:#fff;" : ""}">
+                Progreso PP: ${liq.finalPP} / ${liq.metaSemanaPP} PP (${liq.barraPct}%)
+              </strong>
+              ${statusBadge}
+            </div>
+            <div class="perf-track-lg">
+              <div class="perf-fill-lg ${fillClass}" style="width:${visualWidth}%;"></div>
+            </div>
+            <div class="perf-breakdown-row" style="${options.darkBg ? "color:rgba(255,255,255,0.82);" : ""}">
+              <span class="pos-tag">+${liq.puntosHoraPP} PP/hora (${liq.horasCumplidas}h${liq.puntosExtraManual ? ` + ${liq.puntosExtraManual} manual` : ""})</span>
+              <span class="mult-tag">+${liq.bonoPP} PP mult. (+${liq.bonoPct}%)</span>
+              ${
+                liq.numAnotaciones > 0
+                  ? `<span class="neg-tag">-${liq.puntosRestadosPP} PP (${liq.numAnotaciones}/3 incumpl.)</span>`
+                  : `<span style="opacity:0.75;">0/3 incumplimientos</span>`
+              }
+            </div>
+          </div>
+        `;
       }
 
       function updateTopStatusBar() {
@@ -1758,14 +1947,14 @@
 
         if (syncMeta.pendingChanges > 0) {
           dot.classList.add("dirty");
-          txt.textContent = `Git: ${syncMeta.pendingChanges} cambio(s) guardado(s) localmente · Clic en "Guardar en Git"`;
+          txt.textContent = `Git: ${syncMeta.pendingChanges} cambio(s) en navegador · Clic en "Guardar en Git"`;
         } else {
           dot.classList.remove("dirty");
           txt.textContent = `DB Git: data/prexia-users-db.json · Sincronizado`;
         }
 
         const optionsHtml = [
-          `<option value="__public__">📊 Vista Pública: Progreso de Todos (Solo Lectura)</option>`,
+          `<option value="__public__">📊 Vista Pública: Progreso de Todos (Barra desde 0)</option>`,
           `<option value="" ${!currentUser && activePlatformTab === "portal" ? "selected" : ""}>— Pantalla de Login (${db.usuarios.length - 1} participantes + Maestro) —</option>`
         ];
         db.usuarios.forEach((u) => {
@@ -1795,7 +1984,7 @@
         }
       }
 
-      // ── RENDERIZAR APARTADO PÚBLICO: PROGRESO DE TODOS (SOLO LECTURA · SIN MODIFICAR NADA) ──
+      // ── RENDERIZAR APARTADO PÚBLICO: PROGRESO DE TODOS (BARRA JUSTO DESPUÉS DEL NOMBRE) ──
       function renderPublicProgressView() {
         const db = PrexiaDB.getDB();
         const sem = db.meta.semanaActual || 6;
@@ -1813,6 +2002,7 @@
         let totalHSA = 0;
         let sumaCumplimiento = 0;
         let superanMetaCount = 0;
+        let alertaRojaCount = 0;
 
         estudiantes.forEach((u) => {
           countByLvl[u.nivel] = (countByLvl[u.nivel] || 0) + 1;
@@ -1822,16 +2012,20 @@
           totalHSA += liq.hsa;
           sumaCumplimiento += liq.cumplimientoPct;
           if (liq.superoMeta) superanMetaCount += 1;
+          if (liq.enAlertaRoja) alertaRojaCount += 1;
         });
 
-        const avgComp = estudiantes.length ? Math.round(sumaCumplimiento / estudiantes.length) : 100;
+        const avgComp = estudiantes.length ? Math.round(sumaCumplimiento / estudiantes.length) : 0;
 
         document.getElementById("pub-kpi-total-users").textContent = `${estudiantes.length} Participantes`;
         document.getElementById("pub-kpi-levels-dist").textContent = `N1: ${countByLvl[1]} · N2: ${countByLvl[2]} · N3: ${countByLvl[3]} · N4: ${countByLvl[4]}`;
         document.getElementById("pub-kpi-total-pp").textContent = `${totalPP.toLocaleString("es-CO")} PP`;
-        document.getElementById("pub-kpi-target-pp").textContent = `Meta exigida Semana ${sem}: ${totalMetaPP.toLocaleString("es-CO")} PP`;
+        document.getElementById("pub-kpi-target-pp").textContent = `Meta exigida Semana ${sem}: ${totalMetaPP.toLocaleString("es-CO")} PP (Arranca en 0 PP)`;
         document.getElementById("pub-kpi-avg-comp").textContent = `${avgComp}%`;
-        document.getElementById("pub-kpi-superan").textContent = `${superanMetaCount} de ${estudiantes.length} cumplen o superan la curva del +1%`;
+        document.getElementById("pub-kpi-superan").textContent =
+          alertaRojaCount > 0
+            ? `${superanMetaCount} cumplen meta · 🚨 ${alertaRojaCount} en Alerta Roja (3+ incumpl.)`
+            : `${superanMetaCount} de ${estudiantes.length} cumplen o superan la curva del +1%`;
         document.getElementById("pub-kpi-total-hsa").textContent = `${totalHSA} HSA`;
 
         const filtered = estudiantes.filter((u) => {
@@ -1854,67 +2048,80 @@
             const numOrden = u.ordenHoja || idx + 1;
             const correoMostrar = u.correoCaracterizacion && u.correoCaracterizacion !== "—"
               ? `<a href="mailto:${u.correoCaracterizacion}" style="color:var(--mint-dark);text-decoration:underline;font-size:12px;">${u.correoCaracterizacion}</a>`
-              : `<span style="color:var(--muted);font-size:12px;">Sin correo reportado en hoja (${u.username})</span>`;
+              : `<span style="color:var(--muted);font-size:12px;">usr: ${u.username}</span>`;
 
             const activeMultChips = (liq.multDetalles || [])
-              .map((m) => `<span class="ro-chip">✓ ${m.nombre} (+${m.bono}%)</span>`)
+              .map(
+                (m) => `
+                <span class="ro-chip" style="${m.esOtroNivel ? "background:#eff6ff;color:#1d4ed8;border-color:#93c5fd;" : ""}">
+                  ✓ [N${m.nivelOrigen}] ${m.nombre} (+${m.bono}%${m.esOtroNivel ? ` · Asumió Nivel ${m.nivelOrigen}` : ""})
+                </span>`
+              )
               .join("");
 
-            const progressPctBar = Math.min(100, Math.round((liq.finalPP / liq.metaSemanaPP) * 100));
+            const penaltyBadge = liq.enAlertaRoja
+              ? `<span class="penalty-pill red">🚨 ROJO: ${liq.numAnotaciones}/3 Incumplimientos (-${liq.puntosRestadosPP} PP)</span>`
+              : liq.numAnotaciones > 0
+              ? `<span class="penalty-pill warn">⚠ ${liq.numAnotaciones}/3 Incumplimientos (-${liq.puntosRestadosPP} PP)</span>`
+              : `<span class="penalty-pill">✓ 0/3 Sin anotaciones (0 PP restados)</span>`;
 
             return `
-              <tr>
+              <tr class="${liq.enAlertaRoja ? "row-red-alert" : ""}">
                 <td style="font-weight:800;color:var(--muted);">${numOrden}</td>
                 <td>
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div class="avatar-circle" style="width:36px;height:36px;font-size:12px;">${u.avatar}</div>
-                    <div>
-                      <strong style="font-size:14px;color:var(--ink);display:block;">${u.nombre}</strong>
+                  <div style="display:flex;align-items:flex-start;gap:10px;">
+                    <div class="avatar-circle" style="width:36px;height:36px;font-size:12px;${liq.enAlertaRoja ? "background:#dc2626;" : ""}">${u.avatar}</div>
+                    <div style="flex:1;">
+                      <strong style="font-size:14px;color:${liq.enAlertaRoja ? "#991b1b" : "var(--ink)"};display:block;">
+                        ${u.nombre}
+                      </strong>
                       ${correoMostrar}
+                      <div style="margin-top:4px;font-size:11px;color:var(--muted);">
+                        ${u.carrera || "—"}
+                      </div>
                     </div>
                   </div>
                 </td>
-                <td>
-                  <strong style="font-size:13px;color:var(--ink);">${u.carrera || "—"}</strong>
-                  <span style="display:block;font-size:11px;color:var(--muted);">Línea de Consultoría 2026-2</span>
+                <td style="min-width:270px;">
+                  ${renderBarraRendimientoHTML(u, liq)}
+                  <button type="button" class="btn-sm-action" style="margin-top:6px;width:100%;text-align:center;" onclick="window.verFichaSoloLectura('${u.id}')">
+                    👁 Ver Expediente Detallado
+                  </button>
                 </td>
                 <td>
                   <span class="lvl-badge lvl-${u.nivel}">Nivel ${u.nivel} · ${cfg.rol}</span>
                   <div style="margin-top:6px;font-size:12px;">
-                    Avance hoja: <strong>${liq.avanceDisplay}</strong>
+                    Avance carrera: <strong>${liq.avanceDisplay}</strong>
                   </div>
                   <div class="mini-progress-bar">
                     <div class="mini-progress-fill" style="width:${Math.min(100, liq.avanceCarreraPct)}%;"></div>
                   </div>
                 </td>
                 <td>
-                  <strong style="font-size:14px;color:var(--ink);display:block;">${liq.horasDisplay} h/sem</strong>
-                  <span style="font-size:12px;color:var(--mint-dark);font-weight:700;">Pacto: ${u.hsa} HSA (${liq.basePP} PP base)</span>
-                  <span style="display:block;font-size:11px;color:var(--muted);">Meta Sem. ${sem}: ${liq.metaSemanaPP} PP</span>
+                  <strong style="font-size:13px;color:var(--ink);display:block;">
+                    Cumplidas: ${liq.horasCumplidas}h / ${u.hsa}h pactadas
+                  </strong>
+                  <span style="font-size:12px;color:#0f652e;font-weight:700;">
+                    +${liq.puntosHoraPP} PP por hora
+                  </span>
+                  <span style="display:block;font-size:11px;color:var(--muted);">
+                    Meta Sem. ${sem}: ${liq.metaSemanaPP} PP
+                  </span>
+                </td>
+                <td>
+                  <div>${activeMultChips || `<span style="font-size:11px;color:var(--muted);">0 multiplicadores activos (+0 PP)</span>`}</div>
+                  <div style="margin-top:4px;font-size:11px;color:var(--muted);">
+                    Bono mult.: <strong>+${liq.bonoPP} PP (+${liq.bonoPct}%)</strong>
+                  </div>
+                </td>
+                <td>
+                  ${penaltyBadge}
+                  <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.35;">
+                    Causal: Incumplimiento de fecha y hora de entrega o encuentro sin justa causa.
+                  </div>
                 </td>
                 <td>
                   <div class="ro-skill-box">${liq.herramientas}</div>
-                </td>
-                <td>
-                  <div>${activeMultChips || `<span style="font-size:11px;color:var(--muted);">Sin multiplicadores</span>`}</div>
-                  <div style="margin-top:4px;font-size:11px;color:var(--muted);">
-                    ${(u.insignias || []).length} insignia(s) activa(s)
-                  </div>
-                </td>
-                <td>
-                  <strong style="font-size:16px;color:var(--ink);display:block;">${liq.finalPP} PP</strong>
-                  <span style="font-size:11px;font-weight:800;color:${liq.superoMeta ? "#0f652e" : "#b45309"};">
-                    ${liq.cumplimientoPct}% · ${liq.superoMeta ? "Meta Cumplida" : `En progreso`}
-                  </span>
-                  <div class="mini-progress-bar" style="margin-top:4px;">
-                    <div class="mini-progress-fill" style="width:${progressPctBar}%;background:${liq.superoMeta ? "#0f652e" : "#b45309"};"></div>
-                  </div>
-                  <div style="font-size:11px;color:var(--muted);margin-top:4px;">
-                    Acumulado semestral: <strong>${(u.puntosAcumuladosSemestre || 0).toLocaleString("es-CO")} PP</strong>
-                  </div>
-                  <button type="button" class="btn-sm-action" style="margin-top:6px;width:100%;text-align:center;" onclick="window.verFichaSoloLectura('${u.id}')">
-                    👁 Ver Ficha (Solo Lectura)
-                  </button>
                 </td>
               </tr>
             `;
@@ -1922,7 +2129,7 @@
           .join("");
       }
 
-      // ── RENDERIZAR DIRECTORIO DE LOGIN POR NIVELES ──
+      // ── RENDERIZAR DIRECTORIO DE LOGIN POR NIVELES (BARRA JUSTO DESPUÉS DEL NOMBRE) ──
       function renderLoginDirectory() {
         const db = PrexiaDB.getDB();
         const totalEst = db.usuarios.filter((u) => u.rolSistema !== "maestro").length;
@@ -1941,32 +2148,38 @@
             .map((u) => {
               const liq = PrexiaDB.calcularLiquidacionUsuario(u, db.meta.semanaActual);
               return `
-                <article class="demo-user-card">
+                <article class="demo-user-card" style="${liq.enAlertaRoja ? "border:2px solid #dc2626;background:#fef2f2;" : ""}">
                   <div>
                     <div class="demo-user-top">
-                      <div class="avatar-circle">${u.avatar || "PX"}</div>
-                      <div class="demo-user-meta">
+                      <div class="avatar-circle" style="${liq.enAlertaRoja ? "background:#dc2626;" : ""}">${u.avatar || "PX"}</div>
+                      <div class="demo-user-meta" style="flex:1;">
                         <strong>${u.nombre}</strong>
                         <span>${u.carrera || "Línea de Consultoría"} · Avance: <strong>${liq.avanceDisplay}</strong></span>
                       </div>
                     </div>
+                    <!-- Barra de rendimiento justo después del nombre -->
+                    ${renderBarraRendimientoHTML(u, liq)}
                     <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4;">
                       <strong>Habilidades:</strong> ${liq.herramientas}
                     </div>
-                    <div class="demo-user-stats" style="margin-top:10px;">
-                      <span class="stat-pill">Horas: ${liq.horasDisplay} (${u.hsa} HSA · ${liq.basePP} PP)</span>
-                      <span class="stat-pill mint">Liquidación: ${liq.finalPP} PP (${liq.cumplimientoPct}%)</span>
-                      <span class="stat-pill">+${liq.bonoPct}% Bono</span>
+                    <div class="demo-user-stats" style="margin-top:8px;">
+                      <span class="stat-pill">Pacto: ${u.hsa} HSA (Meta: ${liq.metaSemanaPP} PP)</span>
+                      <span class="stat-pill mint">Actual: ${liq.finalPP} PP (${liq.barraPct}%)</span>
+                      ${
+                        liq.numAnotaciones > 0
+                          ? `<span class="stat-pill" style="background:#fee2e2;color:#991b1b;">Incumpl.: ${liq.numAnotaciones}/3 (-${liq.puntosRestadosPP} PP)</span>`
+                          : ""
+                      }
                     </div>
                   </div>
                   <div class="demo-user-actions">
                     <code>Usuario: <strong>${u.username}</strong> · Clave: 123</code>
                     <div style="display:flex;gap:6px;">
                       <button type="button" class="btn-sm-action" onclick="window.verFichaSoloLectura('${u.id}')">
-                        Solo lectura
+                        Ficha
                       </button>
                       <button type="button" class="btn-enter-user" onclick="window.entrarConUsuario('${u.username}')">
-                        Iniciar sesión →
+                        Gestionar / Entrar →
                       </button>
                     </div>
                   </div>
@@ -1991,7 +2204,7 @@
         container.innerHTML = htmlBlocks.join("");
       }
 
-      // ── RENDERIZAR VISTA MAESTRO ──
+      // ── RENDERIZAR VISTA MAESTRO (CON BARRA DESPUÉS DEL NOMBRE, +HORAS, MULTIPLICADORES N1-N4 Y RESTA DE PUNTOS) ──
       function renderMasterView() {
         const db = PrexiaDB.getDB();
         const sem = db.meta.semanaActual || 6;
@@ -2009,6 +2222,7 @@
         let sumaCumplimiento = 0;
         let superanMetaCount = 0;
         let totalBadges = 0;
+        let alertaRojaCount = 0;
 
         estudiantes.forEach((u) => {
           countByLvl[u.nivel] = (countByLvl[u.nivel] || 0) + 1;
@@ -2017,17 +2231,21 @@
           totalMetaPP += liq.metaSemanaPP;
           sumaCumplimiento += liq.cumplimientoPct;
           if (liq.superoMeta) superanMetaCount += 1;
+          if (liq.enAlertaRoja) alertaRojaCount += 1;
           totalBadges += (u.insignias || []).length;
         });
 
-        const avgComp = estudiantes.length ? Math.round(sumaCumplimiento / estudiantes.length) : 100;
+        const avgComp = estudiantes.length ? Math.round(sumaCumplimiento / estudiantes.length) : 0;
 
         document.getElementById("m-kpi-total-users").textContent = `${estudiantes.length} Consultores`;
         document.getElementById("m-kpi-levels-dist").textContent = `N1: ${countByLvl[1]} · N2: ${countByLvl[2]} · N3: ${countByLvl[3]} · N4: ${countByLvl[4]}`;
         document.getElementById("m-kpi-total-pp").textContent = `${totalPP.toLocaleString("es-CO")} PP`;
         document.getElementById("m-kpi-target-pp").textContent = `Meta exigida Semana ${sem}: ${totalMetaPP.toLocaleString("es-CO")} PP`;
         document.getElementById("m-kpi-avg-comp").textContent = `${avgComp}%`;
-        document.getElementById("m-kpi-superan").textContent = `${superanMetaCount} de ${estudiantes.length} superan la curva del +1%`;
+        document.getElementById("m-kpi-superan").textContent =
+          alertaRojaCount > 0
+            ? `${superanMetaCount} superan meta · 🚨 ${alertaRojaCount} en ROJO (3+ incumpl.)`
+            : `${superanMetaCount} de ${estudiantes.length} superan la curva del +1%`;
         document.getElementById("m-kpi-badges").textContent = `${totalBadges} Insignias`;
 
         const filtered =
@@ -2035,92 +2253,157 @@
             ? estudiantes
             : estudiantes.filter((u) => String(u.nivel) === String(currentFilterLevel));
 
+        const todosMults = PrexiaDB.obtenerTodosLosMultiplicadores();
+
         const tbody = document.getElementById("master-users-tbody");
         tbody.innerHTML = filtered
           .map((u) => {
             const liq = PrexiaDB.calcularLiquidacionUsuario(u, sem);
             const cfg = PrexiaDB.LEVELS_CONFIG[u.nivel];
 
-            const multButtons = cfg.multiplicadores
-              .map((m) => {
-                const isActive = (u.multiplicadoresActivos || []).includes(m.id);
-                return `
-                  <button type="button"
-                    class="mult-chip-btn ${isActive ? "active" : ""}"
-                    title="${m.condicion}"
-                    onclick="window.maestroToggleMult('${u.id}', '${m.id}')">
-                    ${isActive ? "✓ " : "+ "}${m.nombre} (+${m.bono}%)
-                  </button>
-                `;
+            // Multiplicadores activos actualmente (pueden ser de cualquier nivel 1..4)
+            const activeChips = (liq.multDetalles || [])
+              .map(
+                (m) => `
+                <button type="button"
+                  class="mult-chip-btn ${m.esOtroNivel ? "cross-level" : "active"}"
+                  title="Clic para quitar · Nivel ${m.nivelOrigen}: ${m.condicion}"
+                  onclick="window.maestroToggleMult('${u.id}', '${m.id}')">
+                  ✓ [N${m.nivelOrigen}] ${m.nombre} (+${m.bono}%) ✕
+                </button>
+              `
+              )
+              .join("");
+
+            // Botones rápidos de su propio nivel que aún no estén activos
+            const ownLevelInactiveBtns = cfg.multiplicadores
+              .filter((m) => !(u.multiplicadoresActivos || []).includes(m.id))
+              .map(
+                (m) => `
+                <button type="button"
+                  class="mult-chip-btn"
+                  title="Nivel ${u.nivel}: ${m.condicion}"
+                  onclick="window.maestroToggleMult('${u.id}', '${m.id}')">
+                  + [N${u.nivel}] ${m.nombre} (+${m.bono}%)
+                </button>
+              `
+              )
+              .join("");
+
+            // Selector desplegable para añadir multiplicadores de CUALQUIER nivel (N1, N2, N3, N4) sin importar el nivel del usuario
+            const selectOptionsCrossLevel = [1, 2, 3, 4]
+              .map((lvlNum) => {
+                const lCfg = PrexiaDB.LEVELS_CONFIG[lvlNum];
+                const opts = lCfg.multiplicadores
+                  .map((m) => {
+                    const isAct = (u.multiplicadoresActivos || []).includes(m.id);
+                    const tagCross = lvlNum !== u.nivel ? `★ Tarea Nivel ${lvlNum}` : `Su Nivel ${lvlNum}`;
+                    return `<option value="${m.id}">${isAct ? "✓ (Quitar) " : "+ (Añadir) "}[N${lvlNum} · ${tagCross}] ${m.nombre} (+${m.bono}%)</option>`;
+                  })
+                  .join("");
+                return `<optgroup label="Nivel ${lvlNum} — ${lCfg.nombre} (${lCfg.rol})">${opts}</optgroup>`;
               })
               .join("");
 
             const canPromote = u.nivel < 4;
 
             return `
-              <tr>
+              <tr class="${liq.enAlertaRoja ? "row-red-alert" : ""}">
                 <td>
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div class="avatar-circle" style="width:34px;height:34px;font-size:12px;">${u.avatar}</div>
+                  <div style="display:flex;align-items:flex-start;gap:10px;">
+                    <div class="avatar-circle" style="width:34px;height:34px;font-size:12px;${liq.enAlertaRoja ? "background:#dc2626;" : ""}">${u.avatar}</div>
                     <div>
-                      <strong style="font-size:14px;color:var(--ink);display:block;">${u.nombre}</strong>
-                      <span style="font-size:11px;color:var(--muted);">${u.carrera} · Correo: ${liq.correoHoja}</span><br>
+                      <strong style="font-size:14px;color:${liq.enAlertaRoja ? "#991b1b" : "var(--ink)"};display:block;">${u.nombre}</strong>
+                      <span style="font-size:11px;color:var(--muted);">${u.carrera}</span><br>
                       <code style="font-size:11px;color:var(--mint-dark);">usr: ${u.username}</code>
                     </div>
                   </div>
                 </td>
-                <td>
+                <td style="min-width:265px;">
+                  ${renderBarraRendimientoHTML(u, liq)}
+                </td>
+                <td style="min-width:210px;">
+                  <div style="font-size:12px;margin-bottom:6px;">
+                    <strong>Cumplidas: ${liq.horasCumplidas}h</strong> / ${u.hsa}h pacto
+                    <span style="display:block;color:#0f652e;font-weight:700;">+${liq.puntosHoraPP} PP acumulados</span>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+                    <button type="button" class="mult-chip-btn active" onclick="window.maestroAjustarHoras('${u.id}', 1)" title="Sumar 1 hora (+100 PP)">+1h (+100 PP)</button>
+                    <button type="button" class="mult-chip-btn" onclick="window.maestroAjustarHoras('${u.id}', 0.5)" title="Sumar media hora (+50 PP)">+0.5h (+50)</button>
+                    <button type="button" class="mult-chip-btn" onclick="window.maestroAjustarHoras('${u.id}', -1)" title="Restar 1 hora">-1h</button>
+                    <button type="button" class="mult-chip-btn" onclick="window.maestroSetHoras('${u.id}', ${u.hsa})" title="Completar todas las horas pactadas (${u.hsa}h)">Pacto (${u.hsa}h)</button>
+                    <button type="button" class="mult-chip-btn" onclick="window.maestroSetHoras('${u.id}', 0)" title="Reiniciar horas a 0">0h</button>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);">
+                    <span>Pacto HSA (${u.hsa}):</span>
+                    <button type="button" class="mult-chip-btn" style="padding:1px 5px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa - 1})">-</button>
+                    <button type="button" class="mult-chip-btn" style="padding:1px 5px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa + 1})">+</button>
+                    <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroSumarPPManual('${u.id}', 50)" title="Añadir +50 PP manuales">+50 PP</button>
+                  </div>
+                </td>
+                <td style="min-width:250px;">
+                  <div class="mult-chip-list" style="margin-bottom:6px;">
+                    ${activeChips}
+                    ${ownLevelInactiveBtns}
+                  </div>
+                  <select
+                    aria-label="Añadir multiplicador de cualquier nivel N1 a N4"
+                    style="width:100%;padding:5px 7px;font-family:var(--font-display);font-size:11px;border:1px solid var(--border);border-radius:3px;background:#fff;color:var(--ink);"
+                    onchange="if(this.value){ window.maestroToggleMult('${u.id}', this.value); this.value=''; }">
+                    <option value="">+ Añadir multiplicador de cualquier nivel (N1 a N4)...</option>
+                    ${selectOptionsCrossLevel}
+                  </select>
+                  <div style="font-size:10px;color:var(--muted);margin-top:3px;">
+                    Bono mult. activo: <strong>+${liq.bonoPct}% (+${liq.bonoPP} PP)</strong> · Libre entre niveles
+                  </div>
+                </td>
+                <td style="min-width:215px;">
+                  <div style="margin-bottom:6px;">
+                    <span class="penalty-pill ${liq.enAlertaRoja ? "red" : liq.numAnotaciones > 0 ? "warn" : ""}">
+                      ${liq.enAlertaRoja ? "🚨 ROJO · " : ""}${liq.numAnotaciones} / 3 Anotaciones (-${liq.puntosRestadosPP} PP)
+                    </span>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                    <button type="button"
+                      class="btn-sm-action"
+                      style="background:#fee2e2;color:#991b1b;border-color:#f87171;font-weight:800;"
+                      onclick="window.maestroAgregarIncumplimiento('${u.id}')">
+                      ⚠ +1 Incumplimiento (-50 PP)
+                    </button>
+                    ${
+                      liq.numAnotaciones > 0
+                        ? `<button type="button" class="btn-sm-action" onclick="window.maestroQuitarIncumplimiento('${u.id}')">
+                             ↺ Quitar última
+                           </button>`
+                        : ""
+                    }
+                  </div>
+                  <div style="font-size:10px;color:${liq.enAlertaRoja ? "#991b1b" : "var(--muted)"};margin-top:4px;line-height:1.3;">
+                    ${
+                      liq.enAlertaRoja
+                        ? "🚨 Llegó a 3 anotaciones sin justa causa: Barra en ROJO."
+                        : "Incumplimiento de fecha/hora de entrega o encuentro sin justa causa."
+                    }
+                  </div>
+                </td>
+                <td style="min-width:190px;">
                   <span class="lvl-badge lvl-${u.nivel}">Nivel ${u.nivel} · ${cfg.rol}</span>
-                  <div style="font-size:11px;color:var(--muted);margin-top:4px;">${cfg.nombre} (${cfg.rangoPct})</div>
-                </td>
-                <td>
-                  <strong>Avance: ${liq.avanceDisplay} (${u.creditosAprobados}/${u.creditosTotales} créd.)</strong>
-                  <div class="mini-progress-bar">
-                    <div class="mini-progress-fill" style="width:${Math.min(100, liq.avanceCarreraPct)}%;"></div>
+                  <div style="font-size:11px;color:var(--muted);margin:4px 0;">
+                    Avance: <strong>${liq.avanceDisplay}</strong>
                   </div>
-                  <span style="font-size:11px;color:var(--muted);display:block;margin-top:4px;">
-                    Habilidades: ${liq.herramientas}
-                  </span>
-                </td>
-                <td>
-                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-                    <strong>${u.hsa} HSA</strong>
-                    <span style="color:var(--muted);">(${liq.horasDisplay}h · ${liq.basePP} PP)</span>
-                    <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa - 1})" title="Reducir 1 HSA">-</button>
-                    <button type="button" class="mult-chip-btn" style="padding:1px 6px;" onclick="window.maestroCambiarHSA('${u.id}', ${u.hsa + 1})" title="Aumentar 1 HSA">+</button>
-                  </div>
-                  <div style="font-size:11px;color:var(--muted);">
-                    Meta Sem. ${sem} (${exigenciaPct}%): <strong>${liq.metaSemanaPP} PP</strong>
-                  </div>
-                </td>
-                <td>
-                  <div class="mult-chip-list">
-                    ${multButtons}
-                  </div>
-                </td>
-                <td>
-                  <strong style="font-size:16px;color:var(--ink);display:block;">${liq.finalPP} PP</strong>
-                  <span style="font-size:11px;font-weight:800;color:${liq.superoMeta ? "#0f652e" : "#b45309"};">
-                    ${liq.cumplimientoPct}% · ${liq.superoMeta ? "Supera Meta" : `Faltan ${liq.brechaPP} PP`}
-                  </span>
-                  <div style="font-size:11px;color:var(--muted);margin-top:3px;">
-                    Bono activo: +${liq.bonoPct}% (+${liq.bonoPP} PP)
-                  </div>
-                </td>
-                <td>
                   <div class="action-btn-group">
-                    <button type="button" class="btn-sm-action promote" onclick="window.maestroAvanzarCreditos('${u.id}', false)">
-                      ⬆ +18 Créd. / Avanzar Semestre
+                    <button type="button" class="btn-sm-action" onclick="window.inspeccionarEstudiante('${u.id}')">
+                      👁 Gestionar Expediente
                     </button>
                     ${
                       canPromote
-                        ? `<button type="button" class="btn-sm-action" onclick="window.maestroAvanzarCreditos('${u.id}', true)">
-                            🚀 Ascender a Nivel ${u.nivel + 1} (${PrexiaDB.LEVELS_CONFIG[u.nivel + 1].rol})
+                        ? `<button type="button" class="btn-sm-action promote" onclick="window.maestroAvanzarCreditos('${u.id}', true)">
+                            🚀 Ascender a Nivel ${u.nivel + 1}
                            </button>`
-                        : `<span style="font-size:11px;color:var(--mint-dark);font-weight:700;">★ Nivel Máximo (Líder Nivel 4)</span>`
+                        : ""
                     }
-                    <button type="button" class="btn-sm-action" onclick="window.inspeccionarEstudiante('${u.id}')">
-                      👁 Auditar Expediente Detallado
+                    <button type="button" class="btn-sm-action" onclick="window.maestroReiniciarCero('${u.id}')">
+                      ⟲ Reiniciar barra a 0
                     </button>
                   </div>
                 </td>
@@ -2144,21 +2427,195 @@
         document.getElementById("st-avatar").textContent = user.avatar || "PX";
         document.getElementById("st-level-badge").textContent = `NIVEL ${user.nivel} · ${cfg.nombre.toUpperCase()} · ROL ${cfg.rol.toUpperCase()}`;
         document.getElementById("st-name").textContent = user.nombre;
+
+        // Barra de rendimiento justo después del nombre en el encabezado individual
+        const stNameBarEl = document.getElementById("st-name-perf-bar");
+        if (stNameBarEl) {
+          stNameBarEl.innerHTML = renderBarraRendimientoHTML(user, liq, { darkBg: true });
+        }
+
         document.getElementById("st-meta-line").textContent = `${user.carrera} · Avance hoja: ${liq.avanceDisplay} · Horas Semanales: ${liq.horasDisplay} · Herramientas: ${liq.herramientas}`;
 
         document.getElementById("st-week-label").textContent = `Liquidación Semana ${sem} (Meta ${liq.curvaPct}%)`;
-        document.getElementById("st-final-pp-big").textContent = `${liq.finalPP} PP · ${liq.cumplimientoPct}% Cumplimiento`;
+        const bigPP = document.getElementById("st-final-pp-big");
+        bigPP.textContent = liq.enAlertaRoja
+          ? `🚨 ${liq.finalPP} PP · EN ROJO (${liq.numAnotaciones}/3 Incumplimientos)`
+          : `${liq.finalPP} PP · ${liq.barraPct}% Avance`;
+        bigPP.style.color = liq.enAlertaRoja ? "#fca5a5" : "var(--mint)";
 
-        document.getElementById("st-kpi-hsa").textContent = `${user.hsa} HSA (${liq.horasDisplay}h)`;
-        document.getElementById("st-kpi-base").textContent = `Línea base: ${liq.basePP} PP / semana`;
+        document.getElementById("st-kpi-hsa").textContent = `${liq.horasCumplidas}h / ${user.hsa} HSA`;
+        document.getElementById("st-kpi-base").textContent = `+${liq.puntosHoraPP} PP por hora (Pacto: ${liq.basePP} PP)`;
         document.getElementById("st-kpi-target-label").textContent = `Meta Exigida Sem. ${sem} (${liq.curvaPct}%)`;
         document.getElementById("st-kpi-target").textContent = `${liq.metaSemanaPP} PP`;
         document.getElementById("st-kpi-bonus").textContent = `+${liq.bonoPct}% (+${liq.bonoPP} PP)`;
-        document.getElementById("st-kpi-status").textContent = liq.superoMeta
+        document.getElementById("st-kpi-status").textContent = liq.enAlertaRoja
+          ? `🚨 En alerta roja por ${liq.numAnotaciones} incumplimientos (-${liq.puntosRestadosPP} PP)`
+          : liq.superoMeta
           ? "✓ Supera la meta progresiva con insignia"
-          : `Activa +${Math.max(1, liq.curvaPct - 100 - liq.bonoPct)}% en bonos para cubrir la curva`;
+          : `Suma horas o multiplicadores (N1 a N4) para avanzar la barra`;
         document.getElementById("st-kpi-career").textContent = `${liq.avanceDisplay}`;
         document.getElementById("st-kpi-credits").textContent = `Correo caracterización: ${liq.correoHoja}`;
+
+        // Controles de Puntos / Hora (arranca desde 0)
+        const hoursBox = document.getElementById("st-hours-controls-box");
+        if (hoursBox) {
+          hoursBox.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+              <div>
+                <strong style="font-family:var(--font-display);font-size:14px;color:var(--ink);display:block;">
+                  1. Sumar Puntos / Hora (1 Hora = 100 PP · La barra arranca en 0 PP)
+                </strong>
+                <span style="font-size:12px;color:var(--muted);">
+                  Horas registradas: <strong>${liq.horasCumplidas}h</strong> de ${user.hsa}h pactadas (${liq.horasCumplidas * 100} PP)
+                  ${liq.puntosExtraManual ? ` · Puntos manuales extra: <strong>+${liq.puntosExtraManual} PP</strong>` : ""}
+                </span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">
+                <button type="button" class="btn-enter-user" onclick="window.maestroAjustarHoras('${user.id}', 1)">
+                  +1 Hora (+100 PP)
+                </button>
+                <button type="button" class="btn-sm-action promote" onclick="window.maestroAjustarHoras('${user.id}', 0.5)">
+                  +0.5 Horas (+50 PP)
+                </button>
+                <button type="button" class="btn-sm-action" onclick="window.maestroAjustarHoras('${user.id}', -1)">
+                  -1 Hora (-100 PP)
+                </button>
+                <button type="button" class="btn-sm-action" onclick="window.maestroSetHoras('${user.id}', ${user.hsa})">
+                  Completar Pacto (${user.hsa}h = ${user.hsa * 100} PP)
+                </button>
+                <button type="button" class="btn-sm-action" onclick="window.maestroSumarPPManual('${user.id}', 50)">
+                  +50 PP Extra
+                </button>
+                <button type="button" class="btn-sm-action" onclick="window.maestroReiniciarCero('${user.id}')">
+                  ⟲ Reiniciar Barra a 0
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        // Pestañas de nivel de multiplicadores (Todos N1-N4, o por nivel específico, sin importar el nivel del integrante)
+        document.querySelectorAll("#st-mult-level-tabs .filter-pill").forEach((btn) => {
+          const lvlAttr = btn.getAttribute("data-mult-lvl");
+          btn.classList.toggle("active", lvlAttr === studentMultFilterLevel);
+          btn.onclick = () => {
+            studentMultFilterLevel = lvlAttr;
+            renderStudentView(PrexiaDB.getDB().usuarios.find((u) => u.id === user.id) || user);
+          };
+        });
+
+        const todosMults = PrexiaDB.obtenerTodosLosMultiplicadores();
+        const multsMostrar =
+          studentMultFilterLevel === "all"
+            ? todosMults
+            : todosMults.filter((m) => String(m.nivelOrigen) === String(studentMultFilterLevel));
+
+        const multListEl = document.getElementById("st-multipliers-list");
+        multListEl.innerHTML = multsMostrar
+          .map((m) => {
+            const active = (user.multiplicadoresActivos || []).includes(m.id);
+            const esOtroNivel = m.nivelOrigen !== user.nivel;
+            const ppEquiv = Math.round(liq.basePP * (m.bono / 100));
+            return `
+              <div class="mult-card-interactive ${active ? "active" : ""}" style="${active && esOtroNivel ? "border-color:#2563eb;background:#eff6ff;" : ""}">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;">
+                    <span class="lvl-badge lvl-${m.nivelOrigen}">Nivel ${m.nivelOrigen} · ${m.rolOrigen}</span>
+                    ${
+                      esOtroNivel
+                        ? `<span class="cross-lvl-tag">★ Tarea asumida de Nivel ${m.nivelOrigen} (Tu nivel es ${user.nivel})</span>`
+                        : `<span style="font-size:11px;color:var(--muted);font-family:var(--font-display);">Multiplicador de tu nivel</span>`
+                    }
+                  </div>
+                  <strong style="font-family:var(--font-display);font-size:15px;color:var(--ink);">
+                    ${m.nombre} <span style="color:var(--mint-dark);">+${m.bono}% (+${ppEquiv} PP)</span>
+                  </strong>
+                  <p style="font-size:13px;color:var(--muted);margin:4px 0 0;">${m.condicion}</p>
+                </div>
+                <button type="button"
+                  class="btn-enter-user"
+                  style="background:${active ? (esOtroNivel ? "#1d4ed8" : "#0f652e") : "var(--navy)"};white-space:nowrap;"
+                  onclick="window.estudianteToggleMult('${user.id}', '${m.id}')">
+                  ${active ? `✓ Acreditado (+${ppEquiv} PP)` : `+ Acreditar [N${m.nivelOrigen}]`}
+                </button>
+              </div>
+            `;
+          })
+          .join("");
+
+        // Selector de multiplicadores en el formulario de entregables (incluye los 4 niveles)
+        const delivMultSelect = document.getElementById("deliv-mult");
+        delivMultSelect.innerHTML =
+          `<option value="">— Solo registrar entregable —</option>` +
+          [1, 2, 3, 4]
+            .map((lvlNum) => {
+              const lCfg = PrexiaDB.LEVELS_CONFIG[lvlNum];
+              const opts = lCfg.multiplicadores
+                .map(
+                  (m) =>
+                    `<option value="${m.id}">[Nivel ${lvlNum}${lvlNum !== user.nivel ? " · Tarea otro nivel" : ""}] ${m.nombre} (+${m.bono}%)</option>`
+                )
+                .join("");
+              return `<optgroup label="Nivel ${lvlNum} — ${lCfg.nombre}">${opts}</optgroup>`;
+            })
+            .join("");
+
+        // Sección de Resta de Puntos: Incumplimiento de fecha y hora de entrega o encuentro sin justa causa (Rojo a las 3)
+        const penPill = document.getElementById("st-penalty-counter-pill");
+        if (penPill) {
+          penPill.className = `penalty-pill ${liq.enAlertaRoja ? "red" : liq.numAnotaciones > 0 ? "warn" : ""}`;
+          penPill.textContent = liq.enAlertaRoja
+            ? `🚨 ROJO: ${liq.numAnotaciones} / 3 Anotaciones (-${liq.puntosRestadosPP} PP)`
+            : `${liq.numAnotaciones} / 3 Anotaciones (-${liq.puntosRestadosPP} PP)`;
+        }
+
+        const penArea = document.getElementById("st-penalty-controls-area");
+        if (penArea) {
+          const anotacionesList = (liq.anotaciones || [])
+            .map(
+              (a, i) => `
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;background:#fff;border:1px solid #fca5a5;border-radius:3px;margin-bottom:6px;font-family:var(--font-display);font-size:12px;">
+                <div>
+                  <strong style="color:#991b1b;">Anotación #${i + 1}: ${a.motivo}</strong>
+                  <span style="display:block;color:var(--muted);font-size:11px;">Fecha: ${a.fecha} · Semana ${a.semana || sem} · ${a.detalle || "Sin justa causa"}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <strong style="color:#dc2626;">-${a.puntosRestados} PP</strong>
+                  <button type="button" class="btn-sm-action" onclick="window.maestroQuitarIncumplimientoId('${user.id}', '${a.id}')">✕ Quitar</button>
+                </div>
+              </div>
+            `
+            )
+            .join("");
+
+          penArea.innerHTML = `
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px;">
+              <input type="text" id="st-penalty-detail-input" placeholder="Detalle opcional (ej. No asistió a sesión martes 4pm sin excusa)..."
+                style="flex:1;min-width:220px;padding:8px 10px;border:1px solid #fca5a5;border-radius:3px;font-family:var(--font-display);font-size:12px;" />
+              <button type="button"
+                class="btn-enter-user"
+                style="background:#dc2626;"
+                onclick="window.agregarIncumplimientoConDetalle('${user.id}')">
+                ⚠ Registrar Incumplimiento (-50 PP)
+              </button>
+              ${
+                liq.numAnotaciones > 0
+                  ? `<button type="button" class="btn-sm-action" onclick="window.maestroQuitarIncumplimiento('${user.id}')">
+                       ↺ Quitar última anotación
+                     </button>`
+                  : ""
+              }
+            </div>
+            <div>
+              ${
+                anotacionesList ||
+                `<p style="font-size:12px;color:#0f652e;margin:0;font-family:var(--font-display);font-weight:700;">
+                   ✓ 0 anotaciones registradas. Al acumular 3 anotaciones de incumplimiento sin justa causa, la barra se pondrá en ROJO.
+                 </p>`
+              }
+            </div>
+          `;
+        }
 
         const stepsHtml = [1, 2, 3, 4]
           .map((lvl) => {
@@ -2194,36 +2651,6 @@
         } else {
           forceBtn.style.display = "none";
         }
-
-        const multListEl = document.getElementById("st-multipliers-list");
-        multListEl.innerHTML = cfg.multiplicadores
-          .map((m) => {
-            const active = (user.multiplicadoresActivos || []).includes(m.id);
-            return `
-              <div class="mult-card-interactive ${active ? "active" : ""}">
-                <div>
-                  <strong style="font-family:var(--font-display);font-size:15px;color:var(--ink);">
-                    ${m.nombre} <span style="color:var(--mint-dark);">+${m.bono}% (+${Math.round(liq.basePP * (m.bono / 100))} PP)</span>
-                  </strong>
-                  <p style="font-size:13px;color:var(--muted);margin:4px 0 0;">${m.condicion}</p>
-                </div>
-                <button type="button"
-                  class="btn-enter-user"
-                  style="background:${active ? "#0f652e" : "var(--navy)"};white-space:nowrap;"
-                  onclick="window.estudianteToggleMult('${user.id}', '${m.id}')">
-                  ${active ? "✓ Acreditado" : "Acreditar Bono"}
-                </button>
-              </div>
-            `;
-          })
-          .join("");
-
-        const delivMultSelect = document.getElementById("deliv-mult");
-        delivMultSelect.innerHTML =
-          `<option value="">— Solo registrar entregable —</option>` +
-          cfg.multiplicadores
-            .map((m) => `<option value="${m.id}">Acreditar: ${m.nombre} (+${m.bono}%)</option>`)
-            .join("");
 
         const delivContainer = document.getElementById("st-deliverables-list");
         delivContainer.innerHTML = (user.entregables || [])
@@ -2293,7 +2720,7 @@
           });
           document.getElementById("deliv-title").value = "";
           document.getElementById("deliv-badge").value = "";
-          showToast(`Entregable registrado y puntos actualizados para ${user.nombre}.`);
+          showToast(`Entregable registrado y barra de rendimiento actualizada para ${user.nombre}.`);
           renderApp();
         };
       }
@@ -2320,7 +2747,6 @@
 
         tabBtnProgreso.classList.remove("active");
         tabBtnPortal.classList.add("active");
-        // En modo portal, mostramos el portal arriba y mantenemos el apartado público de solo lectura disponible abajo
         publicProgressView.style.display = "block";
 
         if (!currentUser) {
@@ -2372,58 +2798,46 @@
         document.getElementById("ro-modal-sub").textContent = `Nivel ${user.nivel} (${cfg.nombre} · Rol ${cfg.rol}) · ${user.carrera || "Línea de Consultoría"} · Correo: ${liq.correoHoja}`;
 
         const multsHtml = (liq.multDetalles || [])
-          .map((m) => `<span class="ro-chip">✓ ${m.nombre} (+${m.bono}%)</span>`)
+          .map((m) => `<span class="ro-chip">✓ [Nivel ${m.nivelOrigen}] ${m.nombre} (+${m.bono}%)</span>`)
           .join("") || `<span style="font-size:13px;color:var(--muted);">Sin multiplicadores activos</span>`;
 
         const badgesHtml = (user.insignias || [])
           .map((b) => `<span class="insignia-pill">★ ${b}</span>`)
           .join("");
 
-        const histRows = (user.historialQuincenal || [])
-          .map(
-            (h) => `
-            <tr>
-              <td><strong>Semana ${h.semana}</strong></td>
-              <td>${h.basePP} PP</td>
-              <td>${h.metaPP} PP</td>
-              <td>+${h.bonoPct}%</td>
-              <td><strong>${h.finalPP} PP</strong></td>
-              <td><strong style="color:#0f652e;">${h.cumplimiento}%</strong></td>
-            </tr>
-          `
-          )
-          .join("");
-
         document.getElementById("ro-modal-body").innerHTML = `
+          <div style="margin-bottom:16px;">
+            ${renderBarraRendimientoHTML(user, liq)}
+          </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px;font-family:var(--font-display);">
             <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
-              <span style="font-size:11px;color:var(--muted);display:block;">% Avance (Hoja)</span>
-              <strong style="font-size:20px;color:var(--ink);">${liq.avanceDisplay}</strong>
+              <span style="font-size:11px;color:var(--muted);display:block;">Puntos / Hora</span>
+              <strong style="font-size:18px;color:var(--ink);">+${liq.puntosHoraPP} PP (${liq.horasCumplidas}h)</strong>
             </div>
             <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
-              <span style="font-size:11px;color:var(--muted);display:block;">Horas Semanales</span>
-              <strong style="font-size:20px;color:var(--ink);">${liq.horasDisplay} h (${user.hsa} HSA)</strong>
+              <span style="font-size:11px;color:var(--muted);display:block;">Puntos Multiplicadores</span>
+              <strong style="font-size:18px;color:#1d4ed8;">+${liq.bonoPP} PP (+${liq.bonoPct}%)</strong>
             </div>
             <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
-              <span style="font-size:11px;color:var(--muted);display:block;">Liquidación Sem. ${sem}</span>
-              <strong style="font-size:20px;color:var(--mint-dark);">${liq.finalPP} PP (${liq.cumplimientoPct}%)</strong>
+              <span style="font-size:11px;color:var(--muted);display:block;">Resta Incumplimientos</span>
+              <strong style="font-size:18px;color:${liq.enAlertaRoja ? "#dc2626" : "var(--ink)"};">-${liq.puntosRestadosPP} PP (${liq.numAnotaciones}/3)</strong>
             </div>
             <div style="background:var(--bg);padding:12px;border-radius:3px;border:1px solid var(--border);">
-              <span style="font-size:11px;color:var(--muted);display:block;">Acumulado Semestral</span>
-              <strong style="font-size:20px;color:var(--ink);">${(user.puntosAcumuladosSemestre || 0).toLocaleString("es-CO")} PP</strong>
+              <span style="font-size:11px;color:var(--muted);display:block;">Total Neto Sem. ${sem}</span>
+              <strong style="font-size:18px;color:${liq.enAlertaRoja ? "#dc2626" : "var(--mint-dark)"};">${liq.finalPP} / ${liq.metaSemanaPP} PP</strong>
             </div>
           </div>
 
           <div style="background:var(--bg);padding:14px 16px;border-radius:3px;border:1px solid var(--border);margin-bottom:16px;">
             <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;">
-              ¿Con qué herramientas o habilidades cuentas actualmente? (Caracterización 2026-2)
+              Herramientas y Habilidades (Caracterización 2026-2)
             </strong>
             <p style="margin:0;font-size:15px;color:var(--ink);">${liq.herramientas}</p>
           </div>
 
           <div style="margin-bottom:16px;">
             <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">
-              Multiplicadores Acreditados (Solo Lectura)
+              Multiplicadores Acreditados (Niveles 1 a 4)
             </strong>
             <div>${multsHtml}</div>
           </div>
@@ -2433,27 +2847,6 @@
               Insignias de Reconocimiento
             </strong>
             <div class="badge-cloud" style="margin-top:4px;">${badgesHtml}</div>
-          </div>
-
-          <div>
-            <strong style="font-family:var(--font-display);font-size:12px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;">
-              Historial de Auditorías Quincenales (Solo Lectura)
-            </strong>
-            <div class="master-table-wrap" style="margin-bottom:0;">
-              <table class="master-table" style="font-size:12px;">
-                <thead>
-                  <tr>
-                    <th>Corte</th>
-                    <th>Base PP</th>
-                    <th>Meta (+1%)</th>
-                    <th>Bono</th>
-                    <th>Final PP</th>
-                    <th>Cumplimiento</th>
-                  </tr>
-                </thead>
-                <tbody>${histRows}</tbody>
-              </table>
-            </div>
           </div>
         `;
 
@@ -2488,17 +2881,97 @@
       };
 
       window.maestroToggleMult = function (userId, multId) {
+        const mInfo = PrexiaDB.obtenerMultiplicadorInfo(multId);
         const u = PrexiaDB.toggleMultiplicador(userId, multId);
         if (u) {
-          showToast(`Multiplicador actualizado para ${u.nombre}.`);
+          const added = (u.multiplicadoresActivos || []).includes(multId);
+          showToast(
+            `${added ? "✓ Multiplicador añadido" : "Multiplicador retirado"}: [Nivel ${mInfo ? mInfo.nivelOrigen : ""}] ${mInfo ? mInfo.nombre : multId} para ${u.nombre}.`
+          );
           renderApp();
         }
       };
 
       window.estudianteToggleMult = function (userId, multId) {
-        const u = PrexiaDB.toggleMultiplicador(userId, multId);
+        window.maestroToggleMult(userId, multId);
+      };
+
+      window.maestroAjustarHoras = function (userId, deltaHoras) {
+        const u = PrexiaDB.ajustarHorasCumplidas(userId, deltaHoras);
         if (u) {
-          showToast(`Multiplicador actualizado en tu liquidación quincenal.`);
+          showToast(`Horas cumplidas actualizadas a ${u.horasCumplidas}h (${u.horasCumplidas * 100} PP) para ${u.nombre}.`);
+          renderApp();
+        }
+      };
+
+      window.maestroSetHoras = function (userId, nuevasHoras) {
+        const u = PrexiaDB.establecerHorasCumplidas(userId, nuevasHoras);
+        if (u) {
+          showToast(`Horas cumplidas fijadas en ${u.horasCumplidas}h (${u.horasCumplidas * 100} PP) para ${u.nombre}.`);
+          renderApp();
+        }
+      };
+
+      window.maestroSumarPPManual = function (userId, deltaPP) {
+        const u = PrexiaDB.ajustarPuntosManual(userId, deltaPP, "Bonificación directa de puntos por hora/actividad");
+        if (u) {
+          showToast(`Se sumaron +${deltaPP} PP a la barra de rendimiento de ${u.nombre}.`);
+          renderApp();
+        }
+      };
+
+      window.maestroAgregarIncumplimiento = function (userId) {
+        const res = PrexiaDB.agregarAnotacionIncumplimiento(userId, {
+          puntosRestados: 50,
+          detalle: "Incumplimiento de fecha y hora de entrega o encuentro sin justa causa"
+        });
+        if (res) {
+          if (res.enAlertaRoja) {
+            showToast(`🚨 ALERTA ROJA: ${res.user.nombre} acumuló ${res.totalAnotaciones} anotaciones de incumplimiento. Barra en ROJO.`);
+          } else {
+            showToast(`⚠ Anotación ${res.totalAnotaciones}/3 registrada (-50 PP) para ${res.user.nombre}.`);
+          }
+          renderApp();
+        }
+      };
+
+      window.agregarIncumplimientoConDetalle = function (userId) {
+        const inp = document.getElementById("st-penalty-detail-input");
+        const detalle = inp && inp.value.trim() ? inp.value.trim() : "Incumplimiento de fecha y hora de entrega o encuentro sin justa causa";
+        const res = PrexiaDB.agregarAnotacionIncumplimiento(userId, {
+          puntosRestados: 50,
+          detalle
+        });
+        if (res) {
+          if (res.enAlertaRoja) {
+            showToast(`🚨 ALERTA ROJA: ${res.user.nombre} lleva ${res.totalAnotaciones}/3 anotaciones. Barra en ROJO.`);
+          } else {
+            showToast(`⚠ Anotación ${res.totalAnotaciones}/3 registrada (-50 PP) para ${res.user.nombre}.`);
+          }
+          renderApp();
+        }
+      };
+
+      window.maestroQuitarIncumplimiento = function (userId) {
+        const u = PrexiaDB.eliminarAnotacionIncumplimiento(userId);
+        if (u) {
+          showToast(`Anotación de incumplimiento eliminada para ${u.nombre} (${(u.anotaciones || []).length}/3).`);
+          renderApp();
+        }
+      };
+
+      window.maestroQuitarIncumplimientoId = function (userId, anotId) {
+        const u = PrexiaDB.eliminarAnotacionIncumplimiento(userId, anotId);
+        if (u) {
+          showToast(`Anotación eliminada para ${u.nombre} (${(u.anotaciones || []).length}/3).`);
+          renderApp();
+        }
+      };
+
+      window.maestroReiniciarCero = function (userId) {
+        const u = PrexiaDB.reiniciarProgresoUsuario(userId);
+        if (u) {
+          showToast(`Barra de rendimiento de ${u.nombre} reiniciada a 0 PP.`);
           renderApp();
         }
       };
@@ -2631,7 +3104,7 @@
         document.getElementById("nu-nombre").value = "";
         document.getElementById("nu-user").value = "";
         document.getElementById("new-user-drawer").style.display = "none";
-        showToast(`Nuevo integrante creado: ${nuevo.nombre} en Nivel ${nuevo.nivel} (${PrexiaDB.LEVELS_CONFIG[nuevo.nivel].rol}).`);
+        showToast(`Nuevo integrante creado con barra en 0 PP: ${nuevo.nombre} en Nivel ${nuevo.nivel}.`);
         renderApp();
       });
 
@@ -2700,7 +3173,7 @@
 
       document.getElementById("btn-reset-db").addEventListener("click", () => {
         PrexiaDB.resetToFactoryGitDB();
-        showToast("Base de datos restaurada al estado original del repositorio Git.");
+        showToast("Base de datos restaurada al estado inicial (todas las barras en 0 PP).");
         renderApp();
       });
 
